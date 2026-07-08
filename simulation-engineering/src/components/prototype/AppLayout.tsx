@@ -12,7 +12,6 @@ import {
   Bell,
   Sparkles,
   ChevronsUpDown,
-  Waves,
   Activity,
 } from "lucide-react";
 
@@ -84,11 +83,11 @@ export function AppLayout({ children }: { children: ReactNode }) {
       <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground lg:flex">
         <div className="flex items-center gap-2.5 px-5 py-5">
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-sidebar-primary/90 text-sidebar-primary-foreground">
-            <Waves className="h-5 w-5" />
+            <Activity className="h-5 w-5" />
           </span>
           <div className="leading-tight">
-            <p className="text-sm font-bold text-white">Swift River</p>
-            <p className="text-[11px] text-sidebar-foreground/70">Adaptive Sim Engine</p>
+            <p className="text-sm font-bold text-white">Simulations</p>
+            <p className="text-[11px] text-sidebar-foreground/70">Adaptive Sim Engine · ATI</p>
           </div>
         </div>
 
@@ -140,7 +139,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
         <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-border bg-card/80 px-4 backdrop-blur-md md:px-6">
           <Link to="/" className="flex items-center gap-2 lg:hidden">
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Waves className="h-4.5 w-4.5" />
+              <Activity className="h-4.5 w-4.5" />
             </span>
           </Link>
 

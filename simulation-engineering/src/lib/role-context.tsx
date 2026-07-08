@@ -54,7 +54,7 @@ interface RoleContextValue {
 
 const RoleContext = createContext<RoleContextValue | null>(null);
 
-const STORAGE_KEY = "swiftriver.role";
+const STORAGE_KEY = "simulations.role";
 
 export function RoleProvider({ children }: { children: ReactNode }) {
   const [role, setRoleState] = useState<Role>("student");
