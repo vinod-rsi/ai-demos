@@ -1,0 +1,248 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Swift River Adaptive Clinical Simulation Engine
+ * Design system — clinical healthcare edtech (Swift River / ATI language)
+ * Muted clinical teals, calm slate neutrals, generous white space.
+ * All colors defined as oklch semantic tokens.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --font-sans: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-muted: var(--primary-muted);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-muted: var(--success-muted);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-muted: var(--warning-muted);
+  --color-critical: var(--critical);
+  --color-critical-foreground: var(--critical-foreground);
+  --color-critical-muted: var(--critical-muted);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-muted: var(--info-muted);
+  --color-ai: var(--ai);
+  --color-ai-foreground: var(--ai-foreground);
+  --color-ai-muted: var(--ai-muted);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  --background: oklch(0.985 0.004 220);
+  --foreground: oklch(0.27 0.024 245);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.27 0.024 245);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.27 0.024 245);
+
+  --primary: oklch(0.52 0.072 208);
+  --primary-foreground: oklch(0.99 0.004 220);
+  --primary-muted: oklch(0.95 0.028 205);
+
+  --secondary: oklch(0.965 0.008 225);
+  --secondary-foreground: oklch(0.34 0.028 240);
+
+  --muted: oklch(0.965 0.006 230);
+  --muted-foreground: oklch(0.53 0.02 242);
+
+  --accent: oklch(0.95 0.026 202);
+  --accent-foreground: oklch(0.4 0.06 210);
+
+  --destructive: oklch(0.58 0.19 25);
+  --destructive-foreground: oklch(0.99 0.004 220);
+
+  --border: oklch(0.915 0.008 232);
+  --input: oklch(0.915 0.008 232);
+  --ring: oklch(0.52 0.072 208);
+
+  --success: oklch(0.58 0.11 158);
+  --success-foreground: oklch(0.99 0.004 220);
+  --success-muted: oklch(0.95 0.04 158);
+  --warning: oklch(0.72 0.13 72);
+  --warning-foreground: oklch(0.3 0.05 70);
+  --warning-muted: oklch(0.96 0.05 82);
+  --critical: oklch(0.58 0.19 25);
+  --critical-foreground: oklch(0.99 0.004 220);
+  --critical-muted: oklch(0.95 0.045 28);
+  --info: oklch(0.58 0.1 236);
+  --info-foreground: oklch(0.99 0.004 220);
+  --info-muted: oklch(0.95 0.035 236);
+  --ai: oklch(0.55 0.13 292);
+  --ai-foreground: oklch(0.99 0.004 220);
+  --ai-muted: oklch(0.96 0.03 292);
+
+  --chart-1: oklch(0.52 0.072 208);
+  --chart-2: oklch(0.58 0.11 158);
+  --chart-3: oklch(0.72 0.13 72);
+  --chart-4: oklch(0.55 0.13 292);
+  --chart-5: oklch(0.58 0.1 236);
+
+  --sidebar: oklch(0.28 0.032 232);
+  --sidebar-foreground: oklch(0.86 0.014 225);
+  --sidebar-primary: oklch(0.66 0.09 200);
+  --sidebar-primary-foreground: oklch(0.99 0.004 220);
+  --sidebar-accent: oklch(0.34 0.036 230);
+  --sidebar-accent-foreground: oklch(0.97 0.006 220);
+  --sidebar-border: oklch(0.36 0.03 230);
+  --sidebar-ring: oklch(0.66 0.09 200);
+
+  --shadow-card: 0 1px 2px oklch(0.4 0.03 240 / 0.04), 0 4px 16px oklch(0.4 0.03 240 / 0.05);
+  --shadow-panel: 0 8px 30px oklch(0.35 0.04 240 / 0.1);
+  --gradient-hero: linear-gradient(135deg, oklch(0.36 0.05 220) 0%, oklch(0.46 0.07 205) 55%, oklch(0.55 0.09 195) 100%);
+  --gradient-ai: linear-gradient(135deg, oklch(0.55 0.13 292) 0%, oklch(0.52 0.1 250) 100%);
+}
+
+.dark {
+  --background: oklch(0.22 0.02 240);
+  --foreground: oklch(0.96 0.006 220);
+  --card: oklch(0.26 0.024 238);
+  --card-foreground: oklch(0.96 0.006 220);
+  --popover: oklch(0.26 0.024 238);
+  --popover-foreground: oklch(0.96 0.006 220);
+  --primary: oklch(0.68 0.09 200);
+  --primary-foreground: oklch(0.2 0.02 240);
+  --primary-muted: oklch(0.34 0.04 210);
+  --secondary: oklch(0.32 0.026 236);
+  --secondary-foreground: oklch(0.96 0.006 220);
+  --muted: oklch(0.31 0.022 238);
+  --muted-foreground: oklch(0.7 0.016 228);
+  --accent: oklch(0.34 0.04 210);
+  --accent-foreground: oklch(0.92 0.02 200);
+  --destructive: oklch(0.62 0.18 25);
+  --destructive-foreground: oklch(0.99 0.004 220);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.68 0.09 200);
+  --success: oklch(0.66 0.11 158);
+  --success-foreground: oklch(0.18 0.02 240);
+  --success-muted: oklch(0.32 0.05 158);
+  --warning: oklch(0.78 0.12 78);
+  --warning-foreground: oklch(0.24 0.03 70);
+  --warning-muted: oklch(0.34 0.05 80);
+  --critical: oklch(0.66 0.17 27);
+  --critical-foreground: oklch(0.18 0.02 240);
+  --critical-muted: oklch(0.34 0.06 28);
+  --info: oklch(0.66 0.1 236);
+  --info-foreground: oklch(0.18 0.02 240);
+  --info-muted: oklch(0.32 0.05 236);
+  --ai: oklch(0.68 0.12 292);
+  --ai-foreground: oklch(0.18 0.02 240);
+  --ai-muted: oklch(0.34 0.05 292);
+  --chart-1: oklch(0.68 0.09 200);
+  --chart-2: oklch(0.66 0.11 158);
+  --chart-3: oklch(0.78 0.12 78);
+  --chart-4: oklch(0.68 0.12 292);
+  --chart-5: oklch(0.66 0.1 236);
+  --sidebar: oklch(0.2 0.018 240);
+  --sidebar-foreground: oklch(0.86 0.014 225);
+  --sidebar-primary: oklch(0.68 0.09 200);
+  --sidebar-primary-foreground: oklch(0.2 0.02 240);
+  --sidebar-accent: oklch(0.28 0.03 236);
+  --sidebar-accent-foreground: oklch(0.97 0.006 220);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.68 0.09 200);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.01em;
+  }
+}
+
+@utility bg-gradient-hero {
+  background-image: var(--gradient-hero);
+}
+
+@utility bg-gradient-ai {
+  background-image: var(--gradient-ai);
+}
+
+@utility shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+@utility shadow-panel {
+  box-shadow: var(--shadow-panel);
+}
+
+/* subtle grid texture for hero surfaces */
+@utility clinical-grid {
+  background-image:
+    linear-gradient(oklch(1 0 0 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(1 0 0 / 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Safelist dynamically-composed tone utilities used across role cards. */
+@source inline("bg-{info,primary,ai,success,warning,critical}-muted");
+@source inline("text-{info,primary,ai,success,critical}");
+@source inline("text-warning-foreground");
+
+/* Comprehensive tone safelist for dynamically-composed status classes. */
+@source inline("{bg,text,border}-{success,warning,critical,info,ai,primary,secondary,muted}");
+@source inline("{bg,text}-{success,warning,critical,info,ai,primary}-{muted,foreground}");
+@source inline("border-{success,warning,critical,info,ai,primary}/{15,20,25,30,40}");
+@source inline("text-{success,warning,critical,info,ai,primary}");
