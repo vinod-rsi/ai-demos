@@ -221,3 +221,74 @@ export const adaptiveRules: AdaptiveRule[] = [
     tone: "info",
   },
 ];
+
+// ── Lesson 10: Dosage Calculations & Medication Errors (Pharmacology) ──────────
+
+export type MasteryState = "strong" | "fragile" | "at_risk";
+
+export const masteryMeta: Record<MasteryState, { label: string; tone: string; glyph: string }> = {
+  strong: { label: "Strong", tone: "success", glyph: "●" },
+  fragile: { label: "Fragile", tone: "warning", glyph: "◐" },
+  at_risk: { label: "At risk", tone: "critical", glyph: "⚠" },
+};
+
+export interface ConceptMastery {
+  concept: string;
+  state: MasteryState;
+  detail: string;
+}
+
+export const lesson10Mastery: ConceptMastery[] = [
+  { concept: "Unit conversions (mg ↔ mcg ↔ g)", state: "strong", detail: "6/6 correct across last 3 sessions" },
+  { concept: "IV drip rate (gtt/min)", state: "fragile", detail: "Correct but slow; 1 recent slip on drop factor" },
+  { concept: "Pediatric weight-based dosing", state: "at_risk", detail: "2 of last 3 attempts exceeded safe range" },
+  { concept: "Decimal placement & rounding", state: "fragile", detail: "Trailing-zero error flagged once" },
+];
+
+export interface ForgetForecast {
+  topic: string;
+  risk: "high" | "medium" | "low";
+  explain: string;
+}
+
+export const lesson10Forecast: ForgetForecast[] = [
+  { topic: "Pediatric weight-based dosing", risk: "high", explain: "Last correct: 12 days ago · Topic difficulty: high · Reviewed once" },
+  { topic: "IV drip rate (gtt/min)", risk: "medium", explain: "Last correct: 6 days ago · Topic difficulty: medium · Reviewed twice" },
+];
+
+export const lesson10NextBestAction = {
+  label: "Start review set: Pediatric dosing",
+  detail: "8 items · targets your highest decay risk",
+};
+
+export const lesson10DebriefTimeline = [
+  { t: "0:00", step: "Order interpretation", result: "correct", detail: "Correctly parsed the ordered dose and available concentration", tone: "success" },
+  { t: "1:48", step: "Pediatric dose calculation", result: "error", detail: "Mis-placed the decimal — computed 25 mg instead of 2.5 mg", tone: "critical" },
+  { t: "4:12", step: "High-alert double-check", result: "partial", detail: "Recognized the med as high-alert but skipped the independent second-check", tone: "warning" },
+];
+
+export const lesson10MissedCues = [
+  { cue: "Weight-based safe-range mismatch", when: "Pediatric calculation", impact: "High" },
+  { cue: "High-alert medication flag", when: "Verification", impact: "High" },
+  { cue: "Trailing zero on the MAR", when: "Documentation", impact: "Medium" },
+];
+
+export const lesson10DebriefQuestions = [
+  "You read the order correctly — walk through where the decimal shifted, and what check would have caught it before administration.",
+  "This medication is high-alert. What is the independent double-check protocol, and at which step should it have happened?",
+  "Rewrite the pediatric dose using dimensional analysis. Which unit cancels first, and how does that guard against a 10× error?",
+];
+
+export const lesson10Remediation = [
+  { title: "Dimensional-Analysis Drill", type: "Guided practice", mins: 12, focus: "Decimal & unit safety", tone: "critical" },
+  { title: "High-Alert Medication Safety", type: "Interactive module", mins: 10, focus: "Independent double-check", tone: "warning" },
+  { title: "Replay: Pediatric Dosing (Advanced)", type: "Adaptive scenario", mins: 20, focus: "Apply under pressure", tone: "ai" },
+];
+
+export const lesson10Skills = [
+  { skill: "Order interpretation", score: 88 },
+  { skill: "Unit conversion", score: 82 },
+  { skill: "Decimal accuracy", score: 54 },
+  { skill: "Safe-range check", score: 60 },
+  { skill: "High-alert protocol", score: 66 },
+];
