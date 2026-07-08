@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Sparkles, ChevronRight, ArrowRight, Check, Activity, ShieldCheck,
   Lightbulb, RefreshCw, ClipboardCheck, TrendingDown, Play,
+  Maximize2, ExternalLink,
 } from "lucide-react";
 
 import { AppLayout } from "@/components/prototype/AppLayout";
@@ -27,10 +28,13 @@ function SimulationPage() {
   // "modal" = welcome-back shown; "running" = sim revealed; "complete" = finished
   const [phase, setPhase] = useState<"modal" | "running" | "complete">("modal");
   const progress = phase === "complete" ? 100 : phase === "running" ? 45 : 0;
+  const simWrapRef = useRef<HTMLDivElement>(null);
+
+  const goFullscreen = () => simWrapRef.current?.requestFullscreen?.();
 
   return (
     <AppLayout>
-      <div className="mx-auto max-w-6xl px-4 py-6 md:px-8">
+      <div className="mx-auto max-w-[1440px] px-4 py-6 md:px-8">
         {/* Breadcrumb */}
         <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
           <Link to="/student" className="hover:text-foreground">My Simulations</Link>
@@ -56,16 +60,38 @@ function SimulationPage() {
           {/* Left: the embedded sim */}
           <div className="space-y-5">
             <Card className="gap-0 overflow-hidden p-0">
-              <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
+              <div className="flex items-center justify-between gap-2 border-b border-border px-4 py-2.5">
                 <div className="flex items-center gap-2 text-sm font-medium">
                   <Play className="h-4 w-4 text-primary" /> Simulation
                 </div>
-                <StatusBadge tone={phase === "complete" ? "success" : "info"} dot>
-                  {phase === "complete" ? "Completed" : phase === "running" ? "In progress" : "Ready"}
-                </StatusBadge>
+                <div className="flex items-center gap-2">
+                  <StatusBadge tone={phase === "complete" ? "success" : "info"} dot>
+                    {phase === "complete" ? "Completed" : phase === "running" ? "In progress" : "Ready"}
+                  </StatusBadge>
+                  <button
+                    type="button"
+                    onClick={goFullscreen}
+                    title="Fullscreen"
+                    className="flex h-7 w-7 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                  >
+                    <Maximize2 className="h-3.5 w-3.5" />
+                  </button>
+                  <a
+                    href={SIM_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    title="Open sim in new tab"
+                    className="flex h-7 w-7 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                  >
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                </div>
               </div>
 
-              <div className="relative aspect-video w-full bg-black">
+              <div
+                ref={simWrapRef}
+                className="relative h-[72vh] max-h-[820px] min-h-[520px] w-full bg-black"
+              >
                 {/* The real Three.js sim */}
                 <iframe
                   src={SIM_URL}
