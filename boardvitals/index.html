@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoardVitals — AI Mastery Engine</title>
+<style>
+/* BoardVitals design system — aligned with rishiramesh/boardvitalsmock */
+:root {
+  --teal-900: #1b3950;
+  --teal-700: #1f4877;
+  --teal-600: #2c6dd4;
+  --teal-500: #4a85ef;
+  --teal-050: #ecf5fb;
+  --navy-900: #1b3950;
+  --navy-800: #214876;
+  --navy-700: #1f4877;
+  --ink: #1f2a37;
+  --muted: #5b6b7b;
+  --line: #e2e8ee;
+  --bg: #f4f7f9;
+  --card: #ffffff;
+  --good: #487b09;
+  --good-bg: #eaf2dd;
+  --warn: #c9851b;
+  --warn-bg: #fdf3e0;
+  --risk: #d24b4b;
+  --risk-bg: #fbeaea;
+  --info: #2c6dd4;
+  --shadow: 0 1px 2px rgba(16,42,67,.06), 0 4px 14px rgba(16,42,67,.07);
+  --radius: 10px;
+  --radius-sm: 7px;
+  --header-h: 62px;
+  --subnav-h: 48px;
+  --top-chrome-h: 110px;
+  --sidebar-w: 220px;
+  --ai-navy: #0F2044;
+  --page-bg: #F1F5F9;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* App shell: top chrome + content */
+.app{min-height:100vh;background:var(--page-bg)}
+.top-chrome{position:fixed;top:0;left:0;right:0;z-index:30}
+.app-body{margin-top:var(--top-chrome-h);min-height:calc(100vh - var(--top-chrome-h));padding:20px 24px 28px}
+.content-wrap{display:flex;gap:20px;align-items:flex-start;max-width:1440px;margin:0 auto;width:100%}
+
+/* AI Mastery detached left panel */
+.ai-panel{width:var(--sidebar-w);flex-shrink:0;background:#fff;border:1px solid #e2e8ee;border-radius:10px;padding:16px 12px;display:none;flex-direction:column;box-shadow:var(--shadow);align-self:flex-start;position:sticky;top:20px;height:calc(100vh - var(--top-chrome-h) - 48px);max-height:calc(100vh - var(--top-chrome-h) - 48px);overflow-y:auto}
+.content-wrap.ai-layout .ai-panel{display:flex}
+.ai-panel .nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;font-size:13.5px;font-weight:500;color:var(--muted);margin:2px 0;border:none;background:none;width:100%;text-align:left;font-family:inherit;transition:all .15s}
+.ai-panel .nav-item:hover{background:var(--bg);color:var(--navy-800)}
+.ai-panel .nav-item.active{background:var(--teal-050);color:var(--teal-600);font-weight:600}
+.ai-panel .nav-icon{width:18px;height:18px;flex-shrink:0;opacity:.75}
+.ai-panel .nav-item.active .nav-icon{opacity:1}
+.ai-panel .panel-spacer{flex:1;min-height:16px}
+.ai-panel .panel-bottom{padding-top:16px;margin-top:auto;border-top:1px solid #e2e8ee}
+.ai-panel .role-toggle{display:flex;background:var(--bg);border:1px solid #e2e8ee;border-radius:8px;padding:3px;margin-bottom:12px}
+.ai-panel .role-btn{flex:1;padding:6px;border-radius:6px;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;border:none;background:none;font-family:inherit;transition:all .15s}
+.ai-panel .role-btn.active{background:#fff;color:var(--teal-600);font-weight:600;box-shadow:0 1px 3px rgba(16,42,67,.08)}
+.ai-panel .user-info{display:flex;align-items:center;gap:10px}
+.ai-panel .avatar{width:32px;height:32px;background:var(--teal-050);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--teal-700);flex-shrink:0}
+.ai-panel .user-name{font-size:13px;font-weight:500;color:var(--navy-900)}
+.ai-panel .user-role{font-size:11px;color:var(--muted)}
+
+.ai-main{flex:1;min-width:0;min-height:calc(100vh - var(--top-chrome-h) - 48px)}
+.bv-coming-soon{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:360px;text-align:center;padding:40px}
+.bv-coming-soon h2{font-size:22px;color:var(--navy-900);margin-bottom:8px}
+.bv-coming-soon p{color:var(--muted);font-size:15px}
+
+/* Top-nav shell */
+.bv-shell{min-height:100vh;display:flex;flex-direction:column;background:var(--bg)}
+.bv-header{background:var(--navy-900);color:#fff;height:var(--header-h);display:flex;align-items:center;gap:22px;padding:0 22px}
+.bv-header .bv-logo{display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:.12em;font-size:17px;color:#fff}
+.bv-header .bv-logo .logo-dot{width:8px;height:8px;background:#6aa84f;border-radius:50%;animation:pulse 2s infinite}
+.bv-qb{display:flex;align-items:center;gap:10px;margin:0 auto}
+.bv-qb .lbl{color:#aebccb;font-size:13px}
+.bv-qb select{font:inherit;font-weight:700;color:var(--navy-900);background:#fff;border:none;border-radius:4px;padding:9px 34px 9px 14px;min-width:280px;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2311324d' stroke-width='3'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.bv-header .h-link{color:#cdd9e4;font-size:13px;font-weight:600;letter-spacing:.03em;text-decoration:none}
+.bv-header .h-link:hover{color:#fff}
+.bv-header .h-btn{border:1px solid rgba(255,255,255,.35);border-radius:5px;padding:7px 14px;background:transparent;color:#fff;font:inherit;font-weight:600;cursor:pointer;font-size:13px}
+.bv-header .h-btn:hover{background:rgba(255,255,255,.1)}
+.bv-exp{background:#6aa84f;color:#fff;font-weight:700;font-size:12px;padding:6px 14px;border-radius:4px;letter-spacing:.04em;border:none;cursor:pointer;font-family:inherit}
+.bv-exp:hover{background:#5c9445}
+.bv-divider{width:1px;height:20px;background:rgba(255,255,255,.25)}
+.bv-user{display:flex;align-items:center;gap:6px;color:#fff;font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.03em}
+.bv-subnav{background:#fff;border-bottom:1px solid var(--line);height:var(--subnav-h);display:flex;align-items:stretch;gap:4px;padding:0 18px}
+.bv-subnav .nav-tab{display:flex;align-items:center;gap:5px;padding:0 14px;color:var(--navy-800);font-weight:600;font-size:13.5px;border-bottom:3px solid transparent;background:none;border-top:none;border-left:none;border-right:none;cursor:pointer;font-family:inherit;text-decoration:none}
+.bv-subnav .nav-tab:hover{color:var(--teal-700)}
+.bv-subnav .nav-tab.active{border-bottom-color:var(--warn);color:var(--navy-900)}
+.bv-subnav .nav-tab.ai-tab{gap:7px}
+.ai-nav-icon{width:16px;height:16px;flex-shrink:0;display:block}
+.bv-subnav .caret{font-size:9px;opacity:.6}
+.bv-subnav .review-btn{border:1px solid var(--line);border-radius:5px;margin:8px 0;padding:0 14px}
+.bv-subnav .browse{border:1px solid var(--line);border-radius:5px;padding:7px 12px;align-self:center;color:var(--navy-800);font-weight:600;font-size:13.5px;text-decoration:none;display:flex;align-items:center;gap:4px}
+.bv-subnav .browse:hover{text-decoration:none;color:var(--teal-700)}
+.bv-search{display:flex;align-items:center;border:1px solid var(--line);border-radius:5px;overflow:hidden;align-self:center}
+.bv-search input{border:none;padding:7px 10px;font:inherit;width:150px;outline:none;font-size:13px}
+.bv-search button{border:none;background:var(--bg);padding:8px 10px;cursor:pointer;color:var(--muted);display:grid;place-items:center}
+.bv-search button svg{width:15px;height:15px}
+.bv-subnav .right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.icon-btn{background:none;border:none;cursor:pointer;color:#cdd9e4;padding:6px;border-radius:8px;display:grid;place-items:center}
+.icon-btn:hover{background:rgba(255,255,255,.1);color:#fff}
+.icon-btn svg{width:20px;height:20px;display:block}
+.panel{position:fixed;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 12px 40px rgba(16,42,67,.18);z-index:30;overflow:hidden;width:200px}
+.panel a{display:block;padding:12px 16px;border-bottom:1px solid var(--line);font-weight:600;color:var(--navy-800);text-decoration:none;font-size:13.5px}
+.panel a:hover{background:var(--bg)}
+.panel a:last-child{border-bottom:none}
+.grid-dashboard-bottom{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+@media(max-width:900px){.grid-dashboard-bottom{grid-template-columns:1fr}}
+
+/* Cards & content */
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--line);padding:24px;box-shadow:var(--shadow)}
+.card-sm{background:var(--card);border-radius:var(--radius);border:1px solid var(--line);padding:16px;box-shadow:var(--shadow)}
+.page-header{margin-bottom:24px}
+.page-title{font-size:22px;font-weight:700;color:var(--navy-900)}
+.page-sub{font-size:14px;color:var(--muted);margin-top:4px}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:100px;font-size:12px;font-weight:600;white-space:nowrap}
+.badge-mastered{background:var(--good-bg);color:var(--good)}
+.badge-strong{background:var(--teal-050);color:var(--teal-700)}
+.badge-developing{background:var(--teal-050);color:var(--info)}
+.badge-emerging{background:var(--warn-bg);color:var(--warn)}
+.badge-fragile{background:var(--risk-bg);color:var(--risk)}
+.badge-high{background:var(--risk-bg);color:var(--risk)}
+.badge-medium{background:var(--warn-bg);color:var(--warn)}
+.badge-low{background:var(--good-bg);color:var(--good)}
+.btn-primary{background:var(--teal-600);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .12s}
+.btn-primary:hover{background:var(--teal-700)}
+.btn-secondary{background:#fff;color:var(--navy-800);border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:9px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn-ghost{background:#fff;color:var(--muted);border:1px solid var(--line);border-radius:var(--radius-sm);padding:7px 14px;font-size:13px;cursor:pointer;font-family:inherit;transition:all .12s}
+.btn-ghost:hover{background:var(--bg);border-color:#cdd6df;color:var(--navy-800)}
+.btn-danger{background:var(--risk-bg);color:var(--risk);border:none;border-radius:var(--radius-sm);padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.signal-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:var(--bg);border:1px solid var(--line);border-radius:6px;font-size:12px;color:var(--muted)}
+.progress-bar{height:6px;background:#eef2f6;border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;border-radius:999px;transition:width .6s ease}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:11px 16px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;background:var(--bg);border-bottom:1px solid var(--line);cursor:pointer;user-select:none;white-space:nowrap}
+th:hover{color:var(--teal-600)}
+td{padding:13px 16px;font-size:14px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg)}
+.filter-btn{padding:6px 14px;border-radius:100px;font-size:13px;font-weight:600;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-family:inherit;color:var(--muted);transition:background .12s,border-color .12s,color .12s}
+.filter-btn:hover:not(.active){border-color:#cdd6df;color:var(--navy-800);background:var(--bg)}
+.filter-btn.active{border-color:var(--teal-600);color:var(--teal-600);background:var(--teal-050);box-shadow:inset 0 0 0 1px var(--teal-600)}
+.filter-btn:focus{outline:none}
+.filter-btn:focus-visible{outline:2px solid var(--teal-500);outline-offset:2px}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(17,50,77,.45);z-index:50;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal-box{background:#fff;border-radius:16px;padding:36px;width:620px;max-width:94vw;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.drawer{position:fixed;top:0;right:0;height:100vh;width:480px;max-width:96vw;background:#fff;border-left:1px solid var(--line);z-index:45;transform:translateX(100%);transition:transform .3s ease;overflow-y:auto;box-shadow:-4px 0 24px rgba(16,42,67,.1)}
+.drawer.open{transform:translateX(0)}
+.drawer-overlay{display:none;position:fixed;inset:0;background:rgba(17,50,77,.35);z-index:44}
+.drawer-overlay.open{display:block}
+.toast{position:fixed;bottom:22px;right:22px;background:var(--navy-900);color:#fff;padding:12px 16px;border-radius:var(--radius-sm);font-size:14px;z-index:100;display:none;align-items:center;gap:10px;max-width:360px;box-shadow:var(--shadow)}
+.toast.show{display:flex}
+.option-btn{width:100%;text-align:left;padding:14px 16px;border:1.5px solid var(--line);border-radius:var(--radius-sm);background:#fff;cursor:pointer;font-family:inherit;font-size:14px;margin-bottom:8px;transition:all .12s;line-height:1.4}
+.option-btn:hover:not([disabled]){border-color:var(--teal-500);background:var(--teal-050)}
+.option-btn.correct{border-color:var(--good);background:var(--good-bg);color:var(--good)}
+.option-btn.incorrect{border-color:var(--risk);background:var(--risk-bg);color:var(--risk)}
+.option-btn.reveal-correct{border-color:var(--good);background:var(--good-bg);color:var(--good)}
+.option-btn[disabled]{cursor:default}
+.onboarding-banner{background:linear-gradient(160deg,var(--navy-900),var(--teal-700));color:#fff;border-radius:var(--radius);padding:20px 24px;margin-bottom:20px;position:relative}
+.forecast-row{border:1px solid var(--line);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+.forecast-row-header{padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.forecast-row-header:hover{background:var(--bg)}
+.forecast-expanded{padding:16px;background:var(--bg);border-top:1px solid var(--line)}
+.decay-bar{height:8px;border-radius:4px;background:#eef2f6;overflow:hidden;margin-top:6px}
+.intervention-panel{background:var(--warn-bg);border:1px solid #e8c98a;border-radius:var(--radius-sm);padding:16px;margin-top:12px}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .25s ease}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}.bv-qb{display:none}}
+.flex{display:flex}.flex-col{display:flex;flex-direction:column}
+.items-center{align-items:center}.justify-between{justify-content:space-between}
+.gap-8{gap:8px}.gap-12{gap:12px}.gap-16{gap:16px}
+.mb-4{margin-bottom:4px}.mb-8{margin-bottom:8px}.mb-12{margin-bottom:12px}
+.mb-16{margin-bottom:16px}.mb-20{margin-bottom:20px}.mb-24{margin-bottom:24px}
+.mt-4{margin-top:4px}.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}
+.text-xs{font-size:12px}.text-sm{font-size:13px}.text-base{font-size:14px}.text-lg{font-size:16px}
+.font-500{font-weight:500}.font-600{font-weight:600}.font-700{font-weight:700}
+.text-muted{color:var(--muted)}.text-navy{color:var(--navy-900)}.text-blue{color:var(--info)}
+.text-green{color:var(--good)}.text-red{color:var(--risk)}.text-amber{color:var(--warn)}.text-orange{color:var(--warn)}
+.divider{height:1px;background:var(--line);margin:12px 0}
+
+/* Dashboard layout (boardvitalsmock) */
+.section-label{font-weight:700;color:var(--navy-900);font-size:14px;margin:0 0 10px}
+.dash-grid{display:grid;grid-template-columns:25% 75%;gap:0 24px;align-items:start}
+@media(max-width:1100px){.dash-grid{grid-template-columns:1fr}}
+.dash-bottom{display:grid;grid-template-columns:25% 1fr;gap:0 24px;margin-top:22px;align-items:stretch}
+@media(max-width:1100px){.dash-bottom{grid-template-columns:1fr}}
+.panel-card{background:#fff;border:1px solid var(--line);border-radius:6px}
+.joined{display:flex;align-items:stretch}
+.joined>.col-perf{flex:0 0 75%;max-width:75%}
+.joined>.col-qstatus{flex:0 0 25%;max-width:25%}
+.joined .panel-card{border-radius:0;height:100%}
+.joined>.col-perf .panel-card{border-radius:6px 0 0 6px;border-right-width:0}
+.joined>.col-qstatus .panel-card{border-radius:0 6px 6px 0}
+@media(max-width:1100px){
+  .joined{flex-direction:column}
+  .joined>.col-perf,.joined>.col-qstatus{flex:1 1 auto;max-width:100%}
+  .joined>.col-perf .panel-card{border-radius:6px 6px 0 0;border-right-width:1px;border-bottom-width:0}
+  .joined>.col-qstatus .panel-card{border-radius:0 0 6px 6px}
+}
+.perf-cells{display:flex;align-items:center}
+.perf-cells>.pc{flex:1;padding:6px 14px;text-align:center}
+.perf-cells>.pc+.pc{border-left:1px solid var(--line)}
+@media(max-width:860px){.perf-cells{flex-wrap:wrap}.perf-cells>.pc+.pc{border-left:none}}
+.start-block{padding:16px 18px;border-bottom:1px solid var(--line)}
+.start-block:last-child{border-bottom:none}
+.start-block h4{margin:0 0 2px;color:var(--navy-900);font-size:14px}
+.start-block p{margin:0 0 10px;color:var(--muted);font-size:12.5px}
+.peer-curve{position:relative;width:150px;height:96px;margin:0 auto}
+.risk-legend{font-size:12.5px;text-align:left}
+.risk-legend .ln{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.risk-badge{font-size:10px;font-weight:700;color:#fff;border-radius:10px;padding:1px 7px;min-width:34px;text-align:center}
+.risk-badge.good{background:var(--good)}.risk-badge.warn{background:var(--warn)}
+.risk-badge.risk{background:var(--risk)}.risk-badge.muted{background:#8a98a6}
+.qstatus .ln{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-top:1px solid var(--line)}
+.qstatus .ln:first-child{border-top:none}
+.qstatus .ln .k{font-weight:700;color:var(--navy-800)}
+.qstatus .ln .v{font-size:30px;font-weight:300;color:var(--navy-900)}
+.cme-card{padding:16px 18px}
+.cme-card .type{font-style:italic;color:var(--muted);font-size:12.5px}
+.cme-card .earned{font-size:17px;font-weight:700;color:var(--navy-900)}
+.bv-tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);padding:0 18px}
+.bv-tabs button{background:none;border:none;padding:14px 2px;font:inherit;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+.bv-tabs button.active{color:var(--navy-900);border-bottom-color:var(--warn)}
+.bv-tabrow-empty{text-align:center;color:var(--muted);padding:34px}
+.see-more{text-align:center;padding:12px;border-top:1px solid var(--line);color:var(--muted);font-weight:600}
+.donut{--p:0;width:128px;height:128px;border-radius:50%;display:grid;place-items:center;position:relative;margin:0 auto}
+.donut .hole{width:96px;height:96px;border-radius:50%;background:#fff;display:grid;place-items:center;text-align:center}
+.donut .hole .big{font-size:26px;font-weight:700;color:var(--navy-900)}
+.donut-wrap{display:flex;align-items:center;gap:12px;justify-content:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:600;cursor:pointer;border-radius:var(--radius-sm);padding:9px 16px;border:1px solid transparent;transition:.12s;font-family:inherit}
+.btn-block{width:100%;border:none;color:#fff;padding:10px 16px;font-size:13.5px}
+.btn-block.disabled{background:#9db8d6!important;cursor:default}
+.btn-secondary-outline{background:#fff;border:1px solid var(--info);color:var(--info);padding:4px 12px;font-size:12.5px}
+.row{display:flex;align-items:center;gap:12px}
+.between{display:flex;align-items:center;justify-content:space-between}
+table.data{width:100%;border-collapse:collapse;font-size:13.5px}
+table.data td{padding:12px 18px;border-bottom:1px solid var(--line)}
+table.data tr:last-child td{border-bottom:none}
+table.data tbody tr:hover{background:var(--bg)}
+.pill{display:inline-flex;align-items:center;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px}
+.pill.good{background:var(--good-bg);color:var(--good)}
+.pill.muted{background:#eef2f6;color:var(--muted)}
+.onboarding-compact{background:linear-gradient(160deg,var(--navy-900),var(--teal-700));color:#fff;border-radius:6px;padding:12px 16px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top-chrome">
+    <header class="bv-header">
+      <div class="bv-logo">
+        <svg viewBox="0 0 24 24" fill="none" style="width:30px;height:30px"><path d="M3 12h3l2-5 3 10 3-7 2 4h5" stroke="#4a85ef" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>BOARDVITALS</span>
+      </div>
+      <div class="bv-qb">
+        <span class="lbl">Question Bank:</span>
+        <select id="qb-select" title="Active question bank">
+          <option selected>Addiction Medicine</option>
+          <option>USMLE Step 2 CK</option>
+          <option>Internal Medicine</option>
+          <option>Cardiology</option>
+        </select>
+      </div>
+      <button class="h-btn" type="button" id="cme-btn">My CME/CE</button>
+      <button class="bv-exp" type="button" title="Plan Ends: June 3, 2028">EXTEND</button>
+      <span class="bv-divider"></span>
+      <a class="h-link" href="#">HELP CENTER</a>
+      <button class="icon-btn" type="button" id="cart-btn" title="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      </button>
+      <span class="bv-divider"></span>
+      <span class="bv-user" id="user-menu">ALEX KIM ▾</span>
+    </header>
+
+    <nav class="bv-subnav" id="subnav">
+      <button class="nav-tab" data-action="bv-nav" data-value="bv-dashboard" data-label="Dashboard">Dashboard</button>
+      <button class="nav-tab" data-menu="quiz">Quiz <span class="caret">▼</span></button>
+      <button class="nav-tab" data-menu="performance">Performance <span class="caret">▼</span></button>
+      <button class="nav-tab" data-action="bv-nav" data-value="bv-clinical-pearls" data-label="Clinical Pearls">Clinical Pearls</button>
+      <button class="nav-tab" data-action="bv-nav" data-value="bv-cme" data-label="My CME/CE">My CME/CE</button>
+      <button class="nav-tab ai-tab" data-action="ai-zone">
+        <svg class="ai-nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <defs>
+            <linearGradient id="ai-nav-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#4a85ef"/>
+              <stop offset="45%" stop-color="#7c3aed"/>
+              <stop offset="100%" stop-color="#2c6dd4"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#ai-nav-grad)" d="M12 2.5l1.4 4.8L18 8.5l-4.6 1.2L12 14.5l-1.4-4.8L6 8.5l4.6-1.2L12 2.5z"/>
+          <path fill="url(#ai-nav-grad)" opacity=".85" d="M19.5 3.5l.7 2L22 6.2l-1.8.7-.7 2-.7-2L17 6.2l1.8-.7.7-2z"/>
+          <path fill="url(#ai-nav-grad)" opacity=".7" d="M5 16.5l.5 1.4L6.9 18.5l-1.4.5-.5 1.4-.5-1.4L3.1 18.5l1.4-.5.5-1.4z"/>
+        </svg>
+        AI Mastery Engine
+      </button>
+      <div class="right">
+        <button class="review-btn nav-tab" data-action="bv-nav" data-value="bv-practice-exams" data-label="Practice Exams">Practice Exams</button>
+        <button class="browse nav-tab" data-menu="browse" type="button">Browse Questions <span class="caret">▼</span></button>
+        <div class="bv-search">
+          <input id="q-search" placeholder="Search Questions" />
+          <button type="button" id="q-search-btn" title="Search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="app-body">
+    <div class="content-wrap" id="content-wrap">
+    <aside class="ai-panel" id="ai-panel">
+      <div id="ai-nav-list"></div>
+
+      <div class="panel-spacer"></div>
+
+      <div class="panel-bottom">
+        <div class="role-toggle">
+          <button class="role-btn active" data-action="set-role" data-value="student">Student</button>
+          <button class="role-btn" data-action="set-role" data-value="instructor">Instructor</button>
+        </div>
+        <div class="user-info">
+          <div class="avatar" id="avatar-initials">AK</div>
+          <div>
+            <div class="user-name" id="user-display-name">Alex Kim</div>
+            <div class="user-role" id="user-display-role">USMLE Step 2 CK</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="ai-main">
+      <div id="main-content" class="fade-in"></div>
+    </main>
+    </div>
+  </div>
+</div>
+
+<!-- Quiz Modal -->
+<div class="modal-overlay" id="quiz-modal">
+  <div class="modal-box">
+    <div id="quiz-content"></div>
+  </div>
+</div>
+
+<!-- Concept Drawer -->
+<div class="drawer-overlay" id="drawer-overlay" data-action="close-drawer"></div>
+<div class="drawer" id="concept-drawer">
+  <div id="drawer-content" style="padding:28px"></div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6aa84f" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toast-text"></span>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const CONCEPTS = [
+  {id:'c1',name:'Heart failure management',subject:'Cardiology',state:'Fragile',mastery:62,confidence:55,decay:71,attempts:8,daysSince:30,trend:'down',history:[45,52,60,68,65,62],errorPattern:'Forgetting — you answered this correctly 30 days ago but haven not reviewed since.',reviewBy:'2 days'},
+  {id:'c2',name:'Acid-base disorders',subject:'Renal',state:'Fragile',mastery:58,confidence:48,decay:65,attempts:12,daysSince:25,trend:'down',history:[30,40,55,60,62,58],errorPattern:'Mixed — conceptual gaps in delta-delta calculation alongside recent forgetting.',reviewBy:'4 days'},
+  {id:'c3',name:'Beta-blocker pharmacology',subject:'Pharmacology',state:'Strong',mastery:81,confidence:78,decay:22,attempts:15,daysSince:5,trend:'up',history:[50,60,67,73,78,81],errorPattern:'Minor speed-based errors only — you know this material well.',reviewBy:'12 days'},
+  {id:'c4',name:'Ischemic stroke workup',subject:'Neurology',state:'Developing',mastery:67,confidence:60,decay:44,attempts:9,daysSince:14,trend:'stable',history:[40,48,55,60,64,67],errorPattern:'Conceptual gap — imaging sequence and tPA time-window criteria.',reviewBy:'8 days'},
+  {id:'c5',name:'GI bleeding approach',subject:'Gastroenterology',state:'Emerging',mastery:41,confidence:35,decay:28,attempts:5,daysSince:8,trend:'up',history:[0,20,30,35,38,41],errorPattern:'Early stage — not enough repetition yet to build durable memory.',reviewBy:'14 days'},
+  {id:'c6',name:'Sepsis management',subject:'Infectious Disease',state:'Mastered',mastery:92,confidence:88,decay:12,attempts:20,daysSince:3,trend:'stable',history:[70,75,80,85,90,92],errorPattern:'No significant errors in last 10 attempts.',reviewBy:'21 days'},
+  {id:'c7',name:'Diabetic ketoacidosis',subject:'Endocrinology',state:'Strong',mastery:79,confidence:74,decay:31,attempts:11,daysSince:7,trend:'stable',history:[45,55,62,68,75,79],errorPattern:'Occasional confusion between DKA and HHS criteria.',reviewBy:'10 days'},
+  {id:'c8',name:'Pulmonary embolism',subject:'Pulmonology',state:'Mastered',mastery:88,confidence:85,decay:18,attempts:16,daysSince:2,trend:'up',history:[60,68,75,80,85,88],errorPattern:'Consistently strong — no actionable error pattern.',reviewBy:'18 days'},
+  {id:'c9',name:'Chronic kidney disease',subject:'Renal',state:'Developing',mastery:64,confidence:57,decay:38,attempts:7,daysSince:11,trend:'up',history:[30,38,45,52,58,64],errorPattern:'Staging criteria and CKD-MBD management gaps.',reviewBy:'9 days'},
+  {id:'c10',name:'Atrial fibrillation',subject:'Cardiology',state:'Fragile',mastery:55,confidence:45,decay:68,attempts:10,daysSince:28,trend:'down',history:[48,55,62,60,58,55],errorPattern:'Forgetting — rate vs rhythm control criteria last reviewed 4 weeks ago.',reviewBy:'3 days'},
+  {id:'c11',name:'Pneumonia diagnosis',subject:'Pulmonology',state:'Strong',mastery:83,confidence:79,decay:25,attempts:14,daysSince:6,trend:'stable',history:[55,62,70,75,80,83],errorPattern:'Minor errors on atypical presentations.',reviewBy:'13 days'},
+  {id:'c12',name:'Thyroid disorders',subject:'Endocrinology',state:'Emerging',mastery:44,confidence:38,decay:33,attempts:4,daysSince:9,trend:'up',history:[0,15,28,35,40,44],errorPattern:'Hashimoto vs Graves distinction and thyroid storm criteria unclear.',reviewBy:'11 days'},
+];
+
+const STUDENTS = [
+  {id:'s1',name:'Marcus Lee',initials:'ML',readiness:58,decay:74,fragile:['Cardiology','Renal'],trend:'down',flagged:true,intervention:null},
+  {id:'s2',name:'Priya Patel',initials:'PP',readiness:91,decay:12,fragile:[],trend:'up',flagged:false,intervention:null},
+  {id:'s3',name:'Jordan Hayes',initials:'JH',readiness:67,decay:48,fragile:['Neurology'],trend:'stable',flagged:false,intervention:null},
+  {id:'s4',name:'Aaliyah Brooks',initials:'AB',readiness:44,decay:82,fragile:['Pharmacology','GI','Cardiology'],trend:'down',flagged:true,intervention:null},
+  {id:'s5',name:'Ryan Kim',initials:'RK',readiness:73,decay:35,fragile:['Endocrinology'],trend:'up',flagged:false,intervention:null},
+  {id:'s6',name:'Sofia Martinez',initials:'SM',readiness:38,decay:91,fragile:['Renal','Neurology','Pulm'],trend:'down',flagged:true,intervention:null},
+];
+
+const QUIZ_BANK = {
+  c1:[
+    {q:'A 65-year-old man with dyspnea on exertion and bilateral pitting edema has an ejection fraction of 30%. Which medication reduces mortality in this setting?',opts:['Furosemide','Digoxin','Carvedilol','Nifedipine'],correct:2,explanation:'Beta-blockers like carvedilol reduce mortality in HFrEF by attenuating catecholamine toxicity. Furosemide reduces symptoms but not mortality. Digoxin reduces hospitalizations only. Nifedipine can worsen heart failure.',type:'forgetting'},
+    {q:'Which of the following best explains the mechanism of ACE inhibitors in heart failure with reduced ejection fraction?',opts:['Direct positive inotropy','Reduced afterload and preload via RAAS blockade','Increased cardiac output via heart rate elevation','Calcium channel blockade reducing myocardial oxygen demand'],correct:1,explanation:'ACE inhibitors reduce angiotensin II, decreasing vasoconstriction (afterload) and aldosterone-mediated sodium retention (preload). This reverses maladaptive cardiac remodeling over time.',type:'gap'},
+    {q:'A patient with HFrEF (EF 35%) is started on carvedilol. Three days later, symptoms worsen slightly. What is the most appropriate next step?',opts:['Stop carvedilol immediately','Continue at current dose — initial worsening is expected','Switch to a different beta-blocker','Add dobutamine for inotropic support'],correct:1,explanation:'Initial worsening with beta-blocker initiation in HFrEF is common due to acute negative inotropy. This typically resolves within days to weeks, after which long-term mortality benefit is realized.',type:'forgetting'},
+  ],
+  c10:[
+    {q:'A 68-year-old woman with new-onset atrial fibrillation has a ventricular rate of 148 bpm and is hemodynamically stable. What is the first-line rate control agent?',opts:['Digoxin','Metoprolol','Flecainide','Amiodarone'],correct:1,explanation:'Beta-blockers or calcium channel blockers are first-line for rate control in stable AF. Digoxin is ineffective during adrenergic states. Flecainide is a rhythm control agent contraindicated with structural disease. Amiodarone is not first-line.',type:'forgetting'},
+    {q:'When is rhythm control preferred over rate control in atrial fibrillation?',opts:['In all patients over 65','When symptoms persist despite adequate rate control','Only in patients with EF < 40%','In patients with chronic kidney disease'],correct:1,explanation:'Rhythm control is preferred when patients remain symptomatic despite adequate rate control, or in younger patients with AF of short duration. Rate control alone is acceptable in asymptomatic or minimally symptomatic patients.',type:'forgetting'},
+    {q:'A 74-year-old man with non-valvular AF has a CHA2DS2-VASc score of 3. What is the appropriate anticoagulation strategy?',opts:['Aspirin 81mg alone','No anticoagulation — score not high enough','Oral anticoagulation with a DOAC or warfarin','Anticoagulation only during cardioversion procedures'],correct:2,explanation:'CHA2DS2-VASc ≥ 2 in men (≥ 3 in women) indicates high stroke risk requiring anticoagulation. DOACs are preferred over warfarin in non-valvular AF. Aspirin alone is insufficient.',type:'gap'},
+  ],
+  c2:[
+    {q:'A patient with COPD exacerbation has ABG: pH 7.32, PaCO2 58 mmHg, HCO3 29 mEq/L. What is the primary acid-base disturbance?',opts:['Acute respiratory acidosis','Chronic respiratory acidosis with compensation','Metabolic alkalosis with respiratory compensation','Mixed metabolic and respiratory acidosis'],correct:1,explanation:'Elevated CO2 (respiratory acidosis) with appropriately elevated HCO3 (renal compensation) and the pH degree of compensation indicates chronic. For every 10 mmHg rise in CO2, HCO3 rises ~3.5 mEq/L in chronic compensation.',type:'forgetting'},
+    {q:'A patient on loop diuretics develops: pH 7.50, PaCO2 48 mmHg, HCO3 36 mEq/L. What is the primary disturbance?',opts:['Respiratory alkalosis','Metabolic alkalosis with respiratory compensation','Mixed alkalosis','Metabolic acidosis with high anion gap'],correct:1,explanation:'Loop diuretics cause hypokalemic metabolic alkalosis via hydrogen and potassium loss. The elevated HCO3 is the primary problem. Slightly elevated PaCO2 represents appropriate hypoventilation (respiratory compensation).',type:'gap'},
+    {q:'A patient has a high anion gap metabolic acidosis (AG = 22, normal 12). What additional calculation should always follow?',opts:['Osmolar gap','Delta-delta ratio','Urinary anion gap','BUN/creatinine ratio'],correct:1,explanation:'The delta-delta (ΔΔ) ratio compares rise in AG to fall in HCO3. Ratio <1 suggests concurrent normal AG acidosis; >2 suggests concurrent metabolic alkalosis. This unmasks hidden mixed acid-base disorders.',type:'gap'},
+  ],
+};
+
+const DEFAULT_QUIZ = [
+  {q:'Which mechanism best underlies the primary pathophysiology in this condition?',opts:['Receptor antagonism at the target organ','Maladaptive compensatory response to initial injury','Direct cellular toxicity from the causative agent','Ion channel dysfunction leading to electrical instability'],correct:1,explanation:'The primary mechanism involves a maladaptive compensatory response — the body\'s attempt to restore homeostasis ultimately worsens the underlying condition, which is central to understanding treatment targets.',type:'gap'},
+  {q:'In the classic clinical presentation, which finding has the highest positive predictive value for this diagnosis?',opts:['Non-specific inflammatory markers','The characteristic pattern specific to this condition','Fever and leukocytosis alone','Imaging findings that appear in multiple conditions'],correct:1,explanation:'The characteristic pattern specific to this condition is the most diagnostically reliable finding and forms the cornerstone of diagnosis in clinical guidelines.',type:'forgetting'},
+  {q:'What is the evidence-based first-line management for the primary presentation of this condition?',opts:['Watchful waiting with reassurance','Evidence-based first-line therapy per current guidelines','Immediate surgical or procedural intervention','Empirical broad-spectrum coverage pending workup'],correct:1,explanation:'Current guidelines consistently support this first-line therapy based on large RCTs showing mortality and morbidity benefit. Early initiation is associated with improved outcomes.',type:'gap'},
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let S = {
+  zone: 'bv',
+  page: 'dashboard',
+  bvTab: 'bv-dashboard',
+  bvTabLabel: 'Dashboard',
+  role: 'student',
+  onboardingDismissed: false,
+  concepts: JSON.parse(JSON.stringify(CONCEPTS)),
+  students: JSON.parse(JSON.stringify(STUDENTS)),
+  masteryFilter: 'all',
+  masterySort: 'decay',
+  masterySortDir: 'desc',
+  forecastExpanded: null,
+  quiz: {active:false,conceptId:null,qIndex:0,answers:[],answered:false,selectedOpt:null,complete:false},
+  drawer: {open:false,conceptId:null},
+  interventionStudentId: null,
+  notification: null,
+  dashTab: 'quizzes',
+};
+
+// ============================================================
+// HELPERS
+// ============================================================
+function stateBadge(state) {
+  const map = {Mastered:'badge-mastered',Strong:'badge-strong',Developing:'badge-developing',Emerging:'badge-emerging',Fragile:'badge-fragile'};
+  return `<span class="badge ${map[state]||'badge-developing'}">${state}</span>`;
+}
+function stateColor(state) {
+  const map = {Mastered:'#487b09',Strong:'#2c6dd4',Developing:'#2c6dd4',Emerging:'#c9851b',Fragile:'#d24b4b'};
+  return map[state]||'#2c6dd4';
+}
+function decayColor(d) { return d>60?'#d24b4b':d>35?'#c9851b':'#487b09'; }
+function decayBadge(d) {
+  if(d>60) return '<span class="badge badge-high">High risk</span>';
+  if(d>35) return '<span class="badge badge-medium">Medium risk</span>';
+  return '<span class="badge badge-low">Low risk</span>';
+}
+function trendIcon(t) {
+  if(t==='up') return '<span style="color:#487b09;font-size:13px;">↑ Rising</span>';
+  if(t==='down') return '<span style="color:#d24b4b;font-size:13px;">↓ Falling</span>';
+  return '<span style="color:#5b6b7b;font-size:13px;">→ Stable</span>';
+}
+function sparkline(history, w=80, h=28) {
+  const min=Math.min(...history), max=Math.max(...history), range=max-min||1;
+  const pts=history.map((v,i)=>{
+    const x=(i/(history.length-1))*w;
+    const y=h-((v-min)/range)*(h-4)+2;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+  const rising=history[history.length-1]>=history[0];
+  const color=rising?'#487b09':'#d24b4b';
+  const fill=rising?'rgba(72,123,9,0.08)':'rgba(210,75,75,0.08)';
+  const last=history[history.length-1];
+  const lastX=w, lastY=h-((last-min)/range)*(h-4)+2;
+  const firstY=h-((history[0]-min)/range)*(h-4)+2;
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="display:block">
+    <polygon points="0,${firstY} ${pts.split(' ').join(' ')} ${lastX},${h} 0,${h}" fill="${fill}"/>
+    <polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
+}
+function masteryState(pct) {
+  if(pct>=86) return 'Mastered';
+  if(pct>=76) return 'Strong';
+  if(pct>=60) return 'Developing';
+  return 'Emerging';
+}
+function avgMastery() {
+  return Math.round(S.concepts.reduce((s,c)=>s+c.mastery,0)/S.concepts.length);
+}
+function examReadiness() { return 68; }
+function peerPercentile() { return 34; }
+function subjectRiskDistribution() {
+  const total = S.concepts.length || 1;
+  const onTrack = S.concepts.filter(c => c.state === 'Mastered' || c.state === 'Strong').length;
+  const needsImp = S.concepts.filter(c => c.state === 'Developing').length;
+  const atRisk = S.concepts.filter(c => c.state === 'Fragile' || c.state === 'Emerging').length;
+  const pct = n => Math.round((n / total) * 100);
+  const onPct = pct(onTrack), needPct = pct(needsImp), riskPct = pct(atRisk);
+  const nedPct = Math.max(0, 100 - onPct - needPct - riskPct);
+  return [
+    { category: 'On Track', percent: onPct, color: 'good' },
+    { category: 'Needs Improvement', percent: needPct, color: 'warn' },
+    { category: 'At Risk', percent: riskPct, color: 'risk' },
+    { category: 'Not Enough Data', percent: nedPct, color: 'muted' },
+  ];
+}
+function conceptStatusCounts() {
+  return {
+    answered: S.concepts.filter(c => c.attempts > 0).length,
+    unanswered: S.concepts.filter(c => c.state === 'Fragile' || c.decay > 55).length,
+    unseen: S.concepts.filter(c => c.state === 'Emerging').length,
+  };
+}
+function bellCurve(percentile) {
+  const x = 10 + (percentile / 100) * 130;
+  const y = 70 - Math.exp(-Math.pow((x - 75) / 32, 2)) * 52;
+  return `<svg viewBox="0 0 150 96" width="150" height="96">
+    <path d="M5 78 C 45 78, 55 18, 75 18 S 105 78, 145 78" fill="none" stroke="#c7d0d9" stroke-width="2.5"/>
+    <line x1="75" y1="8" x2="75" y2="80" stroke="#9aa7b4" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" fill="#6aa84f"/>
+  </svg>`;
+}
+function riskDonut(dist) {
+  const colors = { good: '#487b09', warn: '#c9851b', risk: '#d24b4b', muted: '#8a98a6' };
+  let acc = 0;
+  const segs = dist.map(r => {
+    const start = acc;
+    acc += r.percent;
+    return `${colors[r.color] || colors.muted} ${start}% ${acc}%`;
+  });
+  const grad = segs.length ? segs.join(', ') : '#c2ccd5 0% 100%';
+  return `<div class="donut" style="background:conic-gradient(${grad});width:108px;height:108px">
+    <div class="hole" style="width:74px;height:74px"></div></div>`;
+}
+function getFragile() {
+  return S.concepts.filter(c=>c.state==='Fragile'||c.decay>55).sort((a,b)=>b.decay-a.decay);
+}
+function showToast(msg) {
+  const t=document.getElementById('toast');
+  document.getElementById('toast-text').textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),4000);
+}
+
+// ============================================================
+// RENDER SIDEBAR NAV ACTIVE STATE
+// ============================================================
+function closeMenus() { document.getElementById('dropdown')?.remove(); }
+
+const BV_NAV_MENUS = {
+  quiz: [
+    { label: 'Create Quiz', tab: 'bv-create-quiz' },
+    { label: 'My Quizzes', tab: 'bv-my-quizzes' },
+  ],
+  performance: [
+    { label: 'Performance Timeline', tab: 'bv-perf-timeline' },
+    { label: 'Performance by Subject', tab: 'bv-performance' },
+    { label: 'Readiness / Risk', tab: 'bv-risk' },
+  ],
+  browse: [
+    { label: 'Question Banks', tab: 'bv-question-banks' },
+    { label: 'Search Questions', tab: 'bv-search' },
+  ],
+};
+
+const AI_NAV_ITEMS = {
+  student: [
+    { value: 'dashboard', label: 'Dashboard', icon: '<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>' },
+    { value: 'mastery', label: 'My Mastery', icon: '<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>' },
+    { value: 'forecast', label: 'Decay Forecast', icon: '<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>' },
+    { value: 'planner', label: 'Study Planner', icon: '<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>' },
+  ],
+  instructor: [
+    { value: 'dashboard', label: 'Dashboard', icon: '<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>' },
+    { value: 'instructor', label: 'Cohort View', icon: '<svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
+  ],
+};
+
+function openBvMenu(menuId, anchor) {
+  closeMenus();
+  const items = BV_NAV_MENUS[menuId];
+  if (!items) return;
+  const rect = anchor.getBoundingClientRect();
+  const menu = document.createElement('div');
+  menu.className = 'panel';
+  menu.id = 'dropdown';
+  menu.style.cssText = `position:fixed;top:${rect.bottom+2}px;left:${rect.left}px`;
+  menu.innerHTML = items.map(i => `<a href="#" data-action="bv-nav" data-value="${i.tab}" data-label="${i.label}">${i.label}</a>`).join('');
+  document.body.appendChild(menu);
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    closeMenus();
+    handleAction('bv-nav', a.dataset.value, e, a.dataset.label);
+  }));
+}
+
+function renderTopNav() {
+  document.querySelectorAll('#subnav .nav-tab').forEach(el => {
+    if (el.dataset.action === 'ai-zone') {
+      el.classList.toggle('active', S.zone === 'ai');
+    } else if (el.dataset.menu) {
+      const tabs = BV_NAV_MENUS[el.dataset.menu]?.map(i => i.tab) || [];
+      el.classList.toggle('active', S.zone === 'bv' && tabs.includes(S.bvTab));
+    } else if (el.dataset.value) {
+      el.classList.toggle('active', S.zone === 'bv' && el.dataset.value === S.bvTab);
+    }
+  });
+  const name = S.role === 'instructor' ? 'DR. SARAH CHEN' : 'ALEX KIM';
+  document.getElementById('user-menu').textContent = name + ' ▾';
+}
+
+function renderSidebarNav() {
+  document.getElementById('content-wrap').classList.toggle('ai-layout', S.zone === 'ai');
+  const isInstructor = S.role === 'instructor';
+  const items = AI_NAV_ITEMS[isInstructor ? 'instructor' : 'student'];
+  document.getElementById('ai-nav-list').innerHTML = items.map(item => `
+    <button type="button" class="nav-item${S.zone === 'ai' && S.page === item.value ? ' active' : ''}" data-action="navigate" data-value="${item.value}">
+      ${item.icon}
+      ${item.label}
+    </button>`).join('');
+  document.querySelectorAll('.ai-panel .role-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.value === S.role);
+  });
+  if (isInstructor) {
+    document.getElementById('avatar-initials').textContent = 'DR';
+    document.getElementById('user-display-name').textContent = 'Dr. Sarah Chen';
+    document.getElementById('user-display-role').textContent = 'Course Director';
+  } else {
+    document.getElementById('avatar-initials').textContent = 'AK';
+    document.getElementById('user-display-name').textContent = 'Alex Kim';
+    document.getElementById('user-display-role').textContent = 'USMLE Step 2 CK';
+  }
+}
+
+function renderBvComingSoon(label) {
+  return `<div class="bv-coming-soon"><h2>${label}</h2><p>Coming soon</p></div>`;
+}
+
+// ============================================================
+// PAGES
+// ============================================================
+function renderBvDashboard() {
+  const fragile = getFragile();
+  const recommended = fragile[0] || S.concepts[0];
+  const atRiskAvailable = fragile.length > 0;
+  const avg = avgMastery();
+  const peer = peerPercentile();
+  const riskDist = subjectRiskDistribution();
+  const qs = conceptStatusCounts();
+  const masteredCount = S.concepts.filter(c => c.state === 'Mastered').length;
+  const scoreColor = avg >= 75 ? 'var(--good)' : avg >= 50 ? 'var(--warn)' : 'var(--risk)';
+
+  const quizRows = fragile.slice(0, 5).map(c => `
+    <tr>
+      <td><b>${c.name}</b><br><small class="text-muted">${c.subject}</small></td>
+      <td>${c.mastery}% · ${c.decay}% decay</td>
+      <td><button class="btn-ghost" data-action="start-quiz" data-value="${c.id}" style="font-size:12px;padding:4px 10px;border-color:var(--info);color:var(--info)">Review</button></td>
+    </tr>`).join('');
+
+  const assignmentRows = `<tr>
+      <td><b>Addiction Medicine — Set 1</b><br><small class="text-muted">Due Jun 28, 2026</small></td>
+      <td>0/10 done</td>
+      <td><span class="pill good">active</span></td>
+    </tr>`;
+
+  const tabTable = S.dashTab === 'quizzes'
+    ? (quizRows || '')
+    : assignmentRows;
+  const tabEmpty = S.dashTab === 'quizzes' && !quizRows;
+
+  return `
+  <div class="text-xs text-muted" style="margin-bottom:16px;line-height:1.5">Your BoardVitals home base — launch custom or quick-start quizzes, review your score and peer rank, and keep an eye on CME/MOC credits.</div>
+  <div class="dash-grid">
+    <div>
+      <div class="section-label">Start Quiz</div>
+      <div class="panel-card">
+        <div class="start-block">
+          <h4>Custom Quiz</h4>
+          <p>Select your subjects, number of questions, and more.</p>
+          <button class="btn btn-block" data-action="bv-nav" data-value="bv-create-quiz" data-label="Create Quiz" style="background:var(--info)">New Custom Quiz</button>
+        </div>
+        <div class="start-block">
+          <div class="between" style="align-items:center">
+            <h4 style="margin:0">Quick Start Quiz</h4>
+            <button class="btn-secondary-outline" data-action="bv-nav" data-value="bv-create-quiz" data-label="Create Quiz">Edit</button>
+          </div>
+          <p style="margin-top:6px">10 unanswered questions, all subjects, tutor mode.</p>
+          <button class="btn btn-block" data-action="start-quiz" data-value="${recommended.id}" style="background:var(--info)">New Quick Start Quiz</button>
+        </div>
+        <div class="start-block">
+          <h4>At Risk Quiz</h4>
+          <p>10 questions, at risk subjects, tutor mode.</p>
+          <button class="btn btn-block ${atRiskAvailable ? '' : 'disabled'}" ${atRiskAvailable ? `data-action="start-quiz" data-value="${fragile[0].id}"` : ''} ${atRiskAvailable ? '' : 'disabled'}
+            style="background:${atRiskAvailable ? 'var(--info)' : '#9db8d6'}">New At Risk Quiz</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="joined">
+      <div class="col-perf">
+        <div class="section-label">Performance</div>
+        <div class="panel-card">
+          <div class="perf-cells">
+            <div class="pc">
+              <div class="donut" style="--p:${avg};background:conic-gradient(${scoreColor} calc(${avg}*1%), #e9edf1 0)">
+                <div class="hole"><div><small class="text-muted">Score</small><div class="big">${avg}%</div></div></div>
+              </div>
+            </div>
+            <div class="pc">
+              <div class="peer-curve">${bellCurve(peer)}</div>
+              <div style="margin-top:6px"><b>Peer Rank</b>
+                <span style="font-size:26px;font-weight:700;color:var(--navy-900);margin-left:6px">${peer}<sup style="font-size:13px">th</sup></span>
+                <div><small class="text-muted" style="font-style:italic">Percentile</small></div>
+              </div>
+            </div>
+            <div class="pc">
+              <div style="font-weight:700;color:var(--navy-800);font-size:13px;margin-bottom:8px">
+                Subject Risk Distribution <span class="text-muted" title="How your concepts are distributed by readiness">(?)</span>
+              </div>
+              <div class="donut-wrap">
+                ${riskDonut(riskDist)}
+                <div class="risk-legend">
+                  ${riskDist.map(r => `<div class="ln"><span class="risk-badge ${r.color}">${r.percent}%</span> ${r.category}</div>`).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-qstatus">
+        <div class="section-label">Question Status</div>
+        <div class="panel-card qstatus">
+          <div class="ln"><span class="k">Answered</span><span class="v">${qs.answered}</span></div>
+          <div class="ln"><span class="k">Unanswered</span><span class="v">${qs.unanswered}</span></div>
+          <div class="ln"><span class="k">Unseen</span><span class="v">${qs.unseen}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-bottom">
+    <div>
+      <div class="section-label">CME/MOC</div>
+      <div class="panel-card cme-card">
+        <div class="between" style="align-items:flex-start">
+          <div>
+            <div class="type">AMA PRA Category 1™</div>
+            <div class="earned">${masteredCount} of 40 Earned</div>
+            <div class="text-muted" style="font-size:12.5px">0 Credits Already Claimed</div>
+          </div>
+          <button class="btn-secondary-outline" data-action="bv-nav" data-value="bv-cme" data-label="My CME/CE">Claim CME Credits</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label" style="visibility:hidden">.</div>
+      <div class="panel-card">
+        <div class="bv-tabs">
+          <button class="${S.dashTab==='quizzes'?'active':''}" data-action="dash-tab" data-value="quizzes">Quizzes</button>
+          <button class="${S.dashTab==='assignments'?'active':''}" data-action="dash-tab" data-value="assignments">Assignments</button>
+        </div>
+        ${tabEmpty
+          ? `<div class="bv-tabrow-empty">No Quiz Available</div>`
+          : `<table class="data"><tbody>${tabTable}</tbody></table>`}
+        <div class="see-more" style="cursor:default">See more</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderDashboard() {
+  const fragile = getFragile().slice(0,3);
+  const recommended = fragile[0] || S.concepts[0];
+  const avg = avgMastery();
+  const stateCounts = ['Mastered','Strong','Developing','Emerging','Fragile'].map(s=>({s,n:S.concepts.filter(c=>c.state===s).length}));
+  const pullingDown = S.concepts.filter(c=>c.state==='Fragile'||c.decay>55).length;
+
+  return `
+  ${!S.onboardingDismissed?`
+  <div class="onboarding-banner mb-20">
+    <button data-action="dismiss-onboarding" style="position:absolute;top:14px;right:16px;background:none;border:none;color:rgba(255,255,255,0.45);cursor:pointer;font-size:20px;line-height:1">×</button>
+    <div style="display:flex;gap:14px;align-items:flex-start">
+      <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:10px;flex-shrink:0">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div>
+        <div style="font-weight:600;font-size:14px;margin-bottom:4px">Welcome to the AI Mastery Engine</div>
+        <div style="font-size:13px;opacity:0.75;line-height:1.6">This layer tracks what you actually know, predicts what's fading, and tells you what to do next — not just what you got right. Every recommendation is grounded in your own quiz history and timing, not a generic study plan.</div>
+      </div>
+    </div>
+  </div>`:''}
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px">
+    <div>
+      <div class="text-xs font-600 text-muted mb-4" style="text-transform:uppercase;letter-spacing:0.05em">Good morning</div>
+      <div style="font-size:22px;font-weight:700;color:var(--navy-900)">Alex Kim</div>
+      <div class="text-xs text-muted mt-4" style="max-width:520px;line-height:1.5">Your study command center — overall mastery, the AI's next best action, and the topics fading fastest before exam day.</div>
+    </div>
+    <div style="font-size:13px;color:var(--warn);background:var(--warn-bg);padding:6px 14px;border-radius:8px;font-weight:500">📅 42 days to exam</div>
+  </div>
+
+  <div class="grid-2 mb-16">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+        <div>
+          <div class="text-xs font-600 text-muted mb-4" style="text-transform:uppercase;letter-spacing:0.05em">Overall Mastery</div>
+          <div style="font-size:42px;font-weight:700;color:var(--navy-900);line-height:1">${avg}<span style="font-size:20px;color:#93a3b2">%</span></div>
+          <div style="font-size:12px;color:var(--warn);margin-top:4px">${pullingDown} concepts pulling this down</div>
+        </div>
+        <div style="text-align:right">
+          <div class="text-xs text-muted">${S.concepts.length} concepts tracked</div>
+          <div style="margin-top:8px">${sparkline([58,61,63,65,66,avg],80,32)}</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:14px">
+        ${stateCounts.map(({s,n})=>`
+        <div style="text-align:center;padding:8px 4px;background:var(--page-bg);border-radius:8px">
+          <div style="font-size:20px;font-weight:700;color:${stateColor(s)}">${n}</div>
+          <div style="font-size:10px;color:#93a3b2;margin-top:2px">${s}</div>
+        </div>`).join('')}
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:${avg}%;background:linear-gradient(90deg,var(--teal-600),var(--teal-500))"></div>
+      </div>
+    </div>
+
+    <div class="card" style="border:1.5px solid var(--teal-600);background:var(--teal-050)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+        <div style="width:8px;height:8px;background:var(--teal-600);border-radius:50%;animation:pulse 2s infinite"></div>
+        <span class="text-xs font-600 text-blue" style="text-transform:uppercase;letter-spacing:0.06em">Next best action</span>
+      </div>
+      <div style="font-size:17px;font-weight:600;color:var(--navy-900);margin-bottom:6px">${recommended.name}</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:14px">${recommended.subject}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px">
+        <span class="signal-chip">⏱ ${recommended.daysSince}d since last correct</span>
+        <span class="signal-chip" style="color:${decayColor(recommended.decay)}">📉 ${recommended.decay}% decay risk</span>
+        <span class="signal-chip">📊 ${recommended.mastery}% mastery</span>
+      </div>
+      <button class="btn-primary" data-action="start-quiz" data-value="${recommended.id}" style="width:100%;padding:12px">Start recommended review →</button>
+    </div>
+  </div>
+
+  <div class="grid-dashboard-bottom">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <div style="font-weight:600;font-size:15px">Topics fading from memory</div>
+        <button data-action="navigate" data-value="forecast" class="btn-ghost" style="font-size:12px;padding:5px 12px">See all →</button>
+      </div>
+      ${fragile.map(c=>`
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:500;font-size:14px">${c.name}</div>
+          <div class="text-xs text-muted mt-4">${c.subject} · Last correct ${c.daysSince}d ago</div>
+        </div>
+        <div style="flex-shrink:0">${stateBadge(c.state)}</div>
+        <div style="font-size:13px;font-weight:600;color:${decayColor(c.decay)};flex-shrink:0">${c.decay}%</div>
+        <button class="btn-ghost" data-action="start-quiz" data-value="${c.id}" style="font-size:12px;padding:6px 12px;flex-shrink:0">Review</button>
+      </div>`).join('')}
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="card">
+        <div class="text-xs font-600 text-muted mb-8" style="text-transform:uppercase">Exam readiness</div>
+        <div style="font-size:36px;font-weight:700;color:var(--navy-900)">${examReadiness()}<span style="font-size:18px;color:#93a3b2">%</span></div>
+        <div class="text-xs text-amber mt-4 mb-12">Fix fragile topics to reach 80%</div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:68%;background:var(--warn)"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="text-xs font-600 text-muted mb-8" style="text-transform:uppercase">vs. Peers</div>
+        <div style="font-size:32px;font-weight:700;color:var(--good)">Top ${peerPercentile()}%</div>
+        <div class="text-xs text-muted mt-4">Stronger than avg. on Cardiology</div>
+      </div>
+      <div class="card">
+        <div class="text-xs font-600 text-muted mb-8" style="text-transform:uppercase">Today's goal</div>
+        <div style="font-size:14px;font-weight:500">~32 min · 3 topics</div>
+        <button data-action="navigate" data-value="planner" class="btn-ghost" style="width:100%;margin-top:10px;font-size:12px">Open planner →</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderMastery() {
+  const legend = [
+    {s:'Mastered',def:'> 85% mastery, stable'},
+    {s:'Strong',def:'75–85%, holding'},
+    {s:'Developing',def:'60–75%, progressing'},
+    {s:'Emerging',def:'< 60%, early stage'},
+    {s:'Fragile',def:'Mastered but decay > 55%'},
+  ];
+  let concepts = [...S.concepts];
+  if(S.masteryFilter!=='all') concepts = concepts.filter(c=>c.state===S.masteryFilter);
+  concepts.sort((a,b)=>{
+    let va=a[S.masterySort], vb=b[S.masterySort];
+    if(typeof va==='string') return S.masterySortDir==='asc'?va.localeCompare(vb):vb.localeCompare(va);
+    return S.masterySortDir==='asc'?va-vb:vb-va;
+  });
+  const filters = ['all','Mastered','Strong','Developing','Emerging','Fragile'];
+  const sortArrow = (col) => S.masterySort===col ? (S.masterySortDir==='asc'?'↑':'↓') : '';
+
+  return `
+  <div class="page-header">
+    <div class="page-title">My Mastery</div>
+    <div class="page-sub">Concept-level breakdown — click any concept for full history and error analysis</div>
+  </div>
+
+  <!-- Legend -->
+  <div class="card mb-16" style="background:#f4f7f9;padding:14px 20px">
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+      <div class="text-xs font-600 text-muted" style="text-transform:uppercase;letter-spacing:0.05em">State legend</div>
+      ${legend.map(({s,def})=>`
+      <div style="display:flex;align-items:center;gap:6px">
+        ${stateBadge(s)}
+        <span class="text-xs text-muted">${def}</span>
+      </div>`).join('')}
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+    ${filters.map(f=>`<button type="button" class="filter-btn${S.masteryFilter===f?' active':''}" data-action="filter-mastery" data-value="${f}" aria-pressed="${S.masteryFilter===f}">${f==='all'?'All concepts':f}</button>`).join('')}
+  </div>
+
+  <!-- Table -->
+  <div style="background:white;border-radius:12px;border:1px solid #e2e8ee;overflow:hidden">
+    <table>
+      <thead>
+        <tr>
+          <th data-action="sort-mastery" data-value="name">Concept ${sortArrow('name')}</th>
+          <th data-action="sort-mastery" data-value="subject">Subject ${sortArrow('subject')}</th>
+          <th data-action="sort-mastery" data-value="state">State ${sortArrow('state')}</th>
+          <th data-action="sort-mastery" data-value="mastery">Mastery % ${sortArrow('mastery')}</th>
+          <th data-action="sort-mastery" data-value="confidence">Confidence ${sortArrow('confidence')}</th>
+          <th data-action="sort-mastery" data-value="decay">Decay risk ${sortArrow('decay')}</th>
+          <th data-action="sort-mastery" data-value="daysSince">Last correct ${sortArrow('daysSince')}</th>
+          <th>Trend</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${concepts.map(c=>`
+        <tr>
+          <td>
+            <div style="font-weight:500;font-size:14px">${c.name}</div>
+            <div style="margin-top:2px">${sparkline(c.history,60,18)}</div>
+          </td>
+          <td class="text-sm text-muted">${c.subject}</td>
+          <td>${stateBadge(c.state)}</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="font-weight:600;color:${stateColor(c.state)}">${c.mastery}%</div>
+              <div class="progress-bar" style="width:56px"><div class="progress-fill" style="width:${c.mastery}%;background:${stateColor(c.state)}"></div></div>
+            </div>
+          </td>
+          <td style="font-weight:500;color:#5b6b7b">${c.confidence}%</td>
+          <td style="font-weight:600;color:${decayColor(c.decay)}">${c.decay}%</td>
+          <td class="text-sm text-muted">${c.daysSince}d ago</td>
+          <td>${trendIcon(c.trend)}</td>
+          <td>
+            <div style="display:flex;gap:6px">
+              <button class="btn-ghost" data-action="open-drawer" data-value="${c.id}" style="font-size:12px;padding:5px 10px">Details</button>
+              <button class="btn-ghost" data-action="start-quiz" data-value="${c.id}" style="font-size:12px;padding:5px 10px;color:#2c6dd4;border-color:#2c6dd4">Review</button>
+            </div>
+          </td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderForecast() {
+  const sorted = [...S.concepts].sort((a,b)=>b.decay-a.decay);
+  const high = sorted.filter(c=>c.decay>60).length;
+
+  return `
+  <div class="page-header">
+    <div class="page-title">Decay Forecast</div>
+    <div class="page-sub">Topics the AI predicts will fade before your exam — ordered by urgency</div>
+  </div>
+
+  <div class="card mb-16" style="background:linear-gradient(135deg,#fdf3e0,#fdf3e0);border-color:#e8c98a;padding:16px 20px">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-weight:600;font-size:15px;color:#8a6410">${high} concepts at high risk of fading</div>
+        <div class="text-sm text-muted mt-4">Review these first — memory is still recoverable before it falls further</div>
+      </div>
+      <button class="btn-primary" data-action="start-quiz" data-value="${sorted[0].id}" style="background:#c9851b;white-space:nowrap">Review highest risk →</button>
+    </div>
+  </div>
+
+  ${sorted.map(c=>{
+    const isOpen = S.forecastExpanded===c.id;
+    const difficultyLabel = c.mastery<60?'High':c.mastery<75?'Medium':'Low';
+    return `
+    <div class="forecast-row">
+      <div class="forecast-row-header" data-action="expand-forecast" data-value="${c.id}">
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+            <span style="font-weight:600;font-size:14px">${c.name}</span>
+            ${stateBadge(c.state)}
+            ${decayBadge(c.decay)}
+          </div>
+          <div class="text-xs text-muted">${c.subject} · Review by: <strong>${c.reviewBy}</strong> · Last correct: ${c.daysSince}d ago</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
+          <div style="text-align:right">
+            <div style="font-size:20px;font-weight:700;color:${decayColor(c.decay)}">${c.decay}%</div>
+            <div class="text-xs text-muted">decay risk</div>
+          </div>
+          <div class="decay-bar" style="width:80px">
+            <div style="height:8px;border-radius:4px;width:${c.decay}%;background:${decayColor(c.decay)}"></div>
+          </div>
+          <span style="color:#93a3b2;font-size:16px">${isOpen?'▲':'▼'}</span>
+        </div>
+      </div>
+      ${isOpen?`
+      <div class="forecast-expanded">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px">
+          <div style="background:white;border-radius:8px;padding:12px;border:1px solid #e2e8ee">
+            <div class="text-xs text-muted mb-4">Time since last correct</div>
+            <div style="font-weight:700;font-size:18px;color:#1b3950">${c.daysSince} days</div>
+          </div>
+          <div style="background:white;border-radius:8px;padding:12px;border:1px solid #e2e8ee">
+            <div class="text-xs text-muted mb-4">Topic difficulty</div>
+            <div style="font-weight:700;font-size:18px;color:#1b3950">${difficultyLabel}</div>
+          </div>
+          <div style="background:white;border-radius:8px;padding:12px;border:1px solid #e2e8ee">
+            <div class="text-xs text-muted mb-4">Total attempts</div>
+            <div style="font-weight:700;font-size:18px;color:#1b3950">${c.attempts}</div>
+          </div>
+        </div>
+        <div style="background:white;border-radius:8px;padding:12px;border:1px solid #e2e8ee;margin-bottom:12px">
+          <div class="text-xs font-600 text-muted mb-8" style="text-transform:uppercase">Why this is flagged</div>
+          <div class="text-sm" style="color:#1f2a37;line-height:1.6">${c.errorPattern}</div>
+        </div>
+        <button class="btn-primary" data-action="start-quiz" data-value="${c.id}">Start review for this concept →</button>
+      </div>`:''}
+    </div>`;
+  }).join('')}`;
+}
+
+function renderPlanner() {
+  const today = [
+    {concept:'Heart failure management',subject:'Cardiology',time:12,impact:'High',decay:71,id:'c1'},
+    {concept:'Atrial fibrillation',subject:'Cardiology',time:10,impact:'High',decay:68,id:'c10'},
+    {concept:'Acid-base disorders',subject:'Renal',time:10,impact:'High',decay:65,id:'c2'},
+  ];
+  const week = [
+    {concept:'Ischemic stroke workup',subject:'Neurology',time:10,day:'Tomorrow',id:'c4'},
+    {concept:'Diabetic ketoacidosis',subject:'Endocrinology',time:8,day:'Wed',id:'c7'},
+    {concept:'Chronic kidney disease',subject:'Renal',time:8,day:'Thu',id:'c9'},
+    {concept:'GI bleeding approach',subject:'Gastroenterology',time:6,day:'Fri',id:'c5'},
+  ];
+  const safe = S.concepts.filter(c=>c.state==='Mastered'||c.state==='Strong');
+
+  return `
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px">
+    <div>
+      <div class="page-title">Study Planner</div>
+      <div class="page-sub">AI-generated plan based on your decay forecast and exam date</div>
+    </div>
+    <div style="background:#ecf5fb;border:1px solid #b8d4f0;border-radius:10px;padding:10px 16px;text-align:right">
+      <div class="text-xs text-muted">Days to exam</div>
+      <div style="font-size:28px;font-weight:700;color:#2c6dd4">42</div>
+    </div>
+  </div>
+
+  <!-- Today -->
+  <div class="card mb-16">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <div>
+        <div style="font-weight:700;font-size:16px">Today</div>
+        <div class="text-sm text-muted mt-4">~32 min · All high-impact</div>
+      </div>
+      <button class="btn-primary" data-action="start-quiz" data-value="c1">Start today's first review →</button>
+    </div>
+    ${today.map((t,i)=>`
+    <div style="display:flex;align-items:center;gap:14px;padding:14px;background:#f4f7f9;border-radius:10px;margin-bottom:8px;border:1px solid #f4f7f9">
+      <div style="width:28px;height:28px;background:#2c6dd4;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0">${i+1}</div>
+      <div style="flex:1">
+        <div style="font-weight:500;font-size:14px">${t.concept}</div>
+        <div class="text-xs text-muted mt-2">${t.subject}</div>
+      </div>
+      <span class="badge badge-high" style="flex-shrink:0">${t.impact} impact</span>
+      <div style="font-size:13px;font-weight:600;color:${decayColor(t.decay)};flex-shrink:0">${t.decay}% decay</div>
+      <div style="color:#5b6b7b;font-size:13px;flex-shrink:0">~${t.time} min</div>
+      <button class="btn-ghost" data-action="start-quiz" data-value="${t.id}" style="font-size:12px;padding:6px 12px;flex-shrink:0">Review</button>
+    </div>`).join('')}
+  </div>
+
+  <!-- This Week -->
+  <div class="card mb-16">
+    <div style="font-weight:700;font-size:16px;margin-bottom:16px">This week</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    ${week.map(t=>`
+    <div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #e2e8ee;border-radius:8px;background:white">
+      <div style="text-align:center;flex-shrink:0">
+        <div style="font-size:11px;color:#93a3b2;font-weight:500">${t.day}</div>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:500;font-size:13px">${t.concept}</div>
+        <div class="text-xs text-muted">${t.subject} · ~${t.time} min</div>
+      </div>
+      <button class="btn-ghost" data-action="start-quiz" data-value="${t.id}" style="font-size:11px;padding:4px 10px;flex-shrink:0">→</button>
+    </div>`).join('')}
+    </div>
+  </div>
+
+  <!-- Safe to skip -->
+  <div class="card" style="background:#eaf2dd;border-color:#c5ddb0">
+    <div style="font-weight:600;font-size:14px;color:#487b09;margin-bottom:12px">✓ Safe to skip this week</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      ${safe.map(c=>`<div style="display:flex;align-items:center;gap:6px;background:white;border:1px solid #eaf2dd;border-radius:8px;padding:7px 12px">
+        <span style="font-size:13px;font-weight:500">${c.name}</span>
+        ${stateBadge(c.state)}
+        <span class="text-xs text-muted">next review in ${c.reviewBy}</span>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function renderInstructor() {
+  const classAvg = Math.round(S.students.reduce((s,st)=>s+st.readiness,0)/S.students.length);
+  const flagged = S.students.filter(s=>s.flagged).length;
+  const classFragile = ['Cardiology','Renal','Neurology'];
+
+  return `
+  <div class="page-header">
+    <div class="page-title">Cohort View</div>
+    <div class="text-xs text-muted" style="margin:4px 0 2px;line-height:1.5">Track each student's exam readiness and decay risk, flag who needs intervention, and spot topics that are fragile across the cohort.</div>
+    <div class="page-sub">USMLE Step 2 CK — Spring 2025 cohort · ${S.students.length} students</div>
+  </div>
+
+  <div class="grid-3 mb-16">
+    <div class="card-sm" style="border-left:3px solid #2c6dd4">
+      <div class="text-xs text-muted mb-4" style="text-transform:uppercase;font-weight:600">Class avg. readiness</div>
+      <div style="font-size:28px;font-weight:700;color:#1b3950">${classAvg}%</div>
+    </div>
+    <div class="card-sm" style="border-left:3px solid #d24b4b">
+      <div class="text-xs text-muted mb-4" style="text-transform:uppercase;font-weight:600">Needs intervention</div>
+      <div style="font-size:28px;font-weight:700;color:#d24b4b">${flagged} students</div>
+    </div>
+    <div class="card-sm" style="border-left:3px solid #c9851b">
+      <div class="text-xs text-muted mb-4" style="text-transform:uppercase;font-weight:600">Top fragile topic</div>
+      <div style="font-size:20px;font-weight:700;color:#c9851b">Cardiology</div>
+    </div>
+  </div>
+
+  <div style="background:white;border-radius:12px;border:1px solid #e2e8ee;overflow:hidden;margin-bottom:16px">
+    <table>
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Readiness</th>
+          <th>Decay risk</th>
+          <th>Fragile subjects</th>
+          <th>Trend</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${S.students.map(st=>`
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:32px;height:32px;background:${st.flagged?'#fbeaea':'#ecf5fb'};border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:${st.flagged?'#d24b4b':'#214876'};flex-shrink:0">${st.initials}</div>
+              <div>
+                <div style="font-weight:500;font-size:14px">${st.name}</div>
+                ${st.flagged?'<div class="text-xs" style="color:#d24b4b">⚠ Intervention recommended</div>':'<div class="text-xs text-muted">On track</div>'}
+              </div>
+            </div>
+          </td>
+          <td>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="font-weight:600;color:${st.readiness>=75?'#487b09':st.readiness>=55?'#c9851b':'#d24b4b'}">${st.readiness}%</div>
+              <div class="progress-bar" style="width:60px"><div class="progress-fill" style="width:${st.readiness}%;background:${st.readiness>=75?'#487b09':st.readiness>=55?'#c9851b':'#d24b4b'}"></div></div>
+            </div>
+          </td>
+          <td style="font-weight:600;color:${decayColor(st.decay)}">${st.decay}%</td>
+          <td>
+            <div style="display:flex;flex-wrap:wrap;gap:4px">
+              ${st.fragile.length?st.fragile.map(f=>`<span class="badge badge-fragile">${f}</span>`).join(''):'<span class="text-sm text-muted">None</span>'}
+            </div>
+          </td>
+          <td>${trendIcon(st.trend)}</td>
+          <td>
+            ${st.flagged?`
+            <button class="btn-danger" data-action="suggest-intervention" data-value="${st.id}">Suggest intervention</button>
+            ${S.interventionStudentId===st.id?`
+            <div class="intervention-panel mt-8">
+              <div class="text-xs font-600 text-muted mb-8" style="text-transform:uppercase">AI Recommended Intervention</div>
+              <div class="text-sm mb-12" style="line-height:1.6">Assign a targeted 20-min review set covering ${st.fragile.join(' and ')}. Student has not reviewed these in 3+ weeks. Suggest checking in after completion.</div>
+              <div style="display:flex;gap:8px">
+                <button class="btn-primary" data-action="assign-intervention" data-value="${st.id}" style="font-size:13px">Assign review set</button>
+                <button class="btn-ghost" data-action="close-intervention" style="font-size:13px">Dismiss</button>
+              </div>
+            </div>`:''}
+            `:'<span class="text-sm text-muted">—</span>'}
+          </td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Class fragile concepts -->
+  <div class="card">
+    <div style="font-weight:600;font-size:15px;margin-bottom:14px">Class-wide fragile concepts</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      ${classFragile.map((s,i)=>`
+      <div style="flex:1;min-width:140px;background:#fdf3e0;border:1px solid #e8c98a;border-radius:10px;padding:14px">
+        <div style="font-weight:600;font-size:15px;color:#8a6410">${s}</div>
+        <div class="text-xs text-muted mt-4">${[4,3,3][i]} students affected</div>
+        <div class="progress-bar mt-8"><div class="progress-fill" style="width:${[75,60,55][i]}%;background:#c9851b"></div></div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+// ============================================================
+// QUIZ
+// ============================================================
+function getQuizQuestions(conceptId) {
+  return QUIZ_BANK[conceptId] || DEFAULT_QUIZ;
+}
+
+function openQuiz(conceptId) {
+  S.quiz = {active:true,conceptId,qIndex:0,answers:[],answered:false,selectedOpt:null,complete:false};
+  document.getElementById('quiz-modal').classList.add('open');
+  renderQuiz();
+}
+
+function renderQuiz() {
+  const c = S.concepts.find(x=>x.id===S.quiz.conceptId);
+  const questions = getQuizQuestions(S.quiz.conceptId);
+  const q = S.quiz;
+
+  if(q.complete) {
+    const correct = q.answers.filter(a=>a).length;
+    const total = questions.length;
+    const gain = correct===total?12:correct===total-1?6:correct===1?2:0;
+    const oldMastery = c.mastery;
+    const newMastery = Math.min(99, oldMastery + gain);
+    const newState = gain>0 ? masteryState(newMastery) : c.state;
+
+    document.getElementById('quiz-content').innerHTML = `
+    <div style="text-align:center;padding:8px 0">
+      <div style="font-size:40px;margin-bottom:12px">${correct===total?'🎯':correct>=2?'✅':'📚'}</div>
+      <div style="font-size:20px;font-weight:700;margin-bottom:4px">${correct}/${total} correct</div>
+      <div class="text-muted text-sm mb-24">${c.name}</div>
+
+      <div style="background:#ecf5fb;border:1.5px solid #b8d4f0;border-radius:12px;padding:20px;margin-bottom:20px">
+        <div class="text-xs font-600 text-muted mb-12" style="text-transform:uppercase">Mastery updated</div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:12px">
+          <div style="font-size:28px;font-weight:700;color:#5b6b7b">${oldMastery}%</div>
+          <div style="font-size:24px;color:#2c6dd4">→</div>
+          <div style="font-size:28px;font-weight:700;color:${stateColor(newState)}">${newMastery}%</div>
+        </div>
+        ${gain>0?`<div style="font-size:13px;color:#487b09">+${gain} points · State: ${newState}</div>`:`<div style="font-size:13px;color:#d24b4b">Keep reviewing — more practice needed</div>`}
+      </div>
+
+      <div style="text-align:left;background:#f4f7f9;border-radius:10px;padding:16px;margin-bottom:20px">
+        ${questions.map((qq,i)=>`
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:${i<questions.length-1?'1px solid #e2e8ee':'none'}">
+          <div style="width:22px;height:22px;border-radius:50%;background:${q.answers[i]?'#eaf2dd':'#fbeaea'};display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">${q.answers[i]?'✓':'✗'}</div>
+          <div class="text-sm" style="line-height:1.4">${qq.q.substring(0,80)}…</div>
+        </div>`).join('')}
+      </div>
+
+      <button class="btn-primary" data-action="finish-quiz" data-mastery="${newMastery}" data-state="${newState}" style="width:100%;padding:13px;font-size:15px">Back to dashboard</button>
+    </div>`;
+    return;
+  }
+
+  const currentQ = questions[q.qIndex];
+  const progress = ((q.qIndex)/(questions.length))*100;
+
+  document.getElementById('quiz-content').innerHTML = `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+    <div>
+      <div class="text-xs font-600 text-muted" style="text-transform:uppercase;letter-spacing:0.05em">${c.subject}</div>
+      <div style="font-weight:600;font-size:15px">${c.name}</div>
+      <div class="text-xs text-muted mt-2" style="max-width:380px;line-height:1.4">Answer each question to refresh this concept — your mastery score and decay forecast update from how you do.</div>
+    </div>
+    <button data-action="close-quiz" style="background:none;border:none;color:#93a3b2;cursor:pointer;font-size:22px;line-height:1">×</button>
+  </div>
+
+  <div style="margin-bottom:6px;display:flex;justify-content:space-between">
+    <span class="text-xs text-muted">Question ${q.qIndex+1} of ${questions.length}</span>
+    <span class="text-xs text-muted">${Math.round((q.qIndex/questions.length)*100)}% complete</span>
+  </div>
+  <div class="progress-bar mb-20" style="height:4px">
+    <div class="progress-fill" style="width:${progress}%;background:#2c6dd4"></div>
+  </div>
+
+  <div style="font-size:15px;font-weight:500;line-height:1.65;margin-bottom:20px;color:#1f2a37">${currentQ.q}</div>
+
+  <div id="options">
+  ${currentQ.opts.map((opt,i)=>{
+    const cls = q.answered ? (i===currentQ.correct ? 'correct reveal-correct' : (i===q.selectedOpt ? 'incorrect' : '')) : '';
+    const spanBg = q.answered&&i===currentQ.correct?'#487b09':q.answered&&i===q.selectedOpt?'#d24b4b':'#e2e8ee';
+    const spanColor = q.answered?(i===currentQ.correct||i===q.selectedOpt?'white':'#5b6b7b'):'#5b6b7b';
+    return `<button class="option-btn ${cls}" data-action="answer-quiz" data-value="${i}" ${q.answered?'disabled':''}>
+      <span style="display:inline-block;width:22px;height:22px;border-radius:50%;background:${spanBg};color:${spanColor};font-size:11px;font-weight:600;text-align:center;line-height:22px;margin-right:10px;flex-shrink:0">${String.fromCharCode(65+i)}</span>${opt}
+    </button>`;
+  }).join('')}
+  </div>
+
+  ${q.answered?`
+  <div style="background:${q.answers[q.qIndex]?'#eaf2dd':'#fdf3e0'};border:1px solid ${q.answers[q.qIndex]?'#c5ddb0':'#e8c98a'};border-radius:10px;padding:16px;margin-top:14px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <span style="font-size:16px">${q.answers[q.qIndex]?'✅':'⚠️'}</span>
+      <span style="font-weight:600;font-size:14px;color:${q.answers[q.qIndex]?'#487b09':'#8a6410'}">${q.answers[q.qIndex]?'Correct':'Incorrect'}</span>
+      ${!q.answers[q.qIndex]?`<span class="badge" style="background:${currentQ.type==='forgetting'?'#ecf5fb':'#fdf3e0'};color:${currentQ.type==='forgetting'?'#1f4877':'#8a6410'};font-size:11px">${currentQ.type==='forgetting'?'Forgetting risk':'Concept gap'}</span>`:''}
+    </div>
+    <div class="text-sm" style="line-height:1.65;color:#1f2a37">${currentQ.explanation}</div>
+    ${!q.answers[q.qIndex]?`<div class="text-xs mt-8" style="color:#5b6b7b">${currentQ.type==='forgetting'?'You may have understood this before — spaced repetition will help.':'Consider reviewing the underlying mechanism before moving on.'}</div>`:''}
+  </div>
+  <button class="btn-primary" data-action="next-question" style="width:100%;margin-top:14px;padding:12px">${q.qIndex+1<questions.length?'Next question →':'See results'}</button>
+  `:''}`;
+}
+
+// ============================================================
+// CONCEPT DRAWER
+// ============================================================
+function openDrawer(conceptId) {
+  S.drawer = {open:true,conceptId};
+  const c = S.concepts.find(x=>x.id===conceptId);
+  const questions = getQuizQuestions(conceptId);
+  const lastAttempts = ['✓','✗','✓','✓','✗'].slice(0,Math.min(5,c.attempts));
+
+  document.getElementById('drawer-content').innerHTML = `
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px">
+    <div>
+      <div class="text-xs text-muted mb-4">${c.subject}</div>
+      <div style="font-size:18px;font-weight:700;color:#1b3950;line-height:1.3">${c.name}</div>
+      <div style="margin-top:8px">${stateBadge(c.state)}</div>
+    </div>
+    <button data-action="close-drawer" style="background:none;border:none;color:#93a3b2;cursor:pointer;font-size:22px;padding:4px">×</button>
+  </div>
+
+  <div class="grid-2 mb-16">
+    <div style="background:#f4f7f9;border-radius:10px;padding:14px;border:1px solid #e2e8ee">
+      <div class="text-xs text-muted mb-4">Mastery</div>
+      <div style="font-size:26px;font-weight:700;color:${stateColor(c.state)}">${c.mastery}%</div>
+      <div style="margin-top:8px">${sparkline(c.history,100,32)}</div>
+    </div>
+    <div style="background:#f4f7f9;border-radius:10px;padding:14px;border:1px solid #e2e8ee">
+      <div class="text-xs text-muted mb-4">Decay risk</div>
+      <div style="font-size:26px;font-weight:700;color:${decayColor(c.decay)}">${c.decay}%</div>
+      <div class="text-xs text-muted mt-4">Review by: <strong>${c.reviewBy}</strong></div>
+    </div>
+  </div>
+
+  <div style="background:#fdf3e0;border:1px solid #e8c98a;border-radius:10px;padding:14px;margin-bottom:16px">
+    <div class="text-xs font-600 mb-6" style="text-transform:uppercase;color:#8a6410">Error pattern</div>
+    <div class="text-sm" style="color:#1f2a37;line-height:1.6">${c.errorPattern}</div>
+  </div>
+
+  <div style="margin-bottom:16px">
+    <div class="text-xs font-600 text-muted mb-8" style="text-transform:uppercase">Recent attempts (${c.attempts} total)</div>
+    <div style="display:flex;gap:6px;align-items:center">
+      ${lastAttempts.map(r=>`<div style="width:30px;height:30px;border-radius:8px;background:${r==='✓'?'#eaf2dd':'#fbeaea'};display:flex;align-items:center;justify-content:center;font-size:14px">${r}</div>`).join('')}
+      <div class="text-xs text-muted" style="margin-left:4px">last ${lastAttempts.length} shown</div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:16px">
+    <div class="text-xs font-600 text-muted mb-8" style="text-transform:uppercase">Confidence</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="progress-bar" style="flex:1;height:8px"><div class="progress-fill" style="width:${c.confidence}%;background:#2c6dd4"></div></div>
+      <div style="font-weight:600;font-size:14px;color:#2c6dd4">${c.confidence}%</div>
+    </div>
+    <div class="text-xs text-muted mt-4">Based on answer speed and hesitation patterns</div>
+  </div>
+
+  <div style="background:#f4f7f9;border-radius:10px;padding:14px;border:1px solid #e2e8ee;margin-bottom:20px">
+    <div class="text-xs font-600 text-muted mb-4" style="text-transform:uppercase">Recommended action</div>
+    <div class="text-sm" style="color:#1f2a37;margin-bottom:10px">${c.state==='Fragile'||c.decay>55?'Immediate review recommended — memory is still recoverable but decaying fast.':c.state==='Mastered'?'On track — no action needed for 2+ weeks.':'Continue building — 2–3 more review sessions to reach Strong.'}</div>
+  </div>
+
+  <button class="btn-primary" data-action="start-quiz" data-value="${c.id}" style="width:100%;padding:12px" onclick="closeDrawer()">Start review session →</button>`;
+
+  document.getElementById('concept-drawer').classList.add('open');
+  document.getElementById('drawer-overlay').classList.add('open');
+}
+
+function closeDrawer() {
+  S.drawer = {open:false,conceptId:null};
+  document.getElementById('concept-drawer').classList.remove('open');
+  document.getElementById('drawer-overlay').classList.remove('open');
+}
+
+// ============================================================
+// MAIN RENDER
+// ============================================================
+function renderMain() {
+  renderTopNav();
+  renderSidebarNav();
+  const el = document.getElementById('main-content');
+  let html;
+  if (S.zone === 'bv') {
+    html = S.bvTab === 'bv-dashboard' ? renderBvDashboard() : renderBvComingSoon(S.bvTabLabel);
+  } else {
+    const pages = {dashboard:renderDashboard,mastery:renderMastery,forecast:renderForecast,planner:renderPlanner,instructor:renderInstructor};
+    html = (pages[S.page] || renderDashboard)();
+  }
+  el.innerHTML = html;
+  el.classList.remove('fade-in');
+  void el.offsetWidth;
+  el.classList.add('fade-in');
+}
+
+// ============================================================
+// EVENT HANDLING
+// ============================================================
+function handleAction(action, value, e, label) {
+  switch(action) {
+    case 'ai-zone':
+      S.zone = 'ai';
+      renderMain();
+      window.scrollTo(0,0);
+      break;
+    case 'navigate':
+      S.zone = 'ai';
+      S.page = value;
+      renderMain();
+      window.scrollTo(0,0);
+      break;
+    case 'bv-nav':
+      S.zone = 'bv';
+      S.bvTab = value;
+      S.bvTabLabel = label || value;
+      renderMain();
+      window.scrollTo(0,0);
+      break;
+    case 'dismiss-onboarding':
+      S.onboardingDismissed = true;
+      renderMain();
+      break;
+    case 'dash-tab':
+      S.dashTab = value;
+      renderMain();
+      break;
+    case 'set-role':
+      S.role = value;
+      S.zone = 'ai';
+      if(value==='instructor') S.page='instructor';
+      else S.page='dashboard';
+      renderMain();
+      break;
+    case 'filter-mastery':
+      S.masteryFilter = value;
+      renderMain();
+      if (e?.target?.blur) e.target.blur();
+      break;
+    case 'sort-mastery':
+      if(S.masterySort===value) S.masterySortDir = S.masterySortDir==='asc'?'desc':'asc';
+      else { S.masterySort=value; S.masterySortDir='asc'; }
+      renderMain();
+      break;
+    case 'expand-forecast':
+      S.forecastExpanded = S.forecastExpanded===value?null:value;
+      renderMain();
+      break;
+    case 'start-quiz':
+      closeDrawer();
+      openQuiz(value);
+      break;
+    case 'close-quiz':
+      document.getElementById('quiz-modal').classList.remove('open');
+      S.quiz.active=false;
+      break;
+    case 'answer-quiz': {
+      if(S.quiz.answered) return;
+      const optIdx = parseInt(value);
+      const qs = getQuizQuestions(S.quiz.conceptId);
+      const isCorrect = optIdx === qs[S.quiz.qIndex].correct;
+      S.quiz.answered = true;
+      S.quiz.selectedOpt = optIdx;
+      S.quiz.answers.push(isCorrect);
+      renderQuiz();
+      break;
+    }
+    case 'next-question': {
+      const questions = getQuizQuestions(S.quiz.conceptId);
+      if(S.quiz.qIndex+1 < questions.length) {
+        S.quiz.qIndex++;
+        S.quiz.answered=false;
+        S.quiz.selectedOpt=null;
+        renderQuiz();
+      } else {
+        S.quiz.complete=true;
+        renderQuiz();
+      }
+      break;
+    }
+    case 'finish-quiz': {
+      const btn = e.target.closest('[data-mastery]');
+      const newMastery = parseInt(btn ? btn.dataset.mastery : 0);
+      const newState = btn ? btn.dataset.state : '';
+      const cId = S.quiz.conceptId;
+      const concept = S.concepts.find(c=>c.id===cId);
+      if(concept && newMastery) {
+        const oldM = concept.mastery;
+        concept.mastery = newMastery;
+        if(newState) concept.state = newState;
+        concept.decay = Math.max(5, concept.decay - 25);
+        concept.daysSince = 0;
+        concept.history.push(newMastery);
+        concept.trend = newMastery>oldM?'up':newMastery<oldM?'down':'stable';
+        document.getElementById('quiz-modal').classList.remove('open');
+        S.quiz.active=false;
+        S.zone='ai';
+        S.page='dashboard';
+        renderMain();
+        setTimeout(()=>showToast(`${concept.name} mastery updated to ${newMastery}%`),300);
+      }
+      break;
+    }
+    case 'open-drawer':
+      openDrawer(value);
+      break;
+    case 'close-drawer':
+      closeDrawer();
+      break;
+    case 'suggest-intervention':
+      S.interventionStudentId = S.interventionStudentId===value?null:value;
+      renderMain();
+      break;
+    case 'close-intervention':
+      S.interventionStudentId = null;
+      renderMain();
+      break;
+    case 'assign-intervention': {
+      const st = S.students.find(s=>s.id===value);
+      if(st) { st.flagged=false; st.trend='up'; }
+      S.interventionStudentId=null;
+      renderMain();
+      showToast(`Review set assigned to ${st ? st.name : 'student'}`);
+      break;
+    }
+  }
+}
+
+// Delegation — main content
+document.getElementById('main-content').addEventListener('click', e=>{
+  const t = e.target.closest('[data-action]');
+  if(!t) return;
+  handleAction(t.dataset.action, t.dataset.value, e, t.dataset.label);
+});
+
+// Delegation — quiz modal
+document.getElementById('quiz-modal').addEventListener('click', e=>{
+  const t = e.target.closest('[data-action]');
+  if(!t) return;
+  handleAction(t.dataset.action, t.dataset.value, e);
+});
+
+// Delegation — drawer
+document.getElementById('concept-drawer').addEventListener('click', e=>{
+  const t = e.target.closest('[data-action]');
+  if(!t) return;
+  handleAction(t.dataset.action, t.dataset.value, e);
+});
+
+// Delegation — drawer overlay
+document.getElementById('drawer-overlay').addEventListener('click', ()=>closeDrawer());
+
+// Delegation — top subnav
+document.getElementById('subnav').addEventListener('click', e=>{
+  const menuBtn = e.target.closest('[data-menu]');
+  if (menuBtn) {
+    e.preventDefault();
+    e.stopPropagation();
+    openBvMenu(menuBtn.dataset.menu, menuBtn);
+    return;
+  }
+  const t = e.target.closest('[data-action]');
+  if(!t) return;
+  handleAction(t.dataset.action, t.dataset.value, e, t.dataset.label);
+});
+
+// Delegation — AI panel
+document.getElementById('ai-panel').addEventListener('click', e=>{
+  const t = e.target.closest('[data-action]');
+  if(!t) return;
+  handleAction(t.dataset.action, t.dataset.value, e);
+});
+
+document.getElementById('cme-btn').addEventListener('click', () => handleAction('bv-nav', 'bv-cme', null, 'My CME/CE'));
+document.getElementById('cart-btn').addEventListener('click', () => showToast('Cart (mock)'));
+document.getElementById('q-search-btn').addEventListener('click', () => handleAction('bv-nav', 'bv-search', null, 'Search Questions'));
+document.getElementById('q-search').addEventListener('keydown', e => { if (e.key === 'Enter') handleAction('bv-nav', 'bv-search', null, 'Search Questions'); });
+
+document.getElementById('user-menu').addEventListener('click', e => {
+  e.stopPropagation();
+  closeMenus();
+  const rect = e.currentTarget.getBoundingClientRect();
+  const menu = document.createElement('div');
+  menu.className = 'panel';
+  menu.id = 'dropdown';
+  menu.style.cssText = `position:fixed;top:${rect.bottom+8}px;right:18px;left:auto;width:220px`;
+  menu.innerHTML = `
+    <a href="#" data-action="bv-nav" data-value="bv-account" data-label="Account &amp; Billing">Account &amp; Billing</a>
+    <a href="#" style="color:var(--risk)">Sign out</a>`;
+  document.body.appendChild(menu);
+  menu.querySelectorAll('[data-action]').forEach(a => a.addEventListener('click', ev => {
+    ev.preventDefault();
+    closeMenus();
+    handleAction(a.dataset.action, a.dataset.value, ev, a.dataset.label);
+  }));
+});
+
+document.addEventListener('click', () => closeMenus());
+
+// ============================================================
+// INIT
+// ============================================================
+renderMain();
+</script>
+</body>
+</html>

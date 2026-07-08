@@ -1,0 +1,124 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-ai: var(--ai);
+  --color-ai-soft: var(--ai-soft);
+  --color-ai-border: var(--ai-border);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Source Serif 4", ui-serif, Georgia, serif;
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.22 0.03 220);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.03 220);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.03 220);
+  --primary: oklch(0.44 0.08 200);
+  --primary-foreground: oklch(0.99 0.003 200);
+  --primary-soft: oklch(0.95 0.03 200);
+  --secondary: oklch(0.97 0.01 220);
+  --secondary-foreground: oklch(0.3 0.03 220);
+  --muted: oklch(0.97 0.01 220);
+  --muted-foreground: oklch(0.5 0.02 220);
+  --accent: oklch(0.95 0.04 200);
+  --accent-foreground: oklch(0.3 0.05 200);
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.99 0.003 200);
+  --success: oklch(0.62 0.14 155);
+  --warning: oklch(0.75 0.15 75);
+  --ai: oklch(0.55 0.09 200);
+  --ai-soft: oklch(0.96 0.025 200);
+  --ai-border: oklch(0.82 0.06 200);
+  --border: oklch(0.92 0.01 220);
+  --input: oklch(0.92 0.01 220);
+  --ring: oklch(0.55 0.09 200);
+  --sidebar: oklch(0.98 0.005 220);
+  --sidebar-foreground: oklch(0.22 0.03 220);
+  --sidebar-primary: oklch(0.44 0.08 200);
+  --sidebar-primary-foreground: oklch(0.99 0.003 200);
+  --sidebar-accent: oklch(0.95 0.04 200);
+  --sidebar-accent-foreground: oklch(0.3 0.05 200);
+  --sidebar-border: oklch(0.92 0.01 220);
+  --sidebar-ring: oklch(0.55 0.09 200);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ai-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+@keyframes flash-highlight {
+  0% { background-color: color-mix(in oklab, var(--warning) 45%, transparent); }
+  100% { background-color: color-mix(in oklab, var(--warning) 0%, transparent); }
+}
+
+@utility animate-fade-in {
+  animation: fade-in 0.25s ease-out both;
+}
+@utility ai-dot {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 9999px;
+  background-color: var(--ai);
+  animation: ai-pulse 1.2s ease-in-out infinite;
+}
+@utility flash-highlight {
+  animation: flash-highlight 2s ease-out;
+}

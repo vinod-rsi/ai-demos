@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "fisdap-copilot-mcp",
+      "version": "0.1.0",
+      "title": "FISDAP AI Shift Feedback Copilot"
+    },
+    "tools": [
+      {
+        "name": "list_shift_queue",
+        "title": "List instructor shift queue",
+        "description": "List EMS student shift submissions in the instructor queue, optionally filtered by urgency tier.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "tier": {
+              "description": "Filter by urgency tier.",
+              "type": "string",
+              "enum": [
+                "urgent",
+                "ready",
+                "pending",
+                "approved"
+              ]
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_student_feedback",
+        "title": "Get student feedback report",
+        "description": "Return the approved instructor feedback report for a student submission, including narrative, evidence map, and action items.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "submissionId": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Submission ID, e.g. sub-102."
+            }
+          },
+          "required": [
+            "submissionId"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_requirements",
+        "title": "List student clinical requirements",
+        "description": "List a student's remaining clinical requirements and progress toward case quotas.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "studentId": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Student ID or name slug."
+            }
+          },
+          "required": [
+            "studentId"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
