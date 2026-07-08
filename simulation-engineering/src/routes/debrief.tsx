@@ -26,36 +26,18 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { studentSkills } from "@/lib/mock-data";
+import {
+  lesson10DebriefTimeline as timeline,
+  lesson10MissedCues as missedCues,
+  lesson10DebriefQuestions as debriefQs,
+  lesson10Remediation as remediation,
+  lesson10Skills,
+} from "@/lib/mock-data";
 
 export const Route = createFileRoute("/debrief")({
-  head: () => ({ meta: [{ title: "Debrief & Remediation — Swift River" }] }),
+  head: () => ({ meta: [{ title: "Debrief & Remediation — Lesson 10" }] }),
   component: DebriefPage,
 });
-
-const timeline = [
-  { t: "0:00", step: "Initial assessment", result: "correct", detail: "Recognized cue cluster (confusion + fever + tachycardia)", tone: "success", icon: Check },
-  { t: "2:14", step: "Prioritization / escalation", result: "late", detail: "Started fluids but delayed provider notification by ~6 min", tone: "warning", icon: CircleAlert },
-  { t: "6:02", step: "Follow-up / handoff", result: "partial", detail: "SBAR omitted pending cultures and lactate recheck", tone: "warning", icon: CircleAlert },
-];
-
-const missedCues = [
-  { cue: "Rising lactate (3.1)", when: "Decision 2", impact: "High" },
-  { cue: "Falling urine output", when: "Decision 2", impact: "Medium" },
-  { cue: "Pending culture results", when: "Handoff", impact: "Medium" },
-];
-
-const debriefQs = [
-  "You recognized the pattern quickly — what made you wait to escalate once fluids were running?",
-  "Which single vital sign should have moved provider notification to the top of your list?",
-  "Rebuild your handoff using SBAR. What two items were missing and why do they matter to the ICU team?",
-];
-
-const remediation = [
-  { title: "Early Escalation Workshop", type: "Interactive module", mins: 15, focus: "Escalation timing", tone: "critical" },
-  { title: "SBAR Handoff Drill", type: "Guided practice", mins: 10, focus: "Structured communication", tone: "warning" },
-  { title: "Replay: Sepsis (Advanced)", type: "Adaptive scenario", mins: 25, focus: "Apply under pressure", tone: "ai" },
-];
 
 function DebriefPage() {
   return (
@@ -68,21 +50,21 @@ function DebriefPage() {
         </div>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold">Debrief — Post-Op Sepsis Recognition</h1>
-            <p className="text-sm text-muted-foreground">Completed 12 min ago · Standard mode · 7:42</p>
+            <h1 className="text-2xl font-bold">Debrief — Lesson 10: Dosage Calculations &amp; Medication Errors</h1>
+            <p className="text-sm text-muted-foreground">Completed just now · Adaptive mode · 6:38</p>
             <p className="mt-1 max-w-2xl text-xs text-muted-foreground">Review your decision timeline, missed cues, and judgment profile, then work through an AI-recommended personalized remediation plan.</p>
           </div>
           <div className="flex items-center gap-2">
             <StatusBadge tone="info" dot>CJMI 71</StatusBadge>
-            <StatusBadge tone="warning">Debrief path B</StatusBadge>
+            <StatusBadge tone="critical">High-alert flag</StatusBadge>
           </div>
         </div>
 
         <AiCard title="AI Debrief Summary" className="mt-5">
-          You demonstrated strong <strong>cue recognition</strong> and safe intervention, but the engine
-          detected a recurring <strong>late-escalation pattern</strong> — this is the third case where you
-          intervened before notifying the team. Your handoff was safe but incomplete. Two short remediation
-          activities below target exactly these gaps; a replay in advanced mode will confirm the improvement.
+          You <strong>interpreted the order correctly</strong>, but a <strong>decimal-placement slip</strong> produced a
+          10× pediatric overdose and the <strong>high-alert independent double-check was skipped</strong>. These are the
+          exact gaps the two activities below target; a replay in advanced mode will confirm the fix. Pediatric dosing is
+          now flagged <strong>at-risk</strong> in your mastery profile.
         </AiCard>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-3">
@@ -95,7 +77,7 @@ function DebriefPage() {
                 <div key={i} className="relative flex gap-4 pb-6 last:pb-0">
                   {i < timeline.length - 1 && <span className="absolute left-[15px] top-8 h-full w-px bg-border" />}
                   <span className={cn("relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full", `bg-${e.tone}-muted text-${e.tone}`)}>
-                    <e.icon className="h-4 w-4" />
+                    {e.tone === "success" ? <Check className="h-4 w-4" /> : e.tone === "critical" ? <X className="h-4 w-4" /> : <CircleAlert className="h-4 w-4" />}
                   </span>
                   <div className="flex-1 rounded-xl border border-border p-3.5">
                     <div className="flex flex-wrap items-center justify-between gap-2">
@@ -132,7 +114,7 @@ function DebriefPage() {
               <h3 className="flex items-center gap-2 text-sm font-semibold"><Target className="h-4 w-4 text-primary" /> Judgment profile</h3>
               <div className="mt-1 h-48">
                 <ResponsiveContainer width="100%" height="100%">
-                  <RadarChart data={studentSkills} outerRadius="70%">
+                  <RadarChart data={lesson10Skills} outerRadius="70%">
                     <PolarGrid stroke="var(--color-border)" />
                     <PolarAngleAxis dataKey="skill" tick={{ fontSize: 9, fill: "var(--color-muted-foreground)" }} />
                     <Radar dataKey="score" stroke="var(--color-primary)" fill="var(--color-primary)" fillOpacity={0.25} strokeWidth={2} />
