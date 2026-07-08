@@ -12,6 +12,7 @@ import { AiCard } from "@/components/prototype/AiCard";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/utils";
 import {
   lesson10Mastery, masteryMeta, lesson10Forecast, lesson10NextBestAction,
 } from "@/lib/mock-data";
@@ -27,32 +28,56 @@ export const Route = createFileRoute("/student/simulation")({
 function SimulationPage() {
   // "modal" = welcome-back shown; "running" = sim revealed; "complete" = finished
   const [phase, setPhase] = useState<"modal" | "running" | "complete">("modal");
+  const [mode, setMode] = useState<"Beginner" | "Advanced">("Advanced");
   const progress = phase === "complete" ? 100 : phase === "running" ? 45 : 0;
   const simWrapRef = useRef<HTMLDivElement>(null);
 
   const goFullscreen = () => simWrapRef.current?.requestFullscreen?.();
 
+  const difficulty =
+    mode === "Beginner"
+      ? { label: "Supported", tone: "info", note: "Beginner level — the engine adds worked-example scaffolding, keeps hints one tap away, and slows the pace on weight-based steps." }
+      : { label: "Advanced", tone: "ai", note: "Advanced level — hints are held back and a competing high-alert distractor is introduced, because your recent dosage decisions have been strong." };
+
   return (
     <AppLayout>
       <div className="mx-auto max-w-[1440px] px-4 py-6 md:px-8">
-        {/* Breadcrumb */}
-        <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-          <Link to="/student" className="hover:text-foreground">My Simulations</Link>
-          <ChevronRight className="h-4 w-4" />
-          <span>ATI Engage: Pharmacology</span>
-          <ChevronRight className="h-4 w-4" />
-          <span className="font-medium text-foreground">Lesson 10 — Dosage Calculations &amp; Medication Errors</span>
+        {/* Breadcrumb + mode toggle */}
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+            <Link to="/student" className="hover:text-foreground">My Simulations</Link>
+            <ChevronRight className="h-4 w-4" />
+            <span>ATI Engage: Pharmacology</span>
+            <ChevronRight className="h-4 w-4" />
+            <span className="font-medium text-foreground">Lesson 10 — Dosage Calculations &amp; Medication Errors</span>
+          </div>
+          <div className="flex items-center gap-1 rounded-lg border border-border bg-card p-1">
+            <span className="px-2 text-xs font-medium text-muted-foreground">Preview as</span>
+            {(["Beginner", "Advanced"] as const).map((m) => (
+              <button
+                key={m}
+                onClick={() => setMode(m)}
+                className={cn(
+                  "rounded-md px-3 py-1 text-xs font-semibold transition-colors",
+                  mode === m ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {m}
+              </button>
+            ))}
+          </div>
         </div>
         <p className="mt-2 max-w-2xl text-xs text-muted-foreground">
-          A role-play clinical scenario. The adaptive engine tracks your dosage-calculation
-          decisions, timing, and confidence, then updates your mastery profile and debrief.
+          One case, every skill level — the adaptive engine tracks your dosage-calculation
+          decisions, timing, and confidence, then tunes cues and difficulty and updates your
+          mastery profile and debrief.
         </p>
 
         {/* Progress + adaptive badge */}
         <div className="mt-4 flex items-center gap-4">
           <Progress value={progress} className="h-2 flex-1" />
-          <StatusBadge tone="ai" dot>
-            <Sparkles className="h-3 w-3" /> Adaptive · Live
+          <StatusBadge tone={difficulty.tone} dot>
+            <Sparkles className="h-3 w-3" /> {difficulty.label}
           </StatusBadge>
         </div>
 
@@ -190,7 +215,11 @@ function SimulationPage() {
               <div className="mt-3 rounded-lg border border-ai/15 bg-card/70 p-3 text-sm leading-relaxed">
                 {phase === "complete"
                   ? "Pediatric dosing flagged after this run — I'll add scaffolding and a slower pace on your next weight-based case."
-                  : "Difficulty is tuned live to your decisions. Hints are held back on strong concepts and added where you slip."}
+                  : difficulty.note}
+              </div>
+              <div className="mt-3 flex items-center justify-between rounded-lg bg-card/70 px-3 py-2 text-xs">
+                <span className="text-muted-foreground">Current level</span>
+                <StatusBadge tone={difficulty.tone}>{difficulty.label}</StatusBadge>
               </div>
             </div>
 
