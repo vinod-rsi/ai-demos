@@ -79,24 +79,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Swift River — Adaptive Clinical Simulation Engine" },
+      { title: "Simulations — ATI Engage: Pharmacology" },
       {
         name: "description",
         content:
-          "An AI layer inside Swift River that personalizes unfolding nursing simulations in real time for learners, faculty, and program leadership.",
+          "An adaptive AI layer inside the Simulations platform that personalizes ATI Engage: Pharmacology scenarios in real time for learners, faculty, and program leadership.",
       },
-      { name: "author", content: "Swift River" },
-      { property: "og:title", content: "Swift River — Adaptive Clinical Simulation Engine" },
+      { name: "author", content: "Simulations · ATI" },
+      { property: "og:title", content: "Simulations — ATI Engage: Pharmacology" },
       {
         property: "og:description",
-        content: "Personalized, adaptive nursing simulation that builds clinical judgment.",
+        content: "Personalized, adaptive clinical simulation that builds dosage-calculation and medication-safety judgment.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "Swift River — Adaptive Clinical Simulation Engine" },
-      { name: "description", content: "AI-powered adaptive simulation engine personalizes nursing education scenarios in real-time." },
-      { property: "og:description", content: "AI-powered adaptive simulation engine personalizes nursing education scenarios in real-time." },
-      { name: "twitter:description", content: "AI-powered adaptive simulation engine personalizes nursing education scenarios in real-time." },
+      { name: "twitter:title", content: "Simulations — ATI Engage: Pharmacology" },
+      { property: "og:description", content: "Adaptive AI personalizes ATI Engage: Pharmacology simulations in real time." },
+      { name: "twitter:description", content: "Adaptive AI personalizes ATI Engage: Pharmacology simulations in real time." },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
