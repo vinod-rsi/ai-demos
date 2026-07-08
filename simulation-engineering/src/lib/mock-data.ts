@@ -97,38 +97,41 @@ export interface StudentRow {
   weakestSkill: string;
   lastActive: string;
   flag?: "at_risk" | "improving" | null;
+  // BoardVitals forgetfulness / decay: risk that a mastered concept is being forgotten.
+  decayRisk: "high" | "medium" | "low";
+  decayNote: string;
 }
 
 export const roster: StudentRow[] = [
-  { id: "s1", name: "Maya Ellison", initials: "ME", section: "A", completed: 6, assigned: 8, cjmi: 78, readiness: "ready", weakestSkill: "Prioritize", lastActive: "2h ago", flag: "improving" },
-  { id: "s2", name: "Devon Carter", initials: "DC", section: "A", completed: 3, assigned: 8, cjmi: 52, readiness: "developing", weakestSkill: "Analyze cues", lastActive: "1d ago", flag: "at_risk" },
-  { id: "s3", name: "Aisha Rahman", initials: "AR", section: "A", completed: 8, assigned: 8, cjmi: 91, readiness: "advanced", weakestSkill: "Evaluate outcomes", lastActive: "5h ago" },
-  { id: "s4", name: "Liam O'Brien", initials: "LO", section: "B", completed: 4, assigned: 8, cjmi: 61, readiness: "approaching", weakestSkill: "Prioritize", lastActive: "3h ago" },
-  { id: "s5", name: "Sofia Reyes", initials: "SR", section: "B", completed: 7, assigned: 8, cjmi: 84, readiness: "ready", weakestSkill: "Generate solutions", lastActive: "1h ago" },
-  { id: "s6", name: "Noah Kim", initials: "NK", section: "B", completed: 2, assigned: 8, cjmi: 47, readiness: "developing", weakestSkill: "Recognize cues", lastActive: "2d ago", flag: "at_risk" },
-  { id: "s7", name: "Grace Thompson", initials: "GT", section: "A", completed: 6, assigned: 8, cjmi: 74, readiness: "ready", weakestSkill: "Analyze cues", lastActive: "6h ago" },
-  { id: "s8", name: "Ethan Walsh", initials: "EW", section: "B", completed: 5, assigned: 8, cjmi: 68, readiness: "approaching", weakestSkill: "Take action", lastActive: "8h ago" },
+  { id: "s1", name: "Maya Ellison", initials: "ME", section: "A", completed: 6, assigned: 8, cjmi: 78, readiness: "ready", weakestSkill: "Decimal accuracy", lastActive: "2h ago", flag: "improving", decayRisk: "low", decayNote: "Unit conversions reviewed 2 days ago" },
+  { id: "s2", name: "Devon Carter", initials: "DC", section: "A", completed: 3, assigned: 8, cjmi: 52, readiness: "developing", weakestSkill: "Pediatric dosing", lastActive: "1d ago", flag: "at_risk", decayRisk: "high", decayNote: "Pediatric dosing last correct 14 days ago" },
+  { id: "s3", name: "Aisha Rahman", initials: "AR", section: "A", completed: 8, assigned: 8, cjmi: 91, readiness: "advanced", weakestSkill: "High-alert protocol", lastActive: "5h ago", decayRisk: "low", decayNote: "All concepts practiced this week" },
+  { id: "s4", name: "Liam O'Brien", initials: "LO", section: "B", completed: 4, assigned: 8, cjmi: 61, readiness: "approaching", weakestSkill: "IV drip rate", lastActive: "3h ago", decayRisk: "medium", decayNote: "IV drip rate last correct 8 days ago" },
+  { id: "s5", name: "Sofia Reyes", initials: "SR", section: "B", completed: 7, assigned: 8, cjmi: 84, readiness: "ready", weakestSkill: "Safe-range check", lastActive: "1h ago", decayRisk: "low", decayNote: "Safe-range check reviewed 3 days ago" },
+  { id: "s6", name: "Noah Kim", initials: "NK", section: "B", completed: 2, assigned: 8, cjmi: 47, readiness: "developing", weakestSkill: "Decimal accuracy", lastActive: "2d ago", flag: "at_risk", decayRisk: "high", decayNote: "Decimal accuracy last correct 16 days ago" },
+  { id: "s7", name: "Grace Thompson", initials: "GT", section: "A", completed: 6, assigned: 8, cjmi: 74, readiness: "ready", weakestSkill: "Unit conversion", lastActive: "6h ago", decayRisk: "medium", decayNote: "Unit conversion last correct 9 days ago" },
+  { id: "s8", name: "Ethan Walsh", initials: "EW", section: "B", completed: 5, assigned: 8, cjmi: 68, readiness: "approaching", weakestSkill: "High-alert protocol", lastActive: "8h ago", decayRisk: "medium", decayNote: "High-alert protocol last correct 7 days ago" },
 ];
 
 export const skillHeatmap: { skill: string; sectionA: number; sectionB: number }[] = [
-  { skill: "Recognize cues", sectionA: 22, sectionB: 38 },
-  { skill: "Analyze cues", sectionA: 41, sectionB: 47 },
-  { skill: "Prioritize", sectionA: 58, sectionB: 52 },
-  { skill: "Generate solutions", sectionA: 34, sectionB: 29 },
-  { skill: "Take action", sectionA: 18, sectionB: 24 },
-  { skill: "Evaluate outcomes", sectionA: 44, sectionB: 40 },
+  { skill: "Order interpretation", sectionA: 18, sectionB: 24 },
+  { skill: "Unit conversion", sectionA: 22, sectionB: 38 },
+  { skill: "Decimal accuracy", sectionA: 48, sectionB: 44 },
+  { skill: "Safe-range check", sectionA: 34, sectionB: 29 },
+  { skill: "Pediatric dosing", sectionA: 58, sectionB: 52 },
+  { skill: "High-alert protocol", sectionA: 41, sectionB: 40 },
 ];
 
 export const debriefQuestions = [
-  "Devon delayed escalation in 3 of 4 sepsis cases — what cluster of cues most reliably signals early decompensation?",
-  "Compare a SIRS response to sepsis: which single vital sign changed the priority order in today's scenario?",
-  "The cohort struggled to reprioritize after the patient's SpO₂ dropped. Walk through your revised plan and rationale.",
-  "When would a handoff be premature? Identify two cues that must be stable before transfer.",
+  "Devon exceeded the safe range in 3 of 4 pediatric cases — which single check (mg/kg vs mg) most reliably catches a 10× error?",
+  "Walk through where a misplaced decimal changes the order of magnitude, and the independent double-check that would catch it before administration.",
+  "The cohort skipped the high-alert second-check under time pressure. When is that check mandatory, and who performs it?",
+  "Rebuild a weight-based dose using dimensional analysis: which unit cancels first, and why does that guard the answer?",
 ];
 
 export const remediationGroups = [
-  { name: "Cue Prioritization Lab", size: 4, focus: "Prioritize + Analyze cues", members: ["Devon C.", "Noah K.", "Liam O.", "Ethan W."] },
-  { name: "Early Escalation Workshop", size: 3, focus: "Recognize cues + timing", members: ["Devon C.", "Noah K.", "Grace T."] },
+  { name: "Dimensional-Analysis Lab", size: 4, focus: "Decimal accuracy + unit conversion", members: ["Devon C.", "Noah K.", "Liam O.", "Ethan W."] },
+  { name: "High-Alert Safety Workshop", size: 3, focus: "Independent double-check + pediatric dosing", members: ["Devon C.", "Noah K.", "Grace T."] },
 ];
 
 // ---------- Admin ----------

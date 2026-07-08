@@ -13,6 +13,9 @@ import {
   CheckCircle2,
   Copy,
   BarChart3,
+  TrendingDown,
+  Sparkles,
+  ArrowUpDown,
 } from "lucide-react";
 
 import { AppLayout } from "@/components/prototype/AppLayout";
@@ -35,7 +38,7 @@ import {
 } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/faculty")({
-  head: () => ({ meta: [{ title: "Faculty Dashboard — Swift River" }] }),
+  head: () => ({ meta: [{ title: "Faculty Dashboard — Simulations" }] }),
   component: FacultyDashboard,
 });
 
@@ -46,17 +49,30 @@ function heatTone(v: number) {
   return "bg-success-muted text-success";
 }
 
+const decayMeta: Record<StudentRow["decayRisk"], { label: string; tone: string }> = {
+  high: { label: "High decay", tone: "critical" },
+  medium: { label: "Watch", tone: "warning" },
+  low: { label: "Retained", tone: "success" },
+};
+
+const decayRank: Record<StudentRow["decayRisk"], number> = { high: 0, medium: 1, low: 2 };
+
 function FacultyDashboard() {
   const [selected, setSelected] = useState<StudentRow | null>(null);
+  const [sortByDecay, setSortByDecay] = useState(false);
+
+  const rows = sortByDecay
+    ? [...roster].sort((a, b) => decayRank[a.decayRisk] - decayRank[b.decayRisk])
+    : roster;
 
   return (
     <AppLayout>
       <div className="mx-auto max-w-6xl px-4 py-6 md:px-8">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <p className="text-sm text-muted-foreground">Med-Surg · BSN 2026 · Sections A & B</p>
+            <p className="text-sm text-muted-foreground">ATI Engage: Pharmacology · Lesson 10 · BSN 2026 · Sections A & B</p>
             <h1 className="text-2xl font-bold">Faculty Dashboard</h1>
-            <p className="mt-1 max-w-2xl text-xs text-muted-foreground">Monitor cohort readiness, drill into each learner's simulation path, and act on AI-generated debrief questions and remediation groups.</p>
+            <p className="mt-1 max-w-2xl text-xs text-muted-foreground">Monitor cohort readiness and forgetfulness risk, drill into each learner's simulation path, and act on AI-generated debrief questions and remediation groups.</p>
           </div>
           <Button variant="outline" className="gap-2" onClick={() => toast.info("Comparing Section A vs Section B")}>
             <BarChart3 className="h-4 w-4" /> Compare sections
@@ -66,7 +82,7 @@ function FacultyDashboard() {
         {/* KPIs */}
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatCard label="Class roster" value="32" icon={Users} hint="Across 2 sections" />
-          <StatCard label="Scenario completion" value="71%" delta="+8%" icon={CheckCircle2} hint="Sepsis module" />
+          <StatCard label="Scenario completion" value="71%" delta="+8%" icon={CheckCircle2} hint="Lesson 10 module" />
           <StatCard label="Avg cohort CJMI" value="68" delta="+5" icon={Target} iconTone="info" />
           <StatCard label="At-risk learners" value="2" delta="Needs review" deltaTone="critical" icon={AlertTriangle} iconTone="critical" />
         </div>
@@ -76,16 +92,25 @@ function FacultyDashboard() {
           <Card className="gap-0 p-0 lg:col-span-2">
             <div className="flex items-center justify-between border-b border-border px-5 py-4">
               <h2 className="font-semibold">Class roster</h2>
-              <span className="text-xs text-muted-foreground">Click a learner for their path</span>
+              <button
+                onClick={() => setSortByDecay((v) => !v)}
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-semibold transition-colors",
+                  sortByDecay ? "border-critical/30 bg-critical-muted text-critical" : "border-border text-muted-foreground hover:text-foreground",
+                )}
+              >
+                <ArrowUpDown className="h-3.5 w-3.5" /> Sort by {sortByDecay ? "decay risk" : "roster"}
+              </button>
             </div>
             <div className="divide-y divide-border">
-              {roster.map((s) => {
+              {rows.map((s) => {
                 const rm = readinessMeta[s.readiness];
+                const dm = decayMeta[s.decayRisk];
                 return (
-                  <button
+                  <div
                     key={s.id}
                     onClick={() => setSelected(s)}
-                    className="flex w-full items-center gap-3 px-5 py-3 text-left transition-colors hover:bg-secondary/50"
+                    className="flex w-full cursor-pointer items-center gap-3 px-5 py-3 text-left transition-colors hover:bg-secondary/50"
                   >
                     <Avatar className="h-9 w-9">
                       <AvatarFallback className="bg-secondary text-xs font-semibold">{s.initials}</AvatarFallback>
@@ -98,18 +123,25 @@ function FacultyDashboard() {
                       </div>
                       <p className="text-xs text-muted-foreground">Section {s.section} · Weakest: {s.weakestSkill} · {s.lastActive}</p>
                     </div>
-                    <div className="hidden w-28 sm:block">
-                      <div className="flex items-center justify-between text-[11px] text-muted-foreground">
-                        <span>{s.completed}/{s.assigned}</span>
-                      </div>
-                      <Progress value={(s.completed / s.assigned) * 100} className="mt-1 h-1.5" />
+                    <div className="hidden w-32 sm:block">
+                      <StatusBadge tone={dm.tone}>
+                        <TrendingDown className="h-3 w-3" /> {dm.label}
+                      </StatusBadge>
+                      {s.decayRisk !== "low" && (
+                        <button
+                          onClick={(e) => { e.stopPropagation(); toast.success(`Intervention suggested for ${s.name}`, { description: `${s.decayNote} — queued a targeted review set.` }); }}
+                          className="mt-1 inline-flex items-center gap-1 text-[11px] font-semibold text-ai hover:underline"
+                        >
+                          <Sparkles className="h-3 w-3" /> Suggest intervention
+                        </button>
+                      )}
                     </div>
-                    <div className="w-24 text-right">
+                    <div className="w-20 text-right">
                       <p className="text-sm font-bold tabular-nums">{s.cjmi}</p>
                       <StatusBadge tone={rm.tone}>{rm.label}</StatusBadge>
                     </div>
                     <ChevronRight className="h-4 w-4 text-muted-foreground" />
-                  </button>
+                  </div>
                 );
               })}
             </div>
@@ -118,9 +150,10 @@ function FacultyDashboard() {
           {/* Right column */}
           <div className="space-y-6">
             <AiCard title="AI Cohort Insight">
-              <strong>Late escalation</strong> is the cohort's dominant gap — 41% of learners delayed
-              provider notification in the sepsis case. Section A trails Section B on cue recognition
-              by 16 points. I've drafted a targeted debrief and two remediation groups below.
+              <strong>Decimal-placement errors</strong> are the cohort's dominant gap — 48% of
+              learners mis-scaled a pediatric dose. Two learners show <strong>high forgetfulness
+              risk</strong> on concepts they previously mastered. I've drafted a targeted debrief and
+              two remediation groups below.
             </AiCard>
 
             {/* Heatmap */}
@@ -207,9 +240,9 @@ function FacultyDashboard() {
 function StudentDrawer({ student, onClose }: { student: StudentRow; onClose: () => void }) {
   const rm = readinessMeta[student.readiness];
   const path = [
-    { step: "Initial assessment", result: "correct", detail: "Recognized cue cluster in 42s", tone: "success" },
-    { step: "Prioritization / escalation", result: student.flag === "at_risk" ? "late" : "correct", detail: student.flag === "at_risk" ? "Escalated 6 min late — competing priority" : "Escalated promptly, bundle sequenced", tone: student.flag === "at_risk" ? "critical" : "success" },
-    { step: "Handoff", result: "partial", detail: "SBAR missing pending labs", tone: "warning" },
+    { step: "Order interpretation", result: "correct", detail: "Parsed dose and concentration in 38s", tone: "success" },
+    { step: "Pediatric dose calculation", result: student.flag === "at_risk" ? "error" : "correct", detail: student.flag === "at_risk" ? "Decimal misplaced — 10× overdose" : "Weight-based dose within safe range", tone: student.flag === "at_risk" ? "critical" : "success" },
+    { step: "High-alert double-check", result: "partial", detail: "Recognized high-alert med, skipped second-check", tone: "warning" },
   ];
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-foreground/30 backdrop-blur-sm" onClick={onClose}>
@@ -247,7 +280,7 @@ function StudentDrawer({ student, onClose }: { student: StudentRow; onClose: () 
           </div>
 
           <div>
-            <h3 className="mb-2 text-sm font-semibold">Simulation path — Sepsis Recognition</h3>
+            <h3 className="mb-2 text-sm font-semibold">Simulation path — Lesson 10 Dosage Calc</h3>
             <div className="space-y-2">
               {path.map((p, i) => (
                 <div key={i} className="flex items-start gap-3 rounded-lg border border-border p-3">
@@ -269,21 +302,27 @@ function StudentDrawer({ student, onClose }: { student: StudentRow; onClose: () 
           <div>
             <h3 className="mb-2 text-sm font-semibold">Missed cues</h3>
             <div className="flex flex-wrap gap-1.5">
-              {["Rising lactate", "Falling urine output", "Widening pulse pressure"].map((c) => (
+              {["Weight-based safe-range mismatch", "High-alert medication flag", "Trailing zero on MAR"].map((c) => (
                 <StatusBadge key={c} tone="critical">{c}</StatusBadge>
               ))}
             </div>
           </div>
 
+          <div className="rounded-lg border border-border bg-secondary/40 p-3">
+            <p className="flex items-center gap-1.5 text-xs font-semibold"><TrendingDown className="h-3.5 w-3.5 text-critical" /> Forgetfulness risk</p>
+            <p className="mt-1 text-xs text-muted-foreground">{student.decayNote}</p>
+          </div>
+
           <AiCard title="AI Debrief Summary">
-            {student.name.split(" ")[0]} reliably recognizes cues but hesitates to escalate under
-            competing demands. Recommend the <strong>Early Escalation Workshop</strong> and an SBAR
-            handoff drill. Confidence is high even when incorrect — add a reflection checkpoint.
+            {student.name.split(" ")[0]} interprets orders reliably but slips on decimal placement in
+            weight-based doses and skips the high-alert second-check under time pressure. Recommend the
+            <strong> Dimensional-Analysis Lab</strong> and a high-alert double-check drill. Confidence is
+            high even when incorrect — add a reflection checkpoint.
           </AiCard>
 
           <div className="flex gap-2">
-            <Button className="flex-1 gap-2" onClick={() => { toast.success("Remediation assigned to " + student.name); onClose(); }}>
-              Assign remediation
+            <Button className="flex-1 gap-2" onClick={() => { toast.success("Intervention assigned to " + student.name, { description: student.decayNote }); onClose(); }}>
+              <Sparkles className="h-4 w-4" /> Suggest intervention
             </Button>
             <Button variant="outline" className="flex-1" onClick={onClose}>Close</Button>
           </div>
