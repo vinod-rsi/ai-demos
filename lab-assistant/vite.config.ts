@@ -6,10 +6,16 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+// Static build for GitHub Pages under /ai-demos/lab-assistant/ — see DEPLOYMENT.md.
+// nitro is off because its prerenderer conflicts with TanStack's; prerender emits a
+// real .html per route so deep links work without an SPA 404.html fallback.
 export default defineConfig({
+  nitro: false,
+  vite: { base: "/ai-demos/lab-assistant/" },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    prerender: { enabled: true, crawlLinks: true, failOnError: true },
   },
 });

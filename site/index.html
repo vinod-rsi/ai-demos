@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Demos — R Systems</title>
+<meta name="description" content="Static prototype portfolio: AI layers for clinical simulation, EMS training, lab authoring, and assessment products." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&display=swap" />
+<style>
+  :root {
+    --ink:        #0e1418;
+    --ink-soft:   #45525a;
+    --ink-faint:  #7b8891;
+    --paper:      #f4f6f5;
+    --card:       #ffffff;
+    --rule:       #dfe4e3;
+    --accent:     #1b6e6a;
+    --accent-dim: #e3efed;
+    --focus:      #b4531f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink:        #e8edec;
+      --ink-soft:   #9aa8ae;
+      --ink-faint:  #6b7880;
+      --paper:      #0c1114;
+      --card:       #141b1f;
+      --rule:       #232d33;
+      --accent:     #5fb8b0;
+      --accent-dim: #16302e;
+      --focus:      #e0834e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink:#e8edec; --ink-soft:#9aa8ae; --ink-faint:#6b7880; --paper:#0c1114;
+    --card:#141b1f; --rule:#232d33; --accent:#5fb8b0; --accent-dim:#16302e; --focus:#e0834e;
+  }
+  :root[data-theme="light"] {
+    --ink:#0e1418; --ink-soft:#45525a; --ink-faint:#7b8891; --paper:#f4f6f5;
+    --card:#ffffff; --rule:#dfe4e3; --accent:#1b6e6a; --accent-dim:#e3efed; --focus:#b4531f;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Public Sans", system-ui, -apple-system, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 68rem; margin: 0 auto; padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 4vw, 3rem) 4rem; }
+
+  header { display: flex; flex-direction: column; gap: .75rem; padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
+  .eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin: 0;
+  }
+  h1 {
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 600; font-size: clamp(2rem, 5vw, 3.1rem);
+    line-height: 1.08; margin: 0; text-wrap: balance;
+    letter-spacing: -.015em;
+  }
+  .lede { margin: 0; max-width: 46ch; color: var(--ink-soft); font-size: 1.03rem; }
+
+  .grid { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-top: 2.5rem; grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); }
+  .demo {
+    background: var(--card); padding: 1.5rem 1.4rem 1.35rem;
+    display: flex; flex-direction: column; gap: .5rem;
+    text-decoration: none; color: inherit;
+    transition: background .15s ease;
+  }
+  .demo:hover, .demo:focus-visible { background: var(--accent-dim); outline: none; }
+  .demo:focus-visible { box-shadow: inset 0 0 0 2px var(--focus); }
+  .demo h2 {
+    font-family: Fraunces, Georgia, serif; font-weight: 600;
+    font-size: 1.22rem; margin: 0; line-height: 1.25; letter-spacing: -.01em;
+  }
+  .product { font-size: .78rem; color: var(--ink-faint); margin: 0; font-weight: 500; }
+  .demo p.desc { margin: .15rem 0 0; font-size: .9rem; color: var(--ink-soft); }
+  .path {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .74rem; color: var(--accent); margin-top: auto; padding-top: .9rem;
+  }
+
+  footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--ink-faint); font-size: .85rem; }
+  footer code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .95em; color: var(--ink-soft); }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Prototype portfolio</p>
+    <h1>AI demos</h1>
+    <p class="lede">Static prototypes exploring where an AI layer earns its place inside clinical simulation, EMS training, lab authoring, and assessment products.</p>
+  </header>
+
+  <main class="grid">
+    <a class="demo" href="./swiftriver/">
+      <p class="product">Swift River</p>
+      <h2>Adaptive Clinical Simulation Engine</h2>
+      <p class="desc">An AI layer that personalizes unfolding nursing simulations in real time — one scenario that adapts across every skill level.</p>
+      <p class="path">/swiftriver/</p>
+    </a>
+
+    <a class="demo" href="./simulation-engineering/">
+      <p class="product">ATI · Simulation Engineering</p>
+      <h2>Lesson 10 — Dosage Calculations</h2>
+      <p class="desc">Medication-error simulation with an embedded Three.js scene, mastery tracking, and forgetfulness-decay forecasting.</p>
+      <p class="path">/simulation-engineering/</p>
+    </a>
+
+    <a class="demo" href="./jbl/">
+      <p class="product">Jones &amp; Bartlett Learning</p>
+      <h2>StudyBot &amp; Catalogue Match</h2>
+      <p class="desc">Stakeholder prototype of StudyBot alongside the CRM ↔ Catalogue Match Assistant for sales and operations.</p>
+      <p class="path">/jbl/</p>
+    </a>
+
+    <a class="demo" href="./fisdap/">
+      <p class="product">FISDAP</p>
+      <h2>AI Shift Feedback Copilot</h2>
+      <p class="desc">Instructor-led assistance for reviewing EMS student shift logs — draft feedback faster while preserving human approval.</p>
+      <p class="path">/fisdap/</p>
+    </a>
+
+    <a class="demo" href="./lab-assistant/">
+      <p class="product">Hatsize</p>
+      <h2>AI Lab Assistant</h2>
+      <p class="desc">Describe a lab in plain language and have the assistant draft a complete lab blueprint.</p>
+      <p class="path">/lab-assistant/</p>
+    </a>
+
+    <a class="demo" href="./live-lab-session/">
+      <p class="product">Hatsize</p>
+      <h2>Live Lab Session</h2>
+      <p class="desc">A running lab session with AI Copilot guidance surfaced alongside the learner's work.</p>
+      <p class="path">/live-lab-session/</p>
+    </a>
+
+    <a class="demo" href="./boardvitals/">
+      <p class="product">BoardVitals</p>
+      <h2>AI Mastery Engine</h2>
+      <p class="desc">Board-prep question bank with mastery estimation driving what the learner sees next.</p>
+      <p class="path">/boardvitals/</p>
+    </a>
+
+    <a class="demo" href="./mytipreport/">
+      <p class="product">myTIPreport</p>
+      <h2>Competency Evidence Layer</h2>
+      <p class="desc">Turns scattered procedural feedback into structured competency evidence for review committees.</p>
+      <p class="path">/mytipreport/</p>
+    </a>
+  </main>
+
+  <footer>
+    <p>Static prototypes — mock data throughout, no backend. Rebuilt and published from <code>main</code> on every push.</p>
+  </footer>
+</div>
+</body>
+</html>

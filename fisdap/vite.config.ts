@@ -7,13 +7,19 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 import { mcpPlugin } from "@lovable.dev/mcp-js/stacks/tanstack/vite";
 
+// Static build for GitHub Pages under /ai-demos/fisdap/ — see DEPLOYMENT.md.
+// nitro is off because its prerenderer conflicts with TanStack's; prerender emits a
+// real .html per route so deep links work without an SPA 404.html fallback.
 export default defineConfig({
+  nitro: false,
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    prerender: { enabled: true, crawlLinks: true, failOnError: true },
   },
   vite: {
+    base: "/ai-demos/fisdap/",
     plugins: [mcpPlugin()],
   },
 });

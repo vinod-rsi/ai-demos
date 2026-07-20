@@ -1,0 +1,86 @@
+name: Deploy demos to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Allow the workflow to publish to Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never run two publishes at once; let a newer push finish rather than cancelling it.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      # Each TanStack Start app prerenders to dist/client; base paths are set per-app
+      # in vite.config.ts and must match the directory it is assembled into below.
+      - name: Build TanStack Start demos
+        run: |
+          set -euo pipefail
+          for app in fisdap jbl lab-assistant live-lab-session simulation-engineering swiftriver; do
+            echo "::group::build $app"
+            (cd "$app" && bun install --frozen-lockfile && bun run build)
+            echo "::endgroup::"
+          done
+
+      - name: Build myTIPreport competency app
+        run: |
+          set -euo pipefail
+          cd mytipreport/myTIPreport-claude/competency-app
+          bun install --frozen-lockfile
+          bun run build
+
+      - name: Assemble Pages artifact
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          cp site/index.html _site/index.html
+          for app in fisdap jbl lab-assistant live-lab-session simulation-engineering swiftriver; do
+            cp -R "$app/dist/client" "_site/$app"
+          done
+          cp -R mytipreport/myTIPreport-claude/competency-app/dist _site/mytipreport
+          mkdir -p _site/boardvitals && cp boardvitals/index.html _site/boardvitals/index.html
+          # Pages runs Jekyll by default, which strips files and dirs beginning with an
+          # underscore — Vite emits some. .nojekyll disables that processing.
+          touch _site/.nojekyll
+
+      - name: Verify every demo produced an entry page
+        run: |
+          set -euo pipefail
+          missing=0
+          for d in swiftriver simulation-engineering jbl fisdap lab-assistant live-lab-session boardvitals mytipreport; do
+            if [ -f "_site/$d/index.html" ]; then
+              echo "ok   $d"
+            else
+              echo "MISSING _site/$d/index.html"; missing=1
+            fi
+          done
+          [ "$missing" -eq 0 ]
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
