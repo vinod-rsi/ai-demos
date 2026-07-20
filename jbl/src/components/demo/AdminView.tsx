@@ -1,6 +1,15 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { toast } from "sonner";
-import { AlertTriangle, Info, Lock, ShieldCheck } from "lucide-react";
+import {
+  AlertTriangle,
+  History,
+  Info,
+  Lock,
+  MessageSquare,
+  ShieldCheck,
+  Sparkles,
+  Clock,
+} from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import {
   Dialog,
@@ -19,12 +28,21 @@ import { Button } from "@/components/ui/button";
 import { useDemo } from "./DemoContext";
 
 export function AdminView() {
-  const { titles, toggleAi, signPolicy } = useDemo();
+  const { titles, toggleAi, signPolicy, policyLog } = useDemo();
   const [modalId, setModalId] = useState<string | null>(null);
   const active = titles.find((t) => t.id === modalId);
 
+  // P5 — portfolio stats
+  const stats = useMemo(() => {
+    const totalUsage = titles.reduce((s, t) => s + t.usage, 0);
+    const activeAi = titles.filter((t) => t.aiEnabled).length;
+    const pending = titles.filter((t) => t.policy !== "signed").length;
+    return { totalUsage, activeAi, pending };
+  }, [titles]);
+
   return (
-    <div className="rounded-lg border bg-card">
+    <div className="space-y-4">
+      <div className="rounded-lg border bg-card">
       <div className="flex items-start justify-between border-b px-6 py-4">
         <div>
           <h2 className="text-lg font-semibold">AI Feature Governance</h2>
@@ -39,6 +57,26 @@ export function AdminView() {
         </div>
       </div>
 
+      {/* P5 — stats row */}
+      <div className="grid grid-cols-3 divide-x border-b">
+        <StatTile
+          icon={MessageSquare}
+          label="StudyBot questions · 30d"
+          value={stats.totalUsage.toLocaleString()}
+        />
+        <StatTile
+          icon={Sparkles}
+          label="AI-enabled titles"
+          value={`${stats.activeAi} / ${titles.length}`}
+        />
+        <StatTile
+          icon={AlertTriangle}
+          label="Pending Legal review"
+          value={String(stats.pending)}
+          tone={stats.pending > 0 ? "warn" : "ok"}
+        />
+      </div>
+
       <TooltipProvider delayDuration={100}>
         <table className="w-full text-sm">
           <thead>
@@ -46,7 +84,7 @@ export function AdminView() {
               <th className="px-6 py-3 font-semibold">Title</th>
               <th className="px-6 py-3 font-semibold">AI-Enabled</th>
               <th className="px-6 py-3 font-semibold">Exposure Policy</th>
-              <th className="px-6 py-3 text-right font-semibold">Usage · 30d</th>
+              <th className="px-6 py-3 text-right font-semibold">Usage trend · 30d</th>
             </tr>
           </thead>
           <tbody>
@@ -104,8 +142,17 @@ export function AdminView() {
                       )}
                     </button>
                   </td>
-                  <td className="px-6 py-4 text-right text-muted-foreground">
-                    {t.usage > 0 ? `${t.usage.toLocaleString()} questions` : "—"}
+                  <td className="px-6 py-4">
+                    {t.usage > 0 ? (
+                      <div className="flex items-center justify-end gap-2">
+                        <Sparkline data={t.trend} />
+                        <span className="w-24 text-right text-muted-foreground">
+                          {t.usage.toLocaleString()} · 30d
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="text-right text-muted-foreground">—</div>
+                    )}
                   </td>
                 </tr>
               );
@@ -166,6 +213,75 @@ export function AdminView() {
           )}
         </DialogContent>
       </Dialog>
+      </div>
+
+      {/* P5 — exposure-policy audit log */}
+      <div className="rounded-lg border bg-card">
+        <div className="flex items-center gap-2 border-b px-6 py-3">
+          <History className="h-4 w-4 text-muted-foreground" />
+          <h3 className="text-sm font-semibold">Exposure Policy Audit Log</h3>
+          <span className="text-xs text-muted-foreground">
+            — every AI-enablement and sign-off event, newest first
+          </span>
+        </div>
+        <ul className="divide-y">
+          {policyLog.map((e) => (
+            <li key={e.id} className="flex items-center gap-3 px-6 py-2.5 text-sm">
+              <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[color:var(--ai)]" />
+              <span className="flex-1 text-foreground/90">{e.text}</span>
+              <span className="flex flex-shrink-0 items-center gap-1 text-xs text-muted-foreground">
+                <Clock className="h-3 w-3" />
+                {e.time}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function StatTile({
+  icon: Icon,
+  label,
+  value,
+  tone,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  value: string;
+  tone?: "ok" | "warn";
+}) {
+  return (
+    <div className="px-6 py-4">
+      <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+        <Icon
+          className={`h-3.5 w-3.5 ${tone === "warn" ? "text-[color:var(--warning)]" : "text-[color:var(--ai)]"}`}
+        />
+        {label}
+      </div>
+      <div
+        className={`mt-1 text-2xl font-semibold ${
+          tone === "warn" ? "text-[color:oklch(0.45_0.12_75)]" : "text-foreground"
+        }`}
+      >
+        {value}
+      </div>
+    </div>
+  );
+}
+
+function Sparkline({ data }: { data: number[] }) {
+  const max = Math.max(...data, 1);
+  return (
+    <div className="flex h-6 items-end gap-0.5" title="Weekly StudyBot usage">
+      {data.map((v, i) => (
+        <span
+          key={i}
+          className="w-1.5 rounded-sm bg-[color:var(--ai)]/70"
+          style={{ height: `${Math.max(8, (v / max) * 100)}%` }}
+        />
+      ))}
     </div>
   );
 }

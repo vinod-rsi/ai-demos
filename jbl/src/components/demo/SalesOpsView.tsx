@@ -6,7 +6,10 @@ import {
   ChevronDown,
   ChevronRight,
   Play,
+  Plus,
+  ShoppingCart,
   Sparkles,
+  TrendingUp,
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,9 +22,13 @@ import {
 } from "@/components/ui/dialog";
 import { AiTag, AiThinking } from "./AiTag";
 import { useDemo, type Match } from "./DemoContext";
+import { ACCOUNT_RECS, type ProductRec } from "@/lib/mockData";
 import { cn } from "@/lib/utils";
 
 const CURRENT_USER = "Jordan Park (Sales Ops)";
+
+const fmtUSD = (n: number) =>
+  n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
 export function SalesOpsView() {
   const { matches, updateMatch, audit, addAudit } = useDemo();
@@ -30,10 +37,42 @@ export function SalesOpsView() {
   const [expanded, setExpanded] = useState<string | null>(null);
   const [conflictOpen, setConflictOpen] = useState<Match | null>(null);
   const [suggestDismissed, setSuggestDismissed] = useState(false);
+  // P-Sales — products the rep has added to a quote (by product id)
+  const [quote, setQuote] = useState<Set<string>>(new Set());
 
   const pending = matches.filter((m) => m.status === "pending" || m.status === "conflict");
   const confirmed = matches.filter((m) => m.status === "confirmed");
   const rejected = matches.filter((m) => m.status === "rejected");
+
+  // Recommendations surface only for reconciled (confirmed) accounts.
+  const recAccounts = useMemo(
+    () => confirmed.filter((m) => (ACCOUNT_RECS[m.id]?.length ?? 0) > 0),
+    [confirmed],
+  );
+  const allRecs = useMemo(
+    () => recAccounts.flatMap((m) => ACCOUNT_RECS[m.id]),
+    [recAccounts],
+  );
+  const quoteTotal = useMemo(
+    () => allRecs.filter((p) => quote.has(p.id)).reduce((s, p) => s + p.acv, 0),
+    [allRecs, quote],
+  );
+  const pipelineTotal = useMemo(
+    () => allRecs.reduce((s, p) => s + p.acv, 0),
+    [allRecs],
+  );
+
+  const addToQuote = (inst: string, p: ProductRec) => {
+    setQuote((prev) => new Set(prev).add(p.id));
+    addAudit(`Added to quote: ${p.name} → ${inst}`);
+    toast.success(`Added to quote · ${p.name}`);
+  };
+  const createOpportunity = () => {
+    const count = quote.size;
+    addAudit(`Created CRM opportunity · ${count} products · ${fmtUSD(quoteTotal)} ACV`);
+    toast.success(`Opportunity pushed to Salesforce · ${fmtUSD(quoteTotal)} pipeline`);
+    setQuote(new Set());
+  };
 
   const acceptedDomainMatches = useMemo(
     () => confirmed.filter((m) => m.evidence.emailDomain).length,
@@ -283,6 +322,74 @@ export function SalesOpsView() {
                 </Section>
               )}
 
+              {recAccounts.length > 0 && (
+                <div className="overflow-hidden rounded-lg border border-[color:var(--ai-border)]/60 bg-card">
+                  <div className="flex items-center justify-between gap-4 border-b border-[color:var(--ai-border)]/40 bg-[color:var(--ai-soft)]/50 px-4 py-3">
+                    <div className="flex items-start gap-2">
+                      <ShoppingCart className="mt-0.5 h-4 w-4 text-[color:var(--ai)]" />
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-semibold text-foreground">
+                            Purchase recommendations
+                          </span>
+                          <AiTag label="Upsell" />
+                        </div>
+                        <p className="text-[11px] text-muted-foreground">
+                          Next-best products for reconciled accounts ·{" "}
+                          {fmtUSD(pipelineTotal)} total pipeline surfaced
+                        </p>
+                      </div>
+                    </div>
+                    {quote.size > 0 && (
+                      <div className="flex flex-shrink-0 items-center gap-2">
+                        <div className="text-right">
+                          <div className="text-sm font-semibold text-foreground">
+                            {fmtUSD(quoteTotal)}
+                          </div>
+                          <div className="text-[11px] text-muted-foreground">
+                            {quote.size} in quote
+                          </div>
+                        </div>
+                        <Button size="sm" onClick={createOpportunity}>
+                          <TrendingUp className="mr-1.5 h-3.5 w-3.5" />
+                          Create opportunity
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="divide-y">
+                    {recAccounts.map((m) => {
+                      const recs = ACCOUNT_RECS[m.id];
+                      const acct = recs.reduce((s, p) => s + p.acv, 0);
+                      return (
+                        <div key={m.id} className="px-4 py-3">
+                          <div className="mb-2 flex items-center justify-between">
+                            <div className="flex items-center gap-2 text-sm font-medium text-foreground">
+                              <Check className="h-3.5 w-3.5 text-[color:var(--success)]" />
+                              {m.institution}
+                            </div>
+                            <span className="text-xs text-muted-foreground">
+                              {fmtUSD(acct)} opportunity
+                            </span>
+                          </div>
+                          <div className="space-y-2">
+                            {recs.map((p) => (
+                              <ProductRow
+                                key={p.id}
+                                p={p}
+                                added={quote.has(p.id)}
+                                onAdd={() => addToQuote(m.institution, p)}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
               {rejected.length > 0 && (
                 <Section title="Rejected" count={rejected.length}>
                   <table className="w-full text-sm">
@@ -386,6 +493,82 @@ function Section({
       </div>
       {children}
     </div>
+  );
+}
+
+function ProductRow({
+  p,
+  added,
+  onAdd,
+}: {
+  p: ProductRec;
+  added: boolean;
+  onAdd: () => void;
+}) {
+  const tier = p.score > 120 ? 1 : 2;
+  return (
+    <div className="flex items-center gap-3 rounded-md border bg-background px-3 py-2.5">
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-sm font-medium text-foreground">{p.name}</span>
+          <span className="rounded-full border bg-muted/60 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
+            {p.kind}
+          </span>
+          <span
+            className={cn(
+              "rounded-full px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider",
+              tier === 1
+                ? "bg-[color:var(--ai-soft)] text-[color:var(--ai)]"
+                : "bg-muted text-muted-foreground",
+            )}
+          >
+            Tier {tier}
+          </span>
+        </div>
+        <p className="mt-0.5 text-xs text-muted-foreground">{p.rationale}</p>
+        <div className="mt-1.5 flex items-center gap-3 text-[11px] text-muted-foreground">
+          <FitBar value={p.fit} />
+          <span>· {p.seats} seats</span>
+          <span className="font-medium text-foreground">· {fmtUSD(p.acv)} ACV</span>
+        </div>
+      </div>
+      <button
+        onClick={onAdd}
+        disabled={added}
+        className={cn(
+          "inline-flex flex-shrink-0 items-center gap-1 rounded-md border px-2.5 py-1.5 text-xs font-medium transition-colors",
+          added
+            ? "border-[color:var(--success)]/40 bg-[color:var(--success)]/10 text-[color:var(--success)]"
+            : "border-[color:var(--ai-border)]/60 text-[color:var(--ai)] hover:bg-[color:var(--ai-soft)]",
+        )}
+      >
+        {added ? (
+          <>
+            <Check className="h-3 w-3" /> In quote
+          </>
+        ) : (
+          <>
+            <Plus className="h-3 w-3" /> Add to quote
+          </>
+        )}
+      </button>
+    </div>
+  );
+}
+
+function FitBar({ value }: { value: number }) {
+  const color =
+    value >= 80 ? "var(--ai)" : value >= 65 ? "var(--warning)" : "var(--muted-foreground)";
+  return (
+    <span className="inline-flex items-center gap-1.5">
+      <span className="h-1.5 w-16 overflow-hidden rounded-full bg-muted">
+        <span
+          className="block h-full rounded-full"
+          style={{ width: `${value}%`, backgroundColor: `color-mix(in oklab, ${color} 100%, transparent)` }}
+        />
+      </span>
+      <span className="font-medium text-foreground">{value}% fit</span>
+    </span>
   );
 }
 
