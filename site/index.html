@@ -17,9 +17,9 @@
     --gap-lg:clamp(20px, 3.4vh, 38px);
     --gap-md:clamp(11px, 1.7vh, 18px);
     --gap-sm:clamp(6px, 0.95vh, 11px);
-    --fs-title:clamp(25px, 3.7vh, 38px);
-    --fs-lede:clamp(14.5px, 2.1vh, 19px);
-    --fs-body:clamp(13.5px, 1.95vh, 16.5px);
+    --fs-title:clamp(24px, min(3.7vh, 8.4vw), 38px);
+    --fs-lede:clamp(14.5px, min(2.1vh, 4.4vw), 19px);
+    --fs-body:clamp(13.5px, min(1.95vh, 4.1vw), 16.5px);
     --fs-micro:clamp(10.5px, 1.4vh, 13px);
   }
   *{box-sizing:border-box;}
@@ -144,12 +144,38 @@
   .dcard button.more:hover{color:var(--purple);}
   .dcard a:focus-visible, .dcard button:focus-visible{outline:2px solid var(--purple); outline-offset:2px; border-radius:3px;}
 
-  /* Narrow windows: stack the columns and let the panel scroll rather than clip. */
-  @media (max-width:900px){
-    .pbody, .pbody.pair{grid-template-columns:1fr; gap:var(--gap-md);}
+  /* Below a laptop, one screen per tab stops being a goal: a phone can't hold a
+     write-up without shrinking it past reading size. The fixed shell is released,
+     the page scrolls the way a phone expects, and the tab strip sticks to the top
+     so switching demos never means scrolling back up. */
+  @media (max-width:980px){
+    html,body{height:auto;}
+    body{display:block; overflow:visible;}
+    .tabsbar{position:sticky; top:0; z-index:19;}
+    /* The strip runs past the edge on a phone; the fade says so. */
+    .tabs{scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
+      -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 26px),transparent 100%);
+      mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 26px),transparent 100%);}
+    .tab{scroll-snap-align:center;}
+    main.wrap{padding:var(--gap-md) clamp(18px,4vw,32px) clamp(32px,6vh,56px);}
+    .panel{height:auto; overflow:visible;}
+    .pbody, .pbody.pair{flex:none; grid-template-columns:1fr; gap:var(--gap-md);}
     .sub + .sub{border-left:0; border-top:1px solid var(--line); padding-left:0; padding-top:var(--gap-md);}
-    .grid{grid-template-columns:repeat(2,1fr); grid-auto-rows:auto;}
-    .rail .cta, .sub .cta{margin-top:var(--gap-sm);}
+    .sub .cta{margin-top:var(--gap-sm);}
+    /* Below the fixed shell the cards pack by width, not by a set column count. */
+    .grid{flex:none; align-content:start; grid-template-columns:repeat(auto-fill,minmax(240px,1fr));}
+    .lede{max-width:none;}
+  }
+  @media (max-width:760px){
+    .crumb{display:none;}
+  }
+  @media (max-width:560px){
+    .topbar .row{gap:12px;}
+    .brand .sub{letter-spacing:.1em;}
+    .tabs{gap:18px;}
+    .dcard .one{margin-bottom:var(--gap-sm);}
+    .demobtn{width:100%; justify-content:center;}
+    .urlline{word-break:break-word;}
   }
   @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
 </style>
@@ -441,9 +467,18 @@
       if (!p.hidden) p.scrollTop = 0;
     });
   }
-  tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.target); }); });
+  tabs.forEach(function(t){ t.addEventListener('click', function(){
+    show(t.dataset.target);
+    // On a phone the strip scrolls; keep the tab you just picked in sight.
+    t.scrollIntoView({block:'nearest', inline:'center', behavior:'smooth'});
+  }); });
   document.querySelectorAll('button.more').forEach(function(b){
-    b.addEventListener('click', function(){ show(b.dataset.goto); });
+    b.addEventListener('click', function(){
+      show(b.dataset.goto);
+      var tab = document.querySelector('.tab[data-target="' + b.dataset.goto + '"]');
+      if (tab) tab.scrollIntoView({block:'nearest', inline:'center'});
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
   });
 </script>
 </body>
