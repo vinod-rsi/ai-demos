@@ -1,0 +1,90 @@
+{
+	"id": "node_a4x_1",
+	"localization_guid": "b5d22cce",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"linkages": 
+	[
+		{
+			"id": "node_a41_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a42_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a43_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a44_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a51_0",
+			"type": "activate"
+		},
+		{
+			"id": "node_a52_0",
+			"type": "activate"
+		},
+		{
+			"id": "node_a53_0",
+			"type": "activate"
+		},
+		{
+			"id": "node_a54_0",
+			"type": "activate"
+		}
+	],
+	"events": 
+	[
+		{
+			"id": "event_a4x_1_0",
+			"localization_guid": "484b5fda",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "We want to stick to the facts and be honest with Rhea about what the problem is and how we're addressing it.[br6.218][br6.299]Fifteen minutes later, Rhea's blood glucose level rose to 80 mg/dL, which was back inside of a safe range.[br13.937]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a4x_1_1",
+			"localization_guid": "60a68364",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "Once Rhea started to stabilize, we needed to report and document the error[br4.833][br4.914]and potentially also communicate with the provider or other people who are relevant because Vic was a student.[br10.826][br10.907]For details on how to report and document errors,[br13.802][br13.883]familiarize yourself with the policies and procedures of the facility where you work about incident or variance reports.[br20.063]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a4x_1_2",
+			"localization_guid": "448eccf0",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "In our case, we needed to update the EHR with information about the drop in blood glucose,[br5.731][br5.812]the clear liquid carbohydrates, and how the blood glucose level changed afterward.[br10.713][br10.794]We also needed to directly contact Rhea's primary care provider and surgeon[br15.187][br15.268]to make sure they were aware of the incident.[br17.782][br17.863]Finally, we made sure to communicate to the next shift what happened so they could monitor Rhea as needed.[br23.272]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a4x_1_3",
+			"localization_guid": "045c1263",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "Afterward, when we had a calmer moment, I talked with Vic[br4.057][br4.138]and gave him some feedback on how to avoid errors like this in the future.[br8.34][br8.421]If you were in my position, what instruction would you give Vic?[br12.114]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		}
+	]
+}

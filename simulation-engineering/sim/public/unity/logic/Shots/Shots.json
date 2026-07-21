@@ -1,0 +1,28 @@
+[
+	{
+		"id": "shot_1",
+		"localization_guid": "a265ba2c",
+		"name": "shot_1",
+		"environment": 0,
+		"background": 0,
+		"camera": 0,
+		"pc-model": 0,
+		"npc-models": 
+		[
+			0
+		]
+	},
+	{
+		"id": "shot_2",
+		"localization_guid": "869c5ac9",
+		"name": "abstractBG",
+		"environment": 1,
+		"background": 1,
+		"camera": 1,
+		"pc-model": 0,
+		"npc-models": 
+		[
+			0
+		]
+	}
+]

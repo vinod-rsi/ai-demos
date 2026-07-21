@@ -1,0 +1,125 @@
+{
+	"id": "node_db_step06_dosage",
+	"localization_guid": "a6b2deb8",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_db_step06_dosage_0",
+			"localization_guid": "aa5526a8",
+			"type": "variabletext",
+			"variable": "var_db_dosage_intro",
+			"text": "By the start of the next shift, Rhea had completely stabilized and was safely in recovery from her procedure. Rebecca and Vic spoke to Rhea's primary care provider to confirm it was time for another insulin dose. Vic prepared the insulin while Rebecca made sure it was the correct amount.\n\nYou were asked to take on Vic's perspective and deliver the correct dosage of insulin."
+		},
+		{
+			"id": "event_db_step06_dosage_1",
+			"localization_guid": "956dc125",
+			"type": "variabletext",
+			"condition": "var_insulin_attempt_1 == 1 ",
+			"variable": "var_db_dosage01_text",
+			"text": "First, you incorrectly pumped <b>1 unit</b> of insulin."
+		},
+		{
+			"id": "event_db_step06_dosage_2",
+			"localization_guid": "e10f948c",
+			"type": "variabletext",
+			"condition": "var_insulin_attempt_1 != 3 && var_insulin_attempt_1 != 1 ",
+			"variable": "var_db_dosage01_text",
+			"text": "First, you incorrectly pumped <b>$value(var_insulin_attempt_1) units</b> of insulin."
+		},
+		{
+			"id": "event_db_step06_dosage_3",
+			"localization_guid": "5a49a2dd",
+			"type": "variabletext",
+			"condition": "var_insulin_attempt_1 == 1 && var_insulin_attempt_2 <= 0 && var_insulin_attempt_3 <= 0 ",
+			"variable": "var_db_dosage01_text",
+			"text": "You incorrectly pumped <b>1 unit</b> of insulin."
+		},
+		{
+			"id": "event_db_step06_dosage_4",
+			"localization_guid": "b269b2ab",
+			"type": "variabletext",
+			"condition": "var_insulin_attempt_1 != 3 && var_insulin_attempt_1 != 1 && var_insulin_attempt_2 <= 0 && var_insulin_attempt_3 < 0 ",
+			"variable": "var_db_dosage01_text",
+			"text": "You incorrectly pumped <b>$value(var_insulin_attempt_1) units</b> of insulin."
+		},
+		{
+			"id": "event_db_step06_dosage_5",
+			"localization_guid": "e2253b6d",
+			"type": "variabletext",
+			"condition": "var_insulin_attempt_1 == 3 ",
+			"variable": "var_db_dosage01_text",
+			"text": "You correctly pumped <b>3 units</b> of insulin."
+		},
+		{
+			"id": "event_db_step06_dosage_6",
+			"localization_guid": "fe6a1fd3",
+			"type": "variabletext",
+			"condition": "var_insulin_attempt_2 == 1 && var_insulin_attempt_1 != 3 ",
+			"variable": "var_db_dosage02_text",
+			"text": "Then you incorrectly pumped <b>1 unit</b> of insulin."
+		},
+		{
+			"id": "event_db_step06_dosage_7",
+			"localization_guid": "e0e89b34",
+			"type": "variabletext",
+			"condition": "var_insulin_attempt_2 != 3 && var_insulin_attempt_2 != 1 && var_insulin_attempt_1 != 3 && var_insulin_attempt_2 >= 0",
+			"variable": "var_db_dosage02_text",
+			"text": "Then you incorrectly pumped <b>$value(var_insulin_attempt_2) units</b> of insulin."
+		},
+		{
+			"id": "event_db_step06_dosage_8",
+			"localization_guid": "166ce02f",
+			"type": "variabletext",
+			"condition": "var_insulin_attempt_2 == 3  && var_insulin_attempt_1 != 3 ",
+			"variable": "var_db_dosage02_text",
+			"text": "Then you correctly pumped <b>3 units</b> of insulin."
+		},
+		{
+			"id": "event_db_step06_dosage_9",
+			"localization_guid": "42e223c7",
+			"type": "variabletext",
+			"condition": "var_insulin_attempt_3 == 1 && var_insulin_attempt_1 != 3 && var_insulin_attempt_2 != 3 ",
+			"variable": "var_db_dosage03_text",
+			"text": "Finally, you incorrectly pumped <b>1 unit</b> of insulin."
+		},
+		{
+			"id": "event_db_step06_dosage_10",
+			"localization_guid": "aef41570",
+			"type": "variabletext",
+			"condition": "var_insulin_attempt_3 != 3 && var_insulin_attempt_3 != 1 && var_insulin_attempt_1 != 3 && var_insulin_attempt_2 != 3 && var_insulin_attempt_3 >= 0",
+			"variable": "var_db_dosage03_text",
+			"text": "Finally, you incorrectly pumped <b>$value(var_insulin_attempt_3) units</b> of insulin."
+		},
+		{
+			"id": "event_db_step06_dosage_11",
+			"localization_guid": "ca9b4e40",
+			"type": "variabletext",
+			"condition": "var_insulin_attempt_3 == 3  && var_insulin_attempt_1 != 3 && var_insulin_attempt_2 != 3 ",
+			"variable": "var_db_dosage03_text",
+			"text": "Finally, you correctly pumped <b>3 units</b> of insulin."
+		},
+		{
+			"id": "event_db_step06_dosage_12",
+			"localization_guid": "7c7b8dfd",
+			"type": "variabletext",
+			"condition": "var_insulin_attempt_1 != 3 && var_insulin_attempt_2 != 3 && var_insulin_attempt_3 != 3 ",
+			"variable": "var_db_dosage_remedial",
+			"text": "Rhea required <b>3 units</b> of insulin."
+		},
+		{
+			"id": "event_db_step06_dosage_13",
+			"localization_guid": "bdd3dc6a",
+			"type": "variabletext",
+			"variable": "var_db_dosage_rationale",
+			"text": "For a high-risk medication like insulin, check the policies where you work to determine if you need confirmation of the amount before administering it. This can prevent errors in dosage, like administering 3 mL instead of 3 units of insulin."
+		}
+	]
+}

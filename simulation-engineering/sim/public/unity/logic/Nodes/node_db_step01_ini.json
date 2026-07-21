@@ -1,0 +1,101 @@
+{
+	"id": "node_db_step01_ini",
+	"localization_guid": "7a38212b",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_db_step01_ini_0",
+			"localization_guid": "5388e824",
+			"type": "variabletext",
+			"variable": "var_db_ini_intro",
+			"text": "Before Rhea's procedure, Rhea had nothing by mouth, also known as NPO. After the cholecystectomy, Rhea returned to her room in the surgical unit in stable condition with her pain level under control. Vic briefly checked the electronic health record (EHR) and noticed that Rhea was now on a clear liquid diet and had an order for 3 units of insulin given subcutaneously.\n\nRebecca asked you what you would do in Vic's situation."
+		},
+		{
+			"id": "event_db_step01_ini_1",
+			"localization_guid": "7dd55d44",
+			"type": "variabletext",
+			"condition": "Played(node_a12_0) || \nPlayed(node_a13_0) ",
+			"variable": "var_db_ini_correct_intro",
+			"text": "You correctly selected the following:"
+		},
+		{
+			"id": "event_db_step01_ini_2",
+			"localization_guid": "98623e8b",
+			"type": "variabletext",
+			"condition": "Played(node_a12_0) ",
+			"variable": "var_db_ini_correct_text01",
+			"text": "<indent=10%>- Recheck the orders to make sure nothing was missed."
+		},
+		{
+			"id": "event_db_step01_ini_3",
+			"localization_guid": "06c4c7eb",
+			"type": "variabletext",
+			"condition": "Played(node_a13_0) ",
+			"variable": "var_db_ini_correct_text02",
+			"text": "<indent=10%>- Test Rhea's blood glucose level."
+		},
+		{
+			"id": "event_db_step01_ini_4",
+			"localization_guid": "02a2ee0a",
+			"type": "variabletext",
+			"condition": "!Played(node_a12_0) || \n!Played(node_a13_0) ",
+			"variable": "var_db_ini_missed_intro",
+			"text": "You missed selecting the following:"
+		},
+		{
+			"id": "event_db_step01_ini_5",
+			"localization_guid": "b2a0814f",
+			"type": "variabletext",
+			"condition": "!Played(node_a12_0) ",
+			"variable": "var_db_ini_missed_text01",
+			"text": "<indent=10%>- Recheck the orders to make sure nothing was missed."
+		},
+		{
+			"id": "event_db_step01_ini_6",
+			"localization_guid": "378cf93c",
+			"type": "variabletext",
+			"condition": "!Played(node_a13_0) ",
+			"variable": "var_db_ini_missed_text02",
+			"text": "<indent=10%>- Test Rhea's blood glucose level."
+		},
+		{
+			"id": "event_db_step01_ini_7",
+			"localization_guid": "5710fd20",
+			"type": "variabletext",
+			"condition": "Played(node_a11_0) || \nPlayed(node_a14_0) ",
+			"variable": "var_db_ini_incorrect_intro",
+			"text": "You incorrectly selected the following:"
+		},
+		{
+			"id": "event_db_step01_ini_8",
+			"localization_guid": "2a241aa1",
+			"type": "variabletext",
+			"condition": "Played(node_a11_0) ",
+			"variable": "var_db_ini_incorrect_text01",
+			"text": "<indent=10%>- Administer the 3 units of insulin."
+		},
+		{
+			"id": "event_db_step01_ini_9",
+			"localization_guid": "89c0c13e",
+			"type": "variabletext",
+			"condition": "Played(node_a14_0) ",
+			"variable": "var_db_ini_incorrect_text02",
+			"text": "<indent=10%>- Make sure Rhea has received previous insulin doses."
+		},
+		{
+			"id": "event_db_step01_ini_10",
+			"localization_guid": "31f9ba87",
+			"type": "variabletext",
+			"variable": "var_db_ini_rationale",
+			"text": "Administering insulin without double-checking the EHR and knowing blood glucose levels can result in medication errors. Even after carefully verifying the EHR, it is important to consider all available information and cues, including blood glucose levels, as there may be a system error if Rhea's post-op orders were not accurately updated.\n\nIn this case, Vic made an individual error by following the initial information he saw in the EHR and administering the 3 units of insulin."
+		}
+	]
+}

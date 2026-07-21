@@ -1,0 +1,62 @@
+{
+	"id": "node_db_step03_respond",
+	"localization_guid": "cd2ef184",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_db_step03_respond_0",
+			"localization_guid": "cb5b9461",
+			"type": "variabletext",
+			"variable": "var_db_respond_intro",
+			"text": "Rebecca asked you what you would do first if you suspected a client was experiencing hypoglycemia."
+		},
+		{
+			"id": "event_db_step03_respond_1",
+			"localization_guid": "5b996322",
+			"type": "variabletext",
+			"condition": "Played(node_a32_0) ",
+			"variable": "var_db_respond_text",
+			"text": "You correctly selected:\n\n<indent=10%>- Check the client's glucose levels.\n\n<indent=0%>If a client may be suspected of hypoglycemia, the first step is to check their blood glucose levels and make sure they are within the expected range. If it is deemed safe, the client may be provided with carbohydrates."
+		},
+		{
+			"id": "event_db_step03_respond_2",
+			"localization_guid": "ed7d8da3",
+			"type": "variabletext",
+			"condition": "Played(node_a31_0)",
+			"variable": "var_db_respond_text",
+			"text": "You incorrectly selected:\n\n<indent=10%>- Give the client carbohydrates.\n\n<indent=0%>Although offering Rhea clear liquid carbohydrates, such as apple juice, can be helpful, it is recommended to check her blood glucose levels beforehand to determine if these liquids are safe."
+		},
+		{
+			"id": "event_db_step03_respond_3",
+			"localization_guid": "658e5b3e",
+			"type": "variabletext",
+			"condition": "Played(node_a33_0) ",
+			"variable": "var_db_respond_text",
+			"text": "You incorrectly selected:\n\n<indent=10%>- Administer more insulin.\n\n<indent=0%>If a client might be hypoglycemic, avoid administering additional insulin as it would further reduce blood sugar levels."
+		},
+		{
+			"id": "event_db_step03_respond_4",
+			"localization_guid": "068a5d06",
+			"type": "variabletext",
+			"condition": "Played(node_a34_0) ",
+			"variable": "var_db_respond_text",
+			"text": "You incorrectly selected:\n\n<indent=10%>- Check the client's blood pressure.\n\n<indent=0%>While it is important to monitor postoperative vital signs, at that moment, the client's blood pressure was not as urgent as determining their blood glucose levels and potentially providing carbohydrates."
+		},
+		{
+			"id": "event_db_step03_respond_5",
+			"localization_guid": "05f6c23f",
+			"type": "variabletext",
+			"condition": "!Played(node_a32_0) ",
+			"variable": "var_db_respond_rationale",
+			"text": "Instead, you could've selected:\n\n<indent=10%>- Check the client's glucose levels.\n\n<indent=0%>If a client may be suspected of hypoglycemia, the first step is to check their blood glucose levels and make sure they are within the expected range. If it is deemed safe, the client may be provided with carbohydrates."
+		}
+	]
+}

@@ -1,0 +1,56 @@
+{
+	"id": "node_a5x_3",
+	"localization_guid": "34ff4c0e",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_a5x_3_0",
+			"localization_guid": "1329ecc0",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "For a high-risk medication like insulin, check the policies where you work[br4.46][br4.541]to determine if you need confirmation of the amount before administering it.[br8.884][br9.306]I'll say in my experience this has prevented some errors. One time, I saw a student start to use the wrong syringe,[br16.371][br16.452]and they were about to administer 3 mL instead of 3 units of insulin.[br21.427][br21.508]Thankfully, I was there to prevent that error before it happened.[br25.032]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a5x_3_1",
+			"localization_guid": "b865ed8e",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "As I said earlier, it can be stressful to think about making errors. But the truth is, we all make them sometimes.[br8.548][br8.629]We're all on the same team working to keep our clients safe, no matter what happens.[br13.403]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a5x_3_2",
+			"localization_guid": "c47fa77a",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "In your own practice, use your clinical judgment skills to anticipate possible errors before they happen.[br7.267][br7.348]If you're not sure about something, ask. And if you do make an error, let your manager or supervisor know immediately.[br15.705][br15.786]Like I said, everyone is on the same team working to keep our clients safe. Thanks for talking with me today![br23.134]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a5x_3_3",
+			"type": "endconversation",
+			"success": true
+		},
+		{
+			"id": "event_a5x_3_4",
+			"type": "jump",
+			"target": "node_dme_end_mgfx",
+			"return": false
+		}
+	]
+}

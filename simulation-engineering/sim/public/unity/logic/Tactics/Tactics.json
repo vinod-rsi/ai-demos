@@ -1,0 +1,18 @@
+[
+	{
+		"id": "tactic_respond",
+		"metadata": {
+			"image": "tactic_respond"
+		},
+		"localization_guid": "ac595d01",
+		"name": "RESPOND"
+	},
+	{
+		"id": "tactic_move_on",
+		"metadata": {
+			"image": "tactic_move_on"
+		},
+		"localization_guid": "634c6b66",
+		"name": "MOVE ON"
+	}
+]

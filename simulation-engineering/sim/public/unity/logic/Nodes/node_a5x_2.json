@@ -1,0 +1,54 @@
+{
+	"id": "node_a5x_2",
+	"localization_guid": "88f73d69",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"linkages": 
+	[
+		{
+			"id": "node_a51_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a52_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a53_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a54_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a55_0",
+			"type": "close"
+		}
+	],
+	"events": 
+	[
+		{
+			"id": "event_a5x_2_0",
+			"localization_guid": "36761f15",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "By the start of our next shift, Rhea had completely stabilized and was safely in recovery from her procedure.[br6.976][br7.547]Vic and I checked in with Rhea's primary care provider to confirm[br11.228][br11.309]that it was time to administer another dose of insulin.[br14.279][br14.36]Then, Vic prepared the insulin, and I was there with him to make sure it was the correct amount.[br19.397]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a5x_2_1",
+			"type": "jump",
+			"target": "node_activity_dme_insulin_1",
+			"return": false
+		}
+	]
+}

@@ -1,0 +1,31 @@
+{
+	"id": "node_dme_end_mgfx",
+	"localization_guid": "16814be4",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_dme_end_mgfx_0",
+			"type": "dialogue",
+			"notes": "MGFX:\n\nYou've completed this simulation.\nContinue to see your feedback.",
+			"audio": "empty",
+			"auto_assign_audio": false,
+			"text": "",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_dme_end_mgfx_1",
+			"type": "jump",
+			"target": "node_db_handler",
+			"return": false
+		}
+	]
+}

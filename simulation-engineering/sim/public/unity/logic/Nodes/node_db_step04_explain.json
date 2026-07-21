@@ -1,0 +1,62 @@
+{
+	"id": "node_db_step04_explain",
+	"localization_guid": "aa67ceda",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_db_step04_explain_0",
+			"localization_guid": "9ff8a553",
+			"type": "variabletext",
+			"variable": "var_db_explain_intro",
+			"text": "In Rebecca's case, Rhea's blood glucose level was 51 mg/dL, so Rhea was provided apple juice since she was on a clear liquid diet. Rebecca then monitored and assessed Rhea over the course of 15 minutes and checked her glucose levels again to determine next steps. At the same time, Rebecca wanted to inform Rhea about the situation.\n\nRebecca asked you how you would explain the situation to Rhea."
+		},
+		{
+			"id": "event_db_step04_explain_1",
+			"localization_guid": "2620e4d2",
+			"type": "variabletext",
+			"condition": "Played(node_a44_0) ",
+			"variable": "var_db_explain_text",
+			"text": "You correctly selected:\n\n<indent=10%>- <i>\"Your blood glucose level is low, so we're giving you some carbohydrates to get it back up.\"</i>\n\n<indent=0%>This sticks to the facts and honestly tells Rhea about the issue and how it's being addressed.\n\nAfter 15 minutes, Rhea's blood glucose level increased to 80 mg/dL, returning to a safe range."
+		},
+		{
+			"id": "event_db_step04_explain_2",
+			"localization_guid": "87be2052",
+			"type": "variabletext",
+			"condition": "Played(node_a41_0) ",
+			"variable": "var_db_explain_text",
+			"text": "You incorrectly selected:\n\n<indent=10%>- <i>\"Vic gave you insulin when he shouldn't have, so now we need to stabilize your glucose level.\"</i>\n\n<indent=0%>At that time, Rebecca's priority was to stabilize the client. Once the situation is resolved, she can provide more information about the decrease in blood glucose levels. However, she intended to avoid assigning blame to Vic or any other members of the healthcare team, even during the detailed explanation."
+		},
+		{
+			"id": "event_db_step04_explain_3",
+			"localization_guid": "11bc531a",
+			"type": "variabletext",
+			"condition": "Played(node_a42_0) ",
+			"variable": "var_db_explain_text",
+			"text": "You incorrectly selected:\n\n<indent=10%>- <i>\"Don't panic, but you're hypoglycemic. If we can't get your blood glucose levels up, you'll really get into trouble.\"</i>\n\n<indent=0%>It is never appropriate to use scare tactics with clients as it may induce panic and have adverse effects on their health outcomes. Instead, focus on the most relevant facts."
+		},
+		{
+			"id": "event_db_step04_explain_4",
+			"localization_guid": "cf220e3e",
+			"type": "variabletext",
+			"condition": "Played(node_a43_0) ",
+			"variable": "var_db_explain_text",
+			"text": "You incorrectly selected:\n\n<indent=10%>- <i>\"Your blood glucose level is low, but don't worry about it. Everything will be fine.\"</i>\n\n<indent=0%>Offering false reassurance to clients is not an effective approach. It can mislead them to believe that everything is fine, even when the nurse may not have that information yet. It is better to focus on the most relevant facts."
+		},
+		{
+			"id": "event_db_step04_explain_5",
+			"localization_guid": "f45b69f3",
+			"type": "variabletext",
+			"condition": "!Played(node_a44_0) ",
+			"variable": "var_db_explain_rationale",
+			"text": "Instead, you could've selected:\n\n<indent=10%>- <i>\"Your blood glucose level is low, so we're giving you some carbohydrates to get it back up.\"</i>\n\n<indent=0%>This sticks to the facts and honestly tells Rhea about the issue and how it's being addressed.\n\nAfter 15 minutes, Rhea's blood glucose level increased to 80 mg/dL, returning to a safe range."
+		}
+	]
+}

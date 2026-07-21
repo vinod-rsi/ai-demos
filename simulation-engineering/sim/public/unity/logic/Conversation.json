@@ -1,0 +1,12 @@
+{
+	"id": "engph_10_dme",
+	"localization_guid": "9e9442ed",
+	"name": "Pharmacology: Dosage Calculations and Medication Errors",
+	"intro": "node_dme_intro_titlecard_mgfx",
+	"outro": "node_outro",
+	"starting_tag": "tag_Start",
+	"version": "081716",
+	"default_tactic_color_r": 32,
+	"default_tactic_color_g": 151,
+	"default_tactic_color_b": 172
+}

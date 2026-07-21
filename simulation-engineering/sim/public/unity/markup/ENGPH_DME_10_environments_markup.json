@@ -1,0 +1,15 @@
+{
+	"containers": {
+		"Environments": [
+			{
+				"prefab": "Fade Plane"
+			},
+			{
+				"prefab": "PHARM_T3_env"
+			},
+			{
+				"prefab": "Abstract-Background_env"
+			}
+		]
+	}
+}

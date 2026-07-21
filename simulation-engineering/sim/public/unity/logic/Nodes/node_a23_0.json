@@ -1,0 +1,31 @@
+{
+	"id": "node_a23_0",
+	"localization_guid": "03886b49",
+	"allow_visibility": true,
+	"title": "Rhea is probably hypoglycemic because she received insulin.",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Target"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a23_0_0",
+			"localization_guid": "e47b97f9",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "That seems like the most likely hypothesis to me.[br3.689][br3.77]If Rhea's blood glucose was low and then she received insulin, she could easily become hypoglycemic.[br11.05]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a23_0_1",
+			"type": "jump",
+			"target": "node_a2x_2",
+			"return": false
+		}
+	]
+}

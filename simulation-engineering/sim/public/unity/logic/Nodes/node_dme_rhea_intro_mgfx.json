@@ -1,0 +1,31 @@
+{
+	"id": "node_dme_rhea_intro_mgfx",
+	"localization_guid": "42cbefe9",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_dme_rhea_intro_mgfx_0",
+			"type": "dialogue",
+			"notes": "MGFX:\n\nRhea Davis \n41 years old, she/her\n\nIn this simulation, you'll explore Rhea's story. Rhea has type 2 diabetes mellitus. She had a cholecystectomy that morning because of gallstones.",
+			"audio": "empty",
+			"auto_assign_audio": false,
+			"text": "",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_dme_rhea_intro_mgfx_1",
+			"type": "jump",
+			"target": "node_a0x_2",
+			"return": false
+		}
+	]
+}

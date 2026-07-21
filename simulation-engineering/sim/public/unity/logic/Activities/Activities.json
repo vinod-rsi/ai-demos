@@ -1,0 +1,206 @@
+[
+	{
+		"id": "activity_insulin_1",
+		"localization_guid": "78d2b3e6",
+		"name": "insulin_1",
+		"type": "insulin_1",
+		"activity-optional-name": "",
+		"inherit-value": false,
+		"variables": 
+		[
+			{
+				"variable": "var_activity_insulin_slider",
+				"min": 0,
+				"max": 30,
+				"initial-value": 0,
+				"inherit-value": false,
+				"correct-values": 
+				[
+					3
+				],
+				"incorrect-values": 
+				[
+					0,
+					1,
+					2,
+					4,
+					5,
+					6,
+					7,
+					8,
+					9,
+					10,
+					11,
+					12,
+					13,
+					14,
+					15,
+					16,
+					17,
+					18,
+					19,
+					20,
+					21,
+					22,
+					23,
+					24,
+					25,
+					26,
+					27,
+					28,
+					29,
+					30
+				]
+			},
+			{
+				"variable": "var_activity_insulin_continue",
+				"min": 0,
+				"max": 1,
+				"initial-value": 0,
+				"inherit-value": false
+			}
+		],
+		"dialogue": 
+		[
+			
+		],
+		"node": "node_activity_dme_insulin_1_logic",
+		"set-values": true
+	},
+	{
+		"id": "activity_insulin_2",
+		"localization_guid": "8c1e1e67",
+		"name": "insulin_2",
+		"type": "insulin_2",
+		"activity-optional-name": "",
+		"inherit-value": false,
+		"variables": 
+		[
+			{
+				"variable": "var_activity_insulin_slider",
+				"min": 0,
+				"max": 30,
+				"initial-value": 0,
+				"inherit-value": false,
+				"correct-values": 
+				[
+					3
+				],
+				"incorrect-values": 
+				[
+					0,
+					1,
+					2,
+					4,
+					5,
+					6,
+					7,
+					8,
+					9,
+					10,
+					11,
+					12,
+					13,
+					14,
+					15,
+					16,
+					17,
+					18,
+					19,
+					20,
+					21,
+					22,
+					23,
+					24,
+					25,
+					26,
+					27,
+					28,
+					29,
+					30
+				]
+			},
+			{
+				"variable": "var_activity_insulin_continue",
+				"min": 0,
+				"max": 1,
+				"initial-value": 0,
+				"inherit-value": false
+			}
+		],
+		"dialogue": 
+		[
+			
+		],
+		"node": "node_activity_dme_insulin_2_logic",
+		"set-values": false
+	},
+	{
+		"id": "activity_insulin_3",
+		"localization_guid": "08555b32",
+		"name": "insulin_3",
+		"type": "insulin_3",
+		"activity-optional-name": "",
+		"inherit-value": false,
+		"variables": 
+		[
+			{
+				"variable": "var_activity_insulin_slider",
+				"min": 0,
+				"max": 30,
+				"initial-value": 0,
+				"inherit-value": false,
+				"correct-values": 
+				[
+					3
+				],
+				"incorrect-values": 
+				[
+					0,
+					1,
+					2,
+					4,
+					5,
+					6,
+					7,
+					8,
+					9,
+					10,
+					11,
+					12,
+					13,
+					14,
+					15,
+					16,
+					17,
+					18,
+					19,
+					20,
+					21,
+					22,
+					23,
+					24,
+					25,
+					26,
+					27,
+					28,
+					29,
+					30
+				]
+			},
+			{
+				"variable": "var_activity_insulin_continue",
+				"min": 0,
+				"max": 1,
+				"initial-value": 0,
+				"inherit-value": false
+			}
+		],
+		"dialogue": 
+		[
+			
+		],
+		"node": "node_activity_dme_insulin_3_logic",
+		"set-values": false
+	}
+]

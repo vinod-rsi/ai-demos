@@ -1,0 +1,31 @@
+{
+	"id": "node_a11_0",
+	"localization_guid": "98ed7c04",
+	"allow_visibility": true,
+	"title": "Administer the 3 units of insulin.",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Poor"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a11_0_0",
+			"localization_guid": "c495c6e4",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "Not right away. We don't have enough information to immediately administer the insulin.[br5.69]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a11_0_1",
+			"type": "jump",
+			"target": "node_a1x_logic",
+			"return": false
+		}
+	]
+}

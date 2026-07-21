@@ -1,0 +1,31 @@
+{
+	"id": "node_a41_0",
+	"localization_guid": "c56eab55",
+	"allow_visibility": true,
+	"title": "\"Vic gave you insulin when he shouldn't have, so now we need to stabilize your glucose level.\"",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Poor"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a41_0_0",
+			"localization_guid": "372fd98e",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "In the moment, we want to focus on stabilizing the client.[br4.07][br4.151]After the situation is resolved, we can go into more detail about the drop in blood glucose,[br9.299][br9.38]but even then, we don't want to assign blame to Vic or anyone else on the health care team.[br15.204]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a41_0_1",
+			"type": "jump",
+			"target": "node_a4x_1",
+			"return": false
+		}
+	]
+}

@@ -1,0 +1,31 @@
+{
+	"id": "node_a53_0",
+	"localization_guid": "516d9597",
+	"allow_visibility": true,
+	"title": "\"Check a client's blood glucose level before you administer insulin.\"",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Target"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a53_0_0",
+			"localization_guid": "e1f482d2",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "This is the most important advice to give. If Vic had checked Rhea's blood glucose level in the first place,[br6.357][br6.438]it's very possible this whole situation could have been avoided.[br9.615]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a53_0_1",
+			"type": "jump",
+			"target": "node_a5x_logic",
+			"return": false
+		}
+	]
+}

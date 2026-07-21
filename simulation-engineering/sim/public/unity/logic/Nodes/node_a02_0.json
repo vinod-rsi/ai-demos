@@ -1,0 +1,28 @@
+{
+	"id": "node_a02_0",
+	"localization_guid": "4adfaf64",
+	"allow_visibility": true,
+	"title": "Tell a supervisor about it immediately.",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Start"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a02_0_0",
+			"localization_guid": "a476101f",
+			"type": "coach",
+			"style": "coachstyle_Mandatory",
+			"text": "Supervisors are always available to support you, especially when an error has been made. In some cases, it can be worth trying to resolve the error on your own first, and then go to a supervisor."
+		},
+		{
+			"id": "event_a02_0_1",
+			"type": "jump",
+			"target": "node_a0x_1",
+			"return": false
+		}
+	]
+}

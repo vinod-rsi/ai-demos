@@ -1,0 +1,36 @@
+{
+	"id": "node_activity_dme_insulin_1_logic",
+	"localization_guid": "761bf0e1",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_activity_dme_insulin_1_logic_0",
+			"type": "variable",
+			"variable": "var_insulin_attempt_1",
+			"expression": "var_activity_insulin_slider",
+			"modifier": "assign"
+		},
+		{
+			"id": "event_activity_dme_insulin_1_logic_1",
+			"type": "jump",
+			"condition": "var_activity_insulin_continue == 1",
+			"target": "node_a5x_3",
+			"return": false
+		},
+		{
+			"id": "event_activity_dme_insulin_1_logic_2",
+			"type": "jump",
+			"condition": "var_activity_insulin_continue == 0",
+			"target": "node_activity_dme_insulin_1_2_reset",
+			"return": false
+		}
+	]
+}

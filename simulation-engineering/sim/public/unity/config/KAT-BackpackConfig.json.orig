@@ -1,0 +1,443 @@
+{
+	"kat-debug": {
+		"version": "1.0.0",
+		"generated": "2026-05-21-151014"
+	},
+	"async-overrides": {
+		"atiengph_dme_10": {
+			"url": "",
+			"local": true
+		}
+	},
+	"loader-overrides": {
+		"ShouldHideLibraryButtonOnSimMenu": true
+	},
+	"library": {
+		"categories": []
+	},
+	"sim-menu": {
+		"categories": {},
+		"courses": {
+			"atiengph_dme_10": {
+				"name": "Dosage Calculations and Medication Errors",
+				"available": true,
+				"zipperTextureBundleGroup": "ATIENGPH_DME_10-zipper",
+				"library-sprite": "atiengph_dme_10_library_thumbnail",
+				"loader-sprite": "atiengph_dme_10_loader_logo",
+				"deploymentTarget": "dev",
+				"course": {
+					"Id": "atiengph_dme_10",
+					"DefaultParameters": {
+						"Locked": "true",
+						"LockedInDebug": "false",
+						"LockedModuleButtonText": "OKAY",
+						"LockedModuleMessage": "This content is locked. You can unlock it by completing previous sections.",
+						"HeartbeatInterval": "30",
+						"WaitForData": "true"
+					},
+					"KeyMapping": [
+						{
+							"UpArrow": "up",
+							"DownArrow": "down",
+							"LeftArrow": "left",
+							"RightArrow": "right",
+							"Space": "select",
+							"Return": "select",
+							"KeypadEnter": "select",
+							"Minus": "volume-down",
+							"KeypadMinus": "volume-down",
+							"Underscore": "volume-down",
+							"Plus": "volume-up",
+							"Equals": "volume-up",
+							"KeypadPlus": "volume-up",
+							"V": "toggle-mute",
+							"C": "toggle-captions",
+							"F": "toggle-fullscreen",
+							"P": "toggle-play",
+							"A": "coach",
+							"T": "thoughts",
+							"B": "meter"
+						}
+					]
+				},
+				"modules": [
+					{
+						"id": "atiengph_dme_10_entry_redirect",
+						"prerequisites": [],
+						"bundles": [
+							"shared_required",
+							"empty_simulation",
+							"ENGPH_DME_10"
+						],
+						"shadow_settings": {},
+						"quality_settings": {
+							"low": 2,
+							"medium": 1,
+							"high": 0
+						}
+					},
+					{
+						"id": "atiengph_dme_10_entry_convo",
+						"prerequisites": [],
+						"bundles": [
+							"shared_required",
+							"empty_simulation",
+							"ENGPH_DME_10"
+						],
+						"shadow_settings": {},
+						"quality_settings": {
+							"low": 2,
+							"medium": 1,
+							"high": 0
+						}
+					},
+					{
+						"id": "atiengph_dme_10_entry_dashboard",
+						"prerequisites": [
+							"atiengph_dme_10_entry_convo"
+						],
+						"bundles": [
+							"shared_required",
+							"empty_simulation"
+						],
+						"shadow_settings": {},
+						"quality_settings": {
+							"low": 2,
+							"medium": 1,
+							"high": 0
+						}
+					},
+					{
+						"id": "atiengph_dme_10_entry_ending_screen",
+						"prerequisites": [
+							"atiengph_dme_10_entry_convo"
+						],
+						"bundles": [
+							"empty_simulation"
+						],
+						"shadow_settings": {},
+						"quality_settings": {
+							"low": 2,
+							"medium": 1,
+							"high": 0
+						}
+					}
+				],
+				"menu": {
+					"header": {
+						"type": "header",
+						"image": "atiengph_dme_10_hero_img",
+						"time_format": "%TOTAL% minute%PLURAL-TOTAL%"
+					},
+					"episodes": [
+						{
+							"entries": [
+								{
+									"type": "conversation",
+									"entry": "atiengph_dme_10_entry_convo",
+									"description": true,
+									"connect": true,
+									"icon": "simmenu-icon-convo",
+									"thumbnail": "atiengph_dme_10_convo_thumbnail"
+								},
+								{
+									"type": "activity",
+									"entry": "atiengph_dme_10_entry_dashboard",
+									"description": true,
+									"icon": "simmenu-icon-dashboard"
+								}
+							]
+						}
+					]
+				},
+				"overrides": {}
+			}
+		},
+		"bundles": {
+			"ENGPH_DME_10": {
+				"urlPrefix": "url",
+				"scene-bundles": [
+					{
+						"id": "atiengph_dme_10_topic_convo",
+						"scene": "ENGPH_DME_10",
+						"local": true
+					}
+				]
+			},
+			"empty_simulation": {
+				"urlPrefix": "url",
+				"groups": [
+					"shared_required"
+				]
+			},
+			"shared_required": {
+				"urlPrefix": "%SIMULATIONSURL%/assetbundles/timeline_urp_shared_required/webgl/dev/",
+				"groups": [],
+				"scene-bundles": [
+					{
+						"id": "empty_simulation",
+						"scene": "EmptySimulation",
+						"local": false
+					}
+				]
+			},
+			"ATIENGPH_DME_10-zipper": {
+				"urlPrefix": "https://client-review.kognito.com/assetbundles/atiengph_dme_10/webgl/current/fordownloadoverwww/",
+				"texture-bundles": [
+					{
+						"id": "atiengph_dme_10_convo_thumbnail",
+						"path": "ATIENGPH_DME_10/texture-bundles/atiengph_dme_10_convo_thumbnail.bpb",
+						"useUrlPrefix": true,
+						"local": false
+					},
+					{
+						"id": "atiengph_dme_10_hero_img",
+						"path": "ATIENGPH_DME_10/texture-bundles/atiengph_dme_10_hero_img.bpb",
+						"useUrlPrefix": true,
+						"local": false
+					},
+					{
+						"id": "atiengph_dme_10_library_thumbnail",
+						"path": "ATIENGPH_DME_10/texture-bundles/atiengph_dme_10_library_thumbnail.bpb",
+						"useUrlPrefix": true,
+						"local": false
+					},
+					{
+						"id": "atiengph_dme_10_loader_logo",
+						"path": "ATIENGPH_DME_10/texture-bundles/atiengph_dme_10_loader_logo.bpb",
+						"useUrlPrefix": true,
+						"local": false
+					}
+				]
+			}
+		},
+		"modules": [
+			{
+				"Id": "atiengph_dme_10_entry_redirect",
+				"Name": "Redirect",
+				"ProgressId": "atiengph_dme_10_entry_redirect",
+				"DefaultParameters": {
+					"continue": "true",
+					"bundle-group": "redirect",
+					"store-progress": "true"
+				},
+				"ModuleTemplateId": "PresetModule",
+				"HideInMenu": true,
+				"Topics": [
+					{
+						"Id": "atiengph_dme_10_topic_redirect",
+						"Name": "Redirect",
+						"ProgressId": "atiengph_dme_10_topic_redirect",
+						"DefaultParameters": {
+							"store-progress": "true",
+							"module": "atiengph_dme_10_entry_convo"
+						},
+						"MediaPaths": {
+							"Video": "Topics/RequestLoadModuleActivity"
+						}
+					}
+				]
+			},
+			{
+				"Id": "atiengph_dme_10_entry_convo",
+				"Name": "Apply Your Understanding",
+				"ProgressId": "atiengph_dme_10_entry_convo",
+				"DefaultParameters": {
+					"required": "true",
+					"continue": "true",
+					"bundle-group": "redirect",
+					"store-progress": "true"
+				},
+				"ModuleTemplateId": "PresetModule",
+				"Topics": [
+					{
+						"Id": "atiengph_dme_10_topic_convo",
+						"Name": "Apply Your Understanding",
+						"ProgressId": "atiengph_dme_10_topic_convo",
+						"DefaultParameters": {
+							"num-environment": "1",
+							"environment": "PHARM_T3_env",
+							"extra-environment-1": "Abstract-Background_env",
+							"num-background": "1",
+							"default-background": "plane_Angle_1-T3",
+							"extra-background-1": "plane_Angle_1-MGFX-Abstract-1",
+							"num-camera": "1",
+							"default-camera": "loc_cam_Angle_1-T3_MS",
+							"extra-camera-1": "loc_cam_Angle_1-MGFX-Abstract-1_FS",
+							"character-nonplayable": "rebecca",
+							"actual-time": "5.0",
+							"store-progress": "true",
+							"narrative": "ENGPH_DME_10/ENGPH_DME_10_Logic",
+							"sequence-path": "ENGPH_DME_10/Sequences",
+							"db-content-id": "ATIENGPH_DME_10_Convo"
+						},
+						"UI": [
+							{
+								"Name": "Playback",
+								"Required": [
+									"Captions",
+									"Fullscreen",
+									"KeyboardShortcuts",
+									"PlayPause",
+									"SettingsButton",
+									"VideoControls",
+									"Volume",
+									"Menu"
+								],
+								"Optional": [],
+								"Keyboard": [
+									"Captions",
+									"Fullscreen",
+									"KeyboardShortcuts",
+									"PlayPause",
+									"SettingsButton",
+									"Volume",
+									"Menu"
+								],
+								"Debug": []
+							},
+							{
+								"Name": "Behavior",
+								"Required": [
+									"Behavior",
+									"FeedbackHelper",
+									"Fullscreen",
+									"KeyboardShortcuts",
+									"SettingsButton",
+									"ThoughtHelper",
+									"Tip",
+									"TranscriptButton",
+									"VideoControls",
+									"Volume",
+									"Menu",
+									"Transcript",
+									"TimeDisplay",
+									"Footer"
+								],
+								"Optional": [
+									"Feedback",
+									"HeadTooltip",
+									"ThoughtBubble"
+								],
+								"Keyboard": [
+									"Behavior",
+									"CoachCornerPopout",
+									"Feedback",
+									"Fullscreen",
+									"KeyboardShortcuts",
+									"SettingsButton",
+									"ThoughtBubble",
+									"ThoughtHelper",
+									"Tip",
+									"TranscriptButton",
+									"Volume",
+									"Menu"
+								],
+								"Debug": []
+							},
+							{
+								"Name": "Thought",
+								"Required": [
+									"Captions",
+									"ThoughtHelper",
+									"VideoControls"
+								],
+								"Optional": [],
+								"Keyboard": [
+									"Captions"
+								],
+								"Debug": []
+							}
+						],
+						"MediaPaths": {
+							"Video": "Topics/Konverse"
+						},
+						"TopicTemplateId": "PresetConvoTopic"
+					}
+				]
+			},
+			{
+				"Id": "atiengph_dme_10_entry_dashboard",
+				"Name": "Performance Dashboard",
+				"ProgressId": "atiengph_dme_10_entry_dashboard",
+				"DefaultParameters": {
+					"required": "true",
+					"continue": "true",
+					"store-progress": "true"
+				},
+				"ModuleTemplateId": "PresetModule",
+				"Topics": [
+					{
+						"Id": "atiengph_dme_10_topic_dashboard",
+						"Name": "Performance Dashboard",
+						"ProgressId": "atiengph_dme_10_topic_dashboard",
+						"DefaultParameters": {
+							"dashboard-topic": "atiengph_dme_10_topic_convo",
+							"dashboard-markup": "ENGPH_DME_10/ENGPH_DME_10_Logic/Dashboards/Dashboard",
+							"store-progress": "true"
+						},
+						"UI": [
+							{
+								"Name": "ui-state",
+								"Required": [],
+								"Optional": [],
+								"Keyboard": [],
+								"Debug": []
+							}
+						],
+						"MediaPaths": {
+							"Video": "Topics/Dashboard"
+						},
+						"TopicTemplateId": "PresetDashboardTopic"
+					},
+					{
+						"Id": "atiengph_dme_10_topic_completion",
+						"Name": "Performance Dashboard",
+						"ProgressId": "atiengph_dme_10_topic_completion",
+						"DefaultParameters": {
+							"store-progress": "true"
+						},
+						"MediaPaths": {
+							"Video": "Topics/MultipleAttemptsCompletionActivity"
+						}
+					}
+				]
+			},
+			{
+				"Id": "atiengph_dme_10_entry_ending_screen",
+				"Name": "Ending",
+				"ProgressId": "atiengph_dme_10_entry_ending_screen",
+				"DefaultParameters": {
+					"continue": "false",
+					"store-progress": "true"
+				},
+				"ModuleTemplateId": "PresetModule",
+				"HideInMenu": true,
+				"Topics": [
+					{
+						"Id": "atiengph_dme_10_topic_ending_screen",
+						"Name": "Ending",
+						"ProgressId": "atiengph_dme_10_topic_ending_screen",
+						"DefaultParameters": {
+							"store-progress": "true",
+							"text": "You have completed your Virtual Application experience."
+						},
+						"UI": [
+							{
+								"Name": "Empty",
+								"Required": [],
+								"Optional": [],
+								"Keyboard": [],
+								"Debug": []
+							}
+						],
+						"MediaPaths": {
+							"Video": "Topics/EndScreenTopic"
+						},
+						"TopicTemplateId": "PresetEndScreenTopic"
+					}
+				]
+			}
+		]
+	}
+}

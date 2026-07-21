@@ -1,0 +1,31 @@
+{
+	"id": "node_a12_0",
+	"localization_guid": "fee1ecb8",
+	"allow_visibility": true,
+	"title": "Recheck the orders to make sure nothing was missed.",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Target"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a12_0_0",
+			"localization_guid": "de0a7190",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "[br0.015]That's right. Surgeons complete postop orders that usually include[br4.413][br4.494]all the medications, procedures, and care needed after surgery.[br8.416][br8.562]In this case with a client who is NPO, we want to make sure[br11.888][br11.969]insulin is being administered exactly as outlined in the orders.[br15.578]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a12_0_1",
+			"type": "jump",
+			"target": "node_a1x_logic",
+			"return": false
+		}
+	]
+}

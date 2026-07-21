@@ -1,0 +1,31 @@
+{
+	"id": "node_a44_0",
+	"localization_guid": "d6899848",
+	"allow_visibility": true,
+	"title": "\"Your blood glucose level is low, so we're giving you some carbohydrates to get it back up.\"",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Target"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a44_0_0",
+			"localization_guid": "a2d1189f",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "This is the best approach.[br1.817]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a44_0_1",
+			"type": "jump",
+			"target": "node_a4x_1",
+			"return": false
+		}
+	]
+}

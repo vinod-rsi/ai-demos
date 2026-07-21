@@ -1,0 +1,29 @@
+{
+	"id": "node_db_step00_overall",
+	"localization_guid": "4090b437",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_db_step00_overall_0",
+			"localization_guid": "4283f37a",
+			"type": "variabletext",
+			"variable": "var_db_MiniHeader",
+			"text": "<align=\"center\"><size=110%><color=#296d98><i><b>If you want to view this feedback later, use the Print button to download a copy.</b></i></color></size>"
+		},
+		{
+			"id": "event_db_step00_overall_1",
+			"localization_guid": "f8bf1dec",
+			"type": "variabletext",
+			"variable": "var_db_overall_intro",
+			"text": "You talked with Rebecca (she/her), a clinical instructor, about a clinical student, Vic (he/him) she was supervising. Vic was caring for a 41-year-old client, Rhea (she/her), who had just undergone a cholecystectomy."
+		}
+	]
+}

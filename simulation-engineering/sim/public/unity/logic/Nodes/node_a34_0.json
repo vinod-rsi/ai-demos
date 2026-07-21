@@ -1,0 +1,31 @@
+{
+	"id": "node_a34_0",
+	"localization_guid": "1fa9703a",
+	"allow_visibility": true,
+	"title": "Check the client's blood pressure.",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Poor"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a34_0_0",
+			"localization_guid": "194ca322",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "Although it is important to monitor postoperative vital signs, in this moment,[br5.824][br5.905]the blood pressure is not as important as knowing the blood glucose levels and possibly giving carbohydrates.[br12.167]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a34_0_1",
+			"type": "jump",
+			"target": "node_a3x_1",
+			"return": false
+		}
+	]
+}

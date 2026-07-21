@@ -1,0 +1,31 @@
+{
+	"id": "node_a33_0",
+	"localization_guid": "72e1aa49",
+	"allow_visibility": true,
+	"title": "Administer more insulin.",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Poor"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a33_0_0",
+			"localization_guid": "fc406d04",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "If we suspect a client might be hypoglycemic, the last thing we want to do is administer more insulin.[br6.561][br6.642]While we will very likely want to give Rhea clear liquid carbs like apple juice,[br11.033][br11.289]we don't want to do anything until we've checked the blood glucose levels.[br15.294]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a33_0_1",
+			"type": "jump",
+			"target": "node_a3x_1",
+			"return": false
+		}
+	]
+}

@@ -30,3 +30,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Built by `bun run build:sim` from sim/ — regenerated, never hand-edited.
+public/sim/

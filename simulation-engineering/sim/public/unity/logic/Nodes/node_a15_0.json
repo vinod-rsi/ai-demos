@@ -1,0 +1,21 @@
+{
+	"id": "node_a15_0",
+	"localization_guid": "19329c85",
+	"allow_visibility": true,
+	"title": "Those are all the actions I would take at this time.",
+	"technique": null,
+	"tactic": "tactic_move_on",
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_a15_0_0",
+			"type": "jump",
+			"target": "node_a1x_2",
+			"return": false
+		}
+	]
+}

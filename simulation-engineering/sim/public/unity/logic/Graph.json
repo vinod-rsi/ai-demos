@@ -1,0 +1,320 @@
+{
+  "nodes": [
+    {
+      "id": "node_a00_1",
+      "pos": "-2591,-424",
+      "type": "basic"
+    },
+    {
+      "id": "node_a01_0",
+      "pos": "-2419,-512",
+      "type": "basic"
+    },
+    {
+      "id": "node_a02_0",
+      "pos": "-2421,-407",
+      "type": "basic"
+    },
+    {
+      "id": "node_a03_0",
+      "pos": "-2410,-326",
+      "type": "basic"
+    },
+    {
+      "id": "node_a0x_1",
+      "pos": "-2218,-404",
+      "type": "basic"
+    },
+    {
+      "id": "node_a0x_2",
+      "pos": "-1872,-399",
+      "type": "basic"
+    },
+    {
+      "id": "node_a11_0",
+      "pos": "-1660,-610",
+      "type": "basic"
+    },
+    {
+      "id": "node_a12_0",
+      "pos": "-1654,-497",
+      "type": "basic"
+    },
+    {
+      "id": "node_a13_0",
+      "pos": "-1649,-347",
+      "type": "basic"
+    },
+    {
+      "id": "node_a14_0",
+      "pos": "-1650,-244",
+      "type": "basic"
+    },
+    {
+      "id": "node_a15_0",
+      "pos": "-1653,-80",
+      "type": "basic"
+    },
+    {
+      "id": "node_a1x_1",
+      "pos": "-1137,-624",
+      "type": "basic"
+    },
+    {
+      "id": "node_a1x_2",
+      "pos": "-954,-538",
+      "type": "basic"
+    },
+    {
+      "id": "node_a1x_logic",
+      "pos": "-1405,-550",
+      "type": "basic"
+    },
+    {
+      "id": "node_a21_0",
+      "pos": "-718,-703",
+      "type": "basic"
+    },
+    {
+      "id": "node_a22_0",
+      "pos": "-716,-567",
+      "type": "basic"
+    },
+    {
+      "id": "node_a23_0",
+      "pos": "-718,-451",
+      "type": "basic"
+    },
+    {
+      "id": "node_a24_0",
+      "pos": "-715,-314",
+      "type": "basic"
+    },
+    {
+      "id": "node_a2x_1",
+      "pos": "-499,-650",
+      "type": "basic"
+    },
+    {
+      "id": "node_a2x_2",
+      "pos": "-289,-597",
+      "type": "basic"
+    },
+    {
+      "id": "node_a31_0",
+      "pos": "-132,-723",
+      "type": "basic"
+    },
+    {
+      "id": "node_a32_0",
+      "pos": "-127,-640",
+      "type": "basic"
+    },
+    {
+      "id": "node_a33_0",
+      "pos": "-123,-547",
+      "type": "basic"
+    },
+    {
+      "id": "node_a34_0",
+      "pos": "-119,-436",
+      "type": "basic"
+    },
+    {
+      "id": "node_a3x_1",
+      "pos": "68,-600",
+      "type": "basic"
+    },
+    {
+      "id": "node_a41_0",
+      "pos": "231,-807",
+      "type": "basic"
+    },
+    {
+      "id": "node_a42_0",
+      "pos": "231,-669",
+      "type": "basic"
+    },
+    {
+      "id": "node_a43_0",
+      "pos": "237,-506",
+      "type": "basic"
+    },
+    {
+      "id": "node_a44_0",
+      "pos": "244,-347",
+      "type": "basic"
+    },
+    {
+      "id": "node_a4x_1",
+      "pos": "405,-586",
+      "type": "basic"
+    },
+    {
+      "id": "node_a51_0",
+      "pos": "634,-803",
+      "type": "basic"
+    },
+    {
+      "id": "node_a52_0",
+      "pos": "630,-664",
+      "type": "basic"
+    },
+    {
+      "id": "node_a53_0",
+      "pos": "633,-520",
+      "type": "basic"
+    },
+    {
+      "id": "node_a54_0",
+      "pos": "640,-370",
+      "type": "basic"
+    },
+    {
+      "id": "node_a55_0",
+      "pos": "622,-164",
+      "type": "basic"
+    },
+    {
+      "id": "node_a5x_1",
+      "pos": "1018,-802",
+      "type": "basic"
+    },
+    {
+      "id": "node_a5x_2",
+      "pos": "1217,-713",
+      "type": "basic"
+    },
+    {
+      "id": "node_a5x_3",
+      "pos": "2440,-703",
+      "type": "basic"
+    },
+    {
+      "id": "node_a5x_logic",
+      "pos": "847,-718",
+      "type": "basic"
+    },
+    {
+      "id": "node_activity_dme_insulin_1",
+      "pos": "1387,-714",
+      "type": "basic"
+    },
+    {
+      "id": "node_activity_dme_insulin_1_2_reset",
+      "pos": "1657,-853",
+      "type": "basic"
+    },
+    {
+      "id": "node_activity_dme_insulin_1_logic",
+      "pos": "1602,-706",
+      "type": "basic"
+    },
+    {
+      "id": "node_activity_dme_insulin_2",
+      "pos": "1749,-797",
+      "type": "basic"
+    },
+    {
+      "id": "node_activity_dme_insulin_2_3_reset",
+      "pos": "1994,-932",
+      "type": "basic"
+    },
+    {
+      "id": "node_activity_dme_insulin_2_logic",
+      "pos": "1933,-797",
+      "type": "basic"
+    },
+    {
+      "id": "node_activity_dme_insulin_3",
+      "pos": "2090,-882",
+      "type": "basic"
+    },
+    {
+      "id": "node_activity_dme_insulin_3_logic",
+      "pos": "2253,-881",
+      "type": "basic"
+    },
+    {
+      "id": "node_db_handler",
+      "pos": "2770,-704",
+      "type": "basic"
+    },
+    {
+      "id": "node_db_step00_overall",
+      "pos": "2926,-824",
+      "type": "basic"
+    },
+    {
+      "id": "node_db_step01_ini",
+      "pos": "2927,-771",
+      "type": "basic"
+    },
+    {
+      "id": "node_db_step02_check",
+      "pos": "2927,-725",
+      "type": "basic"
+    },
+    {
+      "id": "node_db_step03_respond",
+      "pos": "2927,-676",
+      "type": "basic"
+    },
+    {
+      "id": "node_db_step04_explain",
+      "pos": "2928,-628",
+      "type": "basic"
+    },
+    {
+      "id": "node_db_step05_instruct",
+      "pos": "2929,-584",
+      "type": "basic"
+    },
+    {
+      "id": "node_db_step06_dosage",
+      "pos": "2928,-538",
+      "type": "basic"
+    },
+    {
+      "id": "node_dme_coach_intro_mgfx",
+      "pos": "-2795,-433",
+      "type": "basic"
+    },
+    {
+      "id": "node_dme_end_mgfx",
+      "pos": "2601,-704",
+      "type": "basic"
+    },
+    {
+      "id": "node_dme_intro_titlecard_mgfx",
+      "pos": "-2962,-432",
+      "type": "basic"
+    },
+    {
+      "id": "node_dme_rhea_intro_mgfx",
+      "pos": "-2042,-400",
+      "type": "basic"
+    },
+    {
+      "id": "node_outro",
+      "pos": "-902,-898",
+      "type": "outro"
+    }
+  ],
+  "boxes": [],
+  "textBoxes": [],
+  "custom-arrows": [],
+  "custom-boxes": [],
+  "custom-nodes": [],
+  "badges": {
+    "tactic_respond": {
+      "IconId": 1,
+      "Color": "139,70,0,255"
+    },
+    "tactic_move_on": {
+      "Color": "127,0,158,255"
+    }
+  },
+  "window-offset": "2104,343",
+  "zoom": 2.0
+}

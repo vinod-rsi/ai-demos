@@ -1,0 +1,920 @@
+[
+	{
+		"$type": "Kognito.AssemblyToolkit.Model.RootNode, Assembly-CSharp-Editor",
+		"id": "root",
+		"TreeID": -1,
+		"children": [
+			{
+				"$type": "Kognito.AssemblyToolkit.Model.LoaderNode, Assembly-CSharp-Editor",
+				"id": "Loader",
+				"TreeID": 2,
+				"storedParameters": {
+					"sharedRequiredUrlPrefix": "timeline_urp_shared_required",
+					"KeepCachedStatementsForever": "false",
+					"useCache": "true",
+					"localLoaderLogo": "false",
+					"shouldHideLoader": "true",
+					"loaderLogoOverridePath": "https://client-review.kognito.com/assetbundles/atiengph_dme_10/webgl/current/fordownloadoverwww/atiengph_dme_10/texture-bundles/atiengph_dme_10_loader_logo",
+					"shouldAutoLogin": "false",
+					"useLoginSystem": "false",
+					"ShouldOverridePlatformMetadata": "false",
+					"disableLocationTracking": "false",
+					"disableQuestionnairesWhenRecording": "false",
+					"ShouldHideLibraryButtonOnSimMenu": "true",
+					"isTest": "false",
+					"record": "false",
+					"tinCanAnalyticsAllowSending": "false",
+					"tinCanCourseTrackingAllowSending": "false",
+					"tinCanStorageUseFallback": "false",
+					"CourseId": "999",
+					"disableAsync": "false",
+					"disableResumePrompt": "false",
+					"isDebug": "false",
+					"isLocal": "true",
+					"useAicc": "false",
+					"useApi": "false",
+					"useKnetOverride": "false",
+					"apiOverridePath": "http://knet-backpack.dev.kognito.com/api/index/group",
+					"deploymentTarget": "dev",
+					"entry": "atiengph_dme_10_entry_redirect",
+					"path": "BackpackConfig.json",
+					"timeScale": "1.0"
+				}
+			},
+			{
+				"$type": "Kognito.AssemblyToolkit.Model.TrackingConfigNode, Assembly-CSharp-Editor",
+				"id": "Tracking & Config",
+				"TreeID": 3,
+				"storedParameters": {
+					"tincan-password-demo-dev": "",
+					"tincan-uri-demo-dev": "https://kognito.engine.scorm.com/RusticiEngine/lrs/??????????/sandbox/",
+					"tincan-username-demo-dev": "",
+					"tincan-password-demo-live": "",
+					"tincan-uri-demo-live": "https://kognito.engine.scorm.com/RusticiEngine/lrs/??????????/",
+					"tincan-username-demo-live": "",
+					"tincan-password-dev": "",
+					"tincan-uri-dev": "https://kognito.engine.scorm.com/RusticiEngine/lrs/??????????/sandbox/",
+					"tincan-username-dev": "",
+					"tincan-password-live": "",
+					"tincan-uri-live": "https://kognito.engine.scorm.com/RusticiEngine/lrs/??????????/",
+					"tincan-username-live": "",
+					"app version": "1",
+					"bundle id": "com.kognito.atiengph_dme_10",
+					"game name": "ATIENGPH_DME_10"
+				}
+			},
+			{
+				"$type": "Kognito.AssemblyToolkit.Model.BackpackNode, Assembly-CSharp-Editor",
+				"id": "Backpack",
+				"TreeID": 4,
+				"children": [
+					{
+						"$type": "Kognito.AssemblyToolkit.Model.CourseNode, Assembly-CSharp-Editor",
+						"available": true,
+						"overrides": {},
+						"id": "atiengph_dme_10",
+						"Scene": {
+							"Camera": {
+								"FieldView": 17.9,
+								"NearClip": 0.1,
+								"FarClip": 1000.0
+							},
+							"Lighting": {
+								"AmbientColor": "1,1,1,0",
+								"RealTimeShadowColor": "0.42,0.478,0.627",
+								"GradientSkyColor": "0.8509804,0.8067294,0.7829019",
+								"GradientEquatorColor": "0.6509804,0.6423007,0.6379608",
+								"GradientGroundColor": "0.25,0.2425,0.2425"
+							},
+							"Shadows": {
+								"low": {
+									"ShadowsIndex": 2,
+									"ShadowProjectTypeIndex": 1,
+									"ShadowCascadeTypeIndex": 0,
+									"Shadows": "All",
+									"ShadowProjectType": "StableFit",
+									"ShadowDistance": 18.0,
+									"ShadowNearPlaneOffset": 2.0,
+									"ShadowCascadeType": "None"
+								},
+								"medium": {
+									"ShadowsIndex": 2,
+									"ShadowProjectTypeIndex": 1,
+									"ShadowCascadeTypeIndex": 1,
+									"Shadows": "All",
+									"ShadowProjectType": "StableFit",
+									"ShadowDistance": 18.0,
+									"ShadowNearPlaneOffset": 2.0,
+									"ShadowCascadeType": "Two"
+								},
+								"high": {
+									"ShadowsIndex": 2,
+									"ShadowProjectTypeIndex": 1,
+									"ShadowCascadeTypeIndex": 0,
+									"Shadows": "All",
+									"ShadowProjectType": "StableFit",
+									"ShadowDistance": 18.0,
+									"ShadowNearPlaneOffset": 2.0,
+									"ShadowCascadeType": "None"
+								},
+								"med": {
+									"ShadowsIndex": 2,
+									"ShadowProjectTypeIndex": 1,
+									"ShadowCascadeTypeIndex": 0,
+									"Shadows": "All",
+									"ShadowProjectType": "StableFit",
+									"ShadowDistance": 18.0,
+									"ShadowNearPlaneOffset": 2.0,
+									"ShadowCascadeType": "None"
+								}
+							}
+						},
+						"TimeFormat": "%TOTAL% minute%PLURAL-TOTAL%",
+						"CustomTimeFormat": "False",
+						"KeyMapping": {
+							"up": [
+								273
+							],
+							"down": [
+								274
+							],
+							"left": [
+								276
+							],
+							"right": [
+								275
+							],
+							"select": [
+								32,
+								13,
+								271
+							],
+							"volume-down": [
+								45,
+								269,
+								95
+							],
+							"volume-up": [
+								43,
+								61,
+								270
+							],
+							"toggle-mute": [
+								118
+							],
+							"toggle-captions": [
+								99
+							],
+							"toggle-fullscreen": [
+								102
+							],
+							"toggle-play": [
+								112
+							],
+							"coach": [
+								97
+							],
+							"undo": [],
+							"thoughts": [
+								116
+							],
+							"menu": [],
+							"meter": [
+								98
+							]
+						},
+						"LinkedFolderPath": "Assets/ATIENGPH_DME_10_Assets/Sprites/Menu/ATIENGPH_DME_10",
+						"TreeID": 5,
+						"storedParameters": {
+							"HeartbeatInterval": "9->30",
+							"WaitForData": "7->true",
+							"Locked": "true",
+							"LockedInDebug": "false",
+							"LockedModuleButtonText": "OKAY",
+							"LockedModuleButtonTextForDemo": "OKAY",
+							"LockedModuleMessage": "This content is locked. You can unlock it by completing previous sections.",
+							"LockedModuleMessageForDemo": "This content is not available because this is a demo version.",
+							"displayName": "Dosage Calculations and Medication Errors",
+							"AllowResumeCancel": "false",
+							"DebugMode": "false",
+							"demographic": "",
+							"description": "",
+							"headerImage": "5a4f08e0e2aef604ea6effebb0624164",
+							"libraryImage": "191c08c41bfc1e84faff749929467b0b",
+							"loaderImage": "5767d9ec26eb99c48823773f527fa7c2"
+						},
+						"children": [
+							{
+								"$type": "Kognito.AssemblyToolkit.Model.EpisodeNode, Assembly-CSharp-Editor",
+								"id": "atiengph_dme_10_episode",
+								"TreeID": 15,
+								"storedParameters": {
+									"ConnectedToNextEpisode": "false",
+									"DefaultEntryConnected": "false"
+								},
+								"children": [
+									{
+										"$type": "Kognito.AssemblyToolkit.Model.ModuleEntryNode, Assembly-CSharp-Editor",
+										"id": "atiengph_dme_10_entry_redirect",
+										"Scene": {
+											"Camera": {
+												"FieldView": 17.9,
+												"NearClip": 0.1,
+												"FarClip": 1000.0
+											},
+											"Lighting": {
+												"AmbientColor": "1,1,1,0",
+												"RealTimeShadowColor": "0.42,0.478,0.627",
+												"GradientSkyColor": "0.8509804,0.8067294,0.7829019",
+												"GradientEquatorColor": "0.6509804,0.6423007,0.6379608",
+												"GradientGroundColor": "0.25,0.2425,0.2425"
+											},
+											"Shadows": {
+												"low": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 0,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "None"
+												},
+												"medium": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 1,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "Two"
+												},
+												"high": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 0,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "None"
+												},
+												"med": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 0,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "None"
+												}
+											}
+										},
+										"Quality": {
+											"low": 2,
+											"medium": 1,
+											"high": 0
+										},
+										"TreeID": 16,
+										"storedParameters": {},
+										"children": [
+											{
+												"$id": "1",
+												"$type": "Kognito.AssemblyToolkit.Model.ModuleNode, Assembly-CSharp-Editor",
+												"id": "atiengph_dme_10_entry_redirect",
+												"TreeID": 17,
+												"storedParameters": {
+													"breakLine": "false",
+													"connect": "false",
+													"hideInMenu": "true",
+													"displayName": "Redirect",
+													"ProgressId": "atiengph_dme_10_entry_redirect",
+													"required": "false",
+													"AllowResumeCancel": "false",
+													"continue": "True",
+													"fullDemoState": "unlock",
+													"limitedDemoState": "unlock",
+													"requireLoad": "false",
+													"bundle-group": "redirect"
+												},
+												"children": [
+													{
+														"$id": "2",
+														"$type": "Kognito.AssemblyToolkit.Model.CustomTopicNode, Assembly-CSharp-Editor",
+														"id": "atiengph_dme_10_topic_redirect",
+														"LinkedFolderPath": "",
+														"TreeID": 18,
+														"storedParameters": {
+															"module": "atiengph_dme_10_entry_convo",
+															"only-run-once": "false",
+															"only-run-once-global": "false",
+															"play-only-in-debug": "false",
+															"allow-scene-generation": "false",
+															"media-path": "RequestLoadModuleActivity",
+															"other-path": "",
+															"displayName": "Redirect",
+															"ProgressId": "atiengph_dme_10_topic_redirect",
+															"required": "false",
+															"store-progress": "true"
+														}
+													}
+												]
+											}
+										]
+									},
+									{
+										"$type": "Kognito.AssemblyToolkit.Model.ModuleEntryNode, Assembly-CSharp-Editor",
+										"id": "atiengph_dme_10_entry_convo",
+										"Scene": {
+											"Camera": {
+												"FieldView": 17.9,
+												"NearClip": 0.1,
+												"FarClip": 1000.0
+											},
+											"Lighting": {
+												"AmbientColor": "1,1,1,0",
+												"RealTimeShadowColor": "0.42,0.478,0.627",
+												"GradientSkyColor": "0.8509804,0.8067294,0.7829019",
+												"GradientEquatorColor": "0.6509804,0.6423007,0.6379608",
+												"GradientGroundColor": "0.25,0.2425,0.2425"
+											},
+											"Shadows": {
+												"low": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 0,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "None"
+												},
+												"medium": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 1,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "Two"
+												},
+												"high": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 0,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "None"
+												},
+												"med": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 0,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "None"
+												}
+											}
+										},
+										"Quality": {
+											"low": 2,
+											"medium": 1,
+											"high": 0
+										},
+										"TreeID": 19,
+										"storedParameters": {},
+										"children": [
+											{
+												"$id": "3",
+												"$type": "Kognito.AssemblyToolkit.Model.ModuleNode, Assembly-CSharp-Editor",
+												"id": "atiengph_dme_10_entry_convo",
+												"TreeID": 20,
+												"storedParameters": {
+													"breakLine": "false",
+													"connect": "true",
+													"hideInMenu": "false",
+													"thumbnail": "77bf2c8058883de4283eeaa66bff7f75",
+													"displayName": "Apply Your Understanding",
+													"ProgressId": "atiengph_dme_10_entry_convo",
+													"required": "true",
+													"AllowResumeCancel": "false",
+													"continue": "True",
+													"fullDemoState": "unlock",
+													"limitedDemoState": "unlock",
+													"requireLoad": "false",
+													"bundle-group": "redirect"
+												},
+												"children": [
+													{
+														"$id": "4",
+														"$type": "Kognito.AssemblyToolkit.Model.ConvoTopicNode, Assembly-CSharp-Editor",
+														"linkedData": {
+															"SequencesPath": "ENGPH_DME_10/Sequences",
+															"Characters": [
+																{
+																	"ID": "character_rebecca",
+																	"Name": "REBECCA",
+																	"Prefabs": [
+																		"38ee9f6b3efa63f46a19917fa8fd86c9"
+																	],
+																	"IdleNodes": [
+																		{
+																			"defaultBase": "DEFAULT",
+																			"defaultBody": "DEFAULT",
+																			"defaultHead": "DEFAULT",
+																			"defaultBrows": "",
+																			"defaultEyelids": "",
+																			"defaultEyeballs": "",
+																			"defaultMouth": "",
+																			"sets": [
+																				{
+																					"setByLayer": [
+																						{
+																							"In": "idle",
+																							"Out": ""
+																						}
+																					],
+																					"LayerIndex": 3,
+																					"MinDelayBetweenInAndOut": 3.0,
+																					"MaxDelayBetweenInAndOut": 3.0,
+																					"TransitionReturn": true,
+																					"TransitionReturnDuration": 0.25
+																				},
+																				{
+																					"setByLayer": [
+																						{
+																							"In": "blink",
+																							"Out": ""
+																						}
+																					],
+																					"LayerIndex": 5,
+																					"MinDelayBetweenInAndOut": 2.0,
+																					"MaxDelayBetweenInAndOut": 3.0,
+																					"MinDelayBetweenAnimationSets": 2.0,
+																					"MaxDelayBetweenAnimationSets": 4.0,
+																					"TransitionReturn": true,
+																					"TransitionReturnDuration": 0.1
+																				}
+																			],
+																			"extras": [
+																				{
+																					"defaultExtraLayerName": "additive-idle",
+																					"defaultExtraAnimationName": "DEFAULT"
+																				},
+																				{
+																					"defaultExtraLayerName": "additive-head",
+																					"defaultExtraAnimationName": "DEFAULT"
+																				},
+																				{
+																					"defaultExtraLayerName": "additive-eyelids",
+																					"defaultExtraAnimationName": "DEFAULT"
+																				},
+																				{
+																					"defaultExtraLayerName": "additive-eyeballs",
+																					"defaultExtraAnimationName": "DEFAULT"
+																				}
+																			],
+																			"locatorName": "loc_char_rebecca"
+																		}
+																	]
+																}
+															],
+															"Environments": [
+																{
+																	"Prefab": "fbd156b7be8a4ef4a9863cf4795138ad"
+																},
+																{
+																	"Prefab": "d13cb1e87882a1d469a5c08902310644"
+																}
+															],
+															"TacticIcons": {
+																"tactic_respond": "8156a507f1b79674fa366655460de4ce",
+																"tactic_move_on": "1192f045f933f7344bc7d79cb9034560"
+															},
+															"CoachIcons": {
+																"icon_coach": "fbaaff1d83157424aa80fd88c0ac9661",
+																"icon_coach_thumbnail": "b467105aa0cc74051b40828a0f2c6e5e"
+															},
+															"BehaviorIcons": {},
+															"LinkedBasePath": "Assets/ATIENGPH_DME_10_Assets/Topics/Conversations/ENGPH_DME_10",
+															"SharedLogicPath": "",
+															"ActivityTypeNames": [
+																"insulin_1",
+																"insulin_2",
+																"insulin_3"
+															],
+															"BackgroundNames": [
+																"plane_Angle_1-T3",
+																"plane_Angle_1-MGFX-Abstract-1"
+															],
+															"CameraShotNames": [
+																"loc_cam_Angle_1-T3_MS",
+																"loc_cam_Angle_1-MGFX-Abstract-1_FS"
+															],
+															"CameraShots": [
+																"shot_1",
+																"abstractBG"
+															]
+														},
+														"id": "atiengph_dme_10_topic_convo",
+														"Scene": {
+															"Camera": {
+																"FieldView": 17.9,
+																"NearClip": 0.1,
+																"FarClip": 1000.0
+															},
+															"Lighting": {
+																"AmbientColor": "1,1,1,0",
+																"RealTimeShadowColor": "0.42,0.478,0.627",
+																"GradientSkyColor": "0.8509804,0.8067294,0.7829019",
+																"GradientEquatorColor": "0.6509804,0.6423007,0.6379608",
+																"GradientGroundColor": "0.25,0.2425,0.2425"
+															}
+														},
+														"LinkedFolderPath": "Assets/ATIENGPH_DME_10_Assets/Topics/Conversations/ENGPH_DME_10",
+														"TreeID": 21,
+														"storedParameters": {
+															"only-run-once": "false",
+															"only-run-once-global": "false",
+															"play-only-in-debug": "false",
+															"displayName": "Apply Your Understanding",
+															"ProgressId": "atiengph_dme_10_topic_convo",
+															"required": "false",
+															"actual-time": "5.0",
+															"add-marker-camera": "false",
+															"export-db-content-id": "true",
+															"store-progress": "true"
+														},
+														"children": [
+															{
+																"$id": "5",
+																"$type": "Kognito.AssemblyToolkit.Model.UIStateNode, Assembly-CSharp-Editor",
+																"id": "Playback",
+																"Required": {
+																	"Captions": true,
+																	"Fullscreen": true,
+																	"KeyboardShortcuts": true,
+																	"PlayPause": true,
+																	"SettingsButton": true,
+																	"VideoControls": true,
+																	"Volume": true,
+																	"Menu": true
+																},
+																"Optional": {},
+																"Keyboard": {
+																	"Captions": true,
+																	"Fullscreen": true,
+																	"KeyboardShortcuts": true,
+																	"PlayPause": true,
+																	"SettingsButton": true,
+																	"Volume": true,
+																	"Menu": true
+																},
+																"Debug": {},
+																"TreeID": 22,
+																"storedParameters": {}
+															},
+															{
+																"$id": "6",
+																"$type": "Kognito.AssemblyToolkit.Model.UIStateNode, Assembly-CSharp-Editor",
+																"id": "Behavior",
+																"Required": {
+																	"Behavior": true,
+																	"FeedbackHelper": true,
+																	"Fullscreen": true,
+																	"KeyboardShortcuts": true,
+																	"SettingsButton": true,
+																	"ThoughtHelper": true,
+																	"Tip": true,
+																	"TranscriptButton": true,
+																	"VideoControls": true,
+																	"Volume": true,
+																	"Menu": true,
+																	"Transcript": true,
+																	"TimeDisplay": true,
+																	"Footer": true
+																},
+																"Optional": {
+																	"Feedback": true,
+																	"HeadTooltip": true,
+																	"ThoughtBubble": true,
+																	"Undo": false
+																},
+																"Keyboard": {
+																	"Behavior": true,
+																	"CoachCornerPopout": true,
+																	"Feedback": true,
+																	"Fullscreen": true,
+																	"KeyboardShortcuts": true,
+																	"SettingsButton": true,
+																	"ThoughtBubble": true,
+																	"ThoughtHelper": true,
+																	"Tip": true,
+																	"TranscriptButton": true,
+																	"Undo": false,
+																	"Volume": true,
+																	"Menu": true
+																},
+																"Debug": {},
+																"TreeID": 23,
+																"storedParameters": {}
+															},
+															{
+																"$id": "7",
+																"$type": "Kognito.AssemblyToolkit.Model.UIStateNode, Assembly-CSharp-Editor",
+																"id": "Thought",
+																"Required": {
+																	"Captions": true,
+																	"ThoughtHelper": true,
+																	"VideoControls": true
+																},
+																"Optional": {},
+																"Keyboard": {
+																	"Captions": true
+																},
+																"Debug": {},
+																"TreeID": 24,
+																"storedParameters": {}
+															}
+														]
+													}
+												]
+											}
+										]
+									},
+									{
+										"$type": "Kognito.AssemblyToolkit.Model.ModuleEntryNode, Assembly-CSharp-Editor",
+										"id": "atiengph_dme_10_entry_dashboard",
+										"Scene": {
+											"Camera": {
+												"FieldView": 17.9,
+												"NearClip": 0.1,
+												"FarClip": 1000.0
+											},
+											"Lighting": {
+												"AmbientColor": "1,1,1,0",
+												"RealTimeShadowColor": "0.42,0.478,0.627",
+												"GradientSkyColor": "0.8509804,0.8067294,0.7829019",
+												"GradientEquatorColor": "0.6509804,0.6423007,0.6379608",
+												"GradientGroundColor": "0.25,0.2425,0.2425"
+											},
+											"Shadows": {
+												"low": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 0,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "None"
+												},
+												"medium": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 1,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "Two"
+												},
+												"high": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 0,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "None"
+												},
+												"med": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 0,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "None"
+												}
+											}
+										},
+										"Quality": {
+											"low": 2,
+											"medium": 1,
+											"high": 0
+										},
+										"TreeID": 25,
+										"storedParameters": {},
+										"children": [
+											{
+												"$id": "8",
+												"$type": "Kognito.AssemblyToolkit.Model.ModuleNode, Assembly-CSharp-Editor",
+												"id": "atiengph_dme_10_entry_dashboard",
+												"TreeID": 26,
+												"storedParameters": {
+													"breakLine": "false",
+													"connect": "false",
+													"hideInMenu": "false",
+													"displayName": "Performance Dashboard",
+													"ProgressId": "atiengph_dme_10_entry_dashboard",
+													"required": "true",
+													"AllowResumeCancel": "false",
+													"continue": "True",
+													"fullDemoState": "usePrerequisites",
+													"limitedDemoState": "usePrerequisites",
+													"requireLoad": "false",
+													"prerequisites": "atiengph_dme_10_entry_convo"
+												},
+												"children": [
+													{
+														"$id": "9",
+														"$type": "Kognito.AssemblyToolkit.Model.DashboardTopicNode, Assembly-CSharp-Editor",
+														"id": "atiengph_dme_10_topic_dashboard",
+														"TreeID": 27,
+														"storedParameters": {
+															"only-run-once": "false",
+															"only-run-once-global": "false",
+															"play-only-in-debug": "false",
+															"dashboard-topic": "atiengph_dme_10_topic_convo",
+															"displayName": "Performance Dashboard",
+															"ProgressId": "atiengph_dme_10_topic_dashboard",
+															"required": "false",
+															"dashboard-markup": "936c62ca0f2969f46b854f34890902ad",
+															"store-progress": "true"
+														},
+														"children": [
+															{
+																"$id": "10",
+																"$type": "Kognito.AssemblyToolkit.Model.UIStateNode, Assembly-CSharp-Editor",
+																"id": "ui-state",
+																"Required": {},
+																"Optional": {},
+																"Keyboard": {},
+																"Debug": {},
+																"TreeID": 28,
+																"storedParameters": {}
+															}
+														]
+													},
+													{
+														"$id": "11",
+														"$type": "Kognito.AssemblyToolkit.Model.CustomTopicNode, Assembly-CSharp-Editor",
+														"id": "atiengph_dme_10_topic_completion",
+														"LinkedFolderPath": "",
+														"TreeID": 29,
+														"storedParameters": {
+															"only-run-once": "false",
+															"only-run-once-global": "false",
+															"play-only-in-debug": "false",
+															"allow-scene-generation": "false",
+															"media-path": "MultipleAttemptsCompletionActivity",
+															"other-path": "",
+															"displayName": "Performance Dashboard",
+															"ProgressId": "atiengph_dme_10_topic_completion",
+															"required": "false",
+															"store-progress": "true"
+														}
+													}
+												]
+											}
+										]
+									},
+									{
+										"$type": "Kognito.AssemblyToolkit.Model.ModuleEntryNode, Assembly-CSharp-Editor",
+										"id": "atiengph_dme_10_entry_ending_screen",
+										"Scene": {
+											"Camera": {
+												"FieldView": 17.9,
+												"NearClip": 0.1,
+												"FarClip": 1000.0
+											},
+											"Lighting": {
+												"AmbientColor": "1,1,1,0",
+												"RealTimeShadowColor": "0.42,0.478,0.627",
+												"GradientSkyColor": "0.8509804,0.8067294,0.7829019",
+												"GradientEquatorColor": "0.6509804,0.6423007,0.6379608",
+												"GradientGroundColor": "0.25,0.2425,0.2425"
+											},
+											"Shadows": {
+												"low": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 0,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "None"
+												},
+												"medium": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 1,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "Two"
+												},
+												"high": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 0,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "None"
+												},
+												"med": {
+													"ShadowsIndex": 2,
+													"ShadowProjectTypeIndex": 1,
+													"ShadowCascadeTypeIndex": 0,
+													"Shadows": "All",
+													"ShadowProjectType": "StableFit",
+													"ShadowDistance": 18.0,
+													"ShadowNearPlaneOffset": 2.0,
+													"ShadowCascadeType": "None"
+												}
+											}
+										},
+										"Quality": {
+											"low": 2,
+											"medium": 1,
+											"high": 0
+										},
+										"TreeID": 30,
+										"storedParameters": {},
+										"children": [
+											{
+												"$id": "12",
+												"$type": "Kognito.AssemblyToolkit.Model.ModuleNode, Assembly-CSharp-Editor",
+												"id": "atiengph_dme_10_entry_ending_screen",
+												"TreeID": 31,
+												"storedParameters": {
+													"breakLine": "false",
+													"connect": "false",
+													"hideInMenu": "true",
+													"displayName": "Ending",
+													"ProgressId": "atiengph_dme_10_entry_ending_screen",
+													"required": "false",
+													"AllowResumeCancel": "false",
+													"continue": "",
+													"fullDemoState": "usePrerequisites",
+													"limitedDemoState": "lock",
+													"requireLoad": "false",
+													"prerequisites": "atiengph_dme_10_entry_convo"
+												},
+												"children": [
+													{
+														"$id": "13",
+														"$type": "Kognito.AssemblyToolkit.Model.EndScreenTopicNode, Assembly-CSharp-Editor",
+														"id": "atiengph_dme_10_topic_ending_screen",
+														"TreeID": 34,
+														"storedParameters": {
+															"only-run-once": "false",
+															"only-run-once-global": "false",
+															"play-only-in-debug": "false",
+															"displayName": "Ending",
+															"ProgressId": "atiengph_dme_10_topic_ending_screen",
+															"required": "false",
+															"store-progress": "true",
+															"text": "You have completed your Virtual Application experience."
+														},
+														"children": [
+															{
+																"$id": "14",
+																"$type": "Kognito.AssemblyToolkit.Model.UIStateNode, Assembly-CSharp-Editor",
+																"id": "Empty",
+																"Required": {},
+																"Optional": {},
+																"Keyboard": {},
+																"Debug": {},
+																"TreeID": 35,
+																"storedParameters": {}
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+]

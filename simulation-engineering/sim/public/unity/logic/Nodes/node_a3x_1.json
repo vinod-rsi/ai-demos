@@ -1,0 +1,60 @@
+{
+	"id": "node_a3x_1",
+	"localization_guid": "99998648",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"linkages": 
+	[
+		{
+			"id": "node_a31_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a32_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a33_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a34_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a41_0",
+			"type": "activate"
+		},
+		{
+			"id": "node_a42_0",
+			"type": "activate"
+		},
+		{
+			"id": "node_a43_0",
+			"type": "activate"
+		},
+		{
+			"id": "node_a44_0",
+			"type": "activate"
+		}
+	],
+	"events": 
+	[
+		{
+			"id": "event_a3x_1_0",
+			"localization_guid": "cee68dcb",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "If Rhea was still NPO, we might need to reach out to the provider for an order for D50W.[br6.98][br7.061]In this case, Rhea's blood glucose level was 51 mg/dL,[br12.115][br12.196]so we decided to give her apple juice, as she was on a clear liquid diet.[br16.429][br16.51]Then, we'd monitor and assess Rhea over the course of about 15 minutes[br21.119][br21.2]and check her glucose levels again and determine the next steps.[br25.199][br25.28]At the same time, we wanted to let Rhea know what was going on. How would you explain the situation to her?[br31.944]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		}
+	]
+}

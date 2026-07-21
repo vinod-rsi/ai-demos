@@ -1,0 +1,20 @@
+{
+	"id": "node_activity_dme_insulin_3",
+	"localization_guid": "03d91b17",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_activity_dme_insulin_3_0",
+			"type": "activity",
+			"activity": "activity_insulin_3"
+		}
+	]
+}

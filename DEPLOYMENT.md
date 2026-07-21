@@ -31,7 +31,7 @@ hard refreshes work without the usual SPA `404.html` fallback hack.
 | `jbl` | TanStack Start | 2 | prerender + base |
 | `lab-assistant` | TanStack Start | 2 | prerender + base |
 | `live-lab-session` | TanStack Start | 3 | prerender + base |
-| `simulation-engineering` | TanStack Start | 10 | prerender + base; see Three.js note |
+| `simulation-engineering` | TanStack Start | 10 | prerender + base; plus the vendored Three.js sim in `sim/` |
 | `swiftriver` | TanStack Start | 10 | **done** |
 | `boardvitals` | single `index.html` (96K) | — | copy as-is |
 | `mytipreport/…/competency-app` | plain Vite SPA | — | `base` only |
@@ -150,9 +150,12 @@ Built, then served `dist/client/` under `/ai-demos/swiftriver/` on a local stati
 
 - **Repo name and account.** The base path is baked into each build, so this must be fixed
   before rolling out. Assumed `vinodpatil/ai-demos` → `vinodpatil.github.io/ai-demos/<demo>/`.
-- **The Three.js sim.** `simulation-engineering` embeds a sim that lives in a separate
-  project (`~/Projects/unity/ATIENGPH_DME_10_Unity/threejs-port`). It has to be vendored
-  into this repo or published separately and referenced by URL, or that demo is broken.
+- ~~**The Three.js sim.**~~ Resolved: vendored into `simulation-engineering/sim/`
+  (engine source + the Unity course content it fetches, ~58 MB under `sim/public/unity`).
+  It builds to `simulation-engineering/public/sim/` — chained from that app's `build`
+  script, so CI needs no extra step — and the sim page iframes it same-origin at
+  `<base>/sim/index.html`. Nothing resolves to `localhost` any more. See
+  `simulation-engineering/sim/README.md`.
 - **No git remote.** This repo isn't on GitHub yet.
 - **Public by default.** Pages on a private repo requires GitHub Enterprise Cloud.
   Confirmed acceptable — these are demos, not confidential material.

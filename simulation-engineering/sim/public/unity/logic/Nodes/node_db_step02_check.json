@@ -1,0 +1,62 @@
+{
+	"id": "node_db_step02_check",
+	"localization_guid": "5ab4bda3",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_db_step02_check_0",
+			"localization_guid": "0f7712ff",
+			"type": "variabletext",
+			"variable": "var_db_check_intro",
+			"text": "A few minutes later, Rebecca checked on Rhea and noticed that Rhea was confused and agitated. Rhea was sweating heavily and appeared lethargic.\n\nRebecca asked you to determine the most likely issue affecting Rhea."
+		},
+		{
+			"id": "event_db_step02_check_1",
+			"localization_guid": "23e93c92",
+			"type": "variabletext",
+			"condition": "Played(node_a23_0) ",
+			"variable": "var_db_check_text",
+			"text": "You correctly selected:\n\n<indent=10%>- Rhea is probably hypoglycemic because she received insulin.\n\n<indent=0%>If Rhea's blood glucose level was low and she received insulin, it could result in hypoglycemia. This could explain her manifestations of sweating, confusion, agitation, and lethargy."
+		},
+		{
+			"id": "event_db_step02_check_2",
+			"localization_guid": "03402689",
+			"type": "variabletext",
+			"condition": "Played(node_a21_0) ",
+			"variable": "var_db_check_text",
+			"text": "You incorrectly selected:\n\n<indent=10%>- Rhea could be internally bleeding from the cholecystectomy.\n\n<indent=0%>While sweating and lethargy are often associated with internal bleeding, agitation and confusion are less common."
+		},
+		{
+			"id": "event_db_step02_check_3",
+			"localization_guid": "f245cbba",
+			"type": "variabletext",
+			"condition": "Played(node_a22_0) ",
+			"variable": "var_db_check_text",
+			"text": "You incorrectly selected:\n\n<indent=10%>- Rhea might be going into sepsis from an infection we missed.\n\n<indent=0%>Sweating, lethargy, and confusion are typical manifestations of sepsis, but the presence of agitation does not align with this condition."
+		},
+		{
+			"id": "event_db_step02_check_4",
+			"localization_guid": "ec9b2173",
+			"type": "variabletext",
+			"condition": "Played(node_a24_0) ",
+			"variable": "var_db_check_text",
+			"text": "You incorrectly selected:\n\n<indent=10%>- It's possible Rhea is having an allergic reaction.\n\n<indent=0%>Allergic reactions can cause agitation, but they may not always result in lethargy, sweating, and confusion."
+		},
+		{
+			"id": "event_db_step02_check_5",
+			"localization_guid": "4d700cb7",
+			"type": "variabletext",
+			"condition": "!Played(node_a23_0) ",
+			"variable": "var_db_check_rationale",
+			"text": "Instead, you could've selected:\n\n<indent=10%>- Rhea is probably hypoglycemic because she received insulin.\n\n<indent=0%>If Rhea's blood glucose level was low and she received insulin, it could result in hypoglycemia. This could explain her manifestations of sweating, confusion, agitation, and lethargy."
+		}
+	]
+}

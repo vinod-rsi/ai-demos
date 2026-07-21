@@ -7,20 +7,16 @@ adaptive-engine + mastery rail and an AI debrief.
 
 ## Run
 
-Two dev servers are needed — the embedded sim and this shell:
+The sim ships inside this app (`sim/` → `public/sim/`), so one server is enough:
 
-1. **The simulation engine** (the embedded iframe source, port `5180`):
-   ```bash
-   cd /Users/vinodpatil/Projects/unity/ATIENGPH_DME_10_Unity/threejs-port
-   npm install && npm run dev        # http://localhost:5180
-   ```
+```bash
+bun install
+bun run build:sim                                    # once, or after changing sim/
+bun run dev --port 5186 --strictPort                 # http://localhost:5186
+```
 
-2. **This demo shell** (port `5186`):
-   ```bash
-   bun install && bun run dev --port 5186 --strictPort   # http://localhost:5186
-   ```
-
-Then open **http://localhost:5186/student/simulation**.
+Then open **http://localhost:5186/student/simulation**. `bun run build` runs the
+sim build first, so the production build needs no extra step.
 
 ## What to demo
 
@@ -37,6 +33,9 @@ Then open **http://localhost:5186/student/simulation**.
 ## Notes
 
 - All AI content is static mock data (`src/lib/mock-data.ts`) — no LLM calls.
-- The `threejs-port` project is embedded read-only via iframe and is never modified.
+- The Three.js sim is vendored in `sim/` (engine + imported Unity course content)
+  and built to `public/sim/`, which is git-ignored. It is iframed same-origin, so
+  the deployed demo has no dependency on a local server — see `sim/README.md` for
+  how to re-import course assets from the Unity project.
 - The pre-existing faculty / admin / author pages from the Swift River shell remain
   available via the role switcher; the primary flow is the student sim page.

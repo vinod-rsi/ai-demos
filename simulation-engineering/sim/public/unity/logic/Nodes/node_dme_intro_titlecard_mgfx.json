@@ -1,0 +1,31 @@
+{
+	"id": "node_dme_intro_titlecard_mgfx",
+	"localization_guid": "5e16b1bb",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_dme_intro_titlecard_mgfx_0",
+			"type": "dialogue",
+			"notes": "MGFX:\n\nEngage: Pharmacology\nDosage Calculations and Medication Errors\n\nIn this simulation, you will practice how to avoid errors with medication dosages and what to do if an error is made.",
+			"audio": "empty",
+			"auto_assign_audio": false,
+			"text": "",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_dme_intro_titlecard_mgfx_1",
+			"type": "jump",
+			"target": "node_dme_coach_intro_mgfx",
+			"return": false
+		}
+	]
+}

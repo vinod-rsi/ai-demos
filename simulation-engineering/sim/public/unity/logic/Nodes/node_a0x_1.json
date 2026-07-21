@@ -1,0 +1,46 @@
+{
+	"id": "node_a0x_1",
+	"localization_guid": "c5a8ed7d",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"linkages": 
+	[
+		{
+			"id": "node_a01_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a02_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a03_0",
+			"type": "close"
+		}
+	],
+	"events": 
+	[
+		{
+			"id": "event_a0x_1_0",
+			"localization_guid": "39f516c3",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "Keep your approach to errors in mind as we talk through a situation from a couple years back,[br5.589][br5.67]when I was supervising a student named Vic in clinicals.[br9.449][br9.53]He was taking care of a client, Rhea, who had just undergone a cholecystectomy.[br14.216]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a0x_1_1",
+			"type": "jump",
+			"target": "node_dme_rhea_intro_mgfx",
+			"return": false
+		}
+	]
+}

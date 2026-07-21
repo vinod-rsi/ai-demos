@@ -1,0 +1,31 @@
+{
+	"id": "node_a14_0",
+	"localization_guid": "681b3c4b",
+	"allow_visibility": true,
+	"title": "Make sure Rhea has received previous insulin doses.",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Poor"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a14_0_0",
+			"localization_guid": "c19e556e",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "Although this is something that should be in the EHR, it doesn't guide whether to give insulin or not.[br6.671][br6.752]Postop blood glucose levels can vary greatly based on physiological stress and nutritional intake.[br13.064]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a14_0_1",
+			"type": "jump",
+			"target": "node_a1x_logic",
+			"return": false
+		}
+	]
+}

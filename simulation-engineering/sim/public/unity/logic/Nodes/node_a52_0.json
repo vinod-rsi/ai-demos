@@ -1,0 +1,31 @@
+{
+	"id": "node_a52_0",
+	"localization_guid": "4e3372ce",
+	"allow_visibility": true,
+	"title": "\"Try to have another nurse with you when you prepare a high-risk medication like insulin or heparin.\"",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Target"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a52_0_0",
+			"localization_guid": "cf0bc6f1",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "This is great advice. Especially when administering a high-risk medication like insulin or heparin,[br6.363][br6.444]it never hurts to double-check with a second nurse to ensure a situation like this one doesn't happen.[br12.49][br12.571]It's important to check your facility and state policies on all high-risk medication administration.[br18.068]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a52_0_1",
+			"type": "jump",
+			"target": "node_a5x_logic",
+			"return": false
+		}
+	]
+}

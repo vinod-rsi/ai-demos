@@ -1,0 +1,31 @@
+{
+	"id": "node_a54_0",
+	"localization_guid": "ae4cb294",
+	"allow_visibility": true,
+	"title": "\"When preparing and administering medication, it's important to anticipate and prevent any threat to client safety.\"",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Target"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a54_0_0",
+			"localization_guid": "4711038c",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "Client safety is of utmost concern to nurses. Knowing the risks associated with insulin,[br6.658][br6.739]Vic could have anticipated how it could impact Rhea's safety and taken more steps to prevent the error.[br13.016]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a54_0_1",
+			"type": "jump",
+			"target": "node_a5x_logic",
+			"return": false
+		}
+	]
+}

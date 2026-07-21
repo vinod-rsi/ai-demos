@@ -1,0 +1,38 @@
+{
+	"id": "node_a13_0",
+	"localization_guid": "f5f27801",
+	"allow_visibility": true,
+	"title": "Test Rhea's blood glucose level.",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Target"
+	],
+	"linkages": 
+	[
+		{
+			"id": "node_a11_0",
+			"type": "close"
+		}
+	],
+	"events": 
+	[
+		{
+			"id": "event_a13_0_0",
+			"localization_guid": "684be09b",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "Correct. When clients are NPO, they often are given IV fluids, which can contain glucose,[br6.286][br6.367]but before administering insulin, we should always check a client's blood glucose level[br10.656][br10.737]to make sure the dose is necessary and appropriate.[br13.975]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a13_0_1",
+			"type": "jump",
+			"target": "node_a1x_logic",
+			"return": false
+		}
+	]
+}

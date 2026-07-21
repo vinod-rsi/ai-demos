@@ -1,0 +1,21 @@
+{
+	"id": "node_a55_0",
+	"localization_guid": "de69d234",
+	"allow_visibility": true,
+	"title": "That's all the advice I would give.",
+	"technique": null,
+	"tactic": "tactic_move_on",
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_a55_0_0",
+			"type": "jump",
+			"target": "node_a5x_2",
+			"return": false
+		}
+	]
+}

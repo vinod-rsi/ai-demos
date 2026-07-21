@@ -1,0 +1,15 @@
+{
+	"containers": {
+		"Activities": [
+			{
+				"prefab": "activity_dme_insulin_1"
+			},
+			{
+				"prefab": "activity_dme_insulin_2"
+			},
+			{
+				"prefab": "activity_dme_insulin_3"
+			}
+		]
+	}
+}

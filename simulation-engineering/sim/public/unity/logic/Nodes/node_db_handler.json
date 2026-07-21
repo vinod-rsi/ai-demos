@@ -1,0 +1,57 @@
+{
+	"id": "node_db_handler",
+	"localization_guid": "708348f4",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_db_handler_0",
+			"type": "jump",
+			"target": "node_db_step00_overall",
+			"return": true
+		},
+		{
+			"id": "event_db_handler_1",
+			"type": "jump",
+			"target": "node_db_step01_ini",
+			"return": true
+		},
+		{
+			"id": "event_db_handler_2",
+			"type": "jump",
+			"target": "node_db_step02_check",
+			"return": true
+		},
+		{
+			"id": "event_db_handler_3",
+			"type": "jump",
+			"target": "node_db_step03_respond",
+			"return": true
+		},
+		{
+			"id": "event_db_handler_4",
+			"type": "jump",
+			"target": "node_db_step04_explain",
+			"return": true
+		},
+		{
+			"id": "event_db_handler_5",
+			"type": "jump",
+			"target": "node_db_step05_instruct",
+			"return": true
+		},
+		{
+			"id": "event_db_handler_6",
+			"type": "jump",
+			"target": "node_db_step06_dosage",
+			"return": true
+		}
+	]
+}

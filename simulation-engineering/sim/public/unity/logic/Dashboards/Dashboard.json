@@ -1,0 +1,829 @@
+{
+    "elements": {
+        "#close-icon": {
+            "$ref": ".title-bar-close-icon"
+        },
+        "#header-background": {
+            "$ref": ".light-background-contrast"
+        },
+        "#scrollview-background": {
+            "$ref": ".light-background-highlight"
+        }
+    },
+    "containers": {
+        "layout": [
+            {
+                "$ref": "breakdown-section",
+                "containers": {
+                    "breakdown-section": [
+                        {
+                            "$ref": "breakdown-evaluation-section",
+                            "containers": {
+                                "breakdown-evaluation-section": [
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_MiniHeader"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "elements": {
+                                "#horizontal-rule": {
+                                    "active": "true"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "$ref": "modular-title-bar-element",
+                "elements": {
+                    "#modular-title-bar-element-text": {
+                        "text": "Overall Summary"
+                    },
+                    "#horizontal-rule": {
+                        "active": "true"
+                    }
+                }
+            },
+            {
+                "$ref": "breakdown-section",
+                "containers": {
+                    "breakdown-section": [
+                      {
+                          "$ref": "breakdown-evaluation-section",
+                          "containers": {
+                              "breakdown-evaluation-section": [
+                                  {
+                                      "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_overall_intro"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "elements": {
+                                "#horizontal-rule": {
+                                    "active": "true"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "$ref": "modular-title-bar-element",
+                "elements": {
+                    "#modular-title-bar-element-text": {
+                        "text": "Actions Before Administering Insulin"
+                    },
+                    "#horizontal-rule": {
+                        "active": "true"
+                    }
+                }
+            },
+            {
+                "$ref": "breakdown-section",
+                "containers": {
+                    "breakdown-section": [
+                        {
+                            "$ref": "breakdown-evaluation-section",
+                            "containers": {
+                                "breakdown-evaluation-section": [
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_ini_intro"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_ini_correct_intro"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_ini_correct_text01"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_ini_correct_text02"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_ini_missed_intro"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_ini_missed_text01"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_ini_missed_text02"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_ini_incorrect_intro"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_ini_incorrect_text01"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_ini_incorrect_text02"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_ini_rationale"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "elements": {
+                                "#horizontal-rule": {
+                                    "active": "true"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "$ref": "modular-title-bar-element",
+                "elements": {
+                    "#modular-title-bar-element-text": {
+                        "text": "Checking in with Rhea"
+                    },
+                    "#horizontal-rule": {
+                        "active": "true"
+                    }
+                }
+            },
+            {
+                "$ref": "breakdown-section",
+                "containers": {
+                    "breakdown-section": [
+                        {
+                            "$ref": "breakdown-evaluation-section",
+                            "containers": {
+                                "breakdown-evaluation-section": [
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_check_intro"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_check_text"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_check_rationale"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "elements": {
+                                "#horizontal-rule": {
+                                    "active": "true"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "$ref": "modular-title-bar-element",
+                "elements": {
+                    "#modular-title-bar-element-text": {
+                        "text": "Responding to Hypoglycemia"
+                    },
+                    "#horizontal-rule": {
+                        "active": "true"
+                    }
+                }
+            },
+            {
+                "$ref": "breakdown-section",
+                "containers": {
+                    "breakdown-section": [
+                        {
+                            "$ref": "breakdown-evaluation-section",
+                            "containers": {
+                                "breakdown-evaluation-section": [
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_respond_intro"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_respond_text"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_respond_rationale"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "elements": {
+                                "#horizontal-rule": {
+                                    "active": "true"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "$ref": "modular-title-bar-element",
+                "elements": {
+                    "#modular-title-bar-element-text": {
+                        "text": "Explaining the Situation"
+                    },
+                    "#horizontal-rule": {
+                        "active": "true"
+                    }
+                }
+            },
+            {
+                "$ref": "breakdown-section",
+                "containers": {
+                    "breakdown-section": [
+                        {
+                            "$ref": "breakdown-evaluation-section",
+                            "containers": {
+                                "breakdown-evaluation-section": [
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_explain_intro"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_explain_text"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_explain_rationale"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "elements": {
+                                "#horizontal-rule": {
+                                    "active": "true"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "$ref": "modular-title-bar-element",
+                "elements": {
+                    "#modular-title-bar-element-text": {
+                        "text": "Instructing Vic"
+                    },
+                    "#horizontal-rule": {
+                        "active": "true"
+                    }
+                }
+            },
+            {
+                "$ref": "breakdown-section",
+                "containers": {
+                    "breakdown-section": [
+                        {
+                            "$ref": "breakdown-evaluation-section",
+                            "containers": {
+                                "breakdown-evaluation-section": [
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_instruct_intro"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_instruct_correct_intro"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_instruct_correct_text01"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_instruct_correct_text02"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_instruct_correct_text03"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_instruct_missed_intro"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_instruct_missed_text01"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_instruct_missed_text02"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_instruct_missed_text03"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_instruct_incorrect_intro"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_instruct_incorrect_text01"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_instruct_rationale"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "elements": {
+                                "#horizontal-rule": {
+                                    "active": "true"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "$ref": "modular-title-bar-element",
+                "elements": {
+                    "#modular-title-bar-element-text": {
+                        "text": "Delivering the Correct Dosage"
+                    },
+                    "#horizontal-rule": {
+                        "active": "true"
+                    }
+                }
+            },
+            {
+                "$ref": "breakdown-section",
+                "containers": {
+                    "breakdown-section": [
+                        {
+                            "$ref": "breakdown-evaluation-section",
+                            "containers": {
+                                "breakdown-evaluation-section": [
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_dosage_intro"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_dosage01_text"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_dosage02_text"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_dosage03_text"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_dosage_remedial"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "$ref": "breakdown-evaluation-element",
+                                        "elements": {
+                                            "#horizontal-rule": {
+                                                "active": "false"
+                                            },
+                                            "#evaluation-circle": {
+                                                "active": "false"
+                                            },
+                                            "variable": {
+                                                "variable": "var_db_dosage_rationale"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "elements": {
+                                "#horizontal-rule": {
+                                    "active": "true"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "$ref": "modular-button-row",
+                "containers": {
+                    "button-group": [
+                        {
+                            "$ref": "modular-button",
+                            "elements": {
+                                "modular-button-function": {
+                                    "type": "continue",
+                                    "target": "dashboard"
+                                },
+                                "#modular-button-text": {
+                                    "text": "CONTINUE"
+                                },
+                                "#modular-button-icon": {
+                                    "$ref": ".modular-button-icon",
+                                    "active": "true"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

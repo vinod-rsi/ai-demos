@@ -1,0 +1,9 @@
+{
+	"containers": {
+		"Characters": [
+			{
+				"prefab": "rebecca"
+			}
+		]
+	}
+}

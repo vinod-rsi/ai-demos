@@ -1,0 +1,15 @@
+{
+	"course": "atiengph_dme_10",
+	"entry": "atiengph_dme_10_entry_redirect",
+	"deploymentTarget": "dev",
+	"CourseId": 999,
+	"isLocal": true,
+	"apiOverridePath": "http://knet-backpack.dev.kognito.com/api/index/group",
+	"path": "KAT-BackpackConfig.json",
+	"shouldHideLoader": true,
+	"loaderLogoOverridePath": "https://client-review.kognito.com/assetbundles/atiengph_dme_10/webgl/current/fordownloadoverwww/atiengph_dme_10/texture-bundles/atiengph_dme_10_loader_logo",
+	"ShouldHideLibraryButtonOnSimMenu": true,
+	"overridableParameters": {
+		"SIMULATIONSURL": "https://simulations.kognito.com"
+	}
+}

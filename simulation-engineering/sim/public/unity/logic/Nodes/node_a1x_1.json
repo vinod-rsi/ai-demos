@@ -1,0 +1,32 @@
+{
+	"id": "node_a1x_1",
+	"localization_guid": "a2f57b97",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"linkages": 
+	[
+		{
+			"id": "node_a15_0",
+			"type": "activate"
+		}
+	],
+	"events": 
+	[
+		{
+			"id": "event_a1x_1_0",
+			"localization_guid": "a5b13761",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "What else, if anything, would you do?[br2.467]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		}
+	]
+}

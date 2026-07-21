@@ -1,0 +1,57 @@
+[
+	{
+		"id": "tag_Start",
+		"localization_guid": "3acb287a",
+		"name": "Starting Nodes"
+	},
+	{
+		"id": "tag_Target",
+		"localization_guid": "411a9731",
+		"name": "Target"
+	},
+	{
+		"id": "tag_Fair",
+		"localization_guid": "4e46b88f",
+		"name": "Fair"
+	},
+	{
+		"id": "tag_Neutral",
+		"localization_guid": "4e46b88f",
+		"name": "Neutral"
+	},
+	{
+		"id": "tag_Weak",
+		"localization_guid": "17e8ab0d",
+		"name": "Weak"
+	},
+	{
+		"id": "tag_Poor",
+		"localization_guid": "ea9c8410",
+		"name": "Poor"
+	},
+	{
+		"id": "tag_end",
+		"localization_guid": "8152f342",
+		"name": "end"
+	},
+	{
+		"id": "tag_intro",
+		"localization_guid": "8ac4978f",
+		"name": "intro"
+	},
+	{
+		"id": "tag_forced_undo",
+		"localization_guid": "1960f106",
+		"name": "forced_undo"
+	},
+	{
+		"id": "tag_logic_node",
+		"localization_guid": "2e1dca93",
+		"name": "logic_node"
+	},
+	{
+		"id": "tag_jump",
+		"localization_guid": "9efef60c",
+		"name": "jump"
+	}
+]

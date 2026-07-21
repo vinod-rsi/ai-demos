@@ -18,7 +18,9 @@ import {
 } from "@/lib/mock-data";
 import { toast } from "sonner";
 
-const SIM_URL = "http://localhost:5180";
+// The Three.js sim ships with this app: sim/ builds into public/sim, so the
+// iframe is same-origin wherever the demo is hosted (see sim/README.md).
+const SIM_URL = `${import.meta.env.BASE_URL}sim/index.html`;
 
 export const Route = createFileRoute("/student/simulation")({
   head: () => ({ meta: [{ title: "Lesson 10 — Dosage Calculations & Medication Errors" }] }),
@@ -148,7 +150,7 @@ function SimulationPage() {
             <div className="flex flex-wrap items-center justify-between gap-3">
               <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <ShieldCheck className="h-3.5 w-3.5" />
-                Sim runs from the local engine at <code className="rounded bg-secondary px-1">:5180</code> — start it if the frame is blank.
+                Real Three.js simulation engine — Konverse dialogue, lip-sync and course assets, running in-page.
               </p>
               {phase === "running" && (
                 <Button size="sm" className="gap-2" onClick={() => setPhase("complete")}>

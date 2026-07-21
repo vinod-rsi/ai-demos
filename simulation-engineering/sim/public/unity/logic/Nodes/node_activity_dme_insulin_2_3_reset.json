@@ -1,0 +1,28 @@
+{
+	"id": "node_activity_dme_insulin_2_3_reset",
+	"localization_guid": "0760ba15",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_activity_dme_insulin_2_3_reset_0",
+			"type": "variable",
+			"variable": "var_activity_insulin_slider",
+			"expression": "0",
+			"modifier": "assign"
+		},
+		{
+			"id": "event_activity_dme_insulin_2_3_reset_1",
+			"type": "jump",
+			"target": "node_activity_dme_insulin_3",
+			"return": false
+		}
+	]
+}

@@ -1,0 +1,39 @@
+{
+	"containers": {
+		"MGFX": [
+			{
+				"prefab": "MgfxFadeColorCanvas"
+			},
+			{
+				"prefab": "MGFX_dme_coach_intro"
+			},
+			{
+				"prefab": "MGFX_dme_intro_titlecard"
+			},
+			{
+				"prefab": "MGFX_dme_rhea_intro"
+			},
+			{
+				"prefab": "MGFX_end"
+			},
+			{
+				"prefab": "MGFX_screen_overlay_a0x_2_mgfx"
+			},
+			{
+				"prefab": "MGFX_screen_overlay_a1x_2_mgfx"
+			},
+			{
+				"prefab": "MGFX_screen_overlay_a3x_1_mgfx"
+			},
+			{
+				"prefab": "MGFX_screen_overlay_a4x_1_a_mgfx"
+			},
+			{
+				"prefab": "MGFX_screen_overlay_a4x_1_b_mgfx"
+			},
+			{
+				"prefab": "MGFX_screen_overlay_a5x_3_mgfx"
+			}
+		]
+	}
+}

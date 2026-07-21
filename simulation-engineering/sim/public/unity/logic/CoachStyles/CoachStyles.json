@@ -1,0 +1,26 @@
+[
+	{
+		"id": "coachstyle_Optional",
+		"localization_guid": "0692f95a",
+		"name": "Optional",
+		"modal": false,
+		"image": "icon_coach",
+		"scrim": false
+	},
+	{
+		"id": "coachstyle_Mandatory",
+		"localization_guid": "d3b74b9d",
+		"name": "Mandatory",
+		"modal": true,
+		"image": "icon_coach",
+		"scrim": false
+	},
+	{
+		"id": "coachstyle_ForcedUndo",
+		"localization_guid": "2f2b368e",
+		"name": "Forced Undo",
+		"modal": true,
+		"image": "icon_coach",
+		"scrim": true
+	}
+]

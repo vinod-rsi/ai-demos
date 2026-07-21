@@ -1,0 +1,28 @@
+{
+	"id": "node_a03_0",
+	"localization_guid": "ede0959f",
+	"allow_visibility": true,
+	"title": "Focus on avoiding mistakes in the first place.",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Start"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a03_0_0",
+			"localization_guid": "380d1b9b",
+			"type": "coach",
+			"style": "coachstyle_Mandatory",
+			"text": "Prevention is almost always the best approach. However, sometimes errors do happen, and then it's important to address the error, whether by yourself or by informing someone else, depending on the error."
+		},
+		{
+			"id": "event_a03_0_1",
+			"type": "jump",
+			"target": "node_a0x_1",
+			"return": false
+		}
+	]
+}

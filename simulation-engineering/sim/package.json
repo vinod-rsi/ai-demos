@@ -1,0 +1,23 @@
+{
+  "name": "simulation-engineering-sim",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Browser-native Three.js port of the ATIENGPH_DME_10 Unity course (Konverse dialogue engine in TypeScript), embedded by the Simulation Engineering demo.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "import-assets": "node scripts/import-unity-assets.mjs"
+  },
+  "dependencies": {
+    "three": "^0.182.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.3",
+    "@types/three": "^0.182.0",
+    "typescript": "^5.8.0",
+    "vite": "^6.3.0"
+  }
+}

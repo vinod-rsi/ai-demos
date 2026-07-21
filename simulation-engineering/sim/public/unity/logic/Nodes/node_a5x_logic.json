@@ -1,0 +1,35 @@
+{
+	"id": "node_a5x_logic",
+	"localization_guid": "334c25d8",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_a5x_logic_0",
+			"type": "variable",
+			"variable": "var_a5x_played",
+			"expression": "1",
+			"modifier": "increment"
+		},
+		{
+			"id": "event_a5x_logic_1",
+			"type": "jump",
+			"condition": "var_a5x_played < 4",
+			"target": "node_a5x_1",
+			"return": false
+		},
+		{
+			"id": "event_a5x_logic_2",
+			"type": "jump",
+			"target": "node_a5x_2",
+			"return": false
+		}
+	]
+}

@@ -1,0 +1,31 @@
+{
+	"id": "node_a21_0",
+	"localization_guid": "c5b89f15",
+	"allow_visibility": true,
+	"title": "Rhea could be internally bleeding from the cholecystectomy. ",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Poor"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a21_0_0",
+			"localization_guid": "bf668f24",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "I wouldn't think so. Internal bleeding does often manifest with sweating and lethargy,[br5.539][br5.62]but agitation and confusion are less common.[br9.007]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a21_0_1",
+			"type": "jump",
+			"target": "node_a2x_1",
+			"return": false
+		}
+	]
+}

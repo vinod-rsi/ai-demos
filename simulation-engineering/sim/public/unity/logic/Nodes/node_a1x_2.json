@@ -1,0 +1,74 @@
+{
+	"id": "node_a1x_2",
+	"localization_guid": "0b438f64",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"linkages": 
+	[
+		{
+			"id": "node_a11_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a12_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a13_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a14_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a15_0",
+			"type": "close"
+		},
+		{
+			"id": "node_a21_0",
+			"type": "activate"
+		},
+		{
+			"id": "node_a22_0",
+			"type": "activate"
+		},
+		{
+			"id": "node_a23_0",
+			"type": "activate"
+		},
+		{
+			"id": "node_a24_0",
+			"type": "activate"
+		}
+	],
+	"events": 
+	[
+		{
+			"id": "event_a1x_2_0",
+			"localization_guid": "29f31cef",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "In general, administering insulin without knowing blood glucose levels[br4.388][br4.469]and double-checking the EHR can lead to medication errors.[br8.448][br8.529]Even after carefully checking the EHR, it's important to consider all possible information and cues,[br15.154][br15.235]like blood glucose level, because there could be a system error if Rhea's postop orders were not updated properly.[br22.843][br22.924]In this case, Vic followed what he saw in the EHR and administered the 3 units of insulin.[br29.113][br29.194]This is an example of an individual error.[br31.928]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a1x_2_1",
+			"localization_guid": "9bc14692",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "When I checked on Rhea just a few minutes later, I found her confused and agitated.[br5.681][br5.762]She was sweating profusely and seemed lethargic. What do these cues suggest was most likely happening with Rhea?[br13.048]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		}
+	]
+}

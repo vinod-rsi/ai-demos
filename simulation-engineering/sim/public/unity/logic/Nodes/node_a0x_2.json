@@ -1,0 +1,44 @@
+{
+	"id": "node_a0x_2",
+	"localization_guid": "ddbe0134",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"linkages": 
+	[
+		{
+			"id": "node_a11_0",
+			"type": "activate"
+		},
+		{
+			"id": "node_a12_0",
+			"type": "activate"
+		},
+		{
+			"id": "node_a13_0",
+			"type": "activate"
+		},
+		{
+			"id": "node_a14_0",
+			"type": "activate"
+		}
+	],
+	"events": 
+	[
+		{
+			"id": "event_a0x_2_0",
+			"localization_guid": "e95ce064",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "Rhea had nothing by mouth, also known as NPO, before her procedure.[br5.443][br5.524]After the cholecystectomy, Rhea returned to her room on the surgical unit[br9.526][br9.607]in stable condition with her pain level under control.[br13.066][br13.147]Vic briefly checked the electronic health record, or EHR,[br17.16][br17.241]and saw postop orders that indicated Rhea was placed on a clear liquid diet,[br21.851][br21.932]and there was an order for her to receive 3 units of insulin subcutaneously.[br27.34][br27.421]If you were Vic, what would you do in this situation?[br30.813]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		}
+	]
+}

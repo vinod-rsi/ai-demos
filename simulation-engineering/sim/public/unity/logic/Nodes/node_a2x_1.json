@@ -1,0 +1,31 @@
+{
+	"id": "node_a2x_1",
+	"localization_guid": "7df61371",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_a2x_1_0",
+			"localization_guid": "8074805e",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "Since we know Vic administered insulin after Rhea was NPO, she's more likely hypoglycemic.[br6.301]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a2x_1_1",
+			"type": "jump",
+			"target": "node_a2x_2",
+			"return": false
+		}
+	]
+}

@@ -1,0 +1,28 @@
+{
+	"id": "node_a01_0",
+	"localization_guid": "29e4d969",
+	"allow_visibility": true,
+	"title": "Unless it's an emergency, try to fix the error, then get help.",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Start"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a01_0_0",
+			"localization_guid": "a6804283",
+			"type": "coach",
+			"style": "coachstyle_Mandatory",
+			"text": "Taking care of errors on your own is a helpful instinct. It's also important to remember the rest of the team is there to support you, even and especially when an error has been made."
+		},
+		{
+			"id": "event_a01_0_1",
+			"type": "jump",
+			"target": "node_a0x_1",
+			"return": false
+		}
+	]
+}

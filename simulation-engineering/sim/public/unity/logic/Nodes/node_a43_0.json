@@ -1,0 +1,31 @@
+{
+	"id": "node_a43_0",
+	"localization_guid": "85be6141",
+	"allow_visibility": true,
+	"title": "\"Your blood glucose level is low, but don't worry about it. Everything will be fine.\"",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Poor"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a43_0_0",
+			"localization_guid": "3f1a91ca",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "Giving false reassurance to clients is not an effective approach because it can mislead them into thinking[br5.785][br5.866]everything is fine when we don't know that yet. Instead, stick to the most relevant facts.[br11.579]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a43_0_1",
+			"type": "jump",
+			"target": "node_a4x_1",
+			"return": false
+		}
+	]
+}

@@ -1,0 +1,25 @@
+{
+	"id": "node_a00_1",
+	"localization_guid": "0e1d0087",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_a00_1_0",
+			"localization_guid": "550cea39",
+			"type": "dialogue",
+			"audio": "a00_1b",
+			"auto_assign_audio": false,
+			"text": "Hey there. Before we get started today, I wanted to take a few minutes[br4.492][br4.573]and talk through dosage calculation and medication errors.[br8.04][br8.121]Many of the students I work with worry a lot about making mistakes and how to respond to them.[br13.094][br13.175]What approach do you usually take when it comes to errors?[br16.151]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		}
+	]
+}

@@ -1,0 +1,28 @@
+{
+	"id": "node_activity_dme_insulin_3_logic",
+	"localization_guid": "2fcddd74",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_activity_dme_insulin_3_logic_0",
+			"type": "variable",
+			"variable": "var_insulin_attempt_3",
+			"expression": "var_activity_insulin_slider",
+			"modifier": "assign"
+		},
+		{
+			"id": "event_activity_dme_insulin_3_logic_1",
+			"type": "jump",
+			"target": "node_a5x_3",
+			"return": false
+		}
+	]
+}

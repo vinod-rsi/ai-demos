@@ -1,0 +1,32 @@
+{
+	"id": "node_a5x_1",
+	"localization_guid": "08ec7f07",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"linkages": 
+	[
+		{
+			"id": "node_a55_0",
+			"type": "activate"
+		}
+	],
+	"events": 
+	[
+		{
+			"id": "event_a5x_1_0",
+			"localization_guid": "e6cae818",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "What other advice would you give Vic, if any?[br2.531]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		}
+	]
+}

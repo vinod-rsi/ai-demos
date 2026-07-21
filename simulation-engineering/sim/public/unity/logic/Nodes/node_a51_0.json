@@ -1,0 +1,31 @@
+{
+	"id": "node_a51_0",
+	"localization_guid": "fe04446f",
+	"allow_visibility": true,
+	"title": "\"Never trust the EHR.\"",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Poor"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a51_0_0",
+			"localization_guid": "2d476f80",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "This isn't the best advice. We should always be cautious and remain aware of the potential for human error,[br5.968][br6.049]but the EHR should be considered a helpful tool.[br9.185][br9.704]Instead, we should remind Vic to double-check orders in the EHR,[br14.214][br14.295]especially if they seem like they could be risky for the client.[br17.605][br17.686]If need be, orders can always be confirmed with the provider.[br21.325]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a51_0_1",
+			"type": "jump",
+			"target": "node_a5x_logic",
+			"return": false
+		}
+	]
+}

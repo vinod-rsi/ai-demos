@@ -1,0 +1,109 @@
+{
+	"id": "node_db_step05_instruct",
+	"localization_guid": "dc080da2",
+	"allow_visibility": false,
+	"title": "",
+	"technique": null,
+	"tactic": null,
+	"tags": 
+	[
+		
+	],
+	"events": 
+	[
+		{
+			"id": "event_db_step05_instruct_0",
+			"localization_guid": "369be8bf",
+			"type": "variabletext",
+			"variable": "var_db_instruct_intro",
+			"text": "Once Rhea's condition began to stabilize, Rebecca updated the EHR with details about the drop in blood glucose, the administration of clear liquid carbohydrates, and how the blood glucose level changed afterward. She directly contacted Rhea's primary care provider and surgeon to make sure they were aware of the incident. Finally, Rebecca informed the next shift about the situation so they could monitor Rhea as needed.\n\nAfterward, Rebecca had a conversation with Vic where she provided feedback on how to prevent similar errors in the future.\n\nRebecca asked you what instructions you would give Vic."
+		},
+		{
+			"id": "event_db_step05_instruct_1",
+			"localization_guid": "cf30ac05",
+			"type": "variabletext",
+			"condition": "Played(node_a52_0) || \nPlayed(node_a53_0) || \nPlayed(node_a54_0) ",
+			"variable": "var_db_instruct_correct_intro",
+			"text": "You correctly selected the following:"
+		},
+		{
+			"id": "event_db_step05_instruct_2",
+			"localization_guid": "3b29ebb2",
+			"type": "variabletext",
+			"condition": "Played(node_a52_0) ",
+			"variable": "var_db_instruct_correct_text01",
+			"text": "<indent=10%>- <i>\"Try to have another nurse with you when you prepare a high-risk medication like insulin or heparin.\"</i>"
+		},
+		{
+			"id": "event_db_step05_instruct_3",
+			"localization_guid": "39a8399b",
+			"type": "variabletext",
+			"condition": "Played(node_a53_0) ",
+			"variable": "var_db_instruct_correct_text02",
+			"text": "<indent=10%>- <i>\"Check a client's blood glucose level before you administer insulin.\"</i>"
+		},
+		{
+			"id": "event_db_step05_instruct_4",
+			"localization_guid": "fa6c9637",
+			"type": "variabletext",
+			"condition": "Played(node_a54_0) ",
+			"variable": "var_db_instruct_correct_text03",
+			"text": "<indent=10%>- <i>\"When preparing and administering medication, it's important to anticipate and prevent any threat to client safety.\"</i>"
+		},
+		{
+			"id": "event_db_step05_instruct_5",
+			"localization_guid": "d694481d",
+			"type": "variabletext",
+			"condition": "!Played(node_a52_0) || \n!Played(node_a53_0) || \n!Played(node_a54_0) ",
+			"variable": "var_db_instruct_missed_intro",
+			"text": "You missed selecting the following:"
+		},
+		{
+			"id": "event_db_step05_instruct_6",
+			"localization_guid": "d21c1659",
+			"type": "variabletext",
+			"condition": "!Played(node_a52_0) ",
+			"variable": "var_db_instruct_missed_text01",
+			"text": "<indent=10%>- <i>\"Try to have another nurse with you when you prepare a high-risk medication like insulin or heparin.\"</i>"
+		},
+		{
+			"id": "event_db_step05_instruct_7",
+			"localization_guid": "6b99f42e",
+			"type": "variabletext",
+			"condition": "!Played(node_a53_0) ",
+			"variable": "var_db_instruct_missed_text02",
+			"text": "<indent=10%>- <i>\"Check a client's blood glucose level before you administer insulin.\"</i>"
+		},
+		{
+			"id": "event_db_step05_instruct_8",
+			"localization_guid": "311d1f78",
+			"type": "variabletext",
+			"condition": "!Played(node_a54_0) ",
+			"variable": "var_db_instruct_missed_text03",
+			"text": "<indent=10%>- <i>\"When preparing and administering medication, it's important to anticipate and prevent any threat to client safety.\"</i>"
+		},
+		{
+			"id": "event_db_step05_instruct_9",
+			"localization_guid": "e0e7619a",
+			"type": "variabletext",
+			"condition": "Played(node_a51_0) ",
+			"variable": "var_db_instruct_incorrect_intro",
+			"text": "You incorrectly selected the following:"
+		},
+		{
+			"id": "event_db_step05_instruct_10",
+			"localization_guid": "ad2746ac",
+			"type": "variabletext",
+			"condition": "Played(node_a51_0) ",
+			"variable": "var_db_instruct_incorrect_text01",
+			"text": "<indent=10%>- <i>\"Never trust the EHR.\"</i>"
+		},
+		{
+			"id": "event_db_step05_instruct_11",
+			"localization_guid": "4c006d1b",
+			"type": "variabletext",
+			"variable": "var_db_instruct_rationale",
+			"text": "When administering high-risk medications like insulin or heparin, it is advisable to double-check with another nurse to prevent situations like the one described. Adhere to facility and state policies regarding the administration of high-risk medications.\n\nIf Vic had initially checked Rhea's blood glucose level, it is very likely that this entire situation could have been avoided.\n\nNurses prioritize client safety above all else. Understanding the risks associated with insulin, Vic could have anticipated its potential impact on Rhea's well-being and taken additional precautions to prevent the error.\n\nThe EHR should be regarded as a valuable tool. Instead, of telling Vic not to trust the EHR, he should be reminded to verify orders in the EHR, particularly if they appear to pose a risk to the client. If necessary, orders can always be confirmed with the provider."
+		}
+	]
+}

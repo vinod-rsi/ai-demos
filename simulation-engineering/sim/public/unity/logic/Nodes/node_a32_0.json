@@ -1,0 +1,31 @@
+{
+	"id": "node_a32_0",
+	"localization_guid": "53785a2f",
+	"allow_visibility": true,
+	"title": "Check the client's glucose levels.",
+	"technique": null,
+	"tactic": "tactic_respond",
+	"tags": 
+	[
+		"tag_Poor"
+	],
+	"events": 
+	[
+		{
+			"id": "event_a32_0_0",
+			"localization_guid": "1448ef98",
+			"type": "dialogue",
+			"audio": null,
+			"auto_assign_audio": true,
+			"text": "That's correct. We want to know Rhea's glucose levels before we do anything else.[br5.642]",
+			"character": "character_rebecca",
+			"shot": "shot_1"
+		},
+		{
+			"id": "event_a32_0_1",
+			"type": "jump",
+			"target": "node_a3x_1",
+			"return": false
+		}
+	]
+}
