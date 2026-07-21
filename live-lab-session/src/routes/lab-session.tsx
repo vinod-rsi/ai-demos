@@ -41,7 +41,7 @@ function LabSession() {
     >
       {/* Lab View green header (single source of chrome) */}
       <header
-        className="h-[56px] flex items-center justify-between pl-5 pr-4 text-white"
+        className="flex flex-wrap items-center justify-between gap-y-2 py-2 pl-5 pr-4 text-white md:h-[56px] md:flex-nowrap md:py-0"
         style={{ background: HZ_GREEN }}
       >
         <div className="flex items-center gap-6 min-w-0">
@@ -68,7 +68,7 @@ function LabSession() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-[13px]">
+        <div className="flex flex-wrap items-center gap-2 text-[13px] md:flex-nowrap">
           <span className="px-2 py-1 rounded bg-white/10 font-mono">
             Elapsed&nbsp;<span className="font-semibold">18:42</span>
           </span>
@@ -88,9 +88,9 @@ function LabSession() {
       </header>
 
       {/* 70 / 30 main split */}
-      <div className="flex flex-1 min-h-0">
+      <div className="flex flex-col flex-1 md:flex-row md:min-h-0">
         {/* Lab environment */}
-        <section className="flex-1 min-w-0 p-5 flex flex-col gap-4" style={{ flexBasis: "70%" }}>
+        <section className="flex-1 min-w-0 p-5 flex flex-col gap-4 md:flex-[1_1_70%]">
           {/* Terminal */}
           <div className="bg-white border border-[#e3e5e8] rounded-md overflow-hidden shadow-[0_1px_0_rgba(16,24,40,0.04)]">
             <div className="flex items-center justify-between px-4 py-2 border-b border-[#e3e5e8] bg-[#fafbfc]">
@@ -104,7 +104,7 @@ function LabSession() {
               </div>
               <span className="text-[11px] text-[#6b7177] font-mono">10.0.0.4</span>
             </div>
-            <div className="bg-[#0d1117] text-[#d6dde3] font-mono text-[13px] leading-6 p-4 min-h-[280px]">
+            <div className="bg-[#0d1117] text-[#d6dde3] font-mono text-[13px] leading-6 p-4 min-h-[280px] overflow-x-auto">
               <Line>
                 <Prompt /> curl http://10.0.0.5/login.php
               </Line>
@@ -190,10 +190,7 @@ function LabSession() {
         </section>
 
         {/* Copilot sidebar */}
-        <aside
-          className="border-l border-[#e3e5e8] bg-white flex flex-col"
-          style={{ flexBasis: "30%", minWidth: 360 }}
-        >
+        <aside className="border-l border-[#e3e5e8] bg-white flex flex-col md:flex-[0_1_30%] md:min-w-[360px]">
           {/* Header */}
           <div className="px-5 py-4 border-b border-[#e3e5e8]">
             <div className="flex items-center gap-2">
@@ -224,7 +221,7 @@ function LabSession() {
           </div>
 
           {/* Chat region */}
-          <div className="flex-1 overflow-y-auto px-5 py-4 space-y-3">
+          <div className="flex-1 px-5 py-4 space-y-3 md:overflow-y-auto">
             {/* Inline stuck banner — single source above thread */}
             {banner && (
               <div
@@ -284,7 +281,7 @@ function LabSession() {
 
             <div className="pl-9">
               <button className="inline-flex items-center gap-1.5 text-[12px] px-2.5 py-1 rounded-full border border-[#d4d7db] bg-white hover:bg-[#f4f5f7]">
-                <CircleHelp className="h-3.5 w-3.5" style={{ color: HZ_GREEN }} />
+                <CircleHelp className="h-3.5 w-3.5 flex-shrink-0" style={{ color: HZ_GREEN }} />
                 Hint: Check basic network connectivity (ping) before running sqlmap.
               </button>
             </div>
@@ -333,7 +330,7 @@ function LabSession() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask about this lab or your last command…"
-                  className="flex-1 outline-none text-[13px] bg-transparent placeholder:text-[#9aa0a6]"
+                  className="flex-1 min-w-0 outline-none text-[13px] bg-transparent placeholder:text-[#9aa0a6]"
                 />
               )}
 

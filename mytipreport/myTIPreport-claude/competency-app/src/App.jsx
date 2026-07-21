@@ -225,6 +225,7 @@ function NavBar({ view, setView }) {
     <div
       style={{
         display: "flex",
+        flexWrap: "wrap",
         gap: 4,
         background: tokens.colors.surface,
         border: `1px solid ${tokens.colors.border}`,
@@ -232,6 +233,7 @@ function NavBar({ view, setView }) {
         padding: 4,
         marginBottom: 24,
         width: "fit-content",
+        maxWidth: "100%",
       }}
     >
       {items.map((item) => {
@@ -305,6 +307,8 @@ function LearnerDashboard() {
                 style={{
                   width: "100%",
                   display: "flex",
+                  flexWrap: "wrap",
+                  gap: 10,
                   alignItems: "center",
                   justifyContent: "space-between",
                   padding: "16px 18px",
@@ -315,7 +319,7 @@ function LearnerDashboard() {
                   fontFamily: tokens.font,
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, minWidth: 0 }}>
                   {isOpen ? (
                     <ChevronDown size={18} color={tokens.colors.textMuted} />
                   ) : (
@@ -331,7 +335,7 @@ function LearnerDashboard() {
                     </div>
                   </div>
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 14 }}>
                   {!isEmpty && (
                     <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 13, color: tokens.colors.textMuted }}>
                       <TrendIcon trend={c.trend} />
@@ -517,7 +521,7 @@ function ClassificationReview() {
                   gap: 10,
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8 }}>
                   <span style={{ fontSize: 12.5, color: tokens.colors.textMuted }}>Suggested:</span>
                   <Pill tone="primary">{item.suggested}</Pill>
                   <span
@@ -674,10 +678,14 @@ function ProgramOverview() {
           overflow: "hidden",
         }}
       >
+        {/* Roster is a fixed 4-column grid; on narrow screens it scrolls
+            inside this box instead of pushing the page sideways. */}
+        <div style={{ overflowX: "auto" }}>
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "2fr 1.2fr 1.6fr 1fr",
+            minWidth: 560,
             padding: "12px 18px",
             fontSize: 11.5,
             fontWeight: 700,
@@ -698,6 +706,7 @@ function ProgramOverview() {
             style={{
               display: "grid",
               gridTemplateColumns: "2fr 1.2fr 1.6fr 1fr",
+              minWidth: 560,
               padding: "14px 18px",
               alignItems: "center",
               fontSize: 13.5,
@@ -729,6 +738,7 @@ function ProgramOverview() {
             </div>
           </div>
         ))}
+        </div>
       </div>
 
       <div
@@ -764,6 +774,13 @@ export default function App() {
         color: tokens.colors.text,
       }}
     >
+      {/* Phone-only rules. Never match at >=768px, so the desktop
+          rendering is unchanged. */}
+      <style>{`
+        @media (max-width: 767px) {
+          button, select { min-height: 40px; }
+        }
+      `}</style>
       <div style={{ maxWidth: 880, margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 22 }}>
           <div

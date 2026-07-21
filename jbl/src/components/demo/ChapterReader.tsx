@@ -13,9 +13,9 @@ export const ChapterReader = forwardRef<HTMLDivElement, Props>(function ChapterR
   return (
     <div
       ref={ref}
-      className="h-[calc(100vh-140px)] overflow-y-auto rounded-lg border bg-card"
+      className="h-[calc(100vh-140px)] min-w-0 overflow-y-auto rounded-lg border bg-card md:min-w-[auto]"
     >
-      <div className="mx-auto max-w-3xl px-10 py-10">
+      <div className="mx-auto max-w-3xl px-5 py-10 md:px-10">
         <div className="mb-2 text-xs uppercase tracking-widest text-muted-foreground">
           {CHAPTER.book}
         </div>

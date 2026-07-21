@@ -178,12 +178,14 @@ function Index() {
 function TopBar() {
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-surface/90 backdrop-blur">
-      <div className="mx-auto flex max-w-[1440px] items-center gap-6 px-8 py-3">
-        <div className="flex items-center gap-2.5">
-          <div className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground">
+      {/* The brand, nav and control cluster need ~940px on one line, so the row
+          keeps wrapping until there is room for it — nowrap at md overflowed a tablet. */}
+      <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-3 px-4 py-3 md:gap-6 md:px-8 lg:flex-nowrap">
+        <div className="flex min-w-0 items-center gap-2.5">
+          <div className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-primary text-primary-foreground">
             <Stethoscope className="h-4 w-4" />
           </div>
-          <div className="leading-tight">
+          <div className="min-w-0 leading-tight">
             <div className="text-sm font-semibold tracking-tight">FISDAP</div>
             <div className="text-[11px] text-muted-foreground">EMS Education Platform</div>
           </div>
@@ -201,7 +203,7 @@ function TopBar() {
             Feedback Copilot
           </button>
         </nav>
-        <div className="ml-auto flex items-center gap-3">
+        <div className="ml-auto flex shrink-0 items-center gap-3">
           <div className="hidden items-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 text-sm text-muted-foreground md:flex">
             <Search className="h-4 w-4" />
             <span>Search students, shifts…</span>
@@ -237,8 +239,8 @@ function Stepper({ view, approved }: { view: View; approved: boolean }) {
   const active = view === "dashboard" ? -1 : approved ? 3 : 1;
   return (
     <div className="border-b border-border bg-surface-muted">
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-8 py-3">
-        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+      <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-2 px-4 py-3 md:flex-row md:items-center md:gap-0 md:px-8">
+        <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground md:flex-nowrap">
           <Sparkles className="h-3.5 w-3.5 text-primary" />
           <span className="font-medium uppercase tracking-wider text-foreground/70">
             AI Shift Feedback Copilot
@@ -246,14 +248,14 @@ function Stepper({ view, approved }: { view: View; approved: boolean }) {
           <span className="text-border-strong">/</span>
           <span>{view === "dashboard" ? "Instructor Dashboard" : "Shift Review"}</span>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex w-full items-center gap-1 overflow-x-auto md:w-auto md:overflow-visible">
           {steps.map((s, i) => {
             const isActive = i <= active;
             const Icon = s.icon;
             return (
-              <div key={s.k} className="flex items-center">
+              <div key={s.k} className="flex shrink-0 items-center">
                 <div
-                  className={`flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${
+                  className={`flex shrink-0 items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${
                     isActive
                       ? "bg-primary text-primary-foreground"
                       : "bg-surface text-muted-foreground ring-1 ring-border"
@@ -291,8 +293,8 @@ function Dashboard({
   ];
 
   return (
-    <main className="mx-auto max-w-[1440px] px-8 py-8">
-      <div className="mb-6 flex items-end justify-between">
+    <main className="mx-auto max-w-[1440px] px-4 py-8 md:px-8">
+      <div className="mb-6 flex flex-col items-start justify-between gap-3 md:flex-row md:items-end md:gap-0">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Instructor Dashboard</h1>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -305,7 +307,7 @@ function Dashboard({
         </div>
       </div>
 
-      <div className="mb-6 grid grid-cols-4 gap-4">
+      <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
         {stats.map((s) => (
           <StatCard key={s.label} {...s} />
         ))}
@@ -335,7 +337,8 @@ function Dashboard({
 
       {/* Table */}
       <div className="overflow-hidden rounded-lg border border-border bg-surface shadow-sm">
-        <table className="w-full text-sm">
+        <div className="overflow-x-auto">
+        <table className="w-full min-w-max text-sm">
           <thead className="bg-surface-muted text-left text-[11px] uppercase tracking-wider text-muted-foreground">
             <tr>
               <th className="px-5 py-3 font-medium">Student</th>
@@ -387,6 +390,7 @@ function Dashboard({
             ))}
           </tbody>
         </table>
+        </div>
       </div>
 
       <p className="mt-4 flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -485,10 +489,10 @@ function ReviewPage({
   const showWarning = !student.complete;
 
   return (
-    <main className="mx-auto max-w-[1440px] px-8 py-6">
+    <main className="mx-auto max-w-[1440px] px-4 py-6 md:px-8">
       {/* Breadcrumb + actions */}
-      <div className="mb-4 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-2 md:flex-nowrap md:gap-0">
+        <div className="flex min-w-0 flex-wrap items-center gap-2 text-sm text-muted-foreground md:flex-nowrap">
           <button onClick={onBack} className="hover:text-foreground">
             Dashboard
           </button>
@@ -503,9 +507,9 @@ function ReviewPage({
 
       {/* Header card */}
       <div className="mb-4 rounded-lg border border-border bg-surface p-5 shadow-sm">
-        <div className="flex items-start justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="grid h-12 w-12 place-items-center rounded-full bg-accent text-sm font-semibold text-accent-foreground">
+        <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:gap-6">
+          <div className="flex min-w-0 items-center gap-4">
+            <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent text-sm font-semibold text-accent-foreground">
               {student.name.split(" ").map((n) => n[0]).join("")}
             </div>
             <div>
@@ -560,8 +564,8 @@ function DataWarningBanner() {
         <div className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-warning text-warning-foreground">
           <AlertTriangle className="h-4 w-4" />
         </div>
-        <div className="flex-1">
-          <div className="flex items-center justify-between">
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center justify-between gap-2 md:flex-nowrap md:gap-0">
             <h3 className="text-sm font-semibold text-warning-foreground">
               Data completeness check — AI draft generated from partial data
             </h3>
@@ -572,13 +576,13 @@ function DataWarningBanner() {
           <p className="mt-1 text-xs text-warning-foreground/90">
             Instructor must verify before approval. The following fields are missing or look incomplete in Encounter #2:
           </p>
-          <ul className="mt-2 grid grid-cols-2 gap-x-6 gap-y-1 text-xs text-warning-foreground/90">
+          <ul className="mt-2 grid grid-cols-1 gap-x-6 gap-y-1 text-xs text-warning-foreground/90 md:grid-cols-2">
             <li>• Repeat vitals after intervention</li>
             <li>• SpO₂ trend (single reading only)</li>
             <li>• Medication dose verification</li>
             <li>• Transfer-of-care narrative</li>
           </ul>
-          <div className="mt-3 flex items-center gap-2">
+          <div className="mt-3 flex flex-wrap items-center gap-2 md:flex-nowrap">
             <button className="rounded-md bg-warning px-3 py-1.5 text-xs font-medium text-warning-foreground hover:opacity-90">
               Request clarification from student
             </button>
@@ -812,12 +816,12 @@ function DraftPanel({
         </div>
 
         {/* Actions */}
-        <div className="flex items-center justify-between gap-3 border-t border-border bg-surface-muted/40 px-5 py-3">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border bg-surface-muted/40 px-5 py-3 md:flex-nowrap">
           <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
             <Shield className="h-3.5 w-3.5" />
             AI does not auto-publish. Instructor approval required.
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 md:flex-nowrap">
             <button
               disabled={approved}
               className="rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium hover:bg-muted disabled:opacity-60"
@@ -1029,9 +1033,9 @@ function PanelHeader({
   right?: React.ReactNode;
 }) {
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex items-center gap-2.5">
-        <div className="grid h-7 w-7 place-items-center rounded-md bg-primary-soft text-primary">
+    <div className="flex flex-wrap items-center justify-between gap-2 md:flex-nowrap md:gap-0">
+      <div className="flex min-w-0 items-center gap-2.5">
+        <div className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-primary-soft text-primary">
           <Icon className="h-4 w-4" />
         </div>
         <div>
@@ -1047,8 +1051,8 @@ function PanelHeader({
 function Footer() {
   return (
     <footer className="border-t border-border bg-surface-muted/60">
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-8 py-4 text-[11px] text-muted-foreground">
-        <div className="flex items-center gap-2">
+      <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-3 px-4 py-4 text-[11px] text-muted-foreground md:flex-row md:items-center md:gap-0 md:px-8">
+        <div className="flex items-start gap-2 md:items-center">
           <Shield className="h-3.5 w-3.5" />
           FISDAP Copilot follows institutional AI policy. All feedback and competency sign-off remain
           the instructor's responsibility.

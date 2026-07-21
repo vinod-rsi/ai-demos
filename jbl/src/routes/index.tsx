@@ -54,7 +54,7 @@ function Shell() {
   return (
     <div className="min-h-screen bg-[oklch(0.985_0.005_220)]">
       <header className="sticky top-0 z-20 border-b bg-card">
-        <div className="mx-auto flex h-14 max-w-[1440px] items-center justify-between px-6">
+        <div className="mx-auto flex h-auto max-w-[1440px] flex-wrap items-center justify-between gap-y-2 px-6 py-2 md:h-14 md:flex-nowrap md:gap-y-0 md:py-0">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <div className="flex h-7 w-7 items-center justify-center rounded bg-primary text-primary-foreground">
@@ -77,14 +77,14 @@ function Shell() {
             </nav>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-0.5 rounded-full border bg-muted/40 p-0.5">
+          <div className="flex w-full min-w-0 flex-wrap items-center justify-end gap-3 md:w-auto md:flex-nowrap">
+            <div className="flex max-w-full items-center gap-0.5 overflow-x-auto rounded-full border bg-muted/40 p-0.5 md:overflow-x-visible">
               {ROLES.map((r) => (
                 <button
                   key={r.id}
                   onClick={() => switchRole(r.id)}
                   className={cn(
-                    "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all",
+                    "inline-flex flex-shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-medium transition-all",
                     role === r.id
                       ? "bg-primary text-primary-foreground shadow-sm"
                       : "text-muted-foreground hover:text-foreground",
@@ -100,12 +100,12 @@ function Shell() {
                 resetDemo();
                 toast.success("Demo reset");
               }}
-              className="inline-flex items-center gap-1.5 rounded-md border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-muted"
+              className="inline-flex flex-shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-muted"
             >
               <RotateCcw className="h-3 w-3" />
               Reset Demo
             </button>
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-xs font-semibold text-accent-foreground">
+            <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-accent text-xs font-semibold text-accent-foreground">
               JP
             </div>
           </div>

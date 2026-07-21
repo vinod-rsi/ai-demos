@@ -43,7 +43,7 @@ export function AdminView() {
   return (
     <div className="space-y-4">
       <div className="rounded-lg border bg-card">
-      <div className="flex items-start justify-between border-b px-6 py-4">
+      <div className="flex flex-col items-start gap-3 border-b px-6 py-4 md:flex-row md:justify-between md:gap-0">
         <div>
           <h2 className="text-lg font-semibold">AI Feature Governance</h2>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -51,14 +51,14 @@ export function AdminView() {
             signed off on the content exposure policy.
           </p>
         </div>
-        <div className="flex items-center gap-2 rounded-full border bg-muted/40 px-3 py-1.5 text-xs text-muted-foreground">
-          <ShieldCheck className="h-3.5 w-3.5" />
+        <div className="flex flex-shrink-0 items-center gap-2 rounded-full border bg-muted/40 px-3 py-1.5 text-xs text-muted-foreground">
+          <ShieldCheck className="h-3.5 w-3.5 flex-shrink-0" />
           Governance policy v2.4 · active
         </div>
       </div>
 
       {/* P5 — stats row */}
-      <div className="grid grid-cols-3 divide-x border-b">
+      <div className="grid grid-cols-1 divide-y border-b md:grid-cols-3 md:divide-x md:divide-y-0">
         <StatTile
           icon={MessageSquare}
           label="StudyBot questions · 30d"
@@ -78,7 +78,8 @@ export function AdminView() {
       </div>
 
       <TooltipProvider delayDuration={100}>
-        <table className="w-full text-sm">
+        <div className="w-full overflow-x-auto">
+        <table className="w-full min-w-[720px] text-sm">
           <thead>
             <tr className="border-b bg-muted/40 text-left text-xs uppercase tracking-wider text-muted-foreground">
               <th className="px-6 py-3 font-semibold">Title</th>
@@ -159,6 +160,7 @@ export function AdminView() {
             })}
           </tbody>
         </table>
+        </div>
       </TooltipProvider>
 
       <Dialog open={!!modalId} onOpenChange={(o) => !o && setModalId(null)}>
@@ -217,8 +219,8 @@ export function AdminView() {
 
       {/* P5 — exposure-policy audit log */}
       <div className="rounded-lg border bg-card">
-        <div className="flex items-center gap-2 border-b px-6 py-3">
-          <History className="h-4 w-4 text-muted-foreground" />
+        <div className="flex flex-wrap items-center gap-2 border-b px-6 py-3">
+          <History className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
           <h3 className="text-sm font-semibold">Exposure Policy Audit Log</h3>
           <span className="text-xs text-muted-foreground">
             — every AI-enablement and sign-off event, newest first
@@ -228,7 +230,7 @@ export function AdminView() {
           {policyLog.map((e) => (
             <li key={e.id} className="flex items-center gap-3 px-6 py-2.5 text-sm">
               <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[color:var(--ai)]" />
-              <span className="flex-1 text-foreground/90">{e.text}</span>
+              <span className="min-w-0 flex-1 text-foreground/90">{e.text}</span>
               <span className="flex flex-shrink-0 items-center gap-1 text-xs text-muted-foreground">
                 <Clock className="h-3 w-3" />
                 {e.time}

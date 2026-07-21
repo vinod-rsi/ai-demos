@@ -69,6 +69,19 @@ const GLOBAL_CSS = `
   button:active { transform: scale(.97); }
 
   [contenteditable]:focus { outline: 2px solid var(--teal); border-radius:6px; }
+
+  /* ── Phone-only layout overrides. Never applies at >=768px, so the
+        desktop rendering is byte-for-byte unchanged. ───────────── */
+  @media (max-width: 767px) {
+    .m-stack   { grid-template-columns: 1fr !important; }
+    .m-grid-2  { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+    .m-wrap    { flex-wrap: wrap !important; }
+    .m-min0    { min-width: 0 !important; }
+    .m-trunc   { min-width: 0 !important; }
+    .m-trunc > div { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .m-tap     { min-height: 44px; display: flex; align-items: center; }
+    button, select { min-height: 40px; }
+  }
 `;
 
 function InjectStyles() {
@@ -278,7 +291,7 @@ function QueueScreen({ onOpenShift }) {
         <Btn variant="teal" size="sm">Export Report</Btn>
       </div>
 
-      <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:10, margin:"16px 0" }}>
+      <div className="m-grid-2" style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:10, margin:"16px 0" }}>
         {[
           { n:14, l:"Awaiting Review",      s:"3 overdue",              col:C.teal,  hi:true  },
           { n:9,  l:"AI Drafts Ready",      s:"Review & approve",       col:C.navy2, hi:false },
@@ -329,7 +342,7 @@ function QueueScreen({ onOpenShift }) {
 
 function ShiftCard({ shift:s, borderColor, onOpen }) {
   return (
-    <div className="card-hover" style={{
+    <div className="card-hover m-wrap" style={{
       background:C.surface, borderRadius:9, border:`1px solid ${C.border}`,
       borderLeft:`3px solid ${borderColor}`, padding:"13px 15px",
       display:"flex", alignItems:"center", gap:12, marginBottom:8,
@@ -420,7 +433,7 @@ function ReviewScreen({ shift, onBack }) {
       </div>
       <div style={{ fontSize:11, color:C.tm, marginTop:-8, marginBottom:14, maxWidth:640, lineHeight:1.5 }}>Review one encounter's AI-drafted feedback, resolve flagged data gaps, and confirm competency evidence before it's sent to the student under your name.</div>
 
-      <div style={{ display:"grid", gridTemplateColumns:"1fr 390px", gap:14 }}>
+      <div className="m-stack" style={{ display:"grid", gridTemplateColumns:"1fr 390px", gap:14 }}>
         <div style={{ display:"flex", flexDirection:"column", gap:14 }}>
 
           <Card>
@@ -430,7 +443,7 @@ function ReviewScreen({ shift, onBack }) {
               <div style={{ fontSize:12, color:C.t2, lineHeight:1.65, marginBottom:12 }}>
                 <strong style={{ color:C.t1 }}>Chief Complaint:</strong> 58M, chest pain radiating to left arm × 45 min. Diaphoretic, pale. PMH: HTN, DM type 2. 12-lead confirmed ST elevation V2–V4.
               </div>
-              <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:7, marginBottom:14 }}>
+              <div className="m-grid-2" style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:7, marginBottom:14 }}>
                 {[
                   { l:"HR",           v:"104",    s:"Tachycardic",   warn:true  },
                   { l:"BP",           v:"158/94", s:"Elevated",      warn:true  },
@@ -645,7 +658,7 @@ function StudentScreen() {
         <div style={{ fontSize:12, color:C.t2, marginTop:2 }}>AI checks your log in real time and previews competency coverage before you submit.</div>
       </div>
 
-      <div style={{ display:"grid", gridTemplateColumns:"1fr 380px", gap:18, alignItems:"start" }}>
+      <div className="m-stack" style={{ display:"grid", gridTemplateColumns:"1fr 380px", gap:18, alignItems:"start" }}>
 
         {/* LEFT: Log form */}
         <Card>
@@ -997,11 +1010,11 @@ function FISDAQCopilot() {
           <span style={{ background:C.teal, color:"#fff", fontSize:9, fontWeight:700,
             padding:"2px 7px", borderRadius:4, letterSpacing:".5px" }}>AI COPILOT</span>
         </div>
-        <div style={{ marginLeft:"auto", display:"flex", alignItems:"center", gap:10 }}>
+        <div className="m-min0" style={{ marginLeft:"auto", display:"flex", alignItems:"center", gap:10 }}>
           <div style={{ width:30, height:30, borderRadius:"50%", background:currentUser.color,
             display:"flex", alignItems:"center", justifyContent:"center",
-            fontSize:11, fontWeight:700, color:"#fff" }}>{currentUser.initials}</div>
-          <div>
+            fontSize:11, fontWeight:700, color:"#fff", flexShrink:0 }}>{currentUser.initials}</div>
+          <div className="m-trunc">
             <div style={{ fontSize:12, fontWeight:600, color:"#fff" }}>{currentUser.name}</div>
             <div style={{ fontSize:10, color:"rgba(255,255,255,.45)" }}>{currentUser.role}</div>
           </div>
@@ -1014,7 +1027,7 @@ function FISDAQCopilot() {
         {TABS.map(t => (
           <div
             key={t.id}
-            className={`tab-item ${tab===t.id?"active":""}`}
+            className={`tab-item m-tap ${tab===t.id?"active":""}`}
             onClick={() => go(t.id)}
             style={{
               padding:"10px 16px", fontSize:11, fontWeight:500, cursor:"pointer",

@@ -115,7 +115,7 @@ export function SalesOpsView() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between rounded-lg border bg-card p-4">
+      <div className="flex flex-col items-start gap-3 rounded-lg border bg-card p-4 md:flex-row md:items-center md:justify-between md:gap-0">
         <div>
           <h2 className="text-lg font-semibold">CRM ↔ Catalogue Match Assistant</h2>
           <p className="mt-0.5 text-sm text-muted-foreground">
@@ -138,7 +138,7 @@ export function SalesOpsView() {
       </div>
 
       {showSuggest && (
-        <div className="animate-fade-in flex items-start justify-between gap-4 rounded-lg border border-[color:var(--ai-border)] bg-[color:var(--ai-soft)]/60 p-4">
+        <div className="animate-fade-in flex flex-col items-stretch gap-4 rounded-lg border border-[color:var(--ai-border)] bg-[color:var(--ai-soft)]/60 p-4 md:flex-row md:items-start md:justify-between">
           <div className="flex items-start gap-3">
             <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-background text-[color:var(--ai)]">
               <Sparkles className="h-4 w-4" />
@@ -156,7 +156,7 @@ export function SalesOpsView() {
               </p>
             </div>
           </div>
-          <div className="flex flex-shrink-0 gap-2">
+          <div className="flex flex-shrink-0 justify-end gap-2">
             <Button
               variant="ghost"
               size="sm"
@@ -177,8 +177,8 @@ export function SalesOpsView() {
         </div>
       )}
 
-      <div className="grid grid-cols-[1fr_300px] gap-4">
-        <div className="space-y-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_300px]">
+        <div className="min-w-0 space-y-4 md:min-w-[auto]">
           {!ran && !running && (
             <div className="rounded-lg border border-dashed bg-card p-16 text-center text-sm text-muted-foreground">
               Click <strong>Run Match Job</strong> to surface candidate account matches.
@@ -188,7 +188,7 @@ export function SalesOpsView() {
           {running && (
             <div className="rounded-lg border bg-card p-16 text-center">
               <AiThinking label="Reconciling 6,412 CRM accounts against catalogue" />
-              <div className="mx-auto mt-4 h-1 w-64 overflow-hidden rounded-full bg-muted">
+              <div className="mx-auto mt-4 h-1 w-full max-w-[16rem] overflow-hidden rounded-full bg-muted">
                 <div className="h-full w-1/2 animate-pulse bg-[color:var(--ai)]" />
               </div>
             </div>
@@ -198,7 +198,8 @@ export function SalesOpsView() {
             <>
               {pending.length > 0 && (
                 <Section title="Needs review" count={pending.length}>
-                  <table className="w-full text-sm">
+                  <div className="w-full overflow-x-auto">
+                  <table className="w-full min-w-[760px] text-sm">
                     <thead>
                       <tr className="border-b bg-muted/40 text-left text-xs uppercase tracking-wider text-muted-foreground">
                         <th className="w-6" />
@@ -292,12 +293,14 @@ export function SalesOpsView() {
                       ))}
                     </tbody>
                   </table>
+                  </div>
                 </Section>
               )}
 
               {confirmed.length > 0 && (
                 <Section title="Confirmed" count={confirmed.length} tone="success">
-                  <table className="w-full text-sm">
+                  <div className="w-full overflow-x-auto">
+                  <table className="w-full min-w-[560px] text-sm">
                     <tbody>
                       {confirmed.map((m) => (
                         <tr key={m.id} className="border-b last:border-0">
@@ -319,12 +322,13 @@ export function SalesOpsView() {
                       ))}
                     </tbody>
                   </table>
+                  </div>
                 </Section>
               )}
 
               {recAccounts.length > 0 && (
                 <div className="overflow-hidden rounded-lg border border-[color:var(--ai-border)]/60 bg-card">
-                  <div className="flex items-center justify-between gap-4 border-b border-[color:var(--ai-border)]/40 bg-[color:var(--ai-soft)]/50 px-4 py-3">
+                  <div className="flex flex-col items-stretch gap-4 border-b border-[color:var(--ai-border)]/40 bg-[color:var(--ai-soft)]/50 px-4 py-3 md:flex-row md:items-center md:justify-between">
                     <div className="flex items-start gap-2">
                       <ShoppingCart className="mt-0.5 h-4 w-4 text-[color:var(--ai)]" />
                       <div>
@@ -341,7 +345,7 @@ export function SalesOpsView() {
                       </div>
                     </div>
                     {quote.size > 0 && (
-                      <div className="flex flex-shrink-0 items-center gap-2">
+                      <div className="flex flex-shrink-0 items-center justify-end gap-2">
                         <div className="text-right">
                           <div className="text-sm font-semibold text-foreground">
                             {fmtUSD(quoteTotal)}
@@ -364,7 +368,7 @@ export function SalesOpsView() {
                       const acct = recs.reduce((s, p) => s + p.acv, 0);
                       return (
                         <div key={m.id} className="px-4 py-3">
-                          <div className="mb-2 flex items-center justify-between">
+                          <div className="mb-2 flex flex-wrap items-center justify-between gap-x-2">
                             <div className="flex items-center gap-2 text-sm font-medium text-foreground">
                               <Check className="h-3.5 w-3.5 text-[color:var(--success)]" />
                               {m.institution}
@@ -392,7 +396,8 @@ export function SalesOpsView() {
 
               {rejected.length > 0 && (
                 <Section title="Rejected" count={rejected.length}>
-                  <table className="w-full text-sm">
+                  <div className="w-full overflow-x-auto">
+                  <table className="w-full min-w-[360px] text-sm">
                     <tbody>
                       {rejected.map((m) => (
                         <tr key={m.id} className="border-b last:border-0">
@@ -406,13 +411,14 @@ export function SalesOpsView() {
                       ))}
                     </tbody>
                   </table>
+                  </div>
                 </Section>
               )}
             </>
           )}
         </div>
 
-        <aside className="rounded-lg border bg-card">
+        <aside className="min-w-0 rounded-lg border bg-card md:min-w-[auto]">
           <div className="border-b px-4 py-3 text-sm font-semibold">Audit Log</div>
           <div className="p-3">
             {audit.length === 0 ? (
@@ -526,7 +532,7 @@ function ProductRow({
           </span>
         </div>
         <p className="mt-0.5 text-xs text-muted-foreground">{p.rationale}</p>
-        <div className="mt-1.5 flex items-center gap-3 text-[11px] text-muted-foreground">
+        <div className="mt-1.5 flex flex-wrap items-center gap-3 text-[11px] text-muted-foreground">
           <FitBar value={p.fit} />
           <span>· {p.seats} seats</span>
           <span className="font-medium text-foreground">· {fmtUSD(p.acv)} ACV</span>
@@ -683,7 +689,7 @@ function ConflictModal({
           {m.institution} — pick the correct catalogue account.
         </p>
       </DialogHeader>
-      <div className="grid grid-cols-2 gap-3 py-2">
+      <div className="grid grid-cols-1 gap-3 py-2 md:grid-cols-2">
         {opts.map((o) => (
           <button
             key={o.id}

@@ -105,11 +105,11 @@ function LabAssistantPage() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && generate()}
                 placeholder="Describe the lab you want to create…"
-                className="flex-1 bg-transparent px-1 text-[13px] text-foreground placeholder:text-muted-foreground focus:outline-none"
+                className="min-w-0 flex-1 bg-transparent px-1 text-[13px] text-foreground placeholder:text-muted-foreground focus:outline-none"
               />
               <button
                 onClick={() => generate()}
-                className="inline-flex items-center gap-1.5 rounded-md bg-brand px-3 py-1.5 text-[12px] font-semibold text-brand-foreground hover:bg-brand-dark transition-colors"
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-md bg-brand px-3 py-1.5 text-[12px] font-semibold text-brand-foreground hover:bg-brand-dark transition-colors"
               >
                 <Send className="h-3.5 w-3.5" />
                 Submit
@@ -281,29 +281,31 @@ function ReadyBlueprint() {
         {/* Rubric */}
         <Field label="Assessment & Grading Rubric">
           <div className="overflow-hidden rounded-md border border-border">
-            <table className="w-full text-[12.5px]">
-              <thead className="bg-secondary text-muted-foreground">
-                <tr className="text-left">
-                  <th className="px-3 py-2 font-semibold">Deliverable</th>
-                  <th className="px-3 py-2 font-semibold">How it is checked</th>
-                  <th className="px-3 py-2 font-semibold w-20">Weight</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border bg-surface">
-                {[
-                  ["Exploit screenshot", "Image OCR for 'admin' dashboard text", "30%"],
-                  ["Vulnerable query identified", "File diff against expected snippet", "20%"],
-                  ["Patched source file", "Automated unit test against payload", "30%"],
-                  ["Reflection notes", "Minimum 80-word response", "20%"],
-                ].map(([d, h, w]) => (
-                  <tr key={d}>
-                    <td className="px-3 py-2 font-medium text-foreground">{d}</td>
-                    <td className="px-3 py-2 text-muted-foreground">{h}</td>
-                    <td className="px-3 py-2 text-foreground">{w}</td>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[480px] text-[12.5px]">
+                <thead className="bg-secondary text-muted-foreground">
+                  <tr className="text-left">
+                    <th className="px-3 py-2 font-semibold">Deliverable</th>
+                    <th className="px-3 py-2 font-semibold">How it is checked</th>
+                    <th className="px-3 py-2 font-semibold w-20">Weight</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-border bg-surface">
+                  {[
+                    ["Exploit screenshot", "Image OCR for 'admin' dashboard text", "30%"],
+                    ["Vulnerable query identified", "File diff against expected snippet", "20%"],
+                    ["Patched source file", "Automated unit test against payload", "30%"],
+                    ["Reflection notes", "Minimum 80-word response", "20%"],
+                  ].map(([d, h, w]) => (
+                    <tr key={d}>
+                      <td className="px-3 py-2 font-medium text-foreground">{d}</td>
+                      <td className="px-3 py-2 text-muted-foreground">{h}</td>
+                      <td className="px-3 py-2 text-foreground">{w}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </Field>
       </div>

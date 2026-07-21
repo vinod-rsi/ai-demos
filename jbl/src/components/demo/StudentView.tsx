@@ -225,10 +225,10 @@ export function StudentView() {
   };
 
   return (
-    <div className="grid grid-cols-[62fr_38fr] gap-4">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-[62fr_38fr]">
       <ChapterReader ref={readerRef} highlightId={highlight} />
 
-      <div className="flex h-[calc(100vh-140px)] flex-col rounded-lg border bg-card">
+      <div className="flex h-[calc(100vh-140px)] min-w-0 flex-col rounded-lg border bg-card md:min-w-[auto]">
         <div className="flex items-center justify-between gap-2 border-b px-4 py-3">
           <div className="flex min-w-0 items-center gap-2">
             <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[color:var(--ai-soft)] text-[color:var(--ai)]">
@@ -250,7 +250,7 @@ export function StudentView() {
               toast.success(`StudyBot switched to ${c?.name} catalogue`);
             }}
           >
-            <SelectTrigger className="h-8 w-[150px] flex-shrink-0 text-xs">
+            <SelectTrigger className="h-8 w-[120px] flex-shrink-0 text-xs md:w-[150px]">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -661,8 +661,8 @@ function CollectionTray({
   } as const;
   return (
     <div className="border-b bg-[color:var(--ai-soft)]/20 px-3 py-3">
-      <div className="mb-2 flex items-center gap-2">
-        <Library className="h-3.5 w-3.5 text-[color:var(--ai)]" />
+      <div className="mb-2 flex flex-wrap items-center gap-2">
+        <Library className="h-3.5 w-3.5 flex-shrink-0 text-[color:var(--ai)]" />
         <span className="text-xs font-semibold text-foreground">
           Study Collection
         </span>
@@ -686,9 +686,9 @@ function CollectionTray({
                   key={it.id}
                   className="flex items-center gap-2 rounded-md border bg-background px-2.5 py-1.5 text-xs"
                 >
-                  <Icon className="h-3.5 w-3.5 text-[color:var(--ai)]" />
-                  <span className="font-medium text-foreground">{it.label}</span>
-                  <span className="text-muted-foreground">· {it.detail}</span>
+                  <Icon className="h-3.5 w-3.5 flex-shrink-0 text-[color:var(--ai)]" />
+                  <span className="flex-shrink-0 font-medium text-foreground">{it.label}</span>
+                  <span className="min-w-0 truncate text-muted-foreground">· {it.detail}</span>
                   <button
                     onClick={() => onRemove(it.id)}
                     className="ml-auto rounded p-0.5 text-muted-foreground hover:bg-muted hover:text-destructive"
@@ -853,8 +853,8 @@ function ArtifactCard({
   const [added, setAdded] = useState(false);
   return (
     <div className="animate-fade-in overflow-hidden rounded-lg border border-[color:var(--ai-border)]/60 bg-[color:var(--ai-soft)]/30">
-      <div className="flex items-center justify-between border-b border-[color:var(--ai-border)]/40 bg-[color:var(--ai-soft)]/60 px-3 py-2">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[color:var(--ai-border)]/40 bg-[color:var(--ai-soft)]/60 px-3 py-2 md:flex-nowrap md:gap-0">
+        <div className="flex min-w-0 items-center gap-2">
           <AiTag />
           <span className="text-sm font-semibold text-foreground">{title}</span>
         </div>

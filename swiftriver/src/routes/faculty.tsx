@@ -73,12 +73,13 @@ function FacultyDashboard() {
 
         <div className="mt-6 grid gap-6 lg:grid-cols-3">
           {/* Roster */}
-          <Card className="gap-0 p-0 lg:col-span-2">
+          <Card className="min-w-0 gap-0 p-0 lg:col-span-2">
             <div className="flex items-center justify-between border-b border-border px-5 py-4">
               <h2 className="font-semibold">Class roster</h2>
               <span className="text-xs text-muted-foreground">Click a learner for their path</span>
             </div>
-            <div className="divide-y divide-border">
+            <div className="overflow-x-auto">
+              <div className="min-w-max divide-y divide-border md:min-w-0">
               {roster.map((s) => {
                 const rm = readinessMeta[s.readiness];
                 return (
@@ -112,6 +113,7 @@ function FacultyDashboard() {
                   </button>
                 );
               })}
+              </div>
             </div>
           </Card>
 
@@ -227,11 +229,11 @@ function StudentDrawer({ student, onClose }: { student: StudentRow; onClose: () 
               <p className="text-xs text-muted-foreground">Section {student.section} · Last active {student.lastActive}</p>
             </div>
           </div>
-          <button onClick={onClose} className="rounded-lg p-1.5 text-muted-foreground hover:bg-secondary"><X className="h-4 w-4" /></button>
+          <button onClick={onClose} className="shrink-0 rounded-lg p-2.5 text-muted-foreground hover:bg-secondary md:p-1.5"><X className="h-4 w-4" /></button>
         </div>
 
         <div className="space-y-5 p-5">
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             <div className="rounded-lg border border-border bg-secondary/40 p-3 text-center">
               <p className="text-xl font-bold tabular-nums">{student.cjmi}</p>
               <p className="text-[10px] text-muted-foreground">CJMI</p>

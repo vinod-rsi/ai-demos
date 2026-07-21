@@ -131,15 +131,15 @@ export function AdminShell({
   children: ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen w-full bg-background">
+    <div className="flex min-h-screen w-full flex-col bg-background md:flex-row">
       {/* Sidebar */}
-      <aside className="flex w-[240px] shrink-0 flex-col border-r border-border bg-sidebar">
+      <aside className="order-last flex w-full shrink-0 flex-col border-r border-border bg-sidebar md:order-none md:w-[240px]">
         <div className="flex h-[120px] items-center justify-center border-b border-border px-6">
           <div className="flex items-center gap-1">
             <span className="text-3xl font-bold tracking-tight text-foreground">Hat<span className="text-brand">s</span>i<span className="text-brand">z</span>e</span>
           </div>
         </div>
-        <nav className="flex-1 overflow-y-auto py-2">
+        <nav className="flex-1 py-2 md:overflow-y-auto">
           <ul>
             {NAV.map((item) => (
               <NavGroup key={item.label} item={item} />
@@ -160,8 +160,8 @@ export function AdminShell({
       <div className="flex min-w-0 flex-1 flex-col">
         {/* Top bar */}
         <header className="bg-brand text-brand-foreground">
-          <div className="flex items-center justify-between px-8 pt-5">
-            <div className="flex items-center gap-3 text-[17px] font-semibold">
+          <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 px-8 pt-5">
+            <div className="flex min-w-0 flex-wrap items-center gap-3 text-[17px] font-semibold">
               <span>{section}</span>
               <ChevronRight className="h-4 w-4 opacity-80" />
               <span className="inline-flex items-center gap-2">
@@ -169,7 +169,7 @@ export function AdminShell({
                 {page}
               </span>
             </div>
-            <button className="inline-flex items-center gap-2 text-[13px] opacity-95 hover:opacity-100">
+            <button className="inline-flex shrink-0 items-center gap-2 text-[13px] opacity-95 hover:opacity-100">
               <User className="h-4 w-4" />
               jsmith
               <ChevronDown className="h-3 w-3" />
@@ -181,7 +181,7 @@ export function AdminShell({
             </p>
           )}
           {tabs && (
-            <div className="mt-4 flex gap-8 px-8">
+            <div className="mt-4 flex flex-wrap gap-8 px-8 md:flex-nowrap">
               {tabs.map((t) => (
                 <button
                   key={t.label}

@@ -28,12 +28,12 @@ export function InstructorView() {
   const totalResolved = autoAccepted.length + reviewResolved;
 
   return (
-    <div className="grid grid-cols-[52fr_48fr] gap-4">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-[52fr_48fr]">
       <ChapterReader />
-      <div className="flex h-[calc(100vh-140px)] flex-col rounded-lg border bg-card">
-        <div className="flex items-center justify-between border-b px-4 py-3">
-          <div>
-            <div className="flex items-center gap-2">
+      <div className="flex h-[calc(100vh-140px)] min-w-0 flex-col rounded-lg border bg-card md:min-w-[auto]">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b px-4 py-3 md:flex-nowrap md:gap-0">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="text-sm font-semibold">Review AI-Generated Quiz</span>
               <AiTag />
             </div>
@@ -55,7 +55,7 @@ export function InstructorView() {
 
         {/* P3 — threshold control */}
         <div className="border-b bg-muted/30 px-4 py-3">
-          <div className="mb-1.5 flex items-center justify-between text-xs">
+          <div className="mb-1.5 flex flex-wrap items-center justify-between gap-x-2 text-xs">
             <span className="flex items-center gap-1.5 font-medium text-foreground">
               <Zap className="h-3.5 w-3.5 text-[color:var(--ai)]" />
               Auto-accept confidence threshold
@@ -83,7 +83,7 @@ export function InstructorView() {
             <div className="overflow-hidden rounded-lg border border-[color:var(--success)]/30 bg-[color:var(--success)]/5">
               <button
                 onClick={() => setAutoOpen((o) => !o)}
-                className="flex w-full items-center gap-2 px-3 py-2 text-left"
+                className="flex w-full flex-wrap items-center gap-2 px-3 py-2 text-left md:flex-nowrap"
               >
                 {autoOpen ? (
                   <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />
@@ -143,8 +143,8 @@ export function InstructorView() {
                 key={q.id}
                 className="animate-fade-in overflow-hidden rounded-lg border bg-background transition-shadow hover:shadow-sm"
               >
-                <div className="flex items-center justify-between border-b bg-muted/40 px-3 py-2">
-                  <div className="flex items-center gap-2 text-xs">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b bg-muted/40 px-3 py-2 md:flex-nowrap md:gap-0">
+                  <div className="flex flex-wrap items-center gap-2 text-xs">
                     <span className="font-semibold text-muted-foreground">Q{i + 1}</span>
                     <StatusBadge status={q.status} />
                     <ProvenanceBadge source={q.source} />
@@ -184,7 +184,7 @@ export function InstructorView() {
 
                 <div className="p-3">
                   {showDiff[q.id] && q.originalQuestion ? (
-                    <div className="mb-2 grid grid-cols-2 gap-2 text-xs">
+                    <div className="mb-2 grid grid-cols-1 gap-2 text-xs md:grid-cols-2">
                       <div className="rounded-md border border-destructive/30 bg-destructive/5 p-2">
                         <div className="mb-1 text-[10px] font-semibold uppercase text-destructive">
                           AI original
