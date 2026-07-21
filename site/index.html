@@ -1,167 +1,368 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>AI Demos — R Systems</title>
-<meta name="description" content="Static prototype portfolio: AI layers for clinical simulation, EMS training, lab authoring, and assessment products." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&display=swap" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ascend AI Demos — R Systems</title>
 <style>
-  :root {
-    --ink:        #0e1418;
-    --ink-soft:   #45525a;
-    --ink-faint:  #7b8891;
-    --paper:      #f4f6f5;
-    --card:       #ffffff;
-    --rule:       #dfe4e3;
-    --accent:     #1b6e6a;
-    --accent-dim: #e3efed;
-    --focus:      #b4531f;
+  :root{
+    --purple:#6B4EFF; --purple-dark:#5236E0; --purple-2:#8A73FF;
+    --lav-50:#F4F2FE; --lav-100:#EBE7FD; --lav-200:#DAD3FA;
+    --ink:#1E1B2E; --body:#3B3752; --mute:#6E6A83; --faint:#9A96AC;
+    --line:#E7E4F0; --bg:#F4F4F8; --card:#FFFFFF;
+    --teal:#0D9488; --amber:#B45309; --blue:#0369A1;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --ink:        #e8edec;
-      --ink-soft:   #9aa8ae;
-      --ink-faint:  #6b7880;
-      --paper:      #0c1114;
-      --card:       #141b1f;
-      --rule:       #232d33;
-      --accent:     #5fb8b0;
-      --accent-dim: #16302e;
-      --focus:      #e0834e;
-    }
-  }
-  :root[data-theme="dark"] {
-    --ink:#e8edec; --ink-soft:#9aa8ae; --ink-faint:#6b7880; --paper:#0c1114;
-    --card:#141b1f; --rule:#232d33; --accent:#5fb8b0; --accent-dim:#16302e; --focus:#e0834e;
-  }
-  :root[data-theme="light"] {
-    --ink:#0e1418; --ink-soft:#45525a; --ink-faint:#7b8891; --paper:#f4f6f5;
-    --card:#ffffff; --rule:#dfe4e3; --accent:#1b6e6a; --accent-dim:#e3efed; --focus:#b4531f;
-  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--body);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.6;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 40px;}
 
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: "Public Sans", system-ui, -apple-system, sans-serif;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 68rem; margin: 0 auto; padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 4vw, 3rem) 4rem; }
+  /* Top bar */
+  .topbar{background:#fff; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:20;}
+  .topbar .row{display:flex; align-items:center; justify-content:space-between; gap:20px; padding:16px 0;}
+  .brand{display:flex; align-items:center; gap:13px;}
+  .logo{width:44px; height:44px; border-radius:12px; background:linear-gradient(145deg,#7C5CFF,#5A3BE6);
+    display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(90,59,230,.35);}
+  .brand .name{font-size:19px; font-weight:800; color:var(--ink); line-height:1.1;}
+  .brand .sub{font-size:11px; font-weight:700; letter-spacing:.16em; color:var(--faint); text-transform:uppercase; margin-top:2px;}
+  .top-right{display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end;}
+  .crumb{font-size:12px; font-weight:700; letter-spacing:.13em; color:var(--faint); text-transform:uppercase;}
+  .pill{font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:8px 15px; border-radius:22px;}
+  .pill.solid{background:var(--purple); color:#fff;}
+  .pill.outline{background:#fff; color:var(--mute); border:1.5px solid var(--line);}
 
-  header { display: flex; flex-direction: column; gap: .75rem; padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
-  .eyebrow {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--accent); margin: 0;
-  }
-  h1 {
-    font-family: Fraunces, Georgia, serif;
-    font-weight: 600; font-size: clamp(2rem, 5vw, 3.1rem);
-    line-height: 1.08; margin: 0; text-wrap: balance;
-    letter-spacing: -.015em;
-  }
-  .lede { margin: 0; max-width: 46ch; color: var(--ink-soft); font-size: 1.03rem; }
+  /* Tabs */
+  .tabsbar{background:#fff; border-bottom:1px solid var(--line); position:sticky; top:77px; z-index:19;}
+  .tabs{display:flex; gap:34px; overflow-x:auto; scrollbar-width:none;}
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{appearance:none; background:none; border:none; cursor:pointer; white-space:nowrap;
+    font-size:12.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--faint);
+    padding:17px 2px; border-bottom:3px solid transparent; transition:color .15s;}
+  .tab:hover{color:var(--mute);}
+  .tab .num{color:var(--lav-200);}
+  .tab.active{color:var(--purple); border-bottom-color:var(--purple);}
+  .tab.active .num{color:var(--purple-2);}
 
-  .grid { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-top: 2.5rem; grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); }
-  .demo {
-    background: var(--card); padding: 1.5rem 1.4rem 1.35rem;
-    display: flex; flex-direction: column; gap: .5rem;
-    text-decoration: none; color: inherit;
-    transition: background .15s ease;
-  }
-  .demo:hover, .demo:focus-visible { background: var(--accent-dim); outline: none; }
-  .demo:focus-visible { box-shadow: inset 0 0 0 2px var(--focus); }
-  .demo h2 {
-    font-family: Fraunces, Georgia, serif; font-weight: 600;
-    font-size: 1.22rem; margin: 0; line-height: 1.25; letter-spacing: -.01em;
-  }
-  .product { font-size: .78rem; color: var(--ink-faint); margin: 0; font-weight: 500; }
-  .demo p.desc { margin: .15rem 0 0; font-size: .9rem; color: var(--ink-soft); }
-  .path {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: .74rem; color: var(--accent); margin-top: auto; padding-top: .9rem;
-  }
+  /* Panels */
+  main{padding:44px 0 80px;}
+  .panel[hidden]{display:none;}
+  .eyebrow{font-size:12.5px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--purple); margin:0 0 14px;}
+  h1.title{font-size:42px; line-height:1.08; font-weight:800; color:var(--ink); margin:0 0 18px; letter-spacing:-.5px;}
+  .lede{font-size:18px; color:var(--mute); max-width:820px; margin:0 0 26px;}
 
-  footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--ink-faint); font-size: .85rem; }
-  footer code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .95em; color: var(--ink-soft); }
+  /* Callout */
+  .callout{background:var(--lav-50); border-left:4px solid var(--purple); border-radius:0 12px 12px 0;
+    padding:20px 26px; margin:0 0 34px;}
+  .callout p{margin:0; font-size:15.5px; color:var(--body);}
+  .callout b{color:var(--ink);}
 
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  .kicker{font-size:13px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); margin:38px 0 18px;}
+
+  /* Feature list */
+  .feat{list-style:none; margin:0 0 26px; padding:0; display:grid; gap:12px;}
+  .feat li{display:flex; gap:13px; align-items:flex-start; font-size:15.5px; color:var(--body);}
+  .feat .dot{flex:none; width:22px; height:22px; border-radius:7px; background:var(--lav-100); color:var(--purple);
+    font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; margin-top:2px;}
+
+  /* Meta blocks */
+  .biz{background:var(--lav-50); border-left:4px solid var(--purple); border-radius:0 12px 12px 0; padding:16px 22px; margin:0 0 16px;}
+  .biz .lbl{font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--purple); margin:0 0 5px;}
+  .biz p, .ov p{margin:0; font-size:15px; color:var(--body);}
+  .ov{margin:0 0 26px; padding-left:2px;}
+  .ov .lbl{font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin:0 0 4px;}
+  .ov p{color:var(--mute); font-size:14.5px;}
+
+  /* Demo button */
+  .demobtn{display:inline-flex; align-items:center; gap:9px; background:var(--purple); color:#fff; text-decoration:none;
+    font-weight:800; font-size:15px; letter-spacing:.01em; padding:13px 24px; border-radius:10px; transition:background .15s, transform .1s;
+    box-shadow:0 6px 16px rgba(107,78,255,.28);}
+  .demobtn:hover{background:var(--purple-dark); transform:translateY(-1px);}
+  .demobtn .ar{font-size:17px;}
+  .urlline{font-size:12.5px; color:var(--faint); margin-top:11px; word-break:break-all;}
+
+  /* Sub-demo divider (Hatsize / JBL grouped tabs) */
+  .subdemo{padding-top:34px; margin-top:38px; border-top:1px solid var(--line);}
+  .subhead{font-size:24px; font-weight:800; color:var(--ink); margin:0 0 6px; letter-spacing:-.3px;}
+  .subtag{display:inline-block; font-size:11px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; padding:5px 12px; border-radius:20px; margin-bottom:14px;}
+  .t-net{background:var(--lav-100); color:var(--purple-dark);}
+  .t-direct{background:#E1F3F1; color:#0b6a5f;}
+  .t-adj{background:#FBF0DE; color:#8a5a10;}
+  .t-confirm{background:#E2EFF8; color:#0b5183;}
+
+  /* Overview grid */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:18px; margin:6px 0 10px;}
+  .dcard{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 22px;
+    box-shadow:0 1px 2px rgba(30,27,46,.04); display:flex; flex-direction:column; transition:box-shadow .15s, transform .1s;}
+  .dcard:hover{box-shadow:0 10px 26px rgba(30,27,46,.09); transform:translateY(-2px);}
+  .dcard h3{font-size:17px; font-weight:800; color:var(--ink); margin:0 0 4px;}
+  .dcard .one{font-size:14px; color:var(--mute); margin:0 0 16px; flex:1;}
+  .dcard .foot{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .dcard a.open{font-size:13.5px; font-weight:800; color:var(--purple); text-decoration:none;}
+  .dcard a.open:hover{text-decoration:underline;}
+  .dcard button.more{appearance:none; background:none; border:none; cursor:pointer; font-size:13px; font-weight:700; color:var(--faint);}
+  .dcard button.more:hover{color:var(--purple);}
+
+  .note{font-size:13px; color:var(--faint); font-style:italic; border-top:1px solid var(--line); padding-top:20px; margin-top:40px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} h1.title{font-size:31px;} .tabsbar{top:73px;} }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <p class="eyebrow">Prototype portfolio</p>
-    <h1>AI demos</h1>
-    <p class="lede">Static prototypes exploring where an AI layer earns its place inside clinical simulation, EMS training, lab authoring, and assessment products.</p>
-  </header>
 
-  <main class="grid">
-    <a class="demo" href="./swiftriver/">
-      <p class="product">Swift River</p>
-      <h2>Adaptive Clinical Simulation Engine</h2>
-      <p class="desc">An AI layer that personalizes unfolding nursing simulations in real time — one scenario that adapts across every skill level.</p>
-      <p class="path">/swiftriver/</p>
-    </a>
-
-    <a class="demo" href="./simulation-engineering/">
-      <p class="product">ATI · Simulation Engineering</p>
-      <h2>Lesson 10 — Dosage Calculations</h2>
-      <p class="desc">Medication-error simulation with an embedded Three.js scene, mastery tracking, and forgetfulness-decay forecasting.</p>
-      <p class="path">/simulation-engineering/</p>
-    </a>
-
-    <a class="demo" href="./jbl/">
-      <p class="product">Jones &amp; Bartlett Learning</p>
-      <h2>StudyBot &amp; Catalogue Match</h2>
-      <p class="desc">Stakeholder prototype of StudyBot alongside the CRM ↔ Catalogue Match Assistant for sales and operations.</p>
-      <p class="path">/jbl/</p>
-    </a>
-
-    <a class="demo" href="./fisdap/">
-      <p class="product">FISDAP</p>
-      <h2>AI Shift Feedback Copilot</h2>
-      <p class="desc">Instructor-led assistance for reviewing EMS student shift logs — draft feedback faster while preserving human approval.</p>
-      <p class="path">/fisdap/</p>
-    </a>
-
-    <a class="demo" href="./lab-assistant/">
-      <p class="product">Hatsize</p>
-      <h2>AI Lab Assistant</h2>
-      <p class="desc">Describe a lab in plain language and have the assistant draft a complete lab blueprint.</p>
-      <p class="path">/lab-assistant/</p>
-    </a>
-
-    <a class="demo" href="./live-lab-session/">
-      <p class="product">Hatsize</p>
-      <h2>Live Lab Session</h2>
-      <p class="desc">A running lab session with AI Copilot guidance surfaced alongside the learner's work.</p>
-      <p class="path">/live-lab-session/</p>
-    </a>
-
-    <a class="demo" href="./boardvitals/">
-      <p class="product">BoardVitals</p>
-      <h2>AI Mastery Engine</h2>
-      <p class="desc">Board-prep question bank with mastery estimation driving what the learner sees next.</p>
-      <p class="path">/boardvitals/</p>
-    </a>
-
-    <a class="demo" href="./mytipreport/">
-      <p class="product">myTIPreport</p>
-      <h2>Competency Evidence Layer</h2>
-      <p class="desc">Turns scattered procedural feedback into structured competency evidence for review committees.</p>
-      <p class="path">/mytipreport/</p>
-    </a>
-  </main>
-
-  <footer>
-    <p>Static prototypes — mock data throughout, no backend. Rebuilt and published from <code>main</code> on every push.</p>
-  </footer>
+<div class="topbar">
+  <div class="wrap row">
+    <div class="brand">
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="6" cy="6" r="2.6" fill="#fff"/><circle cx="18" cy="6" r="2.6" fill="#fff"/>
+          <circle cx="12" cy="18" r="2.6" fill="#fff"/>
+          <path d="M6 6 L12 18 L18 6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
+        </svg>
+      </div>
+      <div>
+        <div class="name">R Systems</div>
+        <div class="sub">AI Prototype Studio</div>
+      </div>
+    </div>
+    <div class="top-right">
+      <span class="crumb">AI Demos · Ascend Learning</span>
+      <span class="pill solid">Live Portfolio</span>
+      <span class="pill outline">Prototypes</span>
+    </div>
+  </div>
 </div>
+
+<div class="tabsbar">
+  <div class="wrap">
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-target="p-overview"><span class="num">01 · </span>Overview</button>
+      <button class="tab" data-target="p-boardvitals"><span class="num">02 · </span>BoardVitals</button>
+      <button class="tab" data-target="p-hatsize"><span class="num">03 · </span>Hatsize</button>
+      <button class="tab" data-target="p-jbl"><span class="num">04 · </span>JBL</button>
+      <button class="tab" data-target="p-fisdap"><span class="num">05 · </span>FISDAP</button>
+      <button class="tab" data-target="p-swiftriver"><span class="num">06 · </span>Swift River</button>
+      <button class="tab" data-target="p-simulation"><span class="num">07 · </span>Simulation</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- OVERVIEW -->
+  <section class="panel" id="p-overview">
+    <p class="eyebrow">Ascend Learning · AI Prototype Portfolio</p>
+    <h1 class="title">AI Demos — Prototypes We Built</h1>
+    <p class="lede">Interactive prototypes demonstrating AI features across Ascend Learning products, hosted together on GitHub Pages. Open any tab for the full write-up, or launch a live demo directly from the cards below.</p>
+    <div class="callout">
+      <p><b>These are UX proofs, not production AI.</b> Each demo is a clickable prototype over mock data (built in Lovable / Claude); the Simulation demo runs a real Three.js 3-D engine. Descriptions are drawn from the AI Product Pitches deck, and each product notes its overlap with the planned AI portfolio (#13–24, per the June 2026 Technical Briefing).</p>
+    </div>
+
+    <p class="kicker">The Demos</p>
+    <div class="grid" id="ovgrid">
+      <div class="dcard">
+        <h3>BoardVitals — Mastery Engine</h3>
+        <p class="one">Concept-level mastery, forgetfulness forecast, and a next-best-action after every session.</p>
+        <div class="foot"><a class="open" href="https://vinod-rsi.github.io/ai-demos/boardvitals/" target="_blank" rel="noopener">Open demo →</a><button class="more" data-goto="p-boardvitals">Details</button></div>
+      </div>
+      <div class="dcard">
+        <h3>Hatsize — Lab Blueprint</h3>
+        <p class="one">Describe a lab in plain words; the AI drafts topology, steps, and a grading rubric.</p>
+        <div class="foot"><a class="open" href="https://vinod-rsi.github.io/ai-demos/lab-assistant/" target="_blank" rel="noopener">Open demo →</a><button class="more" data-goto="p-hatsize">Details</button></div>
+      </div>
+      <div class="dcard">
+        <h3>Hatsize — Lab Copilot</h3>
+        <p class="one">A Socratic in-session assistant that unblocks students without handing over answers.</p>
+        <div class="foot"><a class="open" href="https://vinod-rsi.github.io/ai-demos/live-lab-session/" target="_blank" rel="noopener">Open demo →</a><button class="more" data-goto="p-hatsize">Details</button></div>
+      </div>
+      <div class="dcard">
+        <h3>JBL — StudyBot</h3>
+        <p class="one">In-book, source-grounded study partner: Q&amp;A, quizzes, flashcards, and study collections.</p>
+        <div class="foot"><a class="open" href="https://vinod-rsi.github.io/ai-demos/jbl/" target="_blank" rel="noopener">Open demo →</a><button class="more" data-goto="p-jbl">Details</button></div>
+      </div>
+      <div class="dcard">
+        <h3>JBL — CRM Match</h3>
+        <p class="one">AI matching of CRM accounts to JBL product accounts, with confidence and an audit trail.</p>
+        <div class="foot"><a class="open" href="https://vinod-rsi.github.io/ai-demos/jbl/" target="_blank" rel="noopener">Open demo →</a><button class="more" data-goto="p-jbl">Details</button></div>
+      </div>
+      <div class="dcard">
+        <h3>FISDAP — Shift Feedback</h3>
+        <p class="one">Completeness checks for EMS shift logs plus AI-drafted feedback, with human approval.</p>
+        <div class="foot"><a class="open" href="https://vinod-rsi.github.io/ai-demos/fisdap/" target="_blank" rel="noopener">Open demo →</a><button class="more" data-goto="p-fisdap">Details</button></div>
+      </div>
+      <div class="dcard">
+        <h3>Swift River — Adaptive Sim</h3>
+        <p class="one">An AI layer that personalizes nursing simulations in real time across every skill level.</p>
+        <div class="foot"><a class="open" href="https://vinod-rsi.github.io/ai-demos/swiftriver/" target="_blank" rel="noopener">Open demo →</a><button class="more" data-goto="p-swiftriver">Details</button></div>
+      </div>
+      <div class="dcard">
+        <h3>Simulation Engineering</h3>
+        <p class="one">A real Unity→Three.js 3-D pharmacology sim with mastery tracking and an AI debrief.</p>
+        <div class="foot"><a class="open" href="https://vinod-rsi.github.io/ai-demos/simulation-engineering/" target="_blank" rel="noopener">Open demo →</a><button class="more" data-goto="p-simulation">Details</button></div>
+      </div>
+    </div>
+    <p class="note">These are interactive UX prototypes over mock data; the Simulation demo runs a real Three.js 3-D engine. They demonstrate the intended experience, not production AI. Cluster B product numbers (#13–24) reference the AI Product Portfolio — Technical Briefing (June 2026).</p>
+  </section>
+
+  <!-- BOARDVITALS -->
+  <section class="panel" id="p-boardvitals" hidden>
+    <p class="eyebrow">Ascend AI Demo · Net-new</p>
+    <h1 class="title">BoardVitals — Mastery Engine &amp; Forgetfulness Forecast</h1>
+    <p class="lede">Goes beyond a score — it watches quiz history at the concept level and knows what's solid, what's fading, and what was never really learned, then says what to do about it.</p>
+    <p class="kicker">What it does</p>
+    <ul class="feat">
+      <li><span class="dot">1</span>Live mastery state per concept — Strong, Fragile, or Mastered-but-at-risk — from accuracy, timing, repetition, and recovery.</li>
+      <li><span class="dot">2</span>Forgetfulness Forecast — surfaces "topics at risk of forgetting" before the student fails again.</li>
+      <li><span class="dot">3</span>One honest "next best action" after every session (review set / mixed practice / remediation / readiness check).</li>
+      <li><span class="dot">4</span>Explainable — "Last correct: 12 days ago · Topic difficulty: high · Reviewed once"; instructor Cohort View with one-click "Suggest intervention" on flagged students only.</li>
+    </ul>
+    <div class="biz"><p class="lbl">Business objective</p><p>Lifts pass rates and daily engagement by telling each student what to review before they forget it — turning a passive question bank into a retention-and-readiness engine, and giving instructors early warning on at-risk learners.</p></div>
+    <div class="ov"><p class="lbl">AI Portfolio overlap</p><p>Consumes AI Content Ingestion (#16) and AI Tagging (#19/#21); the mastery engine itself is net-new, built over BoardVitals' own risk/recommendation ML.</p></div>
+    <a class="demobtn" href="https://vinod-rsi.github.io/ai-demos/boardvitals/" target="_blank" rel="noopener">Open live demo <span class="ar">→</span></a>
+    <div class="urlline">https://vinod-rsi.github.io/ai-demos/boardvitals/</div>
+  </section>
+
+  <!-- HATSIZE (two demos) -->
+  <section class="panel" id="p-hatsize" hidden>
+    <p class="eyebrow">Ascend AI Demo · Direct overlap</p>
+    <h1 class="title">Hatsize — Lab Authoring &amp; Live Session AI</h1>
+    <p class="lede">Two companions around the Hatsize labs platform: an AI that drafts a full lab from a plain-language description, and an in-session copilot that guides students without giving away answers.</p>
+
+    <div class="subdemo" style="border-top:none; padding-top:0; margin-top:8px;">
+      <h2 class="subhead">AI Lab Blueprint Assistant</h2>
+      <span class="subtag t-direct">Authoring companion</span>
+      <ul class="feat">
+        <li><span class="dot">1</span>Generates a title, 3–4 learning objectives, duration/difficulty tags, and the full VM topology.</li>
+        <li><span class="dot">2</span>Writes a 5-step flow with expected outcomes, plus a grading rubric (screenshot OCR, file diff, automated test, word count) with weights.</li>
+        <li><span class="dot">3</span>Preset prompt chips for quick starts (e.g. "CCNA VLAN lab", "Linux hardening").</li>
+        <li><span class="dot">4</span>Nothing publishes automatically — every draft is "Auto-generated · review before saving"; instructor Accepts, Edits, or Regenerates.</li>
+      </ul>
+      <div class="biz"><p class="lbl">Business objective</p><p>Cuts lab authoring from hours to minutes, so instructors build more hands-on labs and the catalog grows without extra content-team headcount.</p></div>
+      <a class="demobtn" href="https://vinod-rsi.github.io/ai-demos/lab-assistant/" target="_blank" rel="noopener">Open live demo <span class="ar">→</span></a>
+      <div class="urlline">https://vinod-rsi.github.io/ai-demos/lab-assistant/</div>
+    </div>
+
+    <div class="subdemo">
+      <h2 class="subhead">Lab Copilot — Live Session Assistant</h2>
+      <span class="subtag t-direct">In-session companion</span>
+      <ul class="feat">
+        <li><span class="dot">1</span>Tracks live context — which step ("Step 3 of 5"), last command, and a "possibly stuck" status.</li>
+        <li><span class="dot">2</span>Idle nudge: "Need a hint?" with three options — subtle hint, detailed explanation, or "Not now."</li>
+        <li><span class="dot">3</span>Socratic mode (on by default) — points at the real error and asks a guiding question back.</li>
+        <li><span class="dot">4</span>A sidebar, not a takeover — it observes and suggests, never touches lab state.</li>
+      </ul>
+      <div class="biz"><p class="lbl">Business objective</p><p>Reduces mid-lab drop-off and support load by unblocking students in the moment — higher completion without more instructor time.</p></div>
+      <a class="demobtn" href="https://vinod-rsi.github.io/ai-demos/live-lab-session/" target="_blank" rel="noopener">Open live demo <span class="ar">→</span></a>
+      <div class="urlline">https://vinod-rsi.github.io/ai-demos/live-lab-session/</div>
+    </div>
+
+    <div class="ov" style="margin-top:30px;"><p class="lbl">AI Portfolio overlap</p><p>Both are companions to JBL Image Grading / Hatsize (#17) — same platform and team: Blueprint on authoring, Copilot in-session.</p></div>
+  </section>
+
+  <!-- JBL (two demos) -->
+  <section class="panel" id="p-jbl" hidden>
+    <p class="eyebrow">Ascend AI Demo · JBL</p>
+    <h1 class="title">JBL — StudyBot &amp; CRM Match</h1>
+    <p class="lede">Two AI surfaces for Jones &amp; Bartlett Learning: an in-book study partner grounded in the purchased title, and a matching engine that reconciles sales CRM accounts with product accounts.</p>
+
+    <div class="subdemo" style="border-top:none; padding-top:0; margin-top:8px;">
+      <h2 class="subhead">In-Book AI Study Partner ("StudyBot")</h2>
+      <span class="subtag t-direct">Direct overlap · #24</span>
+      <ul class="feat">
+        <li><span class="dot">1</span>Source-grounded Q&amp;A — quotes the exact passage, with a visible confidence score and expandable source excerpt.</li>
+        <li><span class="dot">2</span>Generates one-page summaries, 10-question quizzes, and flashcard sets, all traceable to book / chapter / page.</li>
+        <li><span class="dot">3</span>Study Collections — Claire suggests bundling a quiz, flashcards, and a summary into one saved collection (e.g. "Sepsis Recognition &amp; Response").</li>
+        <li><span class="dot">4</span>Instructor review of generated items, plus admin governance — per-title AI toggle, usage logs, and a Legal-signed exposure policy. Works across JBL's portals (Burlington, PSG, CDX, ECSI, pediatric).</li>
+      </ul>
+      <div class="biz"><p class="lbl">Business objective</p><p>Closes a competitive gap (VitalSource Bookshelf+ and Pearson already ship this) and deepens engagement and retention across JBL's multi-portal catalog.</p></div>
+      <a class="demobtn" href="https://vinod-rsi.github.io/ai-demos/jbl/" target="_blank" rel="noopener">Open live demo <span class="ar">→</span></a>
+      <div class="urlline">https://vinod-rsi.github.io/ai-demos/jbl/</div>
+    </div>
+
+    <div class="subdemo">
+      <h2 class="subhead">CRM ↔ Catalogue Account Match Assistant</h2>
+      <span class="subtag t-confirm">Confirm first</span>
+      <ul class="feat">
+        <li><span class="dot">1</span>Proposes mappings ("State University — crm_acct_123 → jbl_acct_suid_987, confidence 0.92") from a CSV upload or scheduled sync.</li>
+        <li><span class="dot">2</span>Flags conflicts (one lead matching multiple accounts) and suggests reconciliation rules (unify on email domain or campus code).</li>
+        <li><span class="dot">3</span>Evidence panel per match — email domain, billing address, recent order IDs, similarity score.</li>
+        <li><span class="dot">4</span>Nothing merges on its own — every proposal is accepted / edited / rejected; every action logged, auditable, and reversible.</li>
+      </ul>
+      <div class="biz"><p class="lbl">Business objective</p><p>Removes the documented 10–15 min-per-request account-matching delay, improves sales/ops data quality, and protects revenue with cleaner institutional account analytics.</p></div>
+      <a class="demobtn" href="https://vinod-rsi.github.io/ai-demos/jbl/" target="_blank" rel="noopener">Open live demo <span class="ar">→</span></a>
+      <div class="urlline">https://vinod-rsi.github.io/ai-demos/jbl/ &nbsp;·&nbsp; Sales / Ops role in the same JBL app</div>
+    </div>
+
+    <div class="ov" style="margin-top:30px;"><p class="lbl">AI Portfolio overlap</p><p>StudyBot maps directly to AI Study Collections (#24). CRM Match has no matching portfolio product — it sits outside the content-AI remit (sales/ops data), though the business pain is documented.</p></div>
+  </section>
+
+  <!-- FISDAP -->
+  <section class="panel" id="p-fisdap" hidden>
+    <p class="eyebrow">Ascend AI Demo · Adjacent</p>
+    <h1 class="title">FISDAP — AI Shift Feedback Copilot</h1>
+    <p class="lede">Reads a logged patient encounter and helps both sides at once — the student submits a complete log, and the instructor gets a drafted narrative to review and approve.</p>
+    <p class="kicker">What it does</p>
+    <ul class="feat">
+      <li><span class="dot">1</span>Real-time completeness check against the competency framework, before submission.</li>
+      <li><span class="dot">2</span>Guided fix flow — not just a red flag, but why the field matters and an example of a good entry.</li>
+      <li><span class="dot">3</span>Competency evidence map per domain — strong, partial, or not-captured.</li>
+      <li><span class="dot">4</span>Instructor shift queue sorted by urgency; the AI drafts and maps, the instructor edits and approves — the AI never grades or signs off.</li>
+    </ul>
+    <div class="biz"><p class="lbl">Business objective</p><p>Saves instructor review time, raises documentation completeness, and speeds feedback turnaround — supporting accreditation and program outcomes.</p></div>
+    <div class="ov"><p class="lbl">AI Portfolio overlap</p><p>Mirrors the AI Tagging (#18–21) / Course Enablement (#23) pattern — classify against a taxonomy, confidence-scored, human review.</p></div>
+    <a class="demobtn" href="https://vinod-rsi.github.io/ai-demos/fisdap/" target="_blank" rel="noopener">Open live demo <span class="ar">→</span></a>
+    <div class="urlline">https://vinod-rsi.github.io/ai-demos/fisdap/</div>
+  </section>
+
+  <!-- SWIFT RIVER -->
+  <section class="panel" id="p-swiftriver" hidden>
+    <p class="eyebrow">Ascend AI Demo · Adjacent</p>
+    <h1 class="title">Swift River — Adaptive Clinical Simulation Engine</h1>
+    <p class="lede">An AI layer over Swift River's 600+ scenarios that turns each fixed case into a personalized, unfolding journey.</p>
+    <p class="kicker">What it does</p>
+    <ul class="feat">
+      <li><span class="dot">1</span>Adapts in real time — strong learners get fewer hints and more complex deterioration; struggling learners get extra cues and slower escalation.</li>
+      <li><span class="dot">2</span>One base case serves beginner, intermediate, and advanced learners without duplicating content.</li>
+      <li><span class="dot">3</span>Faculty mode — class heatmap, common weak spots, AI-generated debrief questions, remediation groupings.</li>
+      <li><span class="dot">4</span>Admin mode — cohort trends, readiness-score distribution, at-risk flags; authoring rules where the AI proposes and the educator approves.</li>
+    </ul>
+    <div class="biz"><p class="lbl">Business objective</p><p>Extends the value of the existing 600+ scenario library by serving every skill level from one case — better clinical-judgment outcomes with less content duplication.</p></div>
+    <div class="ov"><p class="lbl">AI Portfolio overlap</p><p>Analytics-and-recommendation surface like Course Enablement (#23) and AI Study Collections (#24); the product itself isn't in the portfolio.</p></div>
+    <a class="demobtn" href="https://vinod-rsi.github.io/ai-demos/swiftriver/" target="_blank" rel="noopener">Open live demo <span class="ar">→</span></a>
+    <div class="urlline">https://vinod-rsi.github.io/ai-demos/swiftriver/</div>
+  </section>
+
+  <!-- SIMULATION -->
+  <section class="panel" id="p-simulation" hidden>
+    <p class="eyebrow">Ascend AI Demo · Net-new</p>
+    <h1 class="title">Simulation Engineering — 3-D Web Simulation (Three.js)</h1>
+    <p class="lede">A working browser 3-D simulation ("ATI Engage: Pharmacology — Dosage Calculations &amp; Medication Errors, Lesson 10") that replaces the heavy Unity 3D build with a lighter web-native Three.js engine, wrapped in the Swift River shell.</p>
+    <p class="kicker">What it does</p>
+    <ul class="feat">
+      <li><span class="dot">1</span>The real Three.js Lesson 10 sim plays in-browser, with a persistent Adaptive Engine rail.</li>
+      <li><span class="dot">2</span>Concept mastery pills (Strong / Fragile / At-risk), a Forgetfulness Forecast with explainability, and a next-best-action button.</li>
+      <li><span class="dot">3</span>Debrief view — decision timeline, missed cues, judgment radar, AI reflection questions, and an AI-recommended remediation plan.</li>
+      <li><span class="dot">4</span>Restores the 3-D experience Unity gave up on, at web-native cost — no per-platform builds.</li>
+    </ul>
+    <div class="biz"><p class="lbl">Business objective</p><p>Slashes 3-D simulation build and maintenance cost by replacing Unity's multi-platform pipeline with a web-native engine — faster time-to-market and no per-platform builds.</p></div>
+    <div class="ov"><p class="lbl">AI Portfolio overlap</p><p>Relates to Conversational AI Avatar (#22) — a web-native rendering layer for scripted clinical-conversation sims.</p></div>
+    <a class="demobtn" href="https://vinod-rsi.github.io/ai-demos/simulation-engineering/" target="_blank" rel="noopener">Open live demo <span class="ar">→</span></a>
+    <div class="urlline">https://vinod-rsi.github.io/ai-demos/simulation-engineering/</div>
+  </section>
+
+</main>
+
+<script>
+  var tabs = document.querySelectorAll('.tab');
+  var panels = document.querySelectorAll('.panel');
+  function show(id){
+    tabs.forEach(function(t){ t.classList.toggle('active', t.dataset.target === id); });
+    panels.forEach(function(p){ p.hidden = (p.id !== id); });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.target); }); });
+  document.querySelectorAll('button.more').forEach(function(b){
+    b.addEventListener('click', function(){ show(b.dataset.goto); });
+  });
+</script>
 </body>
 </html>
