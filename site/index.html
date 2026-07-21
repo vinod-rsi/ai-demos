@@ -14,13 +14,13 @@
 
     /* One screen, no scroll: every vertical rhythm below is keyed to viewport
        height so a 1080px display breathes and a 700px laptop still fits. */
-    --gap-lg:clamp(14px, 2.2vh, 26px);
-    --gap-md:clamp(9px, 1.4vh, 16px);
-    --gap-sm:clamp(5px, 0.8vh, 9px);
-    --fs-title:clamp(20px, 3.1vh, 33px);
-    --fs-lede:clamp(12.5px, 1.75vh, 16.5px);
-    --fs-body:clamp(11.5px, 1.55vh, 14.5px);
-    --fs-micro:clamp(9.5px, 1.15vh, 11.5px);
+    --gap-lg:clamp(20px, 3.4vh, 38px);
+    --gap-md:clamp(11px, 1.7vh, 18px);
+    --gap-sm:clamp(6px, 0.95vh, 11px);
+    --fs-title:clamp(25px, 3.7vh, 38px);
+    --fs-lede:clamp(14.5px, 2.1vh, 19px);
+    --fs-body:clamp(13.5px, 1.95vh, 16.5px);
+    --fs-micro:clamp(10.5px, 1.4vh, 13px);
   }
   *{box-sizing:border-box;}
   body{margin:0; background:var(--bg); color:var(--body);
@@ -61,8 +61,9 @@
   .tab.active{color:var(--purple); border-bottom-color:var(--purple);}
   .tab.active .num{color:var(--purple-2);}
 
-  /* Panel shell */
-  main{min-height:0; padding:var(--gap-lg) 0;}
+  /* Panel shell. Note the compound selector: a bare `main` would lose its
+     padding to .wrap, which is a class and outranks a type selector. */
+  main.wrap{min-height:0; padding:var(--gap-lg) clamp(20px,3vw,40px);}
   .panel{height:100%; display:flex; flex-direction:column; gap:var(--gap-md); overflow:auto;}
   .panel[hidden]{display:none;}
   .phead{flex:none;}
@@ -71,7 +72,9 @@
   .lede{font-size:var(--fs-lede); color:var(--mute); max-width:78ch; margin:var(--gap-sm) 0 0;}
 
   /* Two-column body: what it does | why it matters + the way in */
-  .pbody{flex:1; min-height:0; display:grid; grid-template-columns:1.35fr 1fr; gap:clamp(20px,3vw,44px);
+  /* Grows to fill the screen, but is never squeezed below its content: on a
+     window too short for a panel, that panel scrolls instead of clipping. */
+  .pbody{flex:1 0 auto; display:grid; grid-template-columns:1.35fr 1fr; gap:clamp(20px,3vw,44px);
     border-top:1px solid var(--line); padding-top:var(--gap-md);}
   .kicker{font-size:var(--fs-micro); font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); margin:0 0 var(--gap-sm);}
 
@@ -82,14 +85,16 @@
     display:flex; align-items:center; justify-content:center; margin-top:2px;}
 
   /* Right rail */
-  .rail{display:flex; flex-direction:column; gap:var(--gap-md); min-height:0;}
+  /* The rail reads top to bottom: why it matters, where it sits, the way in.
+     It sits directly under the heading rule — no stretch, so nothing floats. */
+  .rail{display:flex; flex-direction:column; gap:var(--gap-md);}
   .biz{background:var(--lav-50); border-left:3px solid var(--purple); border-radius:0 10px 10px 0; padding:var(--gap-md) clamp(13px,1.6vw,20px);}
   .biz p, .ov p{margin:0; font-size:var(--fs-body); color:var(--body);}
   .biz .lbl, .ov .lbl{font-size:var(--fs-micro); font-weight:800; letter-spacing:.1em; text-transform:uppercase; margin:0 0 4px;}
   .biz .lbl{color:var(--purple);}
   .ov .lbl{color:var(--faint);}
   .ov p{color:var(--mute);}
-  .rail .cta{margin-top:auto; padding-top:var(--gap-sm);}
+  .rail .cta{padding-top:var(--gap-sm);}
 
   .demobtn{display:inline-flex; align-items:center; gap:9px; background:var(--purple); color:#fff; text-decoration:none;
     font-weight:800; font-size:var(--fs-body); padding:clamp(9px,1.35vh,13px) clamp(16px,2vw,24px); border-radius:10px;
@@ -100,13 +105,19 @@
 
   /* Grouped tabs — two sub-demos, side by side */
   .pbody.pair{grid-template-columns:1fr 1fr;}
-  .sub{display:flex; flex-direction:column; gap:var(--gap-sm); min-height:0;}
+  .sub{display:flex; flex-direction:column; gap:var(--gap-sm);}
   .sub + .sub{border-left:1px solid var(--line); padding-left:clamp(20px,3vw,44px);}
+  /* Paired tabs carry two write-ups in the same screen, so their blocks run
+     tighter — the type stays the size it is everywhere else. */
+  .pbody.pair .feat{gap:clamp(5px,0.75vh,9px);}
+  .pbody.pair .biz{padding:var(--gap-sm) clamp(12px,1.4vw,18px);}
+  .pbody.pair .demobtn{padding:clamp(8px,1.2vh,12px) clamp(15px,1.8vw,22px);}
+  .subrow{display:flex; align-items:center; flex-wrap:wrap; gap:10px;}
   .subhead{font-size:clamp(14px,2vh,19px); font-weight:800; color:var(--ink); margin:0; letter-spacing:-.2px;}
-  .subtag{align-self:flex-start; font-size:var(--fs-micro); font-weight:800; letter-spacing:.06em; text-transform:uppercase; padding:4px 11px; border-radius:20px;}
+  .subtag{ font-size:var(--fs-micro); font-weight:800; letter-spacing:.06em; text-transform:uppercase; padding:4px 11px; border-radius:20px;}
   .t-direct{background:#E1F3F1; color:#0b6a5f;}
   .t-confirm{background:#E2EFF8; color:#0b5183;}
-  .sub .cta{margin-top:auto; padding-top:var(--gap-sm);}
+  .sub .cta{margin-top:auto; padding-top:var(--gap-md);}
   .ovfoot{flex:none; margin:0; padding-top:var(--gap-md); border-top:1px solid var(--line); font-size:var(--fs-body); color:var(--mute);}
   .ovfoot b{color:var(--faint); font-size:var(--fs-micro); font-weight:800; letter-spacing:.1em; text-transform:uppercase;}
 
@@ -115,18 +126,21 @@
     padding:var(--gap-md) clamp(15px,1.8vw,24px); margin:var(--gap-md) 0 0;}
   .callout p{margin:0; font-size:var(--fs-body); color:var(--body);}
   .callout b{color:var(--ink);}
-  .grid{flex:1; min-height:0; display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:1fr;
-    gap:clamp(10px,1.5vh,18px); border-top:1px solid var(--line); padding-top:var(--gap-md);}
-  .dcard{background:var(--card); border:1px solid var(--line); border-radius:13px; padding:clamp(12px,1.8vh,20px);
+  /* Cards are sized by their content; the leftover height becomes even space
+     between the two rows rather than hollow boxes. */
+  .grid{flex:1 0 auto; display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:auto;
+    align-content:space-evenly; column-gap:clamp(12px,1.4vw,20px); row-gap:clamp(12px,2vh,26px);
+    border-top:1px solid var(--line); padding-top:var(--gap-md);}
+  .dcard{background:var(--card); border:1px solid var(--line); border-radius:13px; padding:clamp(14px,2vh,22px);
     box-shadow:0 1px 2px rgba(30,27,46,.04); display:flex; flex-direction:column; min-height:0;
     transition:box-shadow .15s, transform .1s;}
   .dcard:hover{box-shadow:0 10px 26px rgba(30,27,46,.09); transform:translateY(-2px);}
-  .dcard h3{font-size:clamp(12.5px,1.75vh,16px); font-weight:800; color:var(--ink); margin:0 0 4px; line-height:1.25;}
-  .dcard .one{font-size:var(--fs-micro); color:var(--mute); margin:0 0 var(--gap-sm); flex:1; line-height:1.45;}
+  .dcard h3{font-size:clamp(14.5px,2.05vh,18px); font-weight:800; color:var(--ink); margin:0 0 5px; line-height:1.25;}
+  .dcard .one{font-size:clamp(13px,1.8vh,15.5px); color:var(--mute); margin:0 0 var(--gap-md); flex:1; line-height:1.45;}
   .dcard .foot{display:flex; align-items:center; justify-content:space-between; gap:8px;}
-  .dcard a.open{font-size:var(--fs-micro); font-weight:800; color:var(--purple); text-decoration:none;}
+  .dcard a.open{font-size:clamp(12px,1.6vh,14px); font-weight:800; color:var(--purple); text-decoration:none;}
   .dcard a.open:hover{text-decoration:underline;}
-  .dcard button.more{appearance:none; background:none; border:none; cursor:pointer; font-size:var(--fs-micro); font-weight:700; color:var(--faint);}
+  .dcard button.more{appearance:none; background:none; border:none; cursor:pointer; font-size:clamp(12px,1.6vh,14px); font-weight:700; color:var(--faint);}
   .dcard button.more:hover{color:var(--purple);}
   .dcard a:focus-visible, .dcard button:focus-visible{outline:2px solid var(--purple); outline-offset:2px; border-radius:3px;}
 
@@ -272,8 +286,7 @@
     </div>
     <div class="pbody pair">
       <div class="sub">
-        <h2 class="subhead">AI Lab Blueprint Assistant</h2>
-        <span class="subtag t-direct">Authoring companion</span>
+        <div class="subrow"><h2 class="subhead">AI Lab Blueprint Assistant</h2><span class="subtag t-direct">Authoring companion</span></div>
         <ul class="feat">
           <li><span class="dot">1</span>Generates a title, 3–4 learning objectives, duration/difficulty tags, and the full VM topology.</li>
           <li><span class="dot">2</span>Writes a 5-step flow with expected outcomes, plus a grading rubric (screenshot OCR, file diff, automated test, word count) with weights.</li>
@@ -284,8 +297,7 @@
         <div class="cta"><a class="demobtn" href="https://vinod-rsi.github.io/ai-demos/lab-assistant/" target="_blank" rel="noopener">Open live demo <span class="ar">→</span></a></div>
       </div>
       <div class="sub">
-        <h2 class="subhead">Lab Copilot — Live Session Assistant</h2>
-        <span class="subtag t-direct">In-session companion</span>
+        <div class="subrow"><h2 class="subhead">Lab Copilot — Live Session Assistant</h2><span class="subtag t-direct">In-session companion</span></div>
         <ul class="feat">
           <li><span class="dot">1</span>Tracks live context — which step ("Step 3 of 5"), last command, and a "possibly stuck" status.</li>
           <li><span class="dot">2</span>Idle nudge: "Need a hint?" with three options — subtle hint, detailed explanation, or "Not now."</li>
@@ -304,35 +316,33 @@
     <div class="phead">
       <p class="eyebrow">Ascend AI Demo · JBL</p>
       <h1 class="title">JBL — StudyBot &amp; CRM Match</h1>
-      <p class="lede">Two AI surfaces for Jones &amp; Bartlett Learning: an in-book study partner grounded in the purchased title, and a matching engine that reconciles sales CRM accounts with product accounts.</p>
+      <p class="lede">Two AI surfaces for Jones &amp; Bartlett Learning: an in-book study partner grounded in the purchased title, and an account-matching engine for sales ops.</p>
     </div>
     <div class="pbody pair">
       <div class="sub">
-        <h2 class="subhead">In-Book AI Study Partner ("StudyBot")</h2>
-        <span class="subtag t-direct">Direct overlap · #24</span>
+        <div class="subrow"><h2 class="subhead">In-Book AI Study Partner ("StudyBot")</h2><span class="subtag t-direct">Direct overlap · #24</span></div>
         <ul class="feat">
           <li><span class="dot">1</span>Source-grounded Q&amp;A — quotes the exact passage, with a visible confidence score and expandable source excerpt.</li>
           <li><span class="dot">2</span>Generates one-page summaries, 10-question quizzes, and flashcard sets, all traceable to book / chapter / page.</li>
           <li><span class="dot">3</span>Study Collections — Claire suggests bundling a quiz, flashcards, and a summary into one saved collection.</li>
-          <li><span class="dot">4</span>Instructor review of generated items, plus admin governance — per-title AI toggle, usage logs, and a Legal-signed exposure policy.</li>
+          <li><span class="dot">4</span>Instructor review of generated items, plus admin governance — per-title AI toggle, usage logs, Legal-signed policy.</li>
         </ul>
-        <div class="biz"><p class="lbl">Business objective</p><p>Closes a competitive gap (VitalSource Bookshelf+ and Pearson already ship this) and deepens engagement and retention across JBL's multi-portal catalog.</p></div>
+        <div class="biz"><p class="lbl">Business objective</p><p>Closes a competitive gap (VitalSource and Pearson already ship this) and deepens engagement across JBL's multi-portal catalog.</p></div>
         <div class="cta"><a class="demobtn" href="https://vinod-rsi.github.io/ai-demos/jbl/" target="_blank" rel="noopener">Open live demo <span class="ar">→</span></a></div>
       </div>
       <div class="sub">
-        <h2 class="subhead">CRM ↔ Catalogue Account Match</h2>
-        <span class="subtag t-confirm">Confirm first</span>
+        <div class="subrow"><h2 class="subhead">CRM ↔ Catalogue Account Match</h2><span class="subtag t-confirm">Confirm first</span></div>
         <ul class="feat">
-          <li><span class="dot">1</span>Proposes mappings ("State University — crm_acct_123 → jbl_acct_suid_987, confidence 0.92") from a CSV upload or scheduled sync.</li>
+          <li><span class="dot">1</span>Proposes mappings ("State University → jbl_acct_suid_987, confidence 0.92") from a CSV upload or a scheduled sync.</li>
           <li><span class="dot">2</span>Flags conflicts (one lead matching multiple accounts) and suggests reconciliation rules (unify on email domain or campus code).</li>
           <li><span class="dot">3</span>Evidence panel per match — email domain, billing address, recent order IDs, similarity score.</li>
           <li><span class="dot">4</span>Nothing merges on its own — every proposal is accepted / edited / rejected; every action logged, auditable, and reversible.</li>
         </ul>
-        <div class="biz"><p class="lbl">Business objective</p><p>Removes the documented 10–15 min-per-request account-matching delay, improves sales/ops data quality, and protects revenue with cleaner institutional account analytics.</p></div>
+        <div class="biz"><p class="lbl">Business objective</p><p>Removes the documented 10–15 min-per-request matching delay and improves sales/ops data quality and account analytics.</p></div>
         <div class="cta"><a class="demobtn" href="https://vinod-rsi.github.io/ai-demos/jbl/" target="_blank" rel="noopener">Open live demo <span class="ar">→</span></a></div>
       </div>
     </div>
-    <p class="ovfoot"><b>AI Portfolio overlap</b> · StudyBot maps directly to AI Study Collections (#24). CRM Match has no matching portfolio product — it sits outside the content-AI remit (sales/ops data), though the business pain is documented.</p>
+    <p class="ovfoot"><b>AI Portfolio overlap</b> · StudyBot maps to AI Study Collections (#24). CRM Match has no portfolio counterpart — it sits outside the content-AI remit.</p>
   </section>
 
   <!-- FISDAP -->
