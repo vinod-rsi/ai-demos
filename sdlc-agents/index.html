@@ -180,7 +180,10 @@
   .cglabel{font-size:var(--fs-micro); font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin-right:2px;}
   .pchip{font-size:var(--fs-micro); font-weight:700; color:var(--violet); background:var(--lav-100); padding:4px 10px; border-radius:14px; white-space:nowrap;}
   .pchip.alt{color:var(--gain); background:var(--gain-soft);}
-  @media (max-width:800px){ .themegrid{grid-template-columns:repeat(2,1fr);} }
+  .foothint{margin-left:auto; font-size:var(--fs-micro); color:var(--faint);}
+  .foothint a{color:var(--violet); font-weight:700; text-decoration:none;}
+  .foothint a:hover{text-decoration:underline;}
+  @media (max-width:800px){ .themegrid{grid-template-columns:repeat(2,1fr);} .foothint{margin-left:0;} }
 
   @media (max-width:800px){
     .pbody{grid-template-columns:1fr; gap:var(--gap-md);}
@@ -342,7 +345,7 @@
     <div class="phead">
       <p class="eyebrow">Beyond the flagship agents</p>
       <h1 class="title">AI across the <em>whole</em> SDLC</h1>
-      <p class="lede">The agents are the headline. Underneath, AI now assists everyday engineering across nine products and every stage of delivery — 60+ documented use cases and counting.</p>
+      <p class="lede">The agents are the headline. Underneath, the same techniques repeat across every stage of delivery — reusable AI practices that aren't tied to any one product. 60+ documented use cases and counting.</p>
     </div>
     <div class="themegrid">
       <div class="theme"><h4>Test &amp; coverage</h4><p>Unit tests, coverage &amp; automation — Angular/Jest, PHPUnit, Flutter, Playwright MCP.</p></div>
@@ -355,12 +358,10 @@
       <a class="theme link" href="catalogue.html"><h4>See all 60+ →</h4><p>The full catalogue, grouped by product.</p></a>
     </div>
     <div class="acrossfoot">
-      <div class="chipgroup"><span class="cglabel">Products</span>
-        <span class="pchip">MedHub</span><span class="pchip">MedHub Analytics</span><span class="pchip">SwiftRiver</span><span class="pchip">myTIPreport</span><span class="pchip">StaffGarden</span><span class="pchip">Sim</span><span class="pchip">Fisdap</span><span class="pchip">KNET</span><span class="pchip">EdCenter</span>
-      </div>
       <div class="chipgroup"><span class="cglabel">Foundation</span>
         <span class="pchip alt">GitHub Copilot</span><span class="pchip alt">Rovo</span><span class="pchip alt">Playwright MCP</span><span class="pchip alt">Datadog MCP</span><span class="pchip alt">Atlassian MCP</span>
       </div>
+      <span class="foothint">Nine products touched — see the <a href="catalogue.html">full catalogue</a>.</span>
     </div>
   </section>
 
