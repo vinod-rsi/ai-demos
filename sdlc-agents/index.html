@@ -133,9 +133,20 @@
   .panelfoot{flex:none; border-top:1px solid var(--line); padding-top:var(--gap-sm); font-size:var(--fs-micro); color:var(--faint);}
   .panelfoot code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
 
+  /* Diagram-centric agent tabs: full-width figure that scales to fit the panel,
+     with a compact why-it-matters + metric strip beneath. Keeps the no-scroll shell. */
+  .diagwrap{flex:1 1 auto; min-height:0; display:flex; align-items:center; justify-content:center;
+    border-top:1px solid var(--line); padding-top:var(--gap-md);}
+  .diag{max-width:100%; max-height:42vh; width:auto; height:auto; display:block;}
+  .diagfoot{flex:none; display:flex; gap:clamp(16px,3vw,36px); align-items:center; flex-wrap:wrap;
+    border-top:1px solid var(--line); padding-top:var(--gap-md);}
+  .diagfoot .why{flex:1 1 320px; margin:0; font-size:var(--fs-body); color:var(--body);}
+  .diagfoot .why b{color:var(--violet); font-weight:800; text-transform:uppercase; letter-spacing:.04em; font-size:var(--fs-micro);}
+
   @media (max-width:800px){
     .pbody{grid-template-columns:1fr; gap:var(--gap-md);}
     .ovfoot{gap:14px;}
+    .diag{max-height:none;}
   }
 </style>
 </head>
@@ -216,34 +227,12 @@
       <h1 class="title">Architecture &amp; Planning Agent</h1>
       <p class="lede">Answers "what will this take?" with evidence pulled from real code, Arch Web, and Confluence — not a gut feel.</p>
     </div>
-    <div class="pbody">
-      <div>
-        <p class="kicker">What it does</p>
-        <ul class="feat">
-          <li><span class="dot">1</span><span><b>Dual estimates.</b> Effort with an AI agent vs without — per work item and for the total, so the productivity delta is a number.</span></li>
-          <li><span class="dot">2</span><span><b>Confidence score.</b> Every plan carries a High / Medium / Low (~%) rating tied to how much evidence it scanned.</span></li>
-          <li><span class="dot">3</span><span><b>Grounded plans.</b> Phased implementation steps mapped to the actual repos, files, and integration points.</span></li>
-          <li><span class="dot">4</span><span><b>Reuse &amp; comparison.</b> Finds components shared across EValue, MedHub, ATI and more before anything is rebuilt.</span></li>
-          <li><span class="dot">5</span><span><b>Build-ready specs.</b> Emits an OpenSpec behaviour contract a coding agent can implement directly.</span></li>
-        </ul>
-      </div>
-      <div class="rail">
-        <div class="biz">
-          <p class="lbl">Why it matters</p>
-          <p>Estimation stops being guesswork. Leadership sees the AI productivity gain in hours, with a confidence score attached to every plan.</p>
-        </div>
-        <div class="metric">
-          <span class="n gain">~40%</span>
-          <span class="cap">lower effort on boilerplate work, from the dual estimate</span>
-        </div>
-        <span class="illus">Illustrative</span>
-        <div class="ov">
-          <p class="lbl">Sources scanned</p>
-          <p>GitLab (remote, no clone) · Arch Web · Confluence — every claim source-attributed.</p>
-        </div>
-      </div>
+    <div class="diagwrap"><img class="diag" src="diagrams/d2-lifecycle.svg" alt="Continuous delivery loop: Plan & estimate (AscArchDocAgent) → Implement → Test → Review → Operate, looping back to Plan."></div>
+    <div class="diagfoot">
+      <p class="why"><b>Why it matters</b><br>Owns the Plan &amp; estimate phase: dual with-AI vs without-AI effort, a confidence score on every plan, and a build-ready OpenSpec a coding agent can run — estimation stops being guesswork.</p>
+      <div class="metric"><span class="n gain">~40%</span><span class="cap">lower effort on boilerplate, from the dual estimate</span><span class="illus">Illustrative</span></div>
     </div>
-    <div class="panelfoot">Model: Claude Sonnet 4 · Remote-only scanning · GitLab PAT held in session only, never persisted.</div>
+    <div class="panelfoot">Model: Claude Sonnet 4 · Scans GitLab (no clone) · Arch Web · Confluence — every claim source-attributed.</div>
   </section>
 
   <!-- MEDHUB CODING -->
@@ -253,39 +242,12 @@
       <h1 class="title">MedHub Coding Agent</h1>
       <p class="lede">Carries a MEDM ticket from intake to closure — pre-loaded with MedHub architecture, standards, and workflows so developers stop re-explaining context.</p>
     </div>
-    <div class="pbody">
-      <div>
-        <p class="kicker">Across the full ticket lifecycle</p>
-        <ul class="feat">
-          <li><span class="dot">1</span><span><b>Bug investigation.</b> Traces controller → service → gateway and returns a root-cause report with an edge-case checklist.</span></li>
-          <li><span class="dot">2</span><span><b>Feature implementation.</b> Turns Jira acceptance criteria into previewed diffs, commit, and MR.</span></li>
-          <li><span class="dot">3</span><span><b>Test generation, data &amp; execution.</b> QE scenarios and test data run through PHPUnit, Playwright, and SQL checks.</span></li>
-          <li><span class="dot">4</span><span><b>Accessibility remediation.</b> WCAG 2.1 AA fixes validated with axe-core against the live DOM.</span></li>
-          <li><span class="dot">5</span><span><b>Code review &amp; MR fixes.</b> Enforces architecture, security, and coverage; resolves reviewer threads.</span></li>
-        </ul>
-      </div>
-      <div class="rail">
-        <div class="biz">
-          <p class="lbl">Why it matters</p>
-          <p>One agent that already knows the codebase. Context that used to be re-explained every session is built in.</p>
-        </div>
-        <div>
-          <p class="kicker">Guardrails</p>
-          <div class="chips">
-            <span class="chip">Preview before apply</span>
-            <span class="chip">No auto-merge</span>
-            <span class="chip">Duplicate-check</span>
-            <span class="chip">Worklog confirmation</span>
-          </div>
-        </div>
-        <div class="metric">
-          <span class="n">128</span>
-          <span class="cap">tickets resolved with agent assist in the pilot</span>
-          <span class="illus">Illustrative</span>
-        </div>
-      </div>
+    <div class="diagwrap"><img class="diag" src="diagrams/d1-architecture.svg" alt="Four agents — medm-analysis, medm-implement, review-mr, datadogagent — drawing on shared skills; git-analysis and bug-fix are reused across more than one agent."></div>
+    <div class="diagfoot">
+      <p class="why"><b>Why it matters</b><br>Bug investigation, implementation, test generation, accessibility, and code review — one agent that already knows MedHub architecture, standards, and workflows, so context isn't re-explained every session.</p>
+      <div class="metric"><span class="n">128</span><span class="cap">tickets resolved with agent assist in the pilot</span><span class="illus">Illustrative</span></div>
     </div>
-    <div class="panelfoot">Agents: <code>medm-analysis · medm-implement · review-mr · datadogagent</code> · Tools: Jira MCP, GitLab CLI, PHPUnit, Playwright, axe-core.</div>
+    <div class="panelfoot">Guardrails: preview before apply · no auto-merge · duplicate-check · worklog confirmation · Tools: Jira MCP, GitLab CLI, PHPUnit, Playwright, axe-core.</div>
   </section>
 
   <!-- PRODUCTION TRIAGE -->
@@ -295,33 +257,12 @@
       <h1 class="title">Production Triage Agent</h1>
       <p class="lede">Collapses a five-tool HTTP-500 investigation into a single chat — no tab switching, no copy-pasting between Datadog, the IDE, the terminal, and GitLab.</p>
     </div>
-    <div class="pbody">
-      <div>
-        <p class="kicker">The pipeline, in one conversation</p>
-        <ul class="pipe">
-          <li><span class="s">1</span><div><h4>Observe</h4><p>Queries APM traces and logs, correlates by trace ID, and flags regressions first seen within 30 min of a deploy.</p></div></li>
-          <li><span class="s">2</span><div><h4>Attribute</h4><p>Runs <code>git blame</code> to name the exact introducing commit, its author, and the merge request.</p></div></li>
-          <li><span class="s">3</span><div><h4>Remediate</h4><p>Previews a before/after fix; nothing is written until you approve, then it commits and opens the MR.</p></div></li>
-          <li><span class="s">4</span><div><h4>Document</h4><p>Writes a full markdown report and drafts a duplicate-checked Jira ticket.</p></div></li>
-        </ul>
-      </div>
-      <div class="rail">
-        <div class="biz">
-          <p class="lbl">Why it matters</p>
-          <p>From alarm to attributed fix in minutes instead of a cross-tool scavenger hunt. Accountability is instant.</p>
-        </div>
-        <div class="metric">
-          <span class="n gain">3.2×</span>
-          <span class="cap">faster triage — stack trace to fix</span>
-          <span class="illus">Illustrative</span>
-        </div>
-        <div class="ov">
-          <p class="lbl">Proven</p>
-          <p>Two demo sessions recorded with the MedHub team (Feb &amp; Apr 2026).</p>
-        </div>
-      </div>
+    <div class="diagwrap"><img class="diag" src="diagrams/d3-pipeline.svg" alt="Pipeline: Observe (Datadog APM + logs) → Attribute (git blame → commit, author, MR) → Remediate (preview → apply → commit → MR, you approve first) → Document (markdown report + Jira)."></div>
+    <div class="diagfoot">
+      <p class="why"><b>Why it matters</b><br>From alarm to attributed fix in minutes instead of a cross-tool scavenger hunt — the introducing commit, author, and MR surface automatically, and nothing is written until you approve.</p>
+      <div class="metric"><span class="n gain">3.2×</span><span class="cap">faster triage — stack trace to fix</span><span class="illus">Illustrative</span></div>
     </div>
-    <div class="panelfoot">Skills: <code>datadog-analysis · git-analysis · bug-fix</code> · Regression flagged ≤30 min after a deploy.</div>
+    <div class="panelfoot">Skills: <code>datadog-analysis · git-analysis · bug-fix</code> · Two demo sessions recorded with the MedHub team (Feb &amp; Apr 2026).</div>
   </section>
 
 </main>

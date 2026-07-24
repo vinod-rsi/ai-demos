@@ -54,9 +54,13 @@ jobs:
           done
           cp -R mytipreport/myTIPreport-claude/competency-app/dist _site/mytipreport
           mkdir -p _site/boardvitals && cp boardvitals/index.html _site/boardvitals/index.html
-          # SDLC agents page — copy ONLY index.html, never the internal research notes,
-          # so the working brief can never reach the public site even if it exists locally.
-          mkdir -p _site/sdlc-agents && cp sdlc-agents/index.html _site/sdlc-agents/index.html
+          # SDLC agents page — copy the page, the standalone diagrams view, and the
+          # embedded SVGs. Explicitly NOT RESEARCH.md or the .excalidraw sources, so the
+          # internal working notes can never reach the public site even if present locally.
+          mkdir -p _site/sdlc-agents/diagrams
+          cp sdlc-agents/index.html _site/sdlc-agents/index.html
+          cp sdlc-agents/diagrams.html _site/sdlc-agents/diagrams.html
+          cp sdlc-agents/diagrams/*.svg _site/sdlc-agents/diagrams/
           # Pages runs Jekyll by default, which strips files and dirs beginning with an
           # underscore — Vite emits some. .nojekyll disables that processing.
           touch _site/.nojekyll
