@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SDLC AI Agents — Ascend Learning</title>
+<meta name="description" content="Custom engineering agents that assist across the software delivery lifecycle — one tab per agent, one screen." />
+<style>
+  :root{
+    --violet:#6b4eff; --violet-deep:#5236e0; --violet-2:#8a73ff;
+    --lav-50:#f4f2fe; --lav-100:#ebe7fd; --lav-200:#dad3fa;
+    --ink:#1a1730; --body:#3b3654; --mute:#6c6785; --faint:#9a96ad;
+    --line:#e7e4f0; --bg:#f4f4f8; --card:#ffffff;
+    --gain:#0d8f74; --gain-soft:#e2f4ef; --warn:#b0641b;
+
+    /* One screen, no page scroll: vertical rhythm keyed to viewport height so a
+       tall display breathes and a short laptop still fits without scrolling. */
+    --gap-lg:clamp(16px, 3vh, 34px);
+    --gap-md:clamp(10px, 1.7vh, 18px);
+    --gap-sm:clamp(6px, 0.95vh, 11px);
+    --fs-title:clamp(22px, min(3.6vh, 6.6vw), 36px);
+    --fs-lede:clamp(14px, min(2vh, 4vw), 18px);
+    --fs-body:clamp(13px, min(1.85vh, 3.7vw), 16px);
+    --fs-micro:clamp(10px, 1.35vh, 12.5px);
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{margin:0; background:var(--bg); color:var(--body);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.5;
+    display:grid; grid-template-rows:auto auto minmax(0,1fr); overflow:hidden;}
+  .wrap{max-width:1200px; margin:0 auto; padding:0 clamp(18px,3vw,40px); width:100%;}
+
+  /* Top bar */
+  .topbar{background:#fff; border-bottom:1px solid var(--line);}
+  .topbar .row{display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:clamp(8px,1.3vh,15px) 0;}
+  .brand{display:flex; align-items:center; gap:12px;}
+  .logo{width:clamp(30px,4.2vh,42px); height:clamp(30px,4.2vh,42px); border-radius:11px; flex:none;
+    background:linear-gradient(145deg,#7c5cff,#5a3be6);
+    display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(90,59,230,.35);}
+  .logo svg{width:56%; height:56%;}
+  .brand .name{font-size:clamp(14px,1.9vh,18px); font-weight:800; color:var(--ink); line-height:1.1;}
+  .brand .sub{font-size:var(--fs-micro); font-weight:700; letter-spacing:.15em; color:var(--faint); text-transform:uppercase; margin-top:2px;}
+  .conf{font-size:var(--fs-micro); font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--violet);
+    border:1.5px solid color-mix(in srgb, var(--violet) 42%, transparent); padding:6px 12px; border-radius:22px; white-space:nowrap;}
+
+  /* Tabs */
+  .tabsbar{background:#fff; border-bottom:1px solid var(--line);}
+  .tabs{display:flex; gap:clamp(14px,2.2vw,32px); overflow-x:auto; scrollbar-width:none;}
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{appearance:none; background:none; border:none; cursor:pointer; white-space:nowrap; display:flex; align-items:center; gap:8px;
+    font-size:clamp(10.5px,1.35vh,12.5px); font-weight:700; letter-spacing:.11em; text-transform:uppercase; color:var(--faint);
+    padding:clamp(9px,1.5vh,16px) 2px; border-bottom:3px solid transparent; transition:color .15s;}
+  .tab:hover{color:var(--mute);}
+  .tab:focus-visible{outline:2px solid var(--violet); outline-offset:3px; border-radius:3px;}
+  .tab .num{color:var(--lav-200); font-weight:800;}
+  .tab.active{color:var(--violet); border-bottom-color:var(--violet);}
+  .tab.active .num{color:var(--violet-2);}
+
+  /* Panel shell — compound selector so .wrap's padding isn't lost to a bare `main`. */
+  main.wrap{min-height:0; padding-top:var(--gap-lg); padding-bottom:var(--gap-lg); overflow:hidden;}
+  .panel{height:100%; display:flex; flex-direction:column; gap:var(--gap-md); overflow:auto;}
+  .panel[hidden]{display:none;}
+  .phead{flex:none;}
+  .eyebrow{font-size:var(--fs-micro); font-weight:800; letter-spacing:.17em; text-transform:uppercase; color:var(--violet); margin:0 0 var(--gap-sm);}
+  h1.title{font-size:var(--fs-title); line-height:1.08; font-weight:800; color:var(--ink); margin:0; letter-spacing:-.4px; text-wrap:balance;}
+  h1.title em{font-style:normal; color:var(--violet);}
+  .lede{font-size:var(--fs-lede); color:var(--mute); max-width:76ch; margin:var(--gap-sm) 0 0;}
+
+  /* Two-column body: capability | why it matters + context */
+  .pbody{flex:1 0 auto; display:grid; grid-template-columns:1.4fr 1fr; gap:clamp(20px,3vw,44px);
+    border-top:1px solid var(--line); padding-top:var(--gap-md); min-height:0;}
+  .kicker{font-size:var(--fs-micro); font-weight:800; letter-spacing:.15em; text-transform:uppercase; color:var(--faint); margin:0 0 var(--gap-sm);}
+
+  .feat{list-style:none; margin:0; padding:0; display:grid; gap:var(--gap-sm); align-content:start;}
+  .feat li{display:flex; gap:11px; align-items:flex-start; font-size:var(--fs-body); color:var(--body);}
+  .feat .dot{flex:none; width:clamp(17px,2.2vh,21px); height:clamp(17px,2.2vh,21px); border-radius:6px;
+    background:var(--lav-100); color:var(--violet); font-size:var(--fs-micro); font-weight:800;
+    display:flex; align-items:center; justify-content:center; margin-top:2px;}
+  .feat li b{color:var(--ink); font-weight:700;}
+
+  /* Right rail */
+  .rail{display:flex; flex-direction:column; gap:var(--gap-md); min-width:0;}
+  .biz{background:var(--lav-50); border-left:3px solid var(--violet); border-radius:0 10px 10px 0; padding:var(--gap-md) clamp(13px,1.6vw,20px);}
+  .biz p,.ov p{margin:0; font-size:var(--fs-body); color:var(--body);}
+  .biz .lbl,.ov .lbl{font-size:var(--fs-micro); font-weight:800; letter-spacing:.1em; text-transform:uppercase; margin:0 0 5px;}
+  .biz .lbl{color:var(--violet);} .ov .lbl{color:var(--faint);} .ov p{color:var(--mute);}
+
+  /* A single highlighted metric in the rail */
+  .metric{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+  .metric .n{font-size:clamp(26px,4.4vh,40px); font-weight:800; color:var(--ink); letter-spacing:-1px; line-height:1; font-variant-numeric:tabular-nums;}
+  .metric .n.gain{color:var(--gain);}
+  .metric .cap{font-size:var(--fs-body); color:var(--mute); max-width:24ch;}
+  .illus{align-self:flex-start; font-size:var(--fs-micro); font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--violet); background:var(--lav-100); padding:3px 9px; border-radius:5px;}
+
+  /* Safety chips */
+  .chips{display:flex; flex-wrap:wrap; gap:6px;}
+  .chip{font-size:var(--fs-micro); font-weight:700; color:var(--gain); background:var(--gain-soft); padding:5px 10px; border-radius:16px;}
+  .chip::before{content:"✓ "; font-weight:800;}
+
+  /* Datadog pipeline steps */
+  .pipe{list-style:none; margin:0; padding:0; display:grid; gap:var(--gap-sm);}
+  .pipe li{display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:start;}
+  .pipe .s{width:clamp(22px,3vh,28px); height:clamp(22px,3vh,28px); border-radius:8px; flex:none;
+    background:var(--violet); color:#fff; font-size:var(--fs-micro); font-weight:800; display:flex; align-items:center; justify-content:center;}
+  .pipe h4{margin:0; font-size:var(--fs-body); color:var(--ink); font-weight:800;}
+  .pipe p{margin:1px 0 0; font-size:var(--fs-body); color:var(--mute);}
+
+  /* Overview: two bets + lifecycle rail */
+  .bets{display:flex; flex-direction:column; gap:var(--gap-sm);}
+  .bet{border:1px solid var(--line); border-radius:12px; padding:var(--gap-md) clamp(14px,1.6vw,20px); background:var(--card);}
+  .bet.now{background:linear-gradient(150deg,var(--lav-50),var(--card)); border-color:var(--lav-200);}
+  .bet .k{font-size:var(--fs-micro); font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); margin:0 0 4px;}
+  .bet.now .k{color:var(--violet);}
+  .bet h3{margin:0 0 3px; font-size:clamp(15px,2vh,19px); color:var(--ink); font-weight:800; letter-spacing:-.2px;}
+  .bet p{margin:0; font-size:var(--fs-body); color:var(--mute);}
+
+  .life{list-style:none; margin:0; padding:0; display:grid; gap:var(--gap-sm);}
+  .life li{display:grid; grid-template-columns:auto 1fr auto; gap:11px; align-items:center; font-size:var(--fs-body);}
+  .life .n{width:clamp(20px,2.7vh,26px); height:clamp(20px,2.7vh,26px); border-radius:6px; flex:none;
+    background:var(--lav-100); color:var(--violet); font-size:var(--fs-micro); font-weight:800; display:flex; align-items:center; justify-content:center;}
+  .life b{color:var(--ink); font-weight:700;}
+  .life code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.82em; color:var(--faint); white-space:nowrap;}
+
+  /* Overview footer: metrics strip */
+  .ovfoot{flex:none; border-top:1px solid var(--line); padding-top:var(--gap-md); display:flex; align-items:center; gap:clamp(16px,3vw,40px); flex-wrap:wrap;}
+  .ovstat .n{font-size:clamp(19px,3vh,28px); font-weight:800; color:var(--ink); letter-spacing:-.5px; line-height:1; font-variant-numeric:tabular-nums;}
+  .ovstat .n.gain{color:var(--gain);}
+  .ovstat .l{font-size:var(--fs-micro); color:var(--mute); margin-top:3px; max-width:20ch;}
+  .ovfoot .illus{margin-left:auto;}
+
+  .panelfoot{flex:none; border-top:1px solid var(--line); padding-top:var(--gap-sm); font-size:var(--fs-micro); color:var(--faint);}
+  .panelfoot code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
+
+  @media (max-width:800px){
+    .pbody{grid-template-columns:1fr; gap:var(--gap-md);}
+    .ovfoot{gap:14px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap row">
+    <div class="brand">
+      <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l3 6 6 .8-4.4 4.3 1.1 6.1L12 16.6 6.3 19.2l1.1-6.1L3 8.8 9 8z" fill="#fff"/></svg></span>
+      <div><div class="name">SDLC AI Agents</div><div class="sub">Ascend Learning · Engineering</div></div>
+    </div>
+    <span class="conf">Engineering Prototype</span>
+  </div>
+</div>
+
+<div class="tabsbar">
+  <div class="wrap tabs" role="tablist">
+    <button class="tab active" role="tab" aria-selected="true" data-panel="overview">Overview</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="arch"><span class="num">01</span> Architecture &amp; Planning</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="medhub"><span class="num">02</span> MedHub Coding</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="datadog"><span class="num">03</span> Production Triage</button>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- OVERVIEW -->
+  <section class="panel" id="overview" role="tabpanel">
+    <div class="phead">
+      <p class="eyebrow">Engineering productivity</p>
+      <h1 class="title">AI that ships software, not just <em>features inside it</em>.</h1>
+      <p class="lede">A suite of custom Copilot agents that assist across the delivery lifecycle — from planning through implementation, testing, review, and production triage. Every one keeps a human in the loop.</p>
+    </div>
+    <div class="pbody">
+      <div>
+        <p class="kicker">Two bets on AI</p>
+        <div class="bets">
+          <div class="bet">
+            <p class="k">Bet one — in the product</p>
+            <h3>AI our customers touch</h3>
+            <p>The eight prototype demos: adaptive simulation, study copilots, mastery engines.</p>
+          </div>
+          <div class="bet now">
+            <p class="k">Bet two — in how we build</p>
+            <h3>AI our engineers ship with</h3>
+            <p>This suite: agents embedded in writing, testing, and running code — one tab each →</p>
+          </div>
+        </div>
+      </div>
+      <div class="rail">
+        <p class="kicker">Across the lifecycle</p>
+        <ul class="life">
+          <li><span class="n">01</span><span><b>Plan &amp; estimate</b></span><code>AscArchDocAgent</code></li>
+          <li><span class="n">02</span><span><b>Implement</b></span><code>medm-implement</code></li>
+          <li><span class="n">03</span><span><b>Test</b></span><code>qe-test-cases</code></li>
+          <li><span class="n">04</span><span><b>Review</b></span><code>code-review</code></li>
+          <li><span class="n">05</span><span><b>Operate &amp; triage</b></span><code>datadogagent</code></li>
+        </ul>
+        <div class="biz">
+          <p class="lbl">The through-line</p>
+          <p>The agents share skills and hand off to each other — one family covering every phase, not three disconnected tools.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ovfoot">
+      <div class="ovstat"><div class="n gain">~40%</div><div class="l">less effort on boilerplate tickets</div></div>
+      <div class="ovstat"><div class="n">3.2×</div><div class="l">faster incident triage</div></div>
+      <div class="ovstat"><div class="n">~9.7k</div><div class="l">engineer-hours reclaimed / yr</div></div>
+      <div class="ovstat"><div class="n">128</div><div class="l">MEDM tickets resolved in pilot</div></div>
+      <span class="illus">Illustrative figures</span>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE & PLANNING -->
+  <section class="panel" id="arch" role="tabpanel" hidden>
+    <div class="phead">
+      <p class="eyebrow">Plan · Estimate · Spec</p>
+      <h1 class="title">Architecture &amp; Planning Agent</h1>
+      <p class="lede">Answers "what will this take?" with evidence pulled from real code, Arch Web, and Confluence — not a gut feel.</p>
+    </div>
+    <div class="pbody">
+      <div>
+        <p class="kicker">What it does</p>
+        <ul class="feat">
+          <li><span class="dot">1</span><span><b>Dual estimates.</b> Effort with an AI agent vs without — per work item and for the total, so the productivity delta is a number.</span></li>
+          <li><span class="dot">2</span><span><b>Confidence score.</b> Every plan carries a High / Medium / Low (~%) rating tied to how much evidence it scanned.</span></li>
+          <li><span class="dot">3</span><span><b>Grounded plans.</b> Phased implementation steps mapped to the actual repos, files, and integration points.</span></li>
+          <li><span class="dot">4</span><span><b>Reuse &amp; comparison.</b> Finds components shared across EValue, MedHub, ATI and more before anything is rebuilt.</span></li>
+          <li><span class="dot">5</span><span><b>Build-ready specs.</b> Emits an OpenSpec behaviour contract a coding agent can implement directly.</span></li>
+        </ul>
+      </div>
+      <div class="rail">
+        <div class="biz">
+          <p class="lbl">Why it matters</p>
+          <p>Estimation stops being guesswork. Leadership sees the AI productivity gain in hours, with a confidence score attached to every plan.</p>
+        </div>
+        <div class="metric">
+          <span class="n gain">~40%</span>
+          <span class="cap">lower effort on boilerplate work, from the dual estimate</span>
+        </div>
+        <span class="illus">Illustrative</span>
+        <div class="ov">
+          <p class="lbl">Sources scanned</p>
+          <p>GitLab (remote, no clone) · Arch Web · Confluence — every claim source-attributed.</p>
+        </div>
+      </div>
+    </div>
+    <div class="panelfoot">Model: Claude Sonnet 4 · Remote-only scanning · GitLab PAT held in session only, never persisted.</div>
+  </section>
+
+  <!-- MEDHUB CODING -->
+  <section class="panel" id="medhub" role="tabpanel" hidden>
+    <div class="phead">
+      <p class="eyebrow">Build · Test · Review</p>
+      <h1 class="title">MedHub Coding Agent</h1>
+      <p class="lede">Carries a MEDM ticket from intake to closure — pre-loaded with MedHub architecture, standards, and workflows so developers stop re-explaining context.</p>
+    </div>
+    <div class="pbody">
+      <div>
+        <p class="kicker">Across the full ticket lifecycle</p>
+        <ul class="feat">
+          <li><span class="dot">1</span><span><b>Bug investigation.</b> Traces controller → service → gateway and returns a root-cause report with an edge-case checklist.</span></li>
+          <li><span class="dot">2</span><span><b>Feature implementation.</b> Turns Jira acceptance criteria into previewed diffs, commit, and MR.</span></li>
+          <li><span class="dot">3</span><span><b>Test generation, data &amp; execution.</b> QE scenarios and test data run through PHPUnit, Playwright, and SQL checks.</span></li>
+          <li><span class="dot">4</span><span><b>Accessibility remediation.</b> WCAG 2.1 AA fixes validated with axe-core against the live DOM.</span></li>
+          <li><span class="dot">5</span><span><b>Code review &amp; MR fixes.</b> Enforces architecture, security, and coverage; resolves reviewer threads.</span></li>
+        </ul>
+      </div>
+      <div class="rail">
+        <div class="biz">
+          <p class="lbl">Why it matters</p>
+          <p>One agent that already knows the codebase. Context that used to be re-explained every session is built in.</p>
+        </div>
+        <div>
+          <p class="kicker">Guardrails</p>
+          <div class="chips">
+            <span class="chip">Preview before apply</span>
+            <span class="chip">No auto-merge</span>
+            <span class="chip">Duplicate-check</span>
+            <span class="chip">Worklog confirmation</span>
+          </div>
+        </div>
+        <div class="metric">
+          <span class="n">128</span>
+          <span class="cap">tickets resolved with agent assist in the pilot</span>
+          <span class="illus">Illustrative</span>
+        </div>
+      </div>
+    </div>
+    <div class="panelfoot">Agents: <code>medm-analysis · medm-implement · review-mr · datadogagent</code> · Tools: Jira MCP, GitLab CLI, PHPUnit, Playwright, axe-core.</div>
+  </section>
+
+  <!-- PRODUCTION TRIAGE -->
+  <section class="panel" id="datadog" role="tabpanel" hidden>
+    <div class="phead">
+      <p class="eyebrow">Observe · Attribute · Remediate</p>
+      <h1 class="title">Production Triage Agent</h1>
+      <p class="lede">Collapses a five-tool HTTP-500 investigation into a single chat — no tab switching, no copy-pasting between Datadog, the IDE, the terminal, and GitLab.</p>
+    </div>
+    <div class="pbody">
+      <div>
+        <p class="kicker">The pipeline, in one conversation</p>
+        <ul class="pipe">
+          <li><span class="s">1</span><div><h4>Observe</h4><p>Queries APM traces and logs, correlates by trace ID, and flags regressions first seen within 30 min of a deploy.</p></div></li>
+          <li><span class="s">2</span><div><h4>Attribute</h4><p>Runs <code>git blame</code> to name the exact introducing commit, its author, and the merge request.</p></div></li>
+          <li><span class="s">3</span><div><h4>Remediate</h4><p>Previews a before/after fix; nothing is written until you approve, then it commits and opens the MR.</p></div></li>
+          <li><span class="s">4</span><div><h4>Document</h4><p>Writes a full markdown report and drafts a duplicate-checked Jira ticket.</p></div></li>
+        </ul>
+      </div>
+      <div class="rail">
+        <div class="biz">
+          <p class="lbl">Why it matters</p>
+          <p>From alarm to attributed fix in minutes instead of a cross-tool scavenger hunt. Accountability is instant.</p>
+        </div>
+        <div class="metric">
+          <span class="n gain">3.2×</span>
+          <span class="cap">faster triage — stack trace to fix</span>
+          <span class="illus">Illustrative</span>
+        </div>
+        <div class="ov">
+          <p class="lbl">Proven</p>
+          <p>Two demo sessions recorded with the MedHub team (Feb &amp; Apr 2026).</p>
+        </div>
+      </div>
+    </div>
+    <div class="panelfoot">Skills: <code>datadog-analysis · git-analysis · bug-fix</code> · Regression flagged ≤30 min after a deploy.</div>
+  </section>
+
+</main>
+
+<script>
+  const tabs = document.querySelectorAll(".tab");
+  const panels = document.querySelectorAll(".panel");
+  tabs.forEach(tab => tab.addEventListener("click", () => {
+    tabs.forEach(t => { t.classList.remove("active"); t.setAttribute("aria-selected", "false"); });
+    tab.classList.add("active"); tab.setAttribute("aria-selected", "true");
+    const id = tab.dataset.panel;
+    panels.forEach(p => { p.hidden = p.id !== id; });
+  }));
+</script>
+</body>
+</html>

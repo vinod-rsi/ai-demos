@@ -39,3 +39,9 @@ coverage/
 # macOS zip cruft
 __MACOSX/
 ._*
+
+# Internal-only working notes — contains colleague names + internal hostnames.
+# Never publish to the public repo. The SDLC agents page (index.html) is public;
+# this research brief is not.
+sdlc-agents/RESEARCH.md
+sdlc-agents/DEPLOYMENT.md

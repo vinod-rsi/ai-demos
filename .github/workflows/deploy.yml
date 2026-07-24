@@ -54,6 +54,9 @@ jobs:
           done
           cp -R mytipreport/myTIPreport-claude/competency-app/dist _site/mytipreport
           mkdir -p _site/boardvitals && cp boardvitals/index.html _site/boardvitals/index.html
+          # SDLC agents page — copy ONLY index.html, never the internal research notes,
+          # so the working brief can never reach the public site even if it exists locally.
+          mkdir -p _site/sdlc-agents && cp sdlc-agents/index.html _site/sdlc-agents/index.html
           # Pages runs Jekyll by default, which strips files and dirs beginning with an
           # underscore — Vite emits some. .nojekyll disables that processing.
           touch _site/.nojekyll
@@ -62,7 +65,7 @@ jobs:
         run: |
           set -euo pipefail
           missing=0
-          for d in swiftriver simulation-engineering jbl fisdap lab-assistant live-lab-session boardvitals mytipreport; do
+          for d in swiftriver simulation-engineering jbl fisdap lab-assistant live-lab-session boardvitals mytipreport sdlc-agents; do
             if [ -f "_site/$d/index.html" ]; then
               echo "ok   $d"
             else

@@ -47,6 +47,9 @@
   .crumb{font-size:var(--fs-micro); font-weight:700; letter-spacing:.13em; color:var(--faint); text-transform:uppercase;}
   .pill{font-size:var(--fs-micro); font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:7px 14px; border-radius:22px;}
   .pill.outline{background:#fff; color:var(--mute); border:1.5px solid var(--line);}
+  .pill.link{background:var(--purple); color:#fff; text-decoration:none; border:1.5px solid var(--purple); transition:background .15s;}
+  .pill.link:hover{background:var(--purple-dark);}
+  .pill.link:focus-visible{outline:2px solid var(--ink); outline-offset:2px;}
 
   /* Tabs */
   .tabsbar{background:#fff; border-bottom:1px solid var(--line);}
@@ -199,6 +202,7 @@
     </div>
     <div class="top-right">
       <span class="crumb">AI Demos · Ascend Learning</span>
+      <a class="pill link" href="./sdlc-agents/">SDLC Agents →</a>
       <span class="pill outline">Prototypes</span>
     </div>
   </div>
