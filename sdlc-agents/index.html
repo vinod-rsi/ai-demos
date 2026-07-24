@@ -216,16 +216,15 @@
         </ul>
         <div class="biz">
           <p class="lbl">The through-line</p>
-          <p>The agents share skills and hand off to each other — one family covering every phase, not three disconnected tools.</p>
+          <p>Five agents share one skill system and hand off to each other — one family covering every phase, not separate disconnected tools.</p>
         </div>
       </div>
     </div>
     <div class="ovfoot">
-      <div class="ovstat"><div class="n gain">~40%</div><div class="l">less effort on boilerplate tickets</div></div>
-      <div class="ovstat"><div class="n">3.2×</div><div class="l">faster incident triage</div></div>
-      <div class="ovstat"><div class="n">~9.7k</div><div class="l">engineer-hours reclaimed / yr</div></div>
-      <div class="ovstat"><div class="n">128</div><div class="l">MEDM tickets resolved in pilot</div></div>
-      <span class="illus">Illustrative figures</span>
+      <div class="ovstat"><div class="n gain">50k+</div><div class="l">accessibility issues fixed · ~1.5 months</div></div>
+      <div class="ovstat"><div class="n gain">1,000→200</div><div class="l">open AMBS bugs, over recent months</div></div>
+      <div class="ovstat"><div class="n">5</div><div class="l">custom agents, one shared skill system</div></div>
+      <div class="ovstat"><div class="n">100%</div><div class="l">changes human-approved before write</div></div>
     </div>
   </section>
 
@@ -249,14 +248,14 @@
     <div class="phead">
       <p class="eyebrow">Build · Test · Review</p>
       <h1 class="title">MedHub Coding Agent</h1>
-      <p class="lede">Carries a MEDM ticket from intake to closure — pre-loaded with MedHub architecture, standards, and workflows so developers stop re-explaining context.</p>
+      <p class="lede">The MedHub agent family — five custom Copilot agents sharing one skill system — carries a ticket from intake to closure, pre-loaded with MedHub architecture, standards, and workflows.</p>
     </div>
-    <div class="diagwrap"><img class="diag" src="diagrams/d1-architecture.svg" alt="Four agents — medm-analysis, medm-implement, review-mr, datadogagent — drawing on shared skills; git-analysis and bug-fix are reused across more than one agent."></div>
+    <div class="diagwrap"><img class="diag" src="diagrams/d1-architecture.svg" alt="Five agents — ambs-debug, medm-analysis, medm-implement, review-mr, datadogagent — drawing on shared skills; git-analysis and bug-fix are reused across three of them."></div>
     <div class="diagfoot">
-      <p class="why"><b>Why it matters</b><br>Bug investigation, implementation, test generation, accessibility, and code review — one agent that already knows MedHub architecture, standards, and workflows, so context isn't re-explained every session.</p>
-      <div class="metric"><span class="n">128</span><span class="cap">tickets resolved with agent assist in the pilot</span><span class="illus">Illustrative</span></div>
+      <p class="why"><b>Why it matters</b><br>Feature work, code review, production triage, AMBS bug-fixing (open bugs down from ~1,000 to ~200), and accessibility remediation — one family that already knows MedHub, so context isn't re-explained every session.</p>
+      <div class="metric"><span class="n gain">50k+</span><span class="cap">accessibility issues fixed by the QE agent in ~1.5 months</span></div>
     </div>
-    <div class="panelfoot">Guardrails: preview before apply · no auto-merge · duplicate-check · worklog confirmation · Tools: Jira MCP, GitLab CLI, PHPUnit, Playwright, axe-core.</div>
+    <div class="panelfoot">Agents: <code>ambs-debug · medm-analysis · medm-implement · review-mr · datadogagent</code> · Guardrails: preview before apply · no auto-merge · SELECT-only SQL.</div>
   </section>
 
   <!-- PRODUCTION TRIAGE -->
