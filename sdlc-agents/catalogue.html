@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI in SDLC — Use-Case Catalogue</title>
+<meta name="description" content="The full catalogue of AI-assisted engineering work across Ascend Learning products, grouped by product." />
+<style>
+  :root{--bg:#f4f4f8;--card:#fff;--ink:#20233a;--body:#3b3654;--mute:#6b7280;--faint:#9a96ad;
+    --line:#e6e3f0;--violet:#6b4eff;--lav-50:#f4f2fe;--lav-100:#ebe7fd;--gain:#0d8f74;--gain-soft:#e2f4ef;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--body);line-height:1.5;
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1160px;margin:0 auto;padding:clamp(22px,4vw,44px) clamp(16px,4vw,40px);}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:6px;}
+  .backlink{font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute);text-decoration:none;}
+  .backlink:hover{color:var(--violet);}
+  .eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--violet);margin:0 0 8px;}
+  h1{font-size:clamp(1.6rem,3.4vw,2.2rem);margin:0 0 6px;letter-spacing:-.02em;}
+  .sub{color:var(--mute);margin:0 0 8px;max-width:75ch;}
+  .note{font-size:.82rem;color:var(--faint);margin:0 0 24px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px;}
+  .prod{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:0 1px 3px rgba(30,27,46,.05);}
+  .prod h2{font-size:1.05rem;margin:0 0 2px;letter-spacing:-.01em;color:var(--ink);display:flex;align-items:baseline;gap:8px;}
+  .prod .cnt{font-size:.72rem;font-weight:700;color:var(--violet);background:var(--lav-100);padding:2px 8px;border-radius:10px;}
+  .prod .tag{font-size:.72rem;color:var(--faint);margin:0 0 12px;}
+  .prod ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;}
+  .prod li{position:relative;padding-left:16px;font-size:.9rem;color:var(--body);line-height:1.4;}
+  .prod li::before{content:"";position:absolute;left:0;top:.55em;width:5px;height:5px;border-radius:50%;background:var(--violet);}
+  .prod.foundation{background:linear-gradient(160deg,var(--lav-50),var(--card));}
+  .prod.foundation li::before{background:var(--gain);}
+  footer{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-size:.8rem;color:var(--faint);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <p class="eyebrow" style="margin:0">Ascend Learning · Engineering</p>
+    <a class="backlink" href="./">← SDLC AI Agents</a>
+  </div>
+  <h1>AI in SDLC — use-case catalogue</h1>
+  <p class="sub">Beyond the flagship agents, this is the everyday AI-assisted engineering work documented across the platform — 60+ use cases spanning test coverage, accessibility, feature delivery, upgrades, observability, and code quality.</p>
+  <p class="note">Grouped by product. Titles reflect the internal write-ups in the "AI in SDLC" space; this page is a public-safe summary and omits individual and per-ticket data.</p>
+
+  <div class="grid">
+
+    <section class="prod">
+      <h2>MedHub <span class="cnt">8</span></h2>
+      <p class="tag">Core platform · PHP</p>
+      <ul>
+        <li>Manual test-case creation through AI</li>
+        <li>Fetch unique document types across multiple databases</li>
+        <li>Code optimization for memory &amp; timeout issues</li>
+        <li>Fix gradebook page-load &amp; export functionality</li>
+        <li>Conditions-based feature implementation</li>
+        <li>Test automation</li>
+        <li>Copilot — optimization help</li>
+        <li>Copilot — unit test cases written</li>
+      </ul>
+    </section>
+
+    <section class="prod">
+      <h2>myTIPreport <span class="cnt">13</span></h2>
+      <p class="tag">Web + mobile · assessment</p>
+      <ul>
+        <li>Azure swap-action issue resolution</li>
+        <li>Retrieve secrets from GitHub Actions</li>
+        <li>Evaluation-expiration issue resolution</li>
+        <li>JScrambler implementation</li>
+        <li>Data-driven code</li>
+        <li>Reverse engineering</li>
+        <li>Password-expiration for user accounts</li>
+        <li>Scheduled evals not becoming active</li>
+        <li>Update email-sending code</li>
+        <li>VPAT documentation for compliance</li>
+        <li>iOS app crash fix</li>
+        <li>Android lower-environment DB pointing</li>
+        <li>Code review with Atlassian MCP &amp; AI agent</li>
+      </ul>
+    </section>
+
+    <section class="prod">
+      <h2>StaffGarden Mobile <span class="cnt">10</span></h2>
+      <p class="tag">Flutter</p>
+      <ul>
+        <li>Responsiveness &amp; theme selection</li>
+        <li>Widget testing for login flow</li>
+        <li>Code-rules implementation</li>
+        <li>Flutter &amp; Riverpod upgrade</li>
+        <li>Port FontAwesome icons to mobile</li>
+        <li>Main-page layout testing</li>
+        <li>Firebase Cloud Messaging (FCM) push notifications</li>
+        <li>Deep-linking POC + best-practice summary</li>
+        <li>Feature implementation via AI agent (prompt-first)</li>
+        <li>Biometric authentication POC</li>
+      </ul>
+    </section>
+
+    <section class="prod">
+      <h2>Sim Simulation <span class="cnt">7</span></h2>
+      <p class="tag">PHP / Laravel · observability</p>
+      <ul>
+        <li>Accessibility — EHR charts, multi-page content</li>
+        <li>Accessibility — contrast tool reporting</li>
+        <li>Unit-test code coverage</li>
+        <li>Upgrade to PHP 8.4 &amp; Laravel 12</li>
+        <li>Remove obsolete code — KNET LRS management</li>
+        <li>Predictive anomaly detection (Datadog MCP)</li>
+        <li>Datadog SLOs &amp; monitors for KNET service</li>
+      </ul>
+    </section>
+
+    <section class="prod">
+      <h2>MedHub Analytics <span class="cnt">4</span></h2>
+      <p class="tag">Angular</p>
+      <ul>
+        <li>Angular/Jest unit-test coverage enhancement</li>
+        <li>Multi-level filtering in UI</li>
+        <li>Enhance readability &amp; maintainability</li>
+        <li>Program-level filtering (timesheet submission view)</li>
+      </ul>
+    </section>
+
+    <section class="prod">
+      <h2>SwiftRiver <span class="cnt">4</span></h2>
+      <p class="tag">Angular</p>
+      <ul>
+        <li>Generate SQL query</li>
+        <li>Unit test cases</li>
+        <li>Accessibility defect fix</li>
+        <li>Upgrade Angular 19 → 20</li>
+      </ul>
+    </section>
+
+    <section class="prod">
+      <h2>Fisdap <span class="cnt">1</span></h2>
+      <p class="tag">SQL Server</p>
+      <ul>
+        <li>SSL certification issue in SQL Server</li>
+      </ul>
+    </section>
+
+    <section class="prod">
+      <h2>Cross-cutting <span class="cnt">10</span></h2>
+      <p class="tag">Shared techniques &amp; tooling</p>
+      <ul>
+        <li>Analyze Datadog logs</li>
+        <li>Git remote-branch pointing change</li>
+        <li>Code review &amp; refactor</li>
+        <li>Set up Playwright MCP server</li>
+        <li>Automate EdCenter password validation (Playwright MCP)</li>
+        <li>Convert Playwright JavaScript → TypeScript</li>
+        <li>Localization in an existing page</li>
+        <li>Access shadow-root UI elements in JavaScript</li>
+        <li>Convert Figma / images → Angular code</li>
+        <li>Set up Angular app &amp; .NET API</li>
+      </ul>
+    </section>
+
+    <section class="prod foundation">
+      <h2>Program &amp; foundation</h2>
+      <p class="tag">How the practice is run</p>
+      <ul>
+        <li>AI Champions program</li>
+        <li>GitHub Copilot rollout</li>
+        <li>Rovo in QE</li>
+        <li>Rovo prompt repository</li>
+        <li>New-member onboarding — tools, access &amp; usage</li>
+        <li>JIRA / DORA reports auto-generated by a metrics agent</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <footer>Internal engineering practice · Ascend Learning. Summarized from the "AI in SDLC" Confluence space; individual and per-ticket data intentionally omitted.</footer>
+</div>
+</body>
+</html>

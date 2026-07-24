@@ -60,6 +60,7 @@ jobs:
           mkdir -p _site/sdlc-agents/diagrams
           cp sdlc-agents/index.html _site/sdlc-agents/index.html
           cp sdlc-agents/diagrams.html _site/sdlc-agents/diagrams.html
+          cp sdlc-agents/catalogue.html _site/sdlc-agents/catalogue.html
           cp sdlc-agents/diagrams/*.svg _site/sdlc-agents/diagrams/
           # Pages runs Jekyll by default, which strips files and dirs beginning with an
           # underscore — Vite emits some. .nojekyll disables that processing.

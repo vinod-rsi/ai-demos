@@ -163,6 +163,25 @@
 
   @media (max-width:800px){ .agentbody{grid-template-columns:1fr;} .agentbody .fig .diag{max-height:none;} }
 
+  /* Across-the-SDLC tab: theme grid + product / foundation chips */
+  .themegrid{flex:1 1 auto; min-height:0; display:grid; grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:minmax(0,1fr); gap:1px; background:var(--line); border:1px solid var(--line);
+    border-radius:12px; overflow:hidden; margin-top:var(--gap-md);}
+  .theme{background:var(--card); padding:clamp(10px,1.7vh,18px) clamp(12px,1.1vw,17px);
+    display:flex; flex-direction:column; gap:5px; min-width:0; text-decoration:none;}
+  .theme h4{margin:0; font-size:clamp(13px,1.75vh,15.5px); color:var(--ink); font-weight:800; letter-spacing:-.01em;}
+  .theme p{margin:0; font-size:var(--fs-micro); color:var(--mute); line-height:1.38;}
+  .theme.link{background:linear-gradient(150deg,var(--lav-50),var(--card)); justify-content:center;}
+  .theme.link h4{color:var(--violet);}
+  .theme.link:hover{background:var(--lav-100);}
+  .acrossfoot{flex:none; display:flex; flex-wrap:wrap; gap:8px clamp(20px,3vw,40px); align-items:flex-start;
+    border-top:1px solid var(--line); padding-top:var(--gap-md);}
+  .chipgroup{display:flex; flex-wrap:wrap; align-items:center; gap:6px; min-width:0;}
+  .cglabel{font-size:var(--fs-micro); font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin-right:2px;}
+  .pchip{font-size:var(--fs-micro); font-weight:700; color:var(--violet); background:var(--lav-100); padding:4px 10px; border-radius:14px; white-space:nowrap;}
+  .pchip.alt{color:var(--gain); background:var(--gain-soft);}
+  @media (max-width:800px){ .themegrid{grid-template-columns:repeat(2,1fr);} }
+
   @media (max-width:800px){
     .pbody{grid-template-columns:1fr; gap:var(--gap-md);}
     .ovfoot{gap:14px;}
@@ -191,6 +210,7 @@
     <button class="tab" role="tab" aria-selected="false" data-panel="arch"><span class="num">01</span> Architecture &amp; Planning</button>
     <button class="tab" role="tab" aria-selected="false" data-panel="medhub"><span class="num">02</span> MedHub Coding</button>
     <button class="tab" role="tab" aria-selected="false" data-panel="datadog"><span class="num">03</span> Production Triage</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="across"><span class="num">04</span> Across the SDLC</button>
   </div>
 </div>
 
@@ -315,6 +335,33 @@
       </div>
     </div>
     <div class="panelfoot">Skills: <code>datadog-analysis · git-analysis · bug-fix</code> · Two demo sessions recorded with the MedHub team (Feb &amp; Apr 2026).</div>
+  </section>
+
+  <!-- ACROSS THE SDLC -->
+  <section class="panel" id="across" role="tabpanel" hidden>
+    <div class="phead">
+      <p class="eyebrow">Beyond the flagship agents</p>
+      <h1 class="title">AI across the <em>whole</em> SDLC</h1>
+      <p class="lede">The agents are the headline. Underneath, AI now assists everyday engineering across nine products and every stage of delivery — 60+ documented use cases and counting.</p>
+    </div>
+    <div class="themegrid">
+      <div class="theme"><h4>Test &amp; coverage</h4><p>Unit tests, coverage &amp; automation — Angular/Jest, PHPUnit, Flutter, Playwright MCP.</p></div>
+      <div class="theme"><h4>Accessibility</h4><p>WCAG defect fixes and VPAT compliance across SwiftRiver, Sim, and MedHub.</p></div>
+      <div class="theme"><h4>Feature delivery</h4><p>Prompt-first features, biometric auth, deep linking, push notifications, localization.</p></div>
+      <div class="theme"><h4>Upgrades &amp; migrations</h4><p>Angular 19→20, Flutter/Riverpod, PHP 8.4 + Laravel 12, MVC→Angular, JS→TS.</p></div>
+      <div class="theme"><h4>Observability</h4><p>Datadog MCP — log analysis, anomaly detection, SLOs &amp; monitors, DORA metrics.</p></div>
+      <div class="theme"><h4>Code quality</h4><p>Optimization, refactor, and AI code review via the Atlassian MCP.</p></div>
+      <div class="theme"><h4>UI from design</h4><p>Figma files and screenshots turned into working Angular code.</p></div>
+      <a class="theme link" href="catalogue.html"><h4>See all 60+ →</h4><p>The full catalogue, grouped by product.</p></a>
+    </div>
+    <div class="acrossfoot">
+      <div class="chipgroup"><span class="cglabel">Products</span>
+        <span class="pchip">MedHub</span><span class="pchip">MedHub Analytics</span><span class="pchip">SwiftRiver</span><span class="pchip">myTIPreport</span><span class="pchip">StaffGarden</span><span class="pchip">Sim</span><span class="pchip">Fisdap</span><span class="pchip">KNET</span><span class="pchip">EdCenter</span>
+      </div>
+      <div class="chipgroup"><span class="cglabel">Foundation</span>
+        <span class="pchip alt">GitHub Copilot</span><span class="pchip alt">Rovo</span><span class="pchip alt">Playwright MCP</span><span class="pchip alt">Datadog MCP</span><span class="pchip alt">Atlassian MCP</span>
+      </div>
+    </div>
   </section>
 
 </main>
