@@ -149,6 +149,20 @@
   .diagfoot .why{flex:1 1 320px; margin:0; font-size:var(--fs-body); color:var(--body);}
   .diagfoot .why b{color:var(--violet); font-weight:800; text-transform:uppercase; letter-spacing:.04em; font-size:var(--fs-micro);}
 
+  /* Agent tab: diagram on the left, detail bullets on the right */
+  .agentbody{flex:1 1 auto; min-height:0; display:grid; grid-template-columns:1.02fr .98fr;
+    gap:clamp(18px,2.6vw,40px); align-items:center; border-top:1px solid var(--line); padding-top:var(--gap-md);}
+  .agentbody .fig{min-width:0; height:100%; display:flex; align-items:center; justify-content:center;}
+  .agentbody .fig .diag{max-width:100%; max-height:46vh; width:auto; height:auto;}
+  .agentnotes{min-width:0; display:flex; flex-direction:column; gap:var(--gap-sm); align-content:center;}
+  .notes{list-style:none; margin:0; padding:0; display:grid; gap:var(--gap-sm);}
+  .notes li{position:relative; padding-left:16px; font-size:var(--fs-body); color:var(--body); line-height:1.42;}
+  .notes li::before{content:""; position:absolute; left:0; top:calc(0.71em - 2px); width:6px; height:6px; border-radius:50%; background:var(--violet);}
+  .notes li b{color:var(--ink); font-weight:700;}
+  .agentnotes .metric{margin-top:var(--gap-sm);}
+
+  @media (max-width:800px){ .agentbody{grid-template-columns:1fr;} .agentbody .fig .diag{max-height:none;} }
+
   @media (max-width:800px){
     .pbody{grid-template-columns:1fr; gap:var(--gap-md);}
     .ovfoot{gap:14px;}
@@ -235,10 +249,20 @@
       <h1 class="title">Architecture &amp; Planning Agent</h1>
       <p class="lede">Answers "what will this take?" with evidence pulled from real code, Arch Web, and Confluence — not a gut feel.</p>
     </div>
-    <div class="diagwrap"><img class="diag" src="diagrams/d2-lifecycle.svg" alt="Continuous delivery loop: Plan & estimate (AscArchDocAgent) → Implement → Test → Review → Operate, looping back to Plan."></div>
-    <div class="diagfoot">
-      <p class="why"><b>Why it matters</b><br>Owns the Plan &amp; estimate phase: dual with-AI vs without-AI effort, a confidence score on every plan, and a build-ready OpenSpec a coding agent can run — estimation stops being guesswork.</p>
-      <div class="metric"><span class="n gain">~40%</span><span class="cap">lower effort on boilerplate, from the dual estimate</span><span class="illus">Illustrative</span></div>
+    <div class="agentbody">
+      <div class="fig"><img class="diag" src="diagrams/d2-lifecycle.svg" alt="Continuous delivery loop with AscArchDocAgent at the Plan & estimate phase, then Implement, Test, Review, Operate."></div>
+      <div class="agentnotes">
+        <p class="kicker">What it does &amp; impact</p>
+        <ul class="notes">
+          <li><b>Grounds every plan.</b> Scans GitLab (no clone), Arch Web, and Confluence for real evidence.</li>
+          <li><b>Dual estimates.</b> Effort with an AI agent vs without, per work item and total.</li>
+          <li><b>Confidence score.</b> Every plan carries a High / Medium / Low %, tied to the evidence scanned.</li>
+          <li><b>Finds shared components.</b> Across EValue, MedHub, ATI before anything is rebuilt.</li>
+          <li><b>Build-ready specs.</b> Emits an OpenSpec a coding agent implements directly.</li>
+          <li><b>Impact.</b> Estimation becomes evidence, not guesswork — the AI productivity delta is a number leaders can see.</li>
+        </ul>
+        <div class="metric"><span class="n gain">~40%</span><span class="cap">lower effort on boilerplate</span><span class="illus">Illustrative</span></div>
+      </div>
     </div>
     <div class="panelfoot">Model: Claude Sonnet 4 · Scans GitLab (no clone) · Arch Web · Confluence — every claim source-attributed.</div>
   </section>
@@ -250,10 +274,20 @@
       <h1 class="title">MedHub Coding Agent</h1>
       <p class="lede">The MedHub agent family — five custom Copilot agents sharing one skill system — carries a ticket from intake to closure, pre-loaded with MedHub architecture, standards, and workflows.</p>
     </div>
-    <div class="diagwrap"><img class="diag" src="diagrams/d1-architecture.svg" alt="Five agents — ambs-debug, medm-analysis, medm-implement, review-mr, datadogagent — drawing on shared skills; git-analysis and bug-fix are reused across three of them."></div>
-    <div class="diagfoot">
-      <p class="why"><b>Why it matters</b><br>Feature work, code review, production triage, AMBS bug-fixing (open bugs down from ~1,000 to ~200), and accessibility remediation — one family that already knows MedHub, so context isn't re-explained every session.</p>
-      <div class="metric"><span class="n gain">50k+</span><span class="cap">accessibility issues fixed by the QE agent in ~1.5 months</span></div>
+    <div class="agentbody">
+      <div class="fig"><img class="diag" src="diagrams/d1-architecture.svg" alt="Five agents — ambs-debug, medm-analysis, medm-implement, review-mr, datadogagent — drawing on shared skills; git-analysis and bug-fix reused across three of them."></div>
+      <div class="agentnotes">
+        <p class="kicker">What they did &amp; impact</p>
+        <ul class="notes">
+          <li><b>Five agents, one skill system.</b> ambs-debug, medm-analysis, medm-implement, review-mr, datadogagent.</li>
+          <li><b>AMBS bug-fixing.</b> Open production bugs cut from ~1,000 to ~200 over recent months.</li>
+          <li><b>QE / accessibility.</b> ~50,000 accessibility issues fixed in ~1.5 months (WCAG 2.1 AA, axe-core).</li>
+          <li><b>Full ticket lifecycle.</b> Investigation → implementation → tests → review → Jira closure.</li>
+          <li><b>Pre-loaded MedHub context.</b> Architecture, standards, and workflows built in — nothing re-explained.</li>
+          <li><b>Guardrails at every write.</b> Preview before apply, no auto-merge, SELECT-only SQL.</li>
+        </ul>
+        <div class="metric"><span class="n gain">50k+</span><span class="cap">accessibility issues fixed · ~1.5 months</span></div>
+      </div>
     </div>
     <div class="panelfoot">Agents: <code>ambs-debug · medm-analysis · medm-implement · review-mr · datadogagent</code> · Guardrails: preview before apply · no auto-merge · SELECT-only SQL.</div>
   </section>
@@ -265,10 +299,20 @@
       <h1 class="title">Production Triage Agent</h1>
       <p class="lede">Collapses a five-tool HTTP-500 investigation into a single chat — no tab switching, no copy-pasting between Datadog, the IDE, the terminal, and GitLab.</p>
     </div>
-    <div class="diagwrap"><img class="diag" src="diagrams/d3-pipeline.svg" alt="Pipeline: Observe (Datadog APM + logs) → Attribute (git blame → commit, author, MR) → Remediate (preview → apply → commit → MR, you approve first) → Document (markdown report + Jira)."></div>
-    <div class="diagfoot">
-      <p class="why"><b>Why it matters</b><br>From alarm to attributed fix in minutes instead of a cross-tool scavenger hunt — the introducing commit, author, and MR surface automatically, and nothing is written until you approve.</p>
-      <div class="metric"><span class="n gain">3.2×</span><span class="cap">faster triage — stack trace to fix</span><span class="illus">Illustrative</span></div>
+    <div class="agentbody">
+      <div class="fig"><img class="diag" src="diagrams/d3-pipeline.svg" alt="Pipeline: Observe → Attribute → Remediate (you approve first) → Document."></div>
+      <div class="agentnotes">
+        <p class="kicker">What it does &amp; impact</p>
+        <ul class="notes">
+          <li><b>One conversation.</b> Replaces a five-tool HTTP-500 investigation.</li>
+          <li><b>Observe.</b> Correlates Datadog APM traces and logs by trace ID.</li>
+          <li><b>Regression flagged.</b> When an error is first seen ≤30 min after a deploy.</li>
+          <li><b>Attribute.</b> git blame names the introducing commit, author, and MR automatically.</li>
+          <li><b>Remediate.</b> Preview-first fix; commit and MR only on your approval.</li>
+          <li><b>Documents &amp; proven.</b> Markdown report + duplicate-checked Jira ticket; two demo sessions recorded with the MedHub team.</li>
+        </ul>
+        <div class="metric"><span class="n gain">3.2×</span><span class="cap">faster triage — alarm to fix</span><span class="illus">Illustrative</span></div>
+      </div>
     </div>
     <div class="panelfoot">Skills: <code>datadog-analysis · git-analysis · bug-fix</code> · Two demo sessions recorded with the MedHub team (Feb &amp; Apr 2026).</div>
   </section>
