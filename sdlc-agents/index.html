@@ -185,6 +185,33 @@
   .foothint a:hover{text-decoration:underline;}
   @media (max-width:800px){ .themegrid{grid-template-columns:repeat(2,1fr);} .foothint{margin-left:0;} }
 
+  /* Full catalogue lives inside the 'Across the SDLC' tab — an inner segmented
+     toggle swaps between two sub-views so the panel never scrolls. */
+  #across{overflow:hidden;}
+  .seg{flex:none; display:inline-flex; gap:4px; padding:4px; background:var(--lav-50);
+    border:1px solid var(--line); border-radius:11px; align-self:flex-start; margin-top:var(--gap-sm);}
+  .segbtn{appearance:none; border:none; cursor:pointer; background:transparent; color:var(--mute);
+    font-size:clamp(11px,1.4vh,13px); font-weight:700; letter-spacing:.02em; padding:6px 14px; border-radius:8px;
+    font-family:inherit; transition:background .12s,color .12s;}
+  .segbtn:hover{color:var(--ink);}
+  .segbtn.active{background:#fff; color:var(--violet); box-shadow:0 1px 2px rgba(30,27,46,.08);}
+  .segbtn:focus-visible{outline:2px solid var(--violet); outline-offset:2px;}
+  .segpane{flex:1 1 auto; min-height:0; display:grid; grid-template-columns:repeat(3,1fr);
+    grid-auto-rows:minmax(0,1fr); gap:12px; margin-top:var(--gap-md);}
+  .segpane[hidden]{display:none;}
+  .catblock{background:var(--card); border:1px solid var(--line); border-radius:13px;
+    padding:clamp(11px,1.5vh,16px) clamp(13px,1.1vw,17px); min-width:0; overflow:hidden;}
+  .catblock h3{font-size:clamp(13px,1.75vh,15px); margin:0 0 6px; color:var(--ink); letter-spacing:-.01em;}
+  .catblock .lead{font-size:var(--fs-micro); color:var(--mute); margin:0 0 8px; line-height:1.4;}
+  .catblock ul{list-style:none; margin:0; padding:0; display:grid; gap:5px;}
+  .catblock li{position:relative; padding-left:14px; font-size:clamp(11.5px,1.5vh,13px); color:var(--body); line-height:1.34;}
+  .catblock li::before{content:""; position:absolute; left:0; top:.5em; width:5px; height:5px; border-radius:50%; background:var(--violet);}
+  .catblock li b{color:var(--ink); font-weight:700;}
+  .catblock code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.9em;}
+  #seg-pf .catblock{background:linear-gradient(160deg,var(--lav-50),var(--card));}
+  #seg-pf .catblock li::before{background:var(--gain);}
+  @media (max-width:800px){ .segpane{grid-template-columns:repeat(2,1fr);} }
+
   @media (max-width:800px){
     .pbody{grid-template-columns:1fr; gap:var(--gap-md);}
     .ovfoot{gap:14px;}
@@ -345,23 +372,33 @@
     <div class="phead">
       <p class="eyebrow">Beyond the flagship agents</p>
       <h1 class="title">AI across the <em>whole</em> SDLC</h1>
-      <p class="lede">The agents are the headline. Underneath, the same techniques repeat across every stage of delivery — reusable AI practices that aren't tied to any one product. 60+ documented use cases and counting.</p>
+      <p class="lede">The agents are the headline. Underneath, the same techniques repeat across every stage of delivery — reusable AI practices, and the program that makes them repeatable and safe.</p>
     </div>
-    <div class="themegrid">
-      <div class="theme"><h4>Test &amp; coverage</h4><p>Unit tests, coverage &amp; automation — Angular/Jest, PHPUnit, Flutter, Playwright MCP.</p></div>
-      <div class="theme"><h4>Accessibility</h4><p>WCAG defect fixes and VPAT compliance across SwiftRiver, Sim, and MedHub.</p></div>
-      <div class="theme"><h4>Feature delivery</h4><p>Prompt-first features, biometric auth, deep linking, push notifications, localization.</p></div>
-      <div class="theme"><h4>Upgrades &amp; migrations</h4><p>Angular 19→20, Flutter/Riverpod, PHP 8.4 + Laravel 12, MVC→Angular, JS→TS.</p></div>
-      <div class="theme"><h4>Observability</h4><p>Datadog MCP — log analysis, anomaly detection, SLOs &amp; monitors, DORA metrics.</p></div>
-      <div class="theme"><h4>Code quality</h4><p>Optimization, refactor, and AI code review via the Atlassian MCP.</p></div>
-      <div class="theme"><h4>UI from design</h4><p>Figma files and screenshots turned into working Angular code.</p></div>
-      <a class="theme link" href="catalogue.html"><h4>See the detail →</h4><p>Cross-cutting techniques &amp; the program behind them.</p></a>
+
+    <div class="seg" role="tablist">
+      <button class="segbtn active" role="tab" aria-selected="true" data-seg="cc">Cross-cutting techniques</button>
+      <button class="segbtn" role="tab" aria-selected="false" data-seg="pf">Program &amp; foundation</button>
     </div>
-    <div class="acrossfoot">
-      <div class="chipgroup"><span class="cglabel">Foundation</span>
-        <span class="pchip alt">GitHub Copilot</span><span class="pchip alt">Rovo</span><span class="pchip alt">Playwright MCP</span><span class="pchip alt">Datadog MCP</span><span class="pchip alt">Atlassian MCP</span>
-      </div>
-      <span class="foothint">Reusable everywhere — see the <a href="catalogue.html">detailed write-up</a>.</span>
+
+    <div class="segpane" id="seg-cc" role="tabpanel">
+      <div class="catblock"><h3>Test generation &amp; coverage</h3><ul><li><b>Unit tests</b> — Angular/Jest, PHPUnit, Flutter widget</li><li><b>Manual test-case creation</b> from acceptance criteria</li><li><b>Coverage enhancement</b> on existing modules</li><li><b>Automation suites</b> for regression</li></ul></div>
+      <div class="catblock"><h3>Browser &amp; E2E automation</h3><ul><li><b>Playwright MCP</b> server, shared for the team</li><li><b>Automate flows</b> — login, password validation</li><li><b>Modernize</b> — Playwright JavaScript → TypeScript</li></ul></div>
+      <div class="catblock"><h3>Accessibility remediation</h3><ul><li><b>WCAG 2.1 AA</b> — contrast, labels, keyboard, alt text</li><li><b>Multi-page content</b> (e.g. EHR charts)</li><li><b>VPAT docs</b>; axe-core validation on the live DOM</li></ul></div>
+      <div class="catblock"><h3>Observability &amp; reliability</h3><ul><li><b>Datadog MCP</b> — log &amp; APM analysis, triage</li><li><b>Predictive anomaly detection</b> &amp; resource tuning</li><li><b>SLOs &amp; monitors</b>; DORA metrics reports</li></ul></div>
+      <div class="catblock"><h3>Upgrades &amp; migrations</h3><ul><li><b>Frameworks</b> — Angular 19→20; Flutter/Riverpod</li><li><b>Runtime</b> — PHP 8.4 + Laravel 12</li><li><b>Ports</b> — MVC/Razor → Angular; JS → TS</li></ul></div>
+      <div class="catblock"><h3>Code quality &amp; review</h3><ul><li><b>Optimization</b> — memory &amp; timeout issues</li><li><b>Refactoring</b> for readability &amp; maintainability</li><li><b>AI code review</b> via the Atlassian MCP</li></ul></div>
+      <div class="catblock"><h3>Feature delivery (prompt-first)</h3><ul><li><b>Conditions-based</b> feature implementation</li><li><b>Mobile</b> — biometric auth, deep linking, FCM push</li><li><b>Localization</b> of existing pages</li></ul></div>
+      <div class="catblock"><h3>UI from design</h3><ul><li><b>Figma &amp; screenshots</b> → Angular components</li><li><b>Shadow-root</b> UI element access in JavaScript</li></ul></div>
+      <div class="catblock"><h3>DevOps &amp; configuration</h3><ul><li><b>Git</b> remote-branch pointing changes</li><li><b>Secrets</b> from GitHub Actions; env DB pointing</li><li><b>Hardening</b> — SSL certs, JScrambler</li></ul></div>
+    </div>
+
+    <div class="segpane" id="seg-pf" role="tabpanel" hidden>
+      <div class="catblock"><h3>AI Champions</h3><p class="lead">A champions network that drives adoption across teams.</p><ul><li><b>Share patterns</b> and proven prompts</li><li><b>Onboard teams</b> onto the toolchain</li><li><b>Curate</b> new use cases into the shared space</li></ul></div>
+      <div class="catblock"><h3>Tooling</h3><p class="lead">The assistants and connectors the work runs on.</p><ul><li><b>GitHub Copilot</b> — chat + CLI, agents &amp; skills in <code>.github/</code></li><li><b>Rovo</b> — incl. "Rovo in QE" &amp; a prompt repository</li><li><b>MCP servers</b> — Playwright, Datadog, Atlassian</li></ul></div>
+      <div class="catblock"><h3>Custom agent toolkits</h3><p class="lead">Reusable agent + skill bundles, dropped into a repo.</p><ul><li><b>MedHub suite</b> — ambs-debug, medm-analysis, medm-implement, review-mr, datadogagent</li><li><b>Planning</b> — AscArchDocAgent · <b>Metrics</b> — DORA agent</li><li><b>Shared skills</b> — one system reused across agents</li></ul></div>
+      <div class="catblock"><h3>Shared knowledge</h3><p class="lead">So no one re-explains context from scratch.</p><ul><li><b>Prompt repository</b> &amp; a use-case template</li><li><b>Confluence exports</b> loaded into agents</li><li><b>Per-project docs</b> — architecture, database, features</li></ul></div>
+      <div class="catblock"><h3>Onboarding</h3><p class="lead">Get a new engineer productive on the toolchain fast.</p><ul><li><b>New-member guide</b> — tools, access &amp; usage</li><li><b>Setup scripts</b> for agents, skills &amp; credentials</li></ul></div>
+      <div class="catblock"><h3>Guardrails &amp; governance</h3><p class="lead">The same safety model across every agent.</p><ul><li><b>Preview before apply</b>; nothing written until approved</li><li><b>No auto-push / no auto-merge</b></li><li><b>SELECT-only SQL</b>, duplicate checks, worklog confirmation</li></ul></div>
     </div>
   </section>
 
@@ -374,7 +411,14 @@
     tabs.forEach(t => { t.classList.remove("active"); t.setAttribute("aria-selected", "false"); });
     tab.classList.add("active"); tab.setAttribute("aria-selected", "true");
     const id = tab.dataset.panel;
-    panels.forEach(p => { p.hidden = p.id !== id; });
+    panels.forEach(p => { p.hidden = p.id !== id; if (!p.hidden) p.scrollTop = 0; });
+  }));
+
+  // Inner segmented toggle on the "Across the SDLC" tab
+  document.querySelectorAll(".segbtn").forEach(btn => btn.addEventListener("click", () => {
+    document.querySelectorAll(".segbtn").forEach(b => { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); });
+    btn.classList.add("active"); btn.setAttribute("aria-selected", "true");
+    document.querySelectorAll(".segpane").forEach(p => { p.hidden = p.id !== "seg-" + btn.dataset.seg; });
   }));
 </script>
 </body>
